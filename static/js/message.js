@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 	var json = JSON.stringify(sendObj);
 	
-	$.post('/new_messages/', json);
+	$.post('/new_message/', json);
     
 	$("#tags").val("");
 	$("#message").val("");

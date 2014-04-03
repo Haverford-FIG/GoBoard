@@ -7,4 +7,6 @@ urlpatterns = patterns('',
 
      url(r'^new_message$', 'GoBoard.views.new_message',),
      url(r'^get_messages$', 'GoBoard.views.send_messages',),
+
+     url(r'^get_tags$', 'GoBoard.views.get_tags',),
 )

@@ -32,7 +32,7 @@ def new_message(request):
     return HttpResponse("ERROR")
 
 @require_http_methods(["GET"])
-def send_messages(request)
+def send_messages(request):
   try:
     #Variable Setup
     u = request.user
@@ -59,3 +59,7 @@ def send_messages(request)
     #If something goes wrong, send the 500 page.
     return HttpResponse("ERROR")
 
+def get_tags():
+  tags = "#".join([entry.tag for entry in Tag.objects.all()])
+  return HttpResponse(tags)
+ 

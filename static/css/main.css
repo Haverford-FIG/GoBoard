@@ -1,0 +1,13 @@
+#submit{
+border:1px solid black;
+padding:5px;
+width:70px;
+margin:20px;
+}
+
+#submit:hover {
+background-color:yellow;
+border:2px solid black;
+cursor:pointer;
+}
+

@@ -7,8 +7,6 @@ urlpatterns = patterns('',
     # Examples:
      url(r'^$', 'GoBoard.views.main_page',),
      url(r'^new_message$', 'GoBoard.views.new_message',),
-
-
+     url(r'^home', 'GoBoard.views.main_page',),
     url(r'^admin/', include(admin.site.urls)),
 )
-

@@ -1,1 +1,19 @@
-<textarea rows="4" cols="50"></textarea>TEST!
+<html>
+    <head>
+	<title>GO! 3.0</title>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css" />
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="{{STATIC_URL}}js/message.js"></script>
+    </head>
+    <body>
+	Tags:<br>
+	<textarea id="tags" rows="1" cols="40"></textarea><br>
+	Message:<br>
+	<textarea id="message" rows="4" cols="50"></textarea>
+	<br>
+	<div id="submit">Submit</div>
+	<br>
+	Tags Required?<input id="tagCheck" type="checkbox"></input>
+    </body>
+</html>

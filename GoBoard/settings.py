@@ -3,10 +3,10 @@ import os
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__name__))
 
 # Django settings for GoBoard project.
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ["127.0.0.1","0.0.0.0","165.82.80.243", "go.haverford.edu"]
+ALLOWED_HOSTS = ["127.0.0.1","0.0.0.0","165.82.80.243", "go.haverford.edu", "localhost"]
 
 ADMINS = ()
 

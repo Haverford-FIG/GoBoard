@@ -34,9 +34,15 @@ width: 100%;
 
 .fullBox
 {
-margin: 50px;
+width:90%;
+}
+
+#general
+{
+margin:5px;
 height: 650px;
-width: 40%;
+width: 50%;
+float:left;
 border-color: black;
 border-style: solid;
 border-width: 3px;
@@ -57,7 +63,7 @@ overflow-y:auto;
 float: right;
 margin: 50px;
 height: 500px;
-width: 40%;
+width: 30%;
 border-color: black;
 border-style: solid;
 border-width: 3px;

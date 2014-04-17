@@ -36,7 +36,7 @@ width: 100%;
 {
 margin: 50px;
 height: 650px;
-width: 600px;
+width: 40%;
 border-color: black;
 border-style: solid;
 border-width: 3px;
@@ -52,7 +52,27 @@ height:80%;
 width:100%;
 overflow-y:auto;
 }
-
+.fullBox2
+{
+float: right;
+margin: 50px;
+height: 500px;
+width: 40%;
+border-color: black;
+border-style: solid;
+border-width: 3px;
+background-color:#594F4F;
+padding:10px
+border-radius:15px;
+}
+.tagBox
+{
+margin:5px;
+background-color:white;
+height:80%;
+width: 20%
+overflow-y:auto;
+}
 .shoutEven
 {
 padding-left:5px;

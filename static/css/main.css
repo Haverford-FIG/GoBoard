@@ -1,3 +1,8 @@
+body {
+margin:0px;
+padding:0px;
+}
+
 #submit{
 border:1px solid black;
 padding:5px;
@@ -35,13 +40,14 @@ width: 100%;
 .fullBox
 {
 width:90%;
+margin:auto;
 }
 
 #general
 {
 margin:5px;
-height: 650px;
-width: 50%;
+height: 550px;
+width: 60%;
 float:left;
 border-color: black;
 border-style: solid;
@@ -54,15 +60,16 @@ border-radius:15px;
 {
 margin:5px;
 background-color: white;
-height:80%;
+height:60%;
 width:100%;
 overflow-y:auto;
 }
 .fullBox2
 {
 float: left;
-margin: 35px;
-height: 500px;
+margin: 5px;
+margin-left:40px;
+height: 550px;
 width: 30%;
 border-color: black;
 border-style: solid;
@@ -101,5 +108,20 @@ font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
 
 .message
 {
-background-color:red;
+background-color:lightgrey;
+padding:5px;
+border-bottom:1px solid black;
+}
+
+textarea {
+width:80%;
+}
+
+.banner
+{
+font-size:50px;
+color:white;
+background-color:maroon;
+padding:30px;
+margin-bottom:30px;
 }

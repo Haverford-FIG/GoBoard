@@ -32,7 +32,7 @@ function reloadMessages(tags) {
 	reloadMessages(tags);
     });
 
-    $("#submit").on("click", function() {
+    $("#messageForm").on("submit", function() {
 	var tags = $("#tags").val();
 	var message = $("#message").val();
 	var tagsRequired = $("tagCheck").val();
@@ -47,6 +47,7 @@ function reloadMessages(tags) {
 	$.post('/new_message/', json);
 
 	reloadMessages(tags);
+	return false; //Don't continue or else the form will re-submit.
     });
 
 

@@ -21,12 +21,9 @@ function displayMessage(message, tags) {
 
 function displayMessages(response) {
     if (response != "ERROR"){
-	console.log(response)
-	console.log(response.length)
-    
-    for (var i=0; i<response.length;i++){
-	displayMessage(response[i].message, response[i].tags);
-    }
+	for (var i=0; i<response.length;i++){
+	    displayMessage(response[i].message, response[i].tags);
+	}
     }
 }
 
@@ -58,6 +55,12 @@ function reloadMessages(tags) {
 	var json = JSON.stringify(sendObj);
 	
 	$.post('/new_message/', json);
+	
+	$("#tags").val('');
+	$("#message").val('');
+	$("#tagCheck").val('');
+	
+	console.log($("#message").val())
 
 	reloadMessages(tags);
 	return false; //Don't continue or else the form will re-submit.

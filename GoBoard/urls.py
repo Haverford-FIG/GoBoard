@@ -1,4 +1,9 @@
 from django.conf.urls import patterns, include, url
+from django.contrib import admin
+
+#Enable the admin interface.
+admin.autodiscover()
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -9,4 +14,5 @@ urlpatterns = patterns('',
      url(r'^get_messages/?$', 'GoBoard.views.send_messages',),
 
      url(r'^get_tags/?$', 'GoBoard.views.get_tags',),
+     url(r'^admin/?', include(admin.site.urls)),
 )

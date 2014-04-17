@@ -5,7 +5,8 @@
 
 $(document).ready(function() {
 
-function reloadMessages(messages, tags){
+function displayMessagesOther(messages, tags){
+	
 	$(".messageBox").empty();
 	for (var i=0; i < messages.length ; i++){
 		displayMessage(messages[i], tags);
@@ -19,15 +20,20 @@ function displayMessage(message, tags) {
 }
 
 function displayMessages(response) {
-    console.log(response)
+    if (response != "ERROR"){
+	console.log(response)
+	console.log(response.length)
+    
     for (var i=0; i<response.length;i++){
 	displayMessage(response[i].message, response[i].tags);
+    }
     }
 }
 
 function reloadMessages(tags) {
 	var json = {"tags": tags};
 	$("tagCheck").val(tags);
+	displayMessages([{"message":"hello", "tags":"yolo"},{"message":"first", "tags":"welcome"}]);
 	$.get('/get_messages/', json, function(response) {
 		//response = [message1, message2, ... ]
 		displayMessages(response);

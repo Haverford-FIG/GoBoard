@@ -18,6 +18,13 @@ function displayMessage(message, tags) {
 	);
 }
 
+function displayMessages(response) {
+    console.log(response)
+    for (var i=0; i<response.length;i++){
+	displayMessage(response[i].message, response[i].tags);
+    }
+}
+
 function reloadMessages(tags) {
 	var json = {"tags": tags};
 	$("tagCheck").val(tags);

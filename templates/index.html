@@ -17,23 +17,23 @@
 	<script src="{{STATIC_URL}}js/csrf_cookie.js"></script>
 	<script src="{{STATIC_URL}}js/message.js"></script>
 	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css" />
+	<script src="{{STATIC_URL}}js/swatches.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/swatches.css" />
     </head>
 
     <body>
     <div class="banner">
 	GO! 3.0
     </div>
-    <div class="fullBox">
-	<input type="text" id="tagSearchBox" placeholder="#tags"/>
-	<div id="tagSearchSubmit">Search</div>
-	<div class="messageBox" id="messagebox">
+	<div id="navbar">
+		<ul id=kwicks-list class="kwicks kwicks-horizontal">
+			<a class=kwick1>Hello</a>
+			<a class=kwick2>Sup?</a>
+			<a class=kwick3>Hola</a>
+			<a class=kwick4>Howdy</a>
+		</ul>
 	</div>
-	<div class="goBoardBox">
-		<textarea maxlength="300" id="message" placeholder="What's on your mind?" cols="60" rows="5"></textarea>
-	    <div class="ui-widget">
-		<label for="tags"></label>
-		<input id="tags" maxlength="300" cols="60" placeholder="Put tags here!">
-		<button type="submit" id="messageSubmit">Submit</button>	
+    <div class="fullBox">
     	<div id="general">
 	    <input type="text" id="tagSearchBox" placeholder="#tags"/>
 	    <div id="tagSearchSubmit">Search</div>

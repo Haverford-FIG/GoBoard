@@ -1,22 +1,9 @@
 body {
 margin:0px;
 padding:0px;
+background-color:#C7C7C7;
 }
 
-#submit{
-border:1px solid black;
-padding-top:3px;
-padding-bottom:3px;
-border-radius:3px;
-width:15%;
-}
-   
-#submit:hover {
-background-color:yellow;
-border:2px solid black;
-cursor:pointer;
-
-}
 
 .ui-autocomplete {
 max-height: 100px;
@@ -80,6 +67,15 @@ background-color:#594F4F;
 padding:10px;
 border-radius:15px;
 }
+
+#tagSearchBox{
+width:30%;
+}
+
+label, .fullBox{
+text-align:right;
+}
+
 .tagBox
 {
 margin:5px;
@@ -88,6 +84,7 @@ height:80%;
 width: 20%
 overflow-y:auto;
 }
+
 .shoutEven
 {
 padding-left:5px;
@@ -137,6 +134,33 @@ input#tags{
     width:75%;
     margin-right:5px;
 }
+
+#submit{
+border:2px groove #505050;
+width:20%;
+cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+/*give the background a gradient - see cssdemos.tupence.co.uk/gradients.htm for more info*/
+background-color:maroon; /*required for browsers that don't support gradients*/
+background: -webkit-linear-gradient(top, maroon, #1A1A1A);
+/*style to the text inside the button*/
+font-family:Arial;
+color:#fff;
+font-variant:small-caps;
+border-radius: 0 15px 15px 0;
+/*add a drop shadow to the button*/
+-webkit-box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+-moz-box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+}
+/***NOW STYLE THE BUTTON'S HOVER AND FOCUS STATES***/
+input#submitbutton:hover, input#submitbutton:focus {
+color:#edebda;
+/*reduce the spread of the shadow to give a pushed effect*/
+-webkit-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+-moz-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+}
+
 
 .kwicks {
  position:relative;

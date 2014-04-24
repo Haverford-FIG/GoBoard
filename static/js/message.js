@@ -78,5 +78,14 @@ function reloadMessages(tags) {
      $('#messagebox').animate({ 
 	   scrollTop: $("#messagebox").prop("scrollHeight")}, 0
 	);
+
+	$('.kwicks').kwicks({
+		maxSize: "30%",
+        autoResize: true,
+        spacing: 0,
+		duration: 200,
+        behavior: 'menu',
+		interactive: false,	
+    });	
  });	  
 

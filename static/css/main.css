@@ -17,6 +17,11 @@ overflow-x: hidden;
  * html .ui-autocomplete {
 height: 100px;
  }
+
+#navbar{
+    margin-bottom:30px;
+}
+
  .goBoardBox
  {
 border-color: blue;
@@ -33,7 +38,6 @@ margin:auto;
 
 #general
 {
-margin:5px;
 height: 550px;
 width: 60%;
 float:left;
@@ -41,7 +45,7 @@ border-color: black;
 border-style: solid;
 border-width: 3px;
 background-color:#594F4F;
-padding:10px;
+padding:10px 20px 10px 10px;
 border-radius:15px;
 }
 .messageBox
@@ -131,12 +135,20 @@ text-align:center;
 }
 
 input#tags{
-    width:75%;
-    margin-right:5px;
+    width:77%;
+    margin-right:0px;
+    margin-left:0px;
+    padding:2px 0px;
+    border:0px;
+    margin-left:0px;
 }
 
 #submit{
 border:2px groove #505050;
+margin-left:0px;
+margin-right:0px;
+padding-left:0px;
+padding-right:0px;
 width:20%;
 cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
 /*give the background a gradient - see cssdemos.tupence.co.uk/gradients.htm for more info*/
@@ -193,5 +205,3 @@ background-color:#1E4B8D;
 }
 
 .kwicks > a:last-child { 
-    border-right:0px;
-}

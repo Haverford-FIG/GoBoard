@@ -1,60 +1,15 @@
-<!--{
-    "tags": [
-        "#spanish",
-        "#homeworkgroup"
-    ],
-    "text": "This is the message",
-    "date": "Yesterday",
-    "time": "11:31pm"
-}-->
-
 <html>
-    <head>
-    	<title>GO! 3.0</title>
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-	<script src="{{STATIC_URL}}js/csrf_cookie.js"></script>
-	<script src="{{STATIC_URL}}js/message.js"></script>
-	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css" />
-	<script src="{{STATIC_URL}}js/swatches.js"></script>
-	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/swatches.css" />
-    </head>
+ <head>
+  <title>GO! 3.0</title>
+  {% include "head.html" %}
+ </head>
 
-    <body>
-    <div class="banner">
-	GO! 3.0
-    </div>
-	<div id="navbar">
-		<ul id=kwicks-list class="kwicks kwicks-horizontal">
-			<a class=kwick1>Hello</a>
-			<a class=kwick2>Sup?</a>
-			<a class=kwick3>Hola</a>
-			<a class=kwick4>Howdy</a>
-		</ul>
-	</div>
-    <div class="fullBox">
-    	<div id="general">
-	    <input type="text" id="tagSearchBox" placeholder="#tags"/>
-	    <div id="tagSearchSubmit">Search</div>
-		<div class="messageBox" id="messagebox">
-		</div>
-		<div class="goBoardBox">
-		    <form id="messageForm">
-		    <textarea maxlength="300" id="message" placeholder="What's on your mind?" cols="60" rows="5"></textarea>
-		    <div class="ui-widget">
-			<label for="tags"></label>
-			<input id="tags" maxlength="300" cols="60" placeholder="Put tags here!">
-			<button type="submit" id="submit">Submit</button>	
-		    </form>
-		</div>
-	    </div>
-	</div>
-    	<div class="fullBox2">
-		<h2 style="text-color: white"> Recent Tags </h2>
-		<div class="tagBox" id="tagbox">
-		</div>
-	</div>
-    </div>
-    </body>
+ <body>
+  {% include "banner.html" %}
+  {% include "swatches.html" %}
+   <div class="fullBox">
+    {% include "goChat.html" %}
+    {% include "recentTags.html" %}
+   </div>
+ </body>
 </html>

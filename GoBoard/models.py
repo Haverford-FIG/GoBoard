@@ -5,10 +5,12 @@ class Message(models.Model):
 	user = models.ForeignKey(User, unique = False)
 	text = models.CharField(max_length=300)
 	tags_required = models.BooleanField()
-	datetime = models.DateTimeField()
+	datetime = models.DateTimeField(auto_now_add=True)
 	
 class Tag(models.Model):
 	tag = models.CharField(max_length=30)
 	message = models.ManyToManyField(Message)
 
+	def __unicode__(self):
+		print self.tag
 

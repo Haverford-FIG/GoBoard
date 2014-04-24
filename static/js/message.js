@@ -5,12 +5,7 @@
 
 $(document).ready(function() {
 
-<<<<<<< HEAD
 function displayMessages(messages, tags){
-=======
-function displayMessagesOther(messages, tags){
-	
->>>>>>> 1554b7c0d2aa4dab27b71c49b123a19f4b286a51
 	$(".messageBox").empty();
 	for (var i=0; i < messages.length ; i++){
 		displayMessage(messages[i], tags);
@@ -23,19 +18,9 @@ function displayMessage(message, tags) {
 	);
 }
 
-<<<<<<< HEAD
 function displayError(error) {
-	$(".messageBox").append("<div>STUFF</div>");
-	//$(".messageBox").append("<div class=\"error\">"+error+"</div>");
+	$(".messageBox").append("<div class=\"error\">"+error+"</div>");
 	console.log(error);
-=======
-function displayMessages(response) {
-    if (response != "ERROR"){
-	for (var i=0; i<response.length;i++){
-	    displayMessage(response[i].message, response[i].tags);
-	}
-    }
->>>>>>> 1554b7c0d2aa4dab27b71c49b123a19f4b286a51
 }
 
 function reloadMessages(tags) {
@@ -67,9 +52,7 @@ function reloadMessages(tags) {
 	sendObj["message"] = message;
 	sendObj["tagCheck"] = tagsRequired;
 
-<<<<<<< HEAD
 	$.post('/new_message/', sendObj);
-=======
 	var json = JSON.stringify(sendObj);
 	
 	$.post('/new_message/', json);
@@ -79,7 +62,6 @@ function reloadMessages(tags) {
 	$("#tagCheck").val('');
 	
 	console.log($("#message").val())
->>>>>>> 1554b7c0d2aa4dab27b71c49b123a19f4b286a51
 
 	reloadMessages(tags);
 	return false; //Don't continue or else the form will re-submit.

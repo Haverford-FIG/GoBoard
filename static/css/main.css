@@ -141,3 +141,27 @@ input#tags{
     padding-top:3px;
     padding-bottom:3px;
 }
+.kwicks {
+ position:relative;
+ height: 60px;
+ margin:0px;
+ padding:0px;
+ margin-bottom:10px;
+ }
+ .kwicks > a {
+ position:relative;
+ display:inline-block;
+ white-space:nowrap;
+ color:white;
+ padding-top:20px;
+ padding-bottom:20px;
+ text-align:center;
+ /* overridden by kwicks but good for when JavaScript is disabled */
+ width:20%;
+ margin:0px;
+ float: center;
+ border-right:1px solid #134D00;
+ background-color:#004D00;
+ } 
+
+.kwicks > a:last-child { border-right:0px; } }

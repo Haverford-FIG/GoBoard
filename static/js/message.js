@@ -1,33 +1,32 @@
-//Display a message on the message box.
-//Variable Axioms:
-// message = "This is a sample message";
-// tags = "#sample#message";
-
 $(document).ready(function() {
+//###############################################################
 
-function displayMessages(messages, tags){
+function displayMessages(messages){
 	$(".messageBox").empty();
+
 	for (var i=0; i < messages.length ; i++){
-		displayMessage(messages[i], tags);
+		var message = messages[i];
+		displayMessage(message);
 	}
 }
 
-function displayMessage(message, tags) {
+function displayMessage(message) {
+	//Variable Setup.
+	var text = message.text;
+	var tags = message.tags;
+	var user = message.user;
+
 	$(".messageBox").append(
-		"<div class=\"message\" tags=\""+tags+"\">"+message+"</div>"
+		"<div class=\"message\" tags=\""+tags+"\">"+text+"</div>"
 	);
 }
 
 function displayError(error) {
 	$(".messageBox").append("<div class=\"error\">"+error+"</div>");
-	console.log(error);
 }
 
-function reloadMessages(tags) {
-	var json = {"tags": tags};
-	$("tagCheck").val(tags);
-	displayMessages([{"message":"hello", "tags":"yolo"},{"message":"first", "tags":"welcome"}]);
-	$.get('/get_messages/', json, function(response) {
+function reloadMessages(tagArray) {
+	$.get('/get_messages/', {"tags": tagArray}, function(response) {
 		//response = [message1, message2, ... ]
 		if (response["error"]){
 			displayError(response["error"]);
@@ -36,49 +35,49 @@ function reloadMessages(tags) {
 	});
 }
 
+function cleanTags(tagString){
+	tagString = tagString.replace(/ /g, "");
+	var tagArray = tagString.split("#")
+	if (tagArray.length) tagArray.shift();
+
+	return tagArray;
+}
+
     $("#tagSearchSubmit").on("click", function() {
-	tags = tags.replace(/ /g, "");
+	var rawTags = $("#tags").val();
+	var tags = cleanTags(rawTags);
 	reloadMessages(tags);
     });
 
     $("#messageSubmit").on("click", function() {
-	var tags = $("#tags").val();
 	var message = $("#message").val();
-	//var tagsRequired = $("tagCheck").val();
-	var tagsRequired = false;//TODO: Add me!!!
-	
-	var sendObj = {};
-	sendObj["tags"] = tags;
-	sendObj["message"] = message;
-	sendObj["tagCheck"] = tagsRequired;
+	var rawTags = $("#tags").val();
+	var tagsRequired = false; //$("tagCheck").val(); //TODO: Add me!
 
-	$.post('/new_message/', sendObj);
-	var json = JSON.stringify(sendObj);
+	var tagArray = cleanTags(rawTags);
 	
-	$.post('/new_message/', json);
-	
-	$("#tags").val('');
-	$("#message").val('');
-	$("#tagCheck").val('');
-	
-	console.log($("#message").val())
+	var sendObj = {
+			"tags": tagArray,
+			"message": message,
+			"tagCheck": tagsRequired
+			};
 
-	reloadMessages(tags);
+	//Send the new message and get the most recent messages.
+	$.post('/new_message/', sendObj, function(response){
+		$("#message").val('');
+		reloadMessages(tagArray);
+	});
+
 	return false; //Don't continue or else the form will re-submit.
     });
 
-
-
-    var availableTags = [
-      "Haverfest",
-      "CSMajors"
-    ];
+  $.get("/get_tags", function(response) {
     $( "#tags" ).autocomplete({
-      source: availableTags
+      source: response
     });
-     $('#messagebox').animate({ 
-	   scrollTop: $("#messagebox").prop("scrollHeight")}, 0
-	);
+  });
+
+
 
 	$('.kwicks').kwicks({
 		maxSize: "30%",
@@ -87,6 +86,11 @@ function reloadMessages(tags) {
 		duration: 200,
         behavior: 'menu',
 		interactive: false,	
-    });	
- });	  
+      });	
 
+reloadMessages([]);
+
+
+
+//###############################################################
+});	  

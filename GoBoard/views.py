@@ -1,4 +1,4 @@
-from django.http import HttpResponse, Http404
+from django.http import StreamingHttpResponse, HttpResponse, Http404
 from django.template import RequestContext
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -23,7 +23,7 @@ def new_message(request):
     u = request.user
     message = request.POST["message"]
     tagCheck = request.POST["tagCheck"]
-    tags = request.POST["tags"].split("#")
+    tags = request.POST.getlist("tags")
 
     #Store the messages and tags.
     store_message(message, tags, u, tagCheck)
@@ -35,21 +35,32 @@ def new_message(request):
     #If something goes wrong, send the 500 page.
     return HttpResponse("ERROR")
 
+def get_messages(query):
+  #Variable Setup.
+  num_messages = 30
+
+  #Get the messages.
+  if query==None:
+    messages = Message.objects.all()
+  else:
+    messages = Message.objects.filter(query)
+
+  #Order the messages.
+  messages = messages.order_by("-datetime")
+
+  return messages[:num_messages]
+
+def get_tag_list(message):
+  tagList = list(message.tag_set.all())
+  return tagList
+
 @require_http_methods(["GET"])
 def send_messages(request):
   try:
-    print "SEND MESSAGE!!!"
     #Variable Setup
     u = request.user
-    tags = request.GET["tags"].split("#")[1:]
-
-    #TODO: DEBUG!
-    for entry in Tag.objects.all():
-      print "ITERATION"
-      print entry
-    #try:
-    #  time = datetime.datetime.strptime(request.GET["time"] %)
-    #except:
+    tags = request.GET.getlist("tags")
+    query = None
 
     if len(tags)>0:
       #Create a Q (complex query) object for each tag.
@@ -59,28 +70,27 @@ def send_messages(request):
       query = qList.pop()
       for item in qList:
         query |= item
-      messages = Message.objects.filter(query)[:30] #TODO: MAKE ME A BETTER PAGIFIER
-    else:
-      messages = Message.objects.all()[:30] #TODO: MAKE ME A BETTER PAGIFIER
 
-    #Actually query the database.
-    myQuerySet = Message.objects.all()
+    messages = get_messages(query)
 
     if not messages.exists():
       response = {"error":"No messages found! :("}
     else:
       #Construct the JSON response.
-      response = [{"text":message.text, "user":message.user.username, "tags":list(message.tag_set.all()), "datetime":str(message.datetime)} for message in messages]
-    
+      response = [{"text":message.text, "user":message.user.username, "tags":get_tag_list(message), "datetime":str(message.datetime)} for message in messages]
+   
   except Exception as e:
-    print e
+    print "send_messages error: {}".format(e)
     #If something goes wrong, send the 500 page.
     response = {"error":"Oops! No messages could be loaded..."}
 
   #Send the JSON response.
   return HttpResponse(json.dumps(response), content_type="application/json")
 
-def get_tags():
-  tags = "#".join([entry.tag for entry in Tag.objects.all()])
-  return HttpResponse(tags)
+def get_tags(request):
+  tags = ["#{}".format(entry.tag) for entry in Tag.objects.all()]
+  return HttpResponse(json.dumps(tags), content_type="application/json")
  
+
+
+

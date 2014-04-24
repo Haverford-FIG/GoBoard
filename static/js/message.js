@@ -5,7 +5,7 @@
 
 $(document).ready(function() {
 
-function reloadMessages(messages, tags){
+function displayMessages(messages, tags){
 	$(".messageBox").empty();
 	for (var i=0; i < messages.length ; i++){
 		displayMessage(messages[i], tags);
@@ -18,11 +18,10 @@ function displayMessage(message, tags) {
 	);
 }
 
-function displayMessages(response) {
-    console.log(response)
-    for (var i=0; i<response.length;i++){
-	displayMessage(response[i].message, response[i].tags);
-    }
+function displayError(error) {
+	$(".messageBox").append("<div>STUFF</div>");
+	//$(".messageBox").append("<div class=\"error\">"+error+"</div>");
+	console.log(error);
 }
 
 function reloadMessages(tags) {
@@ -30,6 +29,9 @@ function reloadMessages(tags) {
 	$("tagCheck").val(tags);
 	$.get('/get_messages/', json, function(response) {
 		//response = [message1, message2, ... ]
+		if (response["error"]){
+			displayError(response["error"]);
+		}
 		displayMessages(response);
 	});
 }
@@ -39,19 +41,18 @@ function reloadMessages(tags) {
 	reloadMessages(tags);
     });
 
-    $("#messageForm").on("submit", function() {
+    $("#messageSubmit").on("click", function() {
 	var tags = $("#tags").val();
 	var message = $("#message").val();
-	var tagsRequired = $("tagCheck").val();
+	//var tagsRequired = $("tagCheck").val();
+	var tagsRequired = false;//TODO: Add me!!!
 	
 	var sendObj = {};
 	sendObj["tags"] = tags;
 	sendObj["message"] = message;
 	sendObj["tagCheck"] = tagsRequired;
 
-	var json = JSON.stringify(sendObj);
-	
-	$.post('/new_message/', json);
+	$.post('/new_message/', sendObj);
 
 	reloadMessages(tags);
 	return false; //Don't continue or else the form will re-submit.

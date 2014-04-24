@@ -159,6 +159,15 @@ input#tags{
  float: center;
  border-right:1px solid #134D00;
  background-color:#3863A3;
+ font-family: arial;
+ font-variant: small-caps;
+ font-size:larger;
  } 
 
-.kwicks > a:last-child { border-right:0px; }
+.kwicks > a:hover { 
+background-color:#1E4B8D;
+}
+
+.kwicks > a:last-child { 
+    border-right:0px;
+}

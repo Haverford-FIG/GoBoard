@@ -5,8 +5,7 @@
 
 $(document).ready(function() {
 
-function displayMessagesOther(messages, tags){
-	
+function displayMessages(messages, tags){
 	$(".messageBox").empty();
 	for (var i=0; i < messages.length ; i++){
 		displayMessage(messages[i], tags);
@@ -19,12 +18,9 @@ function displayMessage(message, tags) {
 	);
 }
 
-function displayMessages(response) {
-    if (response != "ERROR"){
-	for (var i=0; i<response.length;i++){
-	    displayMessage(response[i].message, response[i].tags);
-	}
-    }
+function displayError(error) {
+	$(".messageBox").append("<div class=\"error\">"+error+"</div>");
+	console.log(error);
 }
 
 function reloadMessages(tags) {
@@ -33,6 +29,9 @@ function reloadMessages(tags) {
 	displayMessages([{"message":"hello", "tags":"yolo"},{"message":"first", "tags":"welcome"}]);
 	$.get('/get_messages/', json, function(response) {
 		//response = [message1, message2, ... ]
+		if (response["error"]){
+			displayError(response["error"]);
+		}
 		displayMessages(response);
 	});
 }
@@ -42,16 +41,18 @@ function reloadMessages(tags) {
 	reloadMessages(tags);
     });
 
-    $("#messageForm").on("submit", function() {
+    $("#messageSubmit").on("click", function() {
 	var tags = $("#tags").val();
 	var message = $("#message").val();
-	var tagsRequired = $("tagCheck").val();
+	//var tagsRequired = $("tagCheck").val();
+	var tagsRequired = false;//TODO: Add me!!!
 	
 	var sendObj = {};
 	sendObj["tags"] = tags;
 	sendObj["message"] = message;
 	sendObj["tagCheck"] = tagsRequired;
 
+	$.post('/new_message/', sendObj);
 	var json = JSON.stringify(sendObj);
 	
 	$.post('/new_message/', json);

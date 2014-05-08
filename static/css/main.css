@@ -36,7 +36,7 @@ width:90%;
 margin:auto;
 }
 
-#general
+#generalMessageBox
 {
 height: 550px;
 width: 60%;
@@ -57,7 +57,7 @@ width:100%;
 border-radius:5px;
 overflow-y:auto;
 }
-.fullBox2
+.recentTags
 {
 float: left;
 margin: 5px;
@@ -143,12 +143,13 @@ input#tags{
     margin-left:0px;
 }
 
-#submit{
+.submitButton{
 border:2px groove #505050;
 margin-left:0px;
 margin-right:0px;
 padding-left:0px;
 padding-right:0px;
+text-align:center;
 width:20%;
 cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
 /*give the background a gradient - see cssdemos.tupence.co.uk/gradients.htm for more info*/

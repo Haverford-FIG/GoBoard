@@ -6,18 +6,27 @@ function displayMessages(messages){
 
 	for (var i=0; i < messages.length ; i++){
 		var message = messages[i];
-		displayMessage(message);
+		displayMessage(message, i);
 	}
 }
 
-function displayMessage(message) {
+function displayMessage(message, i) {
 	//Variable Setup.
 	var text = message.text;
 	var tags = message.tags;
 	var user = message.user;
+	var odd = i%2;
+	
+	var shout = "shoutOdd";
+	if (odd == 0) {
+	    shout = "shoutEven";
+	}
+	
+	console.log(shout);
 
 	$(".messageBox").append(
-		"<div class=\"message\" tags=\""+tags+"\">"+text+"</div>"
+		//"<div class=\"message\" class=\"" + shout + "\" tags=\""+tags+"\">"+text+"</div>"
+		"<div class=\""+ shout + " message\" tags=\""+tags+"\">"+text+"</div>"
 	);
 }
 

@@ -53,6 +53,12 @@ function reloadMessages(tagArray, page) {
 	});
 }
 
+function reloadRecentTags(){
+  $.get("/get_recent_tags/", function(response) {
+    $("#tagbox").html(response);
+  });
+}
+
 function cleanTags(tagString){
 	tagString = tagString.replace(/ /g, "");
 	var tagArray = tagString.split("#")
@@ -62,7 +68,7 @@ function cleanTags(tagString){
 }
 
     $("#tagSearchSubmit").on("click", function() {
-	var rawTags = $("#tags").val();
+	var rawTags = $("#tagSearchBox").val();
 	var tags = cleanTags(rawTags);
 	reloadMessages(tags);
     });
@@ -89,7 +95,7 @@ function cleanTags(tagString){
 	return false; //Don't continue or else the form will re-submit.
     });
 
-  $.get("/get_tags", function(response) {
+  $.get("/get_tags/", function(response) {
     $( "#tags" ).autocomplete({
       source: response
     });
@@ -107,7 +113,7 @@ function cleanTags(tagString){
       });	
 
 reloadMessages([], 1);
-
+reloadRecentTags();
 
 
 //###############################################################

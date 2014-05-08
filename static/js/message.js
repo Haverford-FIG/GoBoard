@@ -2,8 +2,8 @@ $(document).ready(function() {
 //###############################################################
 
 // Stores all the responses, so that they can appear as people need them
-
-var response_full = [];
+// the first index is the response, the second is the number already displayed
+var response_full = [[], 0];
 
 function displayMessages(messages){
 	$(".messageBox").empty();
@@ -13,9 +13,33 @@ function displayMessages(messages){
 		displayMessage(message, i);
 	}
 
-	console.log($(".messageBox")[0].scrollHeight);
 
 	$(".messageBox").scrollTop($(".messageBox")[0].scrollHeight);
+}
+
+function addMessages(messages){
+	for (var i=messages.length-1; i>= 0; i--){
+		var message = messages[i];
+		addMessage(message, i);
+	}
+}
+
+function addMessage(message, i) {
+	//Variable Setup.
+	var text = message.text;
+	var tags = message.tags;
+	var user = message.user;
+	var odd = i%2;
+	
+	var shout = "shoutOdd";
+	if (odd == 0) {
+	    shout = "shoutEven";
+	}
+	
+	$(".messageBox").prepend(
+		//"<div class=\"message\" class=\"" + shout + "\" tags=\""+tags+"\">"+text+"</div>"
+		"<div class=\""+ shout + " message\" tags=\""+tags+"\">"+text+"</div>"
+	);
 }
 
 function displayMessage(message, i) {
@@ -46,10 +70,12 @@ function reloadMessages(tagArray, page) {
 		if (response["error"]){
 			displayError(response["error"]);
 		}
-		
-		var response_partial = response.slice(0,30);
-		response_full = response;
-		displayMessages(response_partial);
+		if (page != 1){
+		    addMessages(response);
+		}
+		else{
+		    displayMessages(response);
+		}
 	});
 }
 
@@ -61,6 +87,18 @@ function cleanTags(tagString){
 	return tagArray;
 }
 
+var scrollCounter = 2;
+
+    $(".messageBox").on('scroll', function() {
+	var scrollTop = $(this).scrollTop();
+	var top_distance = $(this).offset().top;
+
+	if (scrollTop == 0) {
+	    reloadMessages("",scrollCounter);
+	    scrollCounter++;
+	}
+    });
+    
     $("#tagSearchSubmit").on("click", function() {
 	var rawTags = $("#tags").val();
 	var tags = cleanTags(rawTags);
@@ -111,4 +149,4 @@ reloadMessages([], 1);
 
 
 //###############################################################
-});	  
+});	 

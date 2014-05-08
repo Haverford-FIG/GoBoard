@@ -25,8 +25,8 @@ function displayError(error) {
 	$(".messageBox").append("<div class=\"error\">"+error+"</div>");
 }
 
-function reloadMessages(tagArray) {
-	$.get('/get_messages/', {"tags": tagArray}, function(response) {
+function reloadMessages(tagArray, page) {
+	$.get('/get_messages/', {"tags": tagArray, "page":page}, function(response) {
 		//response = [message1, message2, ... ]
 		if (response["error"]){
 			displayError(response["error"]);
@@ -65,7 +65,7 @@ function cleanTags(tagString){
 	//Send the new message and get the most recent messages.
 	$.post('/new_message/', sendObj, function(response){
 		$("#message").val('');
-		reloadMessages(tagArray);
+		reloadMessages(tagArray, 1);
 	});
 
 	return false; //Don't continue or else the form will re-submit.
@@ -88,7 +88,7 @@ function cleanTags(tagString){
 		interactive: false,	
       });	
 
-reloadMessages([]);
+reloadMessages([], 1);
 
 
 

@@ -80,6 +80,12 @@ function reloadMessages(tagArray, page) {
 	});
 }
 
+function reloadRecentTags(){
+  $.get("/get_recent_tags/", function(response) {
+    $("#tagbox").html(response);
+  });
+}
+
 function cleanTags(tagString){
 	tagString = tagString.replace(/ /g, "");
 	var tagArray = tagString.split("#")
@@ -101,7 +107,7 @@ var scrollCounter = 2;
     });
     
     $("#tagSearchSubmit").on("click", function() {
-	var rawTags = $("#tags").val();
+	var rawTags = $("#tagSearchBox").val();
 	var tags = cleanTags(rawTags);
 	reloadMessages(tags);
     });
@@ -119,6 +125,29 @@ var scrollCounter = 2;
 			"tagCheck": tagsRequired
 			};
 
+	//searching for empty messages
+	if (message == "") {
+		//alert(message);
+		$("#message").css('background-color', 'red');
+		$("#message").attr('placeholder', 'You must enter a message');
+		setTimeout(function() {
+		$("#message").css('background-color', 'white');
+		}, 5000);
+		return false;
+	}
+	
+	// looking for innappropriate(sp?) tags
+	for (var i = 0; i<tagArray.length; i++) {
+		patt = new RegExp(/[^a-zA-z0-9]/);
+		if (patt.test(tagArray[i])) {
+			$("#tags").css('background-color', 'red');
+			$("#tags").attr('placeholder', "Please only letters and numbers in tag");	
+			setTimeout(function() {
+				$("#message").css('background-color', 'white');
+			}, 5000);
+			return false;
+		}
+	}
 	//Send the new message and get the most recent messages.
 	$.post('/new_message/', sendObj, function(response){
 		$("#message").val('');
@@ -128,7 +157,7 @@ var scrollCounter = 2;
 	return false; //Don't continue or else the form will re-submit.
     });
 
-  $.get("/get_tags", function(response) {
+  $.get("/get_tags/", function(response) {
     $( "#tags" ).autocomplete({
       source: response
     });
@@ -146,7 +175,7 @@ var scrollCounter = 2;
       });	
 
 reloadMessages([], 1);
-
+reloadRecentTags();
 
 
 //###############################################################

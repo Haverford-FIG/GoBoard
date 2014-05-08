@@ -86,6 +86,29 @@ function cleanTags(tagString){
 			"tagCheck": tagsRequired
 			};
 
+	//searching for empty messages
+	if (message == "") {
+		//alert(message);
+		$("#message").css('background-color', 'red');
+		$("#message").attr('placeholder', 'You must enter a message');
+		setTimeout(function() {
+		$("#message").css('background-color', 'white');
+		}, 5000);
+		return false;
+	}
+	
+	// looking for innappropriate(sp?) tags
+	for (var i = 0; i<tagArray.length; i++) {
+		patt = new RegExp(/[^a-zA-z0-9]/);
+		if (patt.test(tagArray[i])) {
+			$("#tags").css('background-color', 'red');
+			$("#tags").attr('placeholder', "Please only letters and numbers in tag");	
+			setTimeout(function() {
+				$("#message").css('background-color', 'white');
+			}, 5000);
+			return false;
+		}
+	}
 	//Send the new message and get the most recent messages.
 	$.post('/new_message/', sendObj, function(response){
 		$("#message").val('');

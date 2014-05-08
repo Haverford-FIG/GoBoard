@@ -1,13 +1,21 @@
 $(document).ready(function() {
 //###############################################################
 
+// Stores all the responses, so that they can appear as people need them
+
+var response_full = [];
+
 function displayMessages(messages){
 	$(".messageBox").empty();
 
-	for (var i=0; i < messages.length ; i++){
+	for (var i=messages.length-1; i>= 0; i--){
 		var message = messages[i];
 		displayMessage(message, i);
 	}
+
+	console.log($(".messageBox")[0].scrollHeight);
+
+	$(".messageBox").scrollTop($(".messageBox")[0].scrollHeight);
 }
 
 function displayMessage(message, i) {
@@ -22,8 +30,6 @@ function displayMessage(message, i) {
 	    shout = "shoutEven";
 	}
 	
-	console.log(shout);
-
 	$(".messageBox").append(
 		//"<div class=\"message\" class=\"" + shout + "\" tags=\""+tags+"\">"+text+"</div>"
 		"<div class=\""+ shout + " message\" tags=\""+tags+"\">"+text+"</div>"
@@ -40,7 +46,10 @@ function reloadMessages(tagArray) {
 		if (response["error"]){
 			displayError(response["error"]);
 		}
-		displayMessages(response);
+		
+		var response_partial = response.slice(0,30);
+		response_full = response;
+		displayMessages(response_partial);
 	});
 }
 

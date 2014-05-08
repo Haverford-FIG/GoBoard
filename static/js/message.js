@@ -70,6 +70,7 @@ function reloadMessages(tagArray, page) {
 		if (response["error"]){
 			displayError(response["error"]);
 		}
+		
 		if (page != 1){
 		    addMessages(response);
 		}

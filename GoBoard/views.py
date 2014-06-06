@@ -16,8 +16,8 @@ def main_page(request):
  	return render(request, "index.html")
 
 #Store a message in the database.
-#@login_required
-#@require_http_methods(["POST"])
+@login_required
+@require_http_methods(["POST"])
 def new_message(request):
   try:
     #Variable Setup

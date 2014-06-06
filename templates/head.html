@@ -1,8 +1,16 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
 <script src="{{STATIC_URL}}js/csrf_cookie.js"></script>
+
 <script src="{{STATIC_URL}}js/message.js"></script>
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css" />
+
+{% if userFile %} 
+ <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/{{userFile}}.css" />
+{% else %} 
+ <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css" />
+{% endif%}
+
 <script src="{{STATIC_URL}}js/swatches.js"></script>
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/swatches.css" />

@@ -15,7 +15,7 @@ import json
 def main_page(request):
 	u = request.user
 	userFolder = (u.username+"/") if u.is_authenticated() else ""
- 	return render(request, userFolder+"index.html")
+ 	return render(request, userFolder+"index.html", {"userFile":userFolder[:-1]})
 
 #Store a message in the database.
 @login_required

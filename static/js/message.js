@@ -22,6 +22,7 @@ function addMessages(messages){
 		var message = messages[i];
 		addMessage(message, i);
 	}
+	
 }
 
 function addMessage(message, i) {

@@ -1,210 +1,145 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
 body {
-margin:0px;
-padding:0px;
-background-color:#C7C7C7;
-min-width:1000px;
+ margin:0px;
+ padding:0px;
+ min-width:600px;
+
+ font-family:"Lato";
+ font-size:16px;
+}
+
+.banner {
+ padding:20 0 30 20;
+ letter-spacing:2px;
+ font-size:24px; 
+ height:5%;
+
+ color:white;
+ background-color:#225ea8;
+}
+
+#messageContainer {
+ width:70%;
+ position:relative;
+ float:left;
+}
+
+.messageBox {
+ height:60%;
+ padding-left:40px;
+ overflow-x:none;
+ overflow-y:scroll;
+}
+
+.message {
+ margin:25 15 10 0;
+ padding:10 0 20 15;
+ background-color:#e0f3db;
+ position:relative;
 }
 
 
-.ui-autocomplete {
-max-height: 100px;
-overflow-y: auto;
-/* prevent horizontal scrollbar */
-overflow-x: hidden;
- }
- /* IE 6 doesn't support max-height
-  * we use height instead, but this forces the menu to always be this tall
-  */
- * html .ui-autocomplete {
-height: 100px;
- }
-
-#navbar{
-    margin-bottom:30px;
+#recentTagContainer {
+ width:30%;
+ position:relative;
+ float:right;
 }
 
- .goBoardBox
- {
-border-color: blue;
-margin: 10px;
-height: 30%;
-width: 100%;
+.miniHeader {
+ width:100%;
+ padding:20 0 20 0;
+ text-align:center;
+
+ font-size:18px;
+ background-color:#7fcdbb; 
+ color:white;
 }
 
-.fullBox
-{
-width:90%;
-margin:auto;
+.inputContainer {
+ position:relative;
+ height:50px;
+ text-align:center;
+ border-bottom:1px;
 }
 
-#generalMessageBox
-{
-height: 550px;
-width: 60%;
-float:left;
-border-color: black;
-border-style: solid;
-border-width: 3px;
-background-color:#594F4F;
-padding:10px 20px 10px 10px;
-border-radius:15px;
-}
+input, textarea {
+ padding:0 15 0 15;
+ border:0px;
+ outline:none;
 
-.messageBox
-{
-margin:5px;
-background-color: white;
-height:60%;
-width:100%;
-border-radius:5px;
-overflow-y:auto;
-}
-
-.recentTags
-{
-float: left;
-margin: 5px;
-margin-left:40px;
-height: 550px;
-width: 20%;
-border-color: black;
-border-style: solid;
-border-width: 3px;
-background-color:#594F4F;
-padding:10px 10px 10px 0px;
-border-radius:15px;
-}
-
-#tagSearchBox{
-width:30%;
-}
-
-label, .fullBox{
-text-align:right;
-}
-
-.tagBox
-{
-margin:5px;
-background-color: white;
-height:80%;
-width:100%;
-border-radius:5px;
-overflow-y:auto;
-}
-
-.shoutEven
-{
-padding-left:5px;
-background-color: #A5A5A5;
-}
-.shoutOdd
-{
-padding-left:5px;
-background-color:#E4E1E8;
-}
-
-.message
-{
-text-align:left;
-padding:5px 5px 5px 10px;
-border-color:black;
-border-bottom:1px solid black;
-font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
-font-size: small;
-}
-
-form#messageform{
-    margin-right:5px;
-}
-
-
-.tagBox{
+ color:black;
 }
 
 textarea {
-width:100%;
-padding-right:5px;
+ resize:none;
+ resize:none;
+ border-bottom:1px solid #eee;
 }
 
-.banner
-{
-font-size:50px;
-color:white;
-background-color:maroon;
-padding:30px;
-text-align:center;
+input {
+ width:80%;
+ height:100%;
+ float:left;
+ font-size:18px;
 }
 
-input#tags{
-    width:77%;
-    margin-right:0px;
-    margin-left:0px;
-    padding:2px 0px;
-    border:0px;
-    margin-left:0px;
+input:focus {
+ background-color:#fff8cd;
 }
 
-.submitButton{
-border:2px groove #505050;
-margin-left:0px;
-margin-right:0px;
-padding-left:0px;
-padding-right:0px;
-text-align:center;
-width:20%;
-cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
-/*give the background a gradient - see cssdemos.tupence.co.uk/gradients.htm for more info*/
-background-color:maroon; /*required for browsers that don't support gradients*/
-background: -webkit-linear-gradient(top, maroon, #1A1A1A);
-/*style to the text inside the button*/
-font-family:Arial;
-color:#fff;
-font-variant:small-caps;
-border-radius: 0 15px 15px 0;
-/*add a drop shadow to the button*/
--webkit-box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
--moz-box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
-box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
-}
-/***NOW STYLE THE BUTTON'S HOVER AND FOCUS STATES***/
-input#submitbutton:hover, input#submitbutton:focus {
-color:#edebda;
-/*reduce the spread of the shadow to give a pushed effect*/
--webkit-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
--moz-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+.badInput {
+ background-color:#fcbba1;
+ border-bottom:1px solid #fc9272;
 }
 
+.submitButton {
+ float:right;
+ width:auto;
+ padding:15 20 15 20;
+ cursor:pointer;
+ border-left:1px solid #fff7bc;
+ background-color:#fff7bc;
+}
+.submitButton:hover {
+ background-color:#fff8cd;
+ border-color:#fff7bc;
+}
 
-.kwicks {
- position:relative;
- height: 60px;
- margin:0px;
- padding:0px;
- margin-bottom:10px;
- }
- .kwicks > a {
- position:relative;
- display:inline-block;
- white-space:nowrap;
- color:white;
- padding-top:20px;
- padding-bottom:20px;
+.recentTag {
+ padding: 5 10 5 10;
  text-align:center;
- /* overridden by kwicks but good for when JavaScript is disabled */
- width:20%;
- margin:0px;
- float: center;
- border-right:1px solid #134D00;
- background-color:#3863A3;
- font-family: arial;
- font-variant: small-caps;
- font-size:larger;
- } 
-
-.kwicks > a:hover { 
-background-color:#1E4B8D;
+ margin:5 5 5 5;
+ font-size:14px;
+ background-color:#edf8b1;
 }
 
-.kwicks > a:last-child { 
+.tagLink:hover{
+ opacity:1;
+}
+
+.tagLink {
+ cursor:pointer;
+ opacity:0.8;
+}
+
+.userShadow {
+ position:absolute;
+ top:-15px;
+ left:-15px;
+ opacity:0.8;
+ font-style:oblique;
+}
+
+.tagShadow {
+ position:absolute;
+ bottom:-10px;
+ right:-8px;
+ opacity:0.8;
+}
+
+.tag {
+ margin:0 5 0 5;
+ z-index:10;
+}
+

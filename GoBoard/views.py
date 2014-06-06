@@ -53,14 +53,18 @@ def get_messages(query, page=1):
 
   return messages[page_size*(page-1):page_size*page]
 
+def convert_tag_list_to_text_list(tagList):
+  return ["#{}".format(tag.tag) for tag in tagList]
 
 def get_tag_list(message):
   tagList = []
   try:
     #If there are no tags, don't make a list of None objects.
-    if message.tag_set==None:
+    if message.tag_set!=None:
       tagSet = message.tag_set.all()
       tagList = list(tagSet)
+    else:
+      tagList=[]
   except Exception as e:
     print e
     print "ERROR GETTING MESSAGE TAGS: {}".format(message)
@@ -85,11 +89,15 @@ def send_messages(request):
  
     messages = get_messages(query, page)
 
+
     if not messages.exists():
       response = {"error":"No messages found! :("}
     else:
       #Construct the JSON response.
-      response = [{"text":message.text, "user":message.user.username, "tags":get_tag_list(message), "datetime":str(message.datetime)} for message in messages]
+      response = [{"text":message.text, 
+                   "user":message.user.username, 
+                   "tags":convert_tag_list_to_text_list(get_tag_list(message)), 
+                   "datetime":str(message.datetime)} for message in messages]
    
   except Exception as e:
     print "send_messages error: {}".format(e)

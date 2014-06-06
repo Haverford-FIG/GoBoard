@@ -1,19 +1,18 @@
-<div id="generalMessageBox">
-    <div id="tagSearchSubmit">
-    <input type="text" id="tagSearchBox" placeholder="#tags"/>
-    <button class="submitButton" id="tagSearch">Search</button>
-	</div>
+<div id="messageContainer">
+  <div class="inputContainer">
+    <input type="text" id="tagSearchBox" placeholder="Search for #tags..."/>
+    <div class="submitButton" id="tagSearch">Search</div>
+  </div>
 
-	<div class="messageBox"></div>
+  <div class="messageBox"></div>
 
-	<div class="goBoardBox">
-	    <form id="messageForm">
-	    <textarea maxlength="300" id="message" placeholder="What's on your mind?" cols="60" rows="5"></textarea>
-	    <div class="ui-widget">
-		<label for="tags"></label>
-		<input id="tags" maxlength="300" cols="60" placeholder="#tags">
-        <button class="submitButton" id="messageSubmit">Go!</button>	
-	    </form>
-	</div>
-    </div>
+  <div class="goBoardBox">
+    <form id="messageForm">
+      <textarea maxlength="300" id="message" placeholder="What's on your mind?" cols="60" rows="5"></textarea>
+      <div class="inputContainer">
+        <input class="tagAutocomplete" maxlength="300" cols="60" placeholder="#tag #your #message #{{user.username}}">
+        <div class="submitButton" id="messageSubmit">Go!</div>  
+      </div>
+    </form>
+  </div>
 </div>

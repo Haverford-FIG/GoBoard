@@ -13,7 +13,9 @@ import datetime
 import json
 
 def main_page(request):
- 	return render(request, "index.html")
+	u = request.user
+	userFolder = (u.username+"/") if u.is_authenticated() else ""
+ 	return render(request, userFolder+"index.html")
 
 #Store a message in the database.
 @login_required
@@ -110,14 +112,7 @@ def get_recent_tags(request):
     return HttpResponse("ERROR")
 
 
-
-
-def add_user(request):
-	my_string = ""
-	new_user = request
-	if new_user == "":
-		return False
-	else:
-		new_user = str(new_user)
-		my_string = "python User(username="+"\""+ new_user +"\""+", password=figiscool\")\n x.save()"
-	return my_string
+def createUserFromString(name):
+  newUser = User(username=name, password=DEFAULT_USER_PASSWORD)
+  newUser.save()
+  return newUser

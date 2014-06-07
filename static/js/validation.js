@@ -1,11 +1,12 @@
 //# # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # #
 //Function Declarations
 
+//Takes a "dirty" tagString and converts it to a cleaned tagArray
+//eg: "#man/ny  #dir  ty# tags " ==> ["many, "dirty", "tags"]
 function cleanTags(tagString){
-	tagString = tagString.replace(/ /g, "");
+	tagString = tagString.match(/#|[a-zA-Z]/g).join("");
 	var tagArray = tagString.split("#")
-	if (tagArray.length) tagArray.shift();
-
+	if (tagArray.length) tagArray.shift(); //Be wary of the starting hash...
 	return tagArray;
 }
 

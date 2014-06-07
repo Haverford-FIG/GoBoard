@@ -40,11 +40,16 @@ $(".messageBox").scroll(function() {
 
 
     
-    $(document).on("click", "#tagFilterSubmit", function() {
-        var tags = getActiveTags();
-	reloadMessages(tags, {clearMessages:true, page:1});
-    });
+$(document).on("click", "#tagFilterSubmit", function() {
+  var tags = getActiveTags();
+  reloadMessages(tags, {clearMessages:true, page:1});
+});
 
+$(document).on("click", ".tagLink", function() {
+  var tag = cleanTags($(this).html());
+  setActiveTags(tag);
+  $("#tagFilterSubmit").trigger("click");
+});
 
     $(document).on("click", "#newMessageSubmit", function() {
 	var message = $("#newMessageInput").val();

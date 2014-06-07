@@ -4,3 +4,8 @@ function getActiveTags(){
   var tags = cleanTags(rawTags);
   return tags
 }
+
+function setActiveTags(tagArray){
+  var tagString = "#" + tagArray.join(" #");
+  $("#tagFilterInput").val(tagString);
+}

@@ -10,24 +10,39 @@ $(document).on("keydown", "#newMessageInput", function(e) {
   }
 });
 
+//TODO: Fix this on the newMessage Submit....
+//Also allow tag-filters to submit by pressing enter.
+$(document).on("keydown", ".tagAutoComplete", function(e) {
+  if (e.which==13) {
+    $(this).siblings(".submitButton").trigger("click");
+    return false;
+  }
+});
 
 
+$(".messageBox").scroll(function() {
+  var scrollTop = $(this).scrollTop();
+  var containerNotEmpty = $(this).find(".message").length != 0;
+  var containerNotLocked = $(this).data("lockMessages")==false;
+  var containerMaxed = $(this).data("maxPage");
+  if (containerMaxed===undefined) containerMaxed=false;
 
-var scrollCounter = 2;
-    $(document).on("scroll", ".messageBox", function() {
-	var scrollTop = $(this).scrollTop();
-	var top_distance = $(this).offset().top;
+  var page = $(this).data("page");
+  if (page===undefined) page=1;
 
-	if (scrollTop == 0) {
-	    reloadMessages("", scrollCounter);
-	    scrollCounter++;
-	}
-    });
+  if (scrollTop==0 && containerNotEmpty && 
+      containerMaxed==false && containerNotLocked) {
+    page++;
+    var tags = getActiveTags();
+    reloadMessages(tags, {page:page, noScroll:true});
+  }
+});
+
+
     
     $(document).on("click", "#tagFilterSubmit", function() {
-	var rawTags = $("#tagFilterInput").val();
-	var tags = cleanTags(rawTags);
-	reloadMessages(tags);
+        var tags = getActiveTags();
+	reloadMessages(tags, {clearMessages:true, page:1});
     });
 
 
@@ -68,7 +83,7 @@ var scrollCounter = 2;
 	//Send the new message and get the most recent messages.
 	$.post('/new_message/', sendObj, function(response){
 		$("#newMessageInput").val('');
-		reloadMessages(tagArray, 1);
+		reloadMessages(tagArray, {page:1});
 	});
 
 	return false; //Don't continue or else the form will re-submit.

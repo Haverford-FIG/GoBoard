@@ -1,4 +1,11 @@
 
+function buildMessageBoxAlert(message){
+  var HTML = "";
+  HTML += "<div class=\"messageContainerAlert\">"+message+"</div>"
+  return HTML;
+}
+
+
 //Return the HTML for a list of .recentTag elements.
 function buildRecentTags(tagArray){
   var HTML = "";

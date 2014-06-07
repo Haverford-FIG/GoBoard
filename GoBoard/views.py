@@ -45,7 +45,6 @@ def new_message(request):
 def get_messages(query, page=1):
   #Variable Setup.
   page_size = 30
-
   #Get the messages.
   if query==None:
     messages = Message.objects.all()
@@ -95,7 +94,7 @@ def send_messages(request):
 
 
     if not messages.exists():
-      response = {"error":"No messages found! :("}
+      response = {"maxPage":True}
     else:
       #Construct the JSON response.
       response = [{"text":message.text, 
@@ -106,7 +105,7 @@ def send_messages(request):
   except Exception as e:
     print "send_messages error: {}".format(e)
     #If something goes wrong, send the 500 page.
-    response = {"error":"Oops! No messages could be loaded..."}
+    response = {"error":"Oops! We can't seem to load those messages..."}
 
   #Send the JSON response.
   return HttpResponse(json.dumps(response), content_type="application/json")

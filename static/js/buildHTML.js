@@ -1,4 +1,15 @@
 
+//Return the HTML for a list of .recentTag elements.
+function buildRecentTags(tagArray){
+  var HTML = "";
+  for (var i=0; i<tagArray.length; i++){
+    HTML += "<div class=\"recentTag tagLink\">"+tagArray[i]+"</div>"
+  }
+  return HTML;
+}
+
+
+
 //Return the HTML for a list of Tags wrapper in a .tagGroup class.
 function buildTagArrayHTML(tagArray) {
   var HTML = "<div class=\"tagGroup\">";

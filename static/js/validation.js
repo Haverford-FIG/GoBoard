@@ -1,7 +1,18 @@
-$(document).ready(function() {
 //# # # # # # # # # # # # # # # # # # #  # # # # # # # # # # # # #
+//Function Declarations
+
+function cleanTags(tagString){
+	tagString = tagString.replace(/ /g, "");
+	var tagArray = tagString.split("#")
+	if (tagArray.length) tagArray.shift();
+
+	return tagArray;
+}
 
 
+
+$(document).ready(function() {
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 $(".tagAutoComplete").keypress(function(e){
   var c = String.fromCharCode(e.which) 
@@ -14,7 +25,6 @@ $(".tagAutoComplete").keypress(function(e){
 
   var input = $(this).val();
   var lastChar = input.slice(-1);
-      console.log(c);
   switch(c){
     case " ":
       var alpha = new RegExp(/[a-zA-Z]/);

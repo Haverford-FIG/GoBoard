@@ -6,6 +6,9 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__name__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+#Allows us query how many user sessions are active at a given time.
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 ALLOWED_HOSTS = ["127.0.0.1","0.0.0.0","165.82.80.243", "go.haverford.edu", "localhost", "ironwood.fig.haverford.edu"]
 
 ADMINS = ()

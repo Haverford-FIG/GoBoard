@@ -72,6 +72,7 @@ input, textarea {
 }
 
 textarea {
+ padding-top:4px;
  resize:none;
  resize:none;
  border-bottom:1px solid #eee;
@@ -143,3 +144,9 @@ input:focus {
  z-index:10;
 }
 
+#otherActiveUserCount {
+ text-align:center;
+ font-size:0.9em;
+ padding:10 0 0 0;
+ opacity:0.5;
+}

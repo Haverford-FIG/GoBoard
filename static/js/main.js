@@ -160,7 +160,9 @@ var scrollCounter = 2;
                 terms.pop();
                 terms.push(ui.item.value);
                 terms.push("");
-                this.value = terms.join(" ");
+                var dirty = terms.join(" ");
+                var cleaned = dirty.match(/#[a-zA-Z]+/gm).join(" ");
+                this.value = cleaned;
                 return false;
               }
     });

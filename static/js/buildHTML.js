@@ -14,3 +14,14 @@ function buildTagHTML(tag){
   return "<span class=\"tag tagLink\">"+tag+"</span>";
 }
 
+
+function buildUserCounter(userCount){
+  var HTML = "";
+  if (userCount>1){
+    HTML += String(userCount-1)+" others online!";
+  } else {
+    HTML += "No other users online. :(";
+  }
+  return HTML;
+}
+

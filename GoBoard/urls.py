@@ -15,5 +15,8 @@ urlpatterns = patterns('',
 
      url(r'^get_tags/?$', 'GoBoard.views.get_tags',),
      url(r'^get_recent_tags/?$', 'GoBoard.views.get_recent_tags',),
+
+     url(r'^userCount/?$', 'GoBoard.sessionCounter.sendActiveUserCount',),
      url(r'^admin/?', include(admin.site.urls)),
 )
+

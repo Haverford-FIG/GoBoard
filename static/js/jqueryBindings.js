@@ -136,6 +136,17 @@ $.get("/get_tags/", function(tagList) {
   });
 });
 
+//# # # # # # # # # # # # # # # # # # # # # 
+//jQuery Autocomplete for Options Menu # # #
+$("#optionMenuButton").click(function() {
+  var menu = $("#optionMenu");
+  if ($(menu).is(":visible")) {
+    $(menu).hide();
+  } else {
+    $(menu).show();
+  }
+});
+
 
 //# # # # # # # # # # # # # # # # # # # # # # # # # # # #
 });

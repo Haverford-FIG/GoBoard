@@ -7,8 +7,6 @@ function updateUserCounter(){
     $("#otherActiveUserCount").html(newHTML);
   });
 }
-updateUserCounter()
-setInterval(updateUserCounter, 15*1000);
 
 
 // # # # # # # Tag Updaters # # # # # # # # # # # # 

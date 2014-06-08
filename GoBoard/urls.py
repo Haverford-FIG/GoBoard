@@ -21,6 +21,10 @@ urlpatterns = patterns('',
      url(r'^get_trending_tags/?$', 
                   'GoBoard.views.tags.get_tags',{"query":"trending"}),
 
+     #Views for user authentication.
+     url(r'^login/?$', 'GoBoard.views.authentication.login_view',),
+     url(r'^logout/?$', 'GoBoard.views.authentication.logout_view',),
+
      url(r'^userCount/?$', 'GoBoard.sessionCounter.sendActiveUserCount',),
      url(r'^admin/?', include(admin.site.urls)),
 )

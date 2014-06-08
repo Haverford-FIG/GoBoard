@@ -4,6 +4,7 @@
 
 <script src="{{STATIC_URL}}js/csrf_cookie.js"></script>
 
+<script src="{{STATIC_URL}}js/helperFunctions.js"></script>
 <script src="{{STATIC_URL}}js/buildHTML.js"></script>
 <script src="{{STATIC_URL}}js/validation.js"></script>
 <script src="{{STATIC_URL}}js/messageTransactionFunctions.js"></script>
@@ -12,11 +13,14 @@
 <script src="{{STATIC_URL}}js/jqueryBindings.js"></script>
 <script src="{{STATIC_URL}}js/main.js"></script>
 
-{% if userFile %} 
- <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/{{userFile}}.css" />
-{% else %} 
- <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css" />
-{% endif%}
+<!-- Load the default/specified theme. -->
+<link rel="stylesheet" type="text/css" 
+{% if user.is_authenticated %}
+  href="{{STATIC_URL}}css/{{user.userinfo.theme}}.css"
+  {% else %}
+  href="{{STATIC_URL}}css/pastel.css"
+  {% endif %}
+/>
 
 <script src="{{STATIC_URL}}js/swatches.js"></script>
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/swatches.css" />

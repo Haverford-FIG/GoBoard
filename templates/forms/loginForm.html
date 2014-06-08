@@ -1,0 +1,19 @@
+{% if user.is_authenticated %}
+
+  <div class="formDescriptor">You're already logged in as {{user.username}}</div>
+  <div><a href="/accounts/logout/">Log out?</a></div>
+{% else %}
+
+  <form class="fullScreenForm" action="/accounts/login/" method="post">
+    {% csrf_token %}
+    <div class="formFieldContainer">
+      <label for="form_username">Username</label>
+      <input name="username" id="form_username" type="username"></input>
+    </div>
+    <div class="formFieldContainer">
+      <label for="form_password">Password</label>
+      <input name="password" id="form_password" type="password"></input>
+    </div>
+    <div class="button noSelect" id="formSubmitButton">Submit</div>
+  </form>
+{% endif %}

@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:400,700);
 
 body {
- margin:0px;
+ margin:0 0 40 0;
  padding:0px;
  min-width:600px;
 
@@ -38,7 +38,13 @@ a:hover {
  background-color:#225ea8;
 }
 
-.bannerLogo, .bannerLogo a {
+a #bannerLogo, a #bannerLogo:hover {
+ display:inline-block;
+ color:white;
+ font-weight:normal;
+}
+
+.bannerMotto, .bannerMotto a {
  font-size:12px;
  letter-spacing:1.5px;
  opacity:0.9;
@@ -99,7 +105,7 @@ a:hover {
  border-bottom:1px;
 }
 
-input, textarea {
+input, textarea, select {
  padding:0 15 0 15;
  border:0px;
  outline:none;
@@ -114,26 +120,40 @@ textarea {
  border-bottom:1px solid #eee;
 }
 
-input {
+input, select {
  width:80%;
  height:100%;
  float:left;
  font-size:18px;
 }
 
-input:focus {
- background-color:#fff8cd;
+input:focus, select:focus, textarea:focus,
+.fullScreenForm input:focus, .fullSCreenForm select:focus {
+ background-color:#FFFCE5;
 }
 
-.badInput {
- background-color:#fcbba1;
- border-bottom:1px solid #fc9272;
+.ui-menu {
+ margin:0px;
+ padding:0px;
+ border-radius:0px;
+ outline:none;
+ border:none;
 }
 
-.goodInput {
- background-color:#e5f5e0;
- border-bottom:1px solid #c7e9c0;
+
+option, .ui-menu-item a {
+ background:#7fcdbb;
+ outline:none;
+ border:none;
+ font-weight:normal;
+ border-radius:0px;
 }
+
+.ui-widget-content .ui-state-focus { /* TODO: Test in !Chrome */
+ background:#edf8b1;
+ outline:none;
+ border:none;
+} 
 
 .submitButton {
  float:right;
@@ -249,9 +269,82 @@ input:focus {
 }
 
 #copyrightContainer {
- position:absolute;
+ position:fixed;
  right:25px;
  bottom:10px;
  opacity:0.5;
  word-spacing:5px;
 }
+
+.genericCenteredContainer {
+ text-align:center;
+ margin:0 auto;
+}
+
+/* # # # # # User Settings Form # # # # # #  */
+.fullScreenForm {
+ padding:10 30 0 30; 
+}
+
+.formFieldContainer {
+ height:40px;
+ line-height:35px;
+}
+
+.formDescriptor{
+ background-color:#FFE5E8;
+ padding:5 0 5 0;
+ margin: 20 0 0 0;
+ width:100%;
+}
+
+.fullScreenForm label {
+ background-color:#e0f3db;
+ height:100%;
+ width:30%;
+ display:block;
+ float:left;
+ vertical-align:middle;
+ line-height:inherit;
+}
+
+.fullScreenForm input, .fullScreenForm select {
+ float:left;
+ width:70%;
+ height:100%;
+ background-color:#fff8cd;
+ border:0px;
+ border-bottom:1px solid #fff6ab;
+}
+
+.fullScreenForm input[type=checkbox]{
+ width:5%;
+ margin:0 0 0 20; 
+}
+
+.button {
+ background-color:#edf8b1;
+ padding:10 0 15 0;
+ cursor:pointer;
+ font-weight:bold;
+}
+
+.button:hover {
+ background-color:#F2FAC7;
+}
+
+.formFieldGroup {
+ margin:0 auto;
+}
+
+
+.badInput, input.badInput {
+ background-color:#fcbba1;
+ border-bottom:1px solid #fc9272;
+}
+
+.goodInput {
+ background-color:#e5f5e0;
+ border-bottom:1px solid #c7e9c0;
+}
+

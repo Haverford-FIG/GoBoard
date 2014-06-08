@@ -22,8 +22,12 @@ urlpatterns = patterns('',
                   'GoBoard.views.tags.get_tags',{"query":"trending"}),
 
      #Views for user authentication.
-     url(r'^login/?$', 'GoBoard.views.authentication.login_view',),
-     url(r'^logout/?$', 'GoBoard.views.authentication.logout_view',),
+     url(r'^accounts/login/?$', 'GoBoard.views.authentication.login_view',),
+     url(r'^accounts/logout/?$', 'GoBoard.views.authentication.logout_view',),
+
+     #Views for user-specific settings/information.
+     url(r'^settings/?$', 'GoBoard.views.user_settings.load_settings',),
+     url(r'^update_settings/?$', 'GoBoard.views.user_settings.update_settings',),
 
      url(r'^userCount/?$', 'GoBoard.sessionCounter.sendActiveUserCount',),
      url(r'^admin/?', include(admin.site.urls)),

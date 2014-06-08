@@ -17,15 +17,86 @@ function cleanTags(tagString){
   var tagArray = validChars.join("").split("#")
   if (tagArray.length) tagArray.shift(); //Be wary of the starting hash...
 
-  return tagArray;
+  var uniqueTagArray = [];
+  $.each(tagArray, function(index, entry){
+    if (uniqueTagArray.indexOf(entry)<0) uniqueTagArray.push(entry);
+  });
+
+  return uniqueTagArray;
 }
 
-//# # # #  Validaiton Classes  # # # # # # # # # # # # #
-function applyTempErrorClass(location) {
+//# # # #  Form Validation  # # # # # # # # # # # # #
+function validateForm(form, url){
+  //Variable Setup.
+  var formContent = {};
+  var textInput = "input[type=text],input[type=password], input[type=email], select";
+
+  //Clear any previous .badInput elements.
+  $(form).find(".badInput").removeClass("badInput");
+
+  //Perform different validations for different forms.
+  switch (url){
+    case "/update_settings/":
+      var noEmpty = ["currentPass","email"];
+      $(form).find(textInput).each(function(i){
+        var name = $(this).attr("name");
+        var val = $(this).val();
+        //Don't allow empty values.
+        if (noEmpty.indexOf(name)>=0 && val=="") applyErrorClass($(this), false);
+
+        formContent[name]=val;
+      });
+
+      //Collect any checkbox values.
+      $(form).find("input[type=checkbox]").each(function(i){
+        var name = $(this).attr("name");
+        var val = $(this).is(":checked") ? "y" : "n";
+        formContent[name]=val;
+      });
+      
+      //Make sure the repeated new pass is the same.
+      if (formContent["newPass"]!=formContent["newPassRepeat"]){
+        applyErrorClass($(form).find("input[name='newPassRepeat']"), false)
+      }
+
+      //Make sure the email has an "@" and it is appropriately placed.
+      var email = formContent["email"];
+      if (email.indexOf("@")<=0 || email.indexOf("@")==email.length-1){
+        applyErrorClass($(form).find("input[name='email']"), false)
+      }
+
+      break;
+
+    case "/accounts/login/":
+      var noEmpty = ["password","username"];
+      $(form).find("input").each(function(i){
+        var name = $(this).attr("name");
+        var val = $(this).val();
+        //Don't allow empty values.
+        if (noEmpty.indexOf(name)>=0 && val=="") applyErrorClass($(this), false);
+
+        formContent[name]=val;
+      });
+      break;
+    default:
+      throw "Uh oh... validateForm not defined for '"+url+"'";
+
+  }
+
+  return formContent
+}
+
+//# # # #  Validation Classes  # # # # # # # # # # # # #
+function applyErrorClass(location, timeout) {
+  if (timeout===undefined) timeout=true;
+
   $(location).addClass('badInput');
-  setTimeout(function() {
-    $(location).removeClass('badInput', 300);
-  }, 500);
+
+  if (timeout){
+    setTimeout(function() {
+      $(location).removeClass('badInput', 300);
+    }, 500);
+  }
 }
 
 function applyTempGoodClass(location) {

@@ -12,8 +12,11 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 ALLOWED_HOSTS = ["127.0.0.1","0.0.0.0","165.82.80.243", "go.haverford.edu", "localhost", "ironwood.fig.haverford.edu"]
 
 
+# # # # # #GoBoard Interface Settings  # # # # # # # # # # # 
+#The max number of entries to display in an updateContainer.
 MAX_UPDATE_CONTAINER_ENTRIES = 15
-
+CAMPUS_OPTIONS = ["Haverford", "Swarthmore", "Bryn Mawr", "UPenn", "Alumni"]
+THEME_OPTIONS = ["pastel"]
 
 
 

@@ -1,5 +1,4 @@
 from django.http import StreamingHttpResponse, HttpResponse, Http404
-from django.template import RequestContext
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
@@ -15,11 +14,8 @@ import json
 
 def main_page(request):
 	u = request.user
-	userFolder = (u.username+"/") if u.is_authenticated() else ""
-	return render(request, userFolder+"index.html", {
-		"userFile":userFolder[:-1],
-		"otherActiveUsers":getActiveUsers().count()-1,
-	})
+        style = "pastel" if not u.is_authenticated() else u.userinfo.theme
+	return render(request, "index_{}.html".format(style))
 
 #Store a message in the database.
 @login_required

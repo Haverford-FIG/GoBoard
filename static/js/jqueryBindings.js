@@ -20,6 +20,45 @@ $(document).on("click", ".updateContainerOption", function(e) {
 });
 
 
+//Submit a form when a user clicks the #submitFormButton only if it is valid.
+$(document).on("click", "#formSubmitButton", function(){
+  var form = $(this).closest("form");
+  var url = $(form).attr("action");
+
+  //Validates the form contents and converts [{name:val},{name2:val2}, ...]
+  //  to a more dictionary-like form: {name:val, name2:val2,...}
+  //validateForm also sets .badInputs to allow for easy checking.
+  var formContents = validateForm(form, url);
+  if ($(form).find(".badInput").length) return false;
+
+  $.post(url, formContents, function(response){
+    if (response=="SUCCESS"){
+      window.location.reload();
+    } else if (response=="ERROR"){
+      //TODO: Make this more general. Perhaps just PASS the error to client?
+      //Assume the "ERROR" was caused by a bad password.
+      var passElements = "input[name=password],input[name=currentPass]";
+      applyErrorClass($(form).find(passElements),false);
+    } else if (response=="NEXT"){
+      //If there is a "next" page specified, load it.
+      var next = getURLParams("next");
+      if (next===undefined) next = "/home/";
+      window.location.href = next;
+    } else {
+      //TODO: Make me a pretty error message.
+      alert("OOPS!! We don't know what to do with that result...")
+    }
+  });
+});
+
+//Update the .badInput for forms after a user inputs new info.
+$(document).on("blur", ".fullScreenForm input", function() {
+  var form = $(this).closest("form");
+  var url = $(form).attr("action");
+  formContents = validateForm(form, url);
+});
+
+
 
 //If the user presses enter in the #newMessageInput, send the message.
 $(document).on("keydown", "#newMessageInput", function(e) {
@@ -61,6 +100,7 @@ $(".messageBox").scroll(function() {
     
 $(document).on("click", "#tagFilterSubmit", function() {
   var tags = getActiveTags();
+  setActiveTags(tags); //Show the "clean" tags that are actually being used.
   reloadMessages(tags, {clearMessages:true, page:1});
 });
 
@@ -82,7 +122,7 @@ $(document).on("click", "#newMessageSubmit", function() {
     validateMessage(message);
     tagArray = cleanTags(rawTags);
   } catch(err){
-    applyTempErrorClass("#newMessageInput");
+    applyErrorClass("#newMessageInput");
     return false;
   }
   

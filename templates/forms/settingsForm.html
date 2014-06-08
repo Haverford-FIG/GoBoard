@@ -1,0 +1,65 @@
+<form class="fullScreenForm" action="/update_settings/" method="post">
+  {% csrf_token %}
+  <div class="button noSelect" id="formSubmitButton">Save</div>
+  <div class="formFieldContainer">
+    <label for="form_currentPass">Current Pass</label>
+    <input name="currentPass" id="form_currentPass" type="password"></input>
+  </div>
+
+  <div class="formDescriptor">Basic Info</div>
+  <div class="formFieldContainer">
+    <label for="form_firstName">First Name</label>
+    <input name="first_name" id="form_firstName" type="text" value="{{user.first_name}}"/>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_lastName">Last Name</label>
+    <input name="last_name" id="form_lastName" type="text" value="{{user.last_name}}"/>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_email">Email</label>
+    <input name="email" id="form_email" type="email" value="{{user.email}}"/>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_campus">Campus</label>
+    <select name="campus" id="form_campus">
+      {% for option in campus_options %}
+        <option value="{{option}}"
+         {% if user.userinfo.campus = option %}selected{%endif%}>
+          {{option}}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="formDescriptor">Update Password</div>
+  <div class="formFieldContainer">
+    <label for="form_newPass">New Pass</label>
+    <input name="newPass" id="form_newPass" type="password"></input>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_newPassRepeat">(again)</label>
+    <input name="newPassRepeat" id="form_newPassRepeat" type="password"></input>
+  </div>
+
+  <div class="formFieldGroup">
+    <div class="formDescriptor">Email Notifications</div>
+    {% include "forms/checkbox.html" with subject="email_about_new_messages" is_checked=user.userinfo.email_about_new_messages label="New Messages" %} 
+    {% include "forms/checkbox.html" with subject="email_about_tag_updates" is_checked=user.userinfo.email_about_tag_updates label="Tag Updates" %} 
+    {% include "forms/checkbox.html" with subject="email_about_weekly_work" is_checked=user.userinfo.email_about_weekly_work label="Weekly Work" %} 
+    {% include "forms/checkbox.html" with subject="email_about_weekly_consensus" is_checked=user.userinfo.email_about_weekly_consensus label="Weekly Consensus" %} 
+  </div>
+
+  <div class="formDescriptor">Other</div>
+  <div class="formFieldContainer">
+    <label for="form_theme">Theme</label>
+    <select name="theme" id="form_theme">
+      {% for option in theme_options %}
+        <option value="{{option}}"
+         {% if user.userinfo.theme = option %}selected{%endif%}>
+          {{option}}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+</form>

@@ -1,7 +1,7 @@
 <div id="optionMenu" class="noSelect">
   {% if user.is_authenticated %}
     <div class="optionMenuOption" value="user settings">
-      <a href="/user_settings/">Settings</a>
+      <a href="/settings/">Settings</a>
     </div>
     <div class="optionMenuOption" value="user messages">
       <a href="/user_posts/">My Posts</a>
@@ -16,11 +16,11 @@
       <a href="/following/">Following</a>
     </div>
     <div class="optionMenuOption" value="logout">
-      <a href="/logout/">Log Out</a>
+      <a href="/accounts/logout/">Log Out</a>
     </div>
   {% else %}
     <div class="optionMenuOption" value="login">
-      <a href="/login/">Login</a>
+      <a href="/accounts/login/">Login</a>
     </div>
   {% endif %}
 </div>

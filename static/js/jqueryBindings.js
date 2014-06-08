@@ -1,6 +1,25 @@
 $(document).on("ready", function() {
 //# # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+//If the user clicks an .updateContainerOption, set the timer
+//  to reset with the chosen option.
+$(document).on("click", ".updateContainerOption", function(e) {
+  //Get the "adjective item" to update (eg: "recent tags").
+  var choiceTuple = $(this).attr("value").split(" ");
+  var adjective = choiceTuple[0];
+  var item = choiceTuple[1];
+
+  if (item=="tags"){
+    setTagBox(adjective); 
+  } else if (item=="messages") {
+    throw "message updates not set yet!!!!";
+  } else {
+    throw "Uh oh. .updateContainerOption not set for '"+choiceTuple+"'";
+  }
+
+});
+
+
 
 //If the user presses enter in the #newMessageInput, send the message.
 $(document).on("keydown", "#newMessageInput", function(e) {
@@ -51,48 +70,39 @@ $(document).on("click", ".tagLink", function() {
   $("#tagFilterSubmit").trigger("click");
 });
 
-    $(document).on("click", "#newMessageSubmit", function() {
-	var message = $("#newMessageInput").val();
-	var rawTags = $("#newTagsInput").val();
-	var tagsRequired = false; //$("tagCheck").val(); //TODO: Add me!
+$(document).on("click", "#newMessageSubmit", function() {
+  var message = $("#newMessageInput").val();
+  var rawTags = $("#newTagsInput").val();
+  var tagsRequired = false; //$("#tagsRequiredInput").val(); //TODO: Add me!
+  var privateMsg = false; //$("#privateMessageInput").val(); //TODO: Add me!
 
-	var tagArray = cleanTags(rawTags);
-	
-	var sendObj = {
-			"tags": tagArray,
-			"message": message,
-			"tagCheck": tagsRequired
-			};
+  //Validate the message and collect the cleaned tagArray.
+  var tagArray;
+  try {
+    validateMessage(message);
+    tagArray = cleanTags(rawTags);
+  } catch(err){
+    applyTempErrorClass("#newMessageInput");
+    return false;
+  }
+  
+  //Construct an object to describe this message for the server.
+  var sendObj = {
+  		"tags": tagArray,
+  		"message": message,
+  		"tagCheck": tagsRequired,
+  		"private": privateMsg,
+  }
+  
+  //Send the new message and get the most recent messages.
+  $.post('/new_message/', sendObj, function(response){
+    applyTempGoodClass("#newMessageInput");
+    $("#newMessageInput").val('');
+    reloadMessages(tagArray, {page:1});
+  });
 
-	//searching for empty messages
-	if (message == "") {
-		$("#newMessageInput").addClass('badInput');
-		setTimeout(function() {
-			$("#newMessageInput").removeClass('badInput', 300);
-		}, 1000);
-		return false;
-	}
-	
-	// looking for innappropriate(sp?) tags
-	for (var i = 0; i<tagArray.length; i++) {
-		patt = new RegExp(/[^a-zA-z0-9]/);
-		if (patt.test(tagArray[i])) {
-			$("#tags").css('background-color', 'red');
-			$("#tags").attr('placeholder', "Please only letters and numbers in tag");	
-			setTimeout(function() {
-				$("#newMessageInput").css('background-color', 'white');
-			}, 5000);
-			return false;
-		}
-	}
-	//Send the new message and get the most recent messages.
-	$.post('/new_message/', sendObj, function(response){
-		$("#newMessageInput").val('');
-		reloadMessages(tagArray, {page:1});
-	});
-
-	return false; //Don't continue or else the form will re-submit.
-    });
+  return false; //Don't continue or else the form will re-submit.
+});
 
 
 //# # # # # # # # # # # # # # # # # # # # # 

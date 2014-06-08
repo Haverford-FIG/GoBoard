@@ -11,6 +11,12 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 ALLOWED_HOSTS = ["127.0.0.1","0.0.0.0","165.82.80.243", "go.haverford.edu", "localhost", "ironwood.fig.haverford.edu"]
 
+
+MAX_UPDATE_CONTAINER_ENTRIES = 15
+
+
+
+
 ADMINS = ()
 
 MANAGERS = ADMINS

@@ -110,17 +110,6 @@ def send_messages(request):
   #Send the JSON response.
   return HttpResponse(json.dumps(response), content_type="application/json")
 
-def get_tags(request):
-  tags = ["#{}".format(entry.tag) for entry in Tag.objects.all()]
-  return HttpResponse(json.dumps(tags), content_type="application/json")
-
-def get_recent_tags(request):
-  try:
-    tags = ["#{}".format(entry.tag) for entry in Tag.objects.order_by("-message__datetime")[:15]]
-    return HttpResponse(json.dumps(tags), content_type="application/json")
-  except Exception as e:
-    print e
-    return HttpResponse("ERROR")
 
 
 def createUserFromString(name):

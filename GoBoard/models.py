@@ -5,6 +5,8 @@ class Message(models.Model):
   user = models.ForeignKey(User, unique = False)
   text = models.CharField(max_length=300)
   tags_required = models.BooleanField()
+  private = models.ManyToManyField(User, related_name="privateMessage", 
+                                   default=None, null=True)
   datetime = models.DateTimeField(auto_now_add=True)
 
   def __unicode__(self):

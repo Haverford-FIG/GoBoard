@@ -6,15 +6,20 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
-    # Examples:
-     url(r'^$', 'GoBoard.views.main_page',),
-     url(r'^home/?$', 'GoBoard.views.main_page',),
+     # Home page:
+     url(r'^$', 'GoBoard.views_to_abstract.main_page',),
+     url(r'^home/?$', 'GoBoard.views_to_abstract.main_page',),
 
-     url(r'^new_message/?$', 'GoBoard.views.new_message',),
-     url(r'^get_messages/?$', 'GoBoard.views.send_messages',),
+     url(r'^new_message/?$', 'GoBoard.views_to_abstract.new_message',),
+     url(r'^get_messages/?$', 'GoBoard.views_to_abstract.send_messages',),
 
-     url(r'^get_tags/?$', 'GoBoard.views.get_tags',),
-     url(r'^get_recent_tags/?$', 'GoBoard.views.get_recent_tags',),
+     url(r'^get_tags/?$', 'GoBoard.views.tags.get_tags',),
+
+     #Views for transfering basic "#tags" back to the auto-update container.
+     url(r'^get_recent_tags/?$', 
+                  'GoBoard.views.tags.get_tags',{"query":"recent"}),
+     url(r'^get_trending_tags/?$', 
+                  'GoBoard.views.tags.get_tags',{"query":"trending"}),
 
      url(r'^userCount/?$', 'GoBoard.sessionCounter.sendActiveUserCount',),
      url(r'^admin/?', include(admin.site.urls)),

@@ -6,11 +6,11 @@ function buildMessageBoxAlert(message){
 }
 
 
-//Return the HTML for a list of .recentTag elements.
-function buildRecentTags(tagArray){
+//Return the HTML for a list of .updateTag elements.
+function buildUpdateTags(tagArray){
   var HTML = "";
   for (var i=0; i<tagArray.length; i++){
-    HTML += "<div class=\"recentTag tagLink\">"+tagArray[i]+"</div>"
+    HTML += "<div class=\"updateTag tagLink\">"+tagArray[i]+"</div>"
   }
   return HTML;
 }

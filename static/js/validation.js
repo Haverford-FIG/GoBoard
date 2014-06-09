@@ -5,17 +5,13 @@ function validateMessage(msg){
 }
 
 
+
 //# # # #  Tag Validation  # # # # # # # # # # # # #
-//Takes a "dirty" tagString and converts it to a cleaned tagArray
-//eg: "#man/ny  #dir  ty# tags " ==> ["many, "dirty", "tags"]
+//Takes a "dirty" tagString and converts it to a cleaned uniqueTagArray.
 function cleanTags(tagString){
   //Get the valid characters from the string.
-  var validChars = tagString.match(/#|[a-zA-Z]/g);
-  if (validChars===null) validChars=[];
-
-  //And convert the string back into a valid array.
-  var tagArray = validChars.join("").split("#")
-  if (tagArray.length) tagArray.shift(); //Be wary of the starting hash...
+  var tagArray = tagString.match(/((@|#)[a-zA-Z]+[a-zA-Z1-9]*)+?/g)
+  if (tagArray===null) tagArray=[];
 
   var uniqueTagArray = [];
   $.each(tagArray, function(index, entry){
@@ -24,6 +20,13 @@ function cleanTags(tagString){
 
   return uniqueTagArray;
 }
+
+//Returns 'true' if a string is in the proper tag format.
+function isValidTag(str){
+  var re = RegExp("^(@|#)[a-zA-Z]+[a-aA-Z1-9]*$");
+  return re.test(str);
+}
+
 
 //# # # #  Form Validation  # # # # # # # # # # # # #
 function validateForm(form, url){
@@ -55,15 +58,14 @@ function validateForm(form, url){
       
       //Make sure the repeated new pass is the same.
       if (formContent["newPass"]!=formContent["newPassRepeat"]){
-        applyErrorClass($(form).find("input[name='newPassRepeat']"), false)
+        applyErrorClass($(form).find("input[name=newPassRepeat]"), false)
       }
 
       //Make sure the email has an "@" and it is appropriately placed.
       var email = formContent["email"];
       if (email.indexOf("@")<=0 || email.indexOf("@")==email.length-1){
-        applyErrorClass($(form).find("input[name='email']"), false)
+        applyErrorClass($(form).find("input[name=email]"), false)
       }
-
       break;
 
     case "/accounts/create/":
@@ -78,13 +80,18 @@ function validateForm(form, url){
 
       //Make sure the repeated new pass is the same.
       if (formContent["newPass"]!=formContent["newPassRepeat"]){
-        applyErrorClass($(form).find("input[name='newPassRepeat']"), false)
+        applyErrorClass($(form).find("input[name=newPassRepeat]"), false)
       }
 
       //Make sure the email has an "@" and it is appropriately placed.
       var email = formContent["email"];
       if (email.indexOf("@")<=0 || email.indexOf("@")==email.length-1){
-        applyErrorClass($(form).find("input[name='email']"), false)
+        applyErrorClass($(form).find("input[name=email'"), false)
+      }
+
+      //Make sure the username is in hash format.
+      if (!isValidTag("@"+formContent["username"])){
+        applyErrorClass($(form).find("input[name=username]"), false)
       }
       break;
 
@@ -135,7 +142,7 @@ $(".tagAutoComplete").keypress(function(e){
   var c = String.fromCharCode(e.which) 
 
   //Only allow certain characters.
-  var re = new RegExp(/#|[a-zA-Z]|\s/);
+  var re = new RegExp(/(#|@|[a-zA-Z1-9]|\s)/);
   if (!re.test(c)){
     return false; 
   }
@@ -144,16 +151,18 @@ $(".tagAutoComplete").keypress(function(e){
   var lastChar = input.slice(-1);
   switch(c){
     case " ":
-      var alpha = new RegExp(/[a-zA-Z]/);
-      if (!alpha.test(lastChar)) return false;
+      var alphaNum = new RegExp(/[a-zA-Z1-9]/);
+      if (!alphaNum.test(lastChar)) return false;
       break;
+    case "@":
     case "#":
       var alphaSpace = new RegExp(/^|\s|[a-zA-Z]/);
-      if (!alphaSpace.test(lastChar) || lastChar=="#") return false;
+      if (!alphaSpace.test(lastChar) || "#"==lastChar || "@"==lastChar) return false;
       break;
     default:
-      var alphaHash = new RegExp(/#|[a-zA-Z]/);
-      if (!alphaHash.test(lastChar)) return false;
+      var validChars = new RegExp(/#|@|[a-zA-Z1-9]/);
+      if (lastChar.match(/@|#/) && c.match(/[1-9]/)) return false;
+      if (!validChars.test(lastChar)) return false;
   }
 
 });

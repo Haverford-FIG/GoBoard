@@ -41,6 +41,7 @@ def new_message(request):
 def get_messages(query, page=1):
   #Variable Setup.
   page_size = 30
+
   #Get the messages.
   if query==None:
     messages = Message.objects.all()
@@ -81,7 +82,13 @@ def send_messages(request):
     if len(tags)>0:
       #Create a Q (complex query) object for each tag based on the tag's tag field.
       #The format below is: Q(object__field=value)
-      qList = [Q(tag__tag=str(queried_tag)) for queried_tag in tags]
+      qList = []
+      for query_bit in tags:
+        if query_bit[0]=="@":
+          qList.append(Q(user__username=query_bit[1:]))
+        else:
+          if query_bit[0]=="#": query_bit = query_bit[1:]
+          qList.append(Q(tag__tag=query_bit))
 
       #Create the query itself in the form: Q(content) | Q(content) | Q(content) ...
       query = reduce(operator.or_, qList)

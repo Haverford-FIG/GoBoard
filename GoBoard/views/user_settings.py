@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from GoBoard.settings import CAMPUS_OPTIONS, THEME_OPTIONS
+from GoBoard.validation import valid_username, valid_email
 
 @login_required
 @require_http_methods(["GET"])
@@ -20,14 +21,18 @@ def update_settings(request):
   #Variable Setup.
   u = request.user 
 
-  print request.POST
   #Verify the user's current password.
   password = request.POST.get("currentPass","")
   if not u.check_password(password): return HttpResponse("ERROR PASS")
 
   #Make sure no email is duplicated.
-  if User.objects.filter(email=request.POST.get("email")).exists():
+  if not valid_email(request.POST.get("email")):
     return HttpResponse("ERROR EMAIL")
+
+  #And make sure the username also is valid.
+  if not valid_username(request.POST.get("username")): 
+    return HttpResponse("ERROR USERNAME")
+   
 
   #Change the user's email preferences.
   emailFields = ["new_messages","tag_updates","weekly_work","weekly_consensus"]

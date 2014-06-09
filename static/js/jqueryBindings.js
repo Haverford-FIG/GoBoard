@@ -105,7 +105,6 @@ $(".messageBox").scroll(function() {
   }
 });
 
-
     
 $(document).on("click", "#tagFilterSubmit", function() {
   var tags = getActiveTags();

@@ -4,6 +4,7 @@ from django.db.models import Q
 from GoBoard.views.authentication import validate_login
 from GoBoard.settings import CAMPUS_OPTIONS
 from GoBoard.models import User, UserInfo
+from GoBoard.validation import valid_username, valid_email
 
 def createUser(kwargs):
   #Make a new User object for the user.
@@ -41,9 +42,9 @@ def create_user(request):
     password = request.POST.get("newPass")
 
     #Make sure no username or email is duplicated.
-    if not username or User.objects.filter(username=username).exists():
+    if not valid_username(username):
       return HttpResponse("ERROR USERNAME")
-    if not email or User.objects.filter(email=email).exists():
+    if not valid_email(email):
       return HttpResponse("ERROR EMAIL")
     if not password or password!=request.POST.get("newPassRepeat"):
       return HttpResponse("ERROR PASS")

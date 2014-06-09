@@ -86,7 +86,7 @@ function validateForm(form, url){
       //Make sure the email has an "@" and it is appropriately placed.
       var email = formContent["email"];
       if (email.indexOf("@")<=0 || email.indexOf("@")==email.length-1){
-        applyErrorClass($(form).find("input[name=email'"), false)
+        applyErrorClass($(form).find("input[name=email]"), false)
       }
 
       //Make sure the username is in hash format.
@@ -95,8 +95,25 @@ function validateForm(form, url){
       }
       break;
 
+    case "/accounts/forgot/":
+      var noEmpty = ["email"];
+      $(form).find("input").each(function(i){
+        var name = $(this).attr("name");
+        var val = $(this).val();
+        //Don't allow empty values.
+        if (noEmpty.indexOf(name)>=0 && val=="") applyErrorClass($(this), false);
+        formContent[name]=val;
+      });
+
+      //Make sure the email has an "@" and it is appropriately placed.
+      var email = formContent["email"];
+      if (email.indexOf("@")<=0 || email.indexOf("@")==email.length-1){
+        applyErrorClass($(form).find("input[name=email]"), false)
+      }
+      break;
+
     case "/accounts/login/":
-      var noEmpty = ["password","username"];
+      var noEmpty = ["password","username","email"];
       $(form).find("input").each(function(i){
         var name = $(this).attr("name");
         var val = $(this).val();

@@ -9,11 +9,16 @@ def valid_username(username):
 
   return result
 
-def valid_email(email):
+def valid_email(email, should_exist=False):
   result = True
-  if not username or " " in username or not "@" in username[1:-1]: 
+  if not email or " " in email or not "@" in email[1:-1]: 
     result = False
-  if User.objects.filter(email=email).exists(): 
-    result = False
+
+  if should_exist:
+    if not User.objects.filter(email=email).exists(): 
+      result = False
+  else:
+    if User.objects.filter(email=email).exists(): 
+      result = False
 
   return result

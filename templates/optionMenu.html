@@ -1,26 +1,29 @@
 <div id="optionMenu" class="noSelect">
   {% if user.is_authenticated %}
-    <div class="optionMenuOption" value="user settings">
+    <div class="optionMenuOption">
       <a href="/settings/">Settings</a>
     </div>
-    <div class="optionMenuOption" value="user messages">
+    <div class="optionMenuOption">
       <a href="/user_posts/">My Posts</a>
     </div>
-    <div class="optionMenuOption" value="user tags">
+    <div class="optionMenuOption">
       <a href="/user_tags/">My Tags</a>
     </div>
-    <div class="optionMenuOption" value="saved tags">
+    <div class="optionMenuOption">
       <a href="/saved_tags/">Saved Tags</a>
     </div>
-    <div class="optionMenuOption" value="following">
+    <div class="optionMenuOption">
       <a href="/following/">Following</a>
     </div>
-    <div class="optionMenuOption" value="logout">
+    <div class="optionMenuOption">
       <a href="/accounts/logout/">Log Out</a>
     </div>
   {% else %}
-    <div class="optionMenuOption" value="login">
+    <div class="optionMenuOption"> 
       <a href="/accounts/login/">Login</a>
+    </div>
+    <div class="optionMenuOption">
+      <a href="/accounts/create/">New User</a>
     </div>
   {% endif %}
 </div>

@@ -19,6 +19,14 @@ CAMPUS_OPTIONS = ["Haverford", "Swarthmore", "Bryn Mawr", "UPenn", "Alumni"]
 THEME_OPTIONS = ["pastel"]
 
 
+#Email Settings
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "noreply.figstaff@gmail.com"
+EMAIL_HOST_PASSWORD = "SecurePassword"  #TODO: Change me in production!
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 ADMINS = ()
 

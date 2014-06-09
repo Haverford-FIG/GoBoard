@@ -1,10 +1,14 @@
-from models import Message, Tag
+from models import Message, Tag, User
 import datetime
 
 def tag_exists(tag):
  return Tag.objects.filter(tag=tag).exists()
 
-def store_message(text, tagList, user, tags_required):
+def user_exists(username):
+ return User.objects.filter(username=username).exists()
+
+
+def store_message(text, tagList, user, tags_required, private):
   #Construct the message itself.
   message = Message()
   message.user = user
@@ -14,10 +18,22 @@ def store_message(text, tagList, user, tags_required):
 
   #Store each tag.
   for tag in tagList:
-    if tag_exists(tag):
-      add_message_to_tag(tag, message)
+    #Remove the prefix.
+    prefix = tag[0]
+    tag = tag[1:]
+
+    if prefix=="#":
+      if tag_exists(tag):
+        add_message_to_tag(tag, message)
+      else:
+        store_tag(tag, message)
+    elif prefix=="@":
+      if user_exists(tag):
+        pass
+        #TODO: Add public "mentions" and private messages here. 
     else:
-      store_tag(tag, message)
+      raise Exception("Tag has inapproriate prefix. Choices are '@' or '#'.")
+      
 
   message.save()
 

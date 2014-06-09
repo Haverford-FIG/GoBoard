@@ -142,7 +142,7 @@ input:focus, select:focus, textarea:focus,
 
 
 option, .ui-menu-item a {
- background:#7fcdbb;
+ background:#edf8b1;
  outline:none;
  border:none;
  font-weight:normal;
@@ -150,7 +150,7 @@ option, .ui-menu-item a {
 }
 
 .ui-widget-content .ui-state-focus { /* TODO: Test in !Chrome */
- background:#edf8b1;
+ background:#7fcdbb;
  outline:none;
  border:none;
 } 

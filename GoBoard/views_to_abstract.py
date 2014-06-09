@@ -27,9 +27,10 @@ def new_message(request):
     message = request.POST["message"]
     tagCheck = request.POST["tagCheck"]
     tags = request.POST.getlist("tags[]")
+    private = request.POST.get("private")=="y"
 
     #Store the messages and tags.
-    store_message(message, tags, u, tagCheck)
+    store_message(message, tags, u, tagCheck, private)
 
     return HttpResponse("All set!")
 

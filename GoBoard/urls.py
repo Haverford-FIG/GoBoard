@@ -25,6 +25,9 @@ urlpatterns = patterns('',
      url(r'^accounts/login/?$', 'GoBoard.views.authentication.login_view',),
      url(r'^accounts/logout/?$', 'GoBoard.views.authentication.logout_view',),
 
+     #Views for user "support" (eg: new user, forgot password, etc.)
+     url(r'^accounts/create/?$', 'GoBoard.views.user_creation.create_user',),
+
      #Views for user-specific settings/information.
      url(r'^settings/?$', 'GoBoard.views.user_settings.load_settings',),
      url(r'^update_settings/?$', 'GoBoard.views.user_settings.update_settings',),

@@ -1,7 +1,16 @@
 <div class="banner noSelect">
   <a href="/home/"><div id="bannerLogo">GO! 3.0</div></a>
+
   <div class="bannerMotto">Another fine product from the good folks at 
   <a href="http://fig.haverford.edu">FIG</a>.</div>
+
   <div id="optionMenuButton" class="noSelect">&#9776;</div>
   {% include "optionMenu.html" %}
+
+  {% if user.is_authenticated %}
+  <div id="userGreeting">
+  Hi{% if user.first_name != "" %}, {{user.first_name}}{%endif%}!
+  </div>
+  {% endif %}
+
 </div>

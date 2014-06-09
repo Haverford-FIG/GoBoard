@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.db.models import Q, Count
+from django.db.models import Count
 from GoBoard.models import Tag
 from GoBoard.settings import MAX_UPDATE_CONTAINER_ENTRIES
 import datetime

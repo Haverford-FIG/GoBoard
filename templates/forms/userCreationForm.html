@@ -1,0 +1,45 @@
+<form class="fullScreenForm" action="/accounts/create/" method="post">
+  {% csrf_token %}
+
+  <div class="formDescriptor">Basic Info</div>
+  <div class="formFieldContainer">
+    <label for="form_firstName">First Name</label>
+    <input name="first_name" id="form_firstName" type="text" value="{{user.first_name}}"/>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_lastName">Last Name</label>
+    <input name="last_name" id="form_lastName" type="text" value="{{user.last_name}}"/>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_email">Email</label>
+    <input name="email" id="form_email" type="email" value="{{user.email}}"/>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_campus">Campus</label>
+    <select name="campus" id="form_campus">
+      {% for option in campus_options %}
+        <option value="{{option}}"
+         {% if user.userinfo.campus = option %}selected{%endif%}>
+          {{option}}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="formDescriptor">Account Info</div>
+  <div class="formFieldContainer">
+    <label for="form_username">Username</label>
+    <input name="username" id="form_username" type="text"></input>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_newPass">Password</label>
+    <input name="newPass" id="form_newPass" type="password"></input>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_newPassRepeat">(again)</label>
+    <input name="newPassRepeat" id="form_newPassRepeat" type="password"></input>
+  </div>
+
+  <div class="button noSelect" id="formSubmitButton">Save</div>
+
+</form>

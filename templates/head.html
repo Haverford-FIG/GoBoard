@@ -1,6 +1,7 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="{{STATIC_URL}}/js/jquery.linkify.min.js"></script>
 
 <script src="{{STATIC_URL}}js/csrf_cookie.js"></script>
 
@@ -22,5 +23,8 @@
   {% endif %}
 />
 
-<script src="{{STATIC_URL}}js/swatches.js"></script>
+<!-- Include your theme in the string below if you want swatches. -->
+{% if user.userinfo.theme in "" %} 
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/swatches.css" />
+<script src="{{STATIC_URL}}js/swatches.js"></script>
+{% endif %}

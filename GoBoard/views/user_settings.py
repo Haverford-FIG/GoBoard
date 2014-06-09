@@ -23,7 +23,11 @@ def update_settings(request):
   print request.POST
   #Verify the user's current password.
   password = request.POST.get("currentPass","")
-  if not u.check_password(password): return HttpResponse("ERROR")
+  if not u.check_password(password): return HttpResponse("ERROR PASS")
+
+  #Make sure no email is duplicated.
+  if User.objects.filter(email=request.POST.get("email")).exists():
+    return HttpResponse("ERROR EMAIL")
 
   #Change the user's email preferences.
   emailFields = ["new_messages","tag_updates","weekly_work","weekly_consensus"]

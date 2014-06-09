@@ -34,11 +34,20 @@ $(document).on("click", "#formSubmitButton", function(){
   $.post(url, formContents, function(response){
     if (response=="SUCCESS"){
       window.location.reload();
-    } else if (response=="ERROR"){
-      //TODO: Make this more general. Perhaps just PASS the error to client?
-      //Assume the "ERROR" was caused by a bad password.
-      var passElements = "input[name=password],input[name=currentPass]";
-      applyErrorClass($(form).find(passElements),false);
+    } else if (response.substr(0,5)=="ERROR"){
+      var error = response.split(" ")[1];
+      var badElements="";
+      if (error===undefined || error=="PASS"){
+        badElements = "input[name=password],input[name=currentPass]";
+      } else if (error=="USERNAME"){
+        badElements = "input[name=username]";
+      } else if (error=="EMAIL"){
+        badElements = "input[name=email]";
+      } else {
+        throw "oops... Don't know what to do with ERROR: '"+error+"'.";
+      }
+
+      applyErrorClass($(form).find(badElements),false);
     } else if (response=="NEXT"){
       //If there is a "next" page specified, load it.
       var next = getURLParams("next");
@@ -111,6 +120,11 @@ $(document).on("click", ".tagLink", function() {
 });
 
 $(document).on("click", "#newMessageSubmit", function() {
+  if ($("#userGreeting").length==0){
+    alert("Oops. Yain't logged in.");//TODO: Make me pretttyyyy...
+    return false;
+  }
+
   var message = $("#newMessageInput").val();
   var rawTags = $("#newTagsInput").val();
   var tagsRequired = false; //$("#tagsRequiredInput").val(); //TODO: Add me!

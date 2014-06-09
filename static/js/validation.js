@@ -43,7 +43,6 @@ function validateForm(form, url){
         var val = $(this).val();
         //Don't allow empty values.
         if (noEmpty.indexOf(name)>=0 && val=="") applyErrorClass($(this), false);
-
         formContent[name]=val;
       });
 
@@ -67,6 +66,28 @@ function validateForm(form, url){
 
       break;
 
+    case "/accounts/create/":
+      var noEmpty = ["newPass","newPassRepeat", "username", "email"];
+      $(form).find("input").each(function(i){
+        var name = $(this).attr("name");
+        var val = $(this).val();
+        //Don't allow empty values.
+        if (noEmpty.indexOf(name)>=0 && val=="") applyErrorClass($(this), false);
+        formContent[name]=val;
+      });
+
+      //Make sure the repeated new pass is the same.
+      if (formContent["newPass"]!=formContent["newPassRepeat"]){
+        applyErrorClass($(form).find("input[name='newPassRepeat']"), false)
+      }
+
+      //Make sure the email has an "@" and it is appropriately placed.
+      var email = formContent["email"];
+      if (email.indexOf("@")<=0 || email.indexOf("@")==email.length-1){
+        applyErrorClass($(form).find("input[name='email']"), false)
+      }
+      break;
+
     case "/accounts/login/":
       var noEmpty = ["password","username"];
       $(form).find("input").each(function(i){
@@ -74,7 +95,6 @@ function validateForm(form, url){
         var val = $(this).val();
         //Don't allow empty values.
         if (noEmpty.indexOf(name)>=0 && val=="") applyErrorClass($(this), false);
-
         formContent[name]=val;
       });
       break;

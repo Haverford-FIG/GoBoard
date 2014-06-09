@@ -43,4 +43,15 @@ function buildUserCounter(userCount){
   return HTML;
 }
 
+function buildMessage(text, user, tagArray){
+  var HTML = "<div class=\"message\">";
+  HTML += "<div class=\"messageText\">"+text+"</div>";
+  HTML += "<div class=\"userShadow\">"+user+"</div>";
+  HTML += "<div class=\"tagShadow\">"+buildTagArrayHTML(tagArray)+"</div>";
+  HTML += "</div>";
+  return HTML;
+}
+
+
+
 

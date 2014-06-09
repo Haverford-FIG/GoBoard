@@ -2,18 +2,21 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.shortcuts import render
 
+def validate_login(username, password, request):
+  u = authenticate(username = username, password = password)
+  if u is not None:
+    if u.is_active:
+      login(request, u)
+      return True
+  return False
+
+
 def login_view(request):
   if request.method=="POST":
-    try:
-      u = authenticate(username = request.POST["username"], 
-                       password = request.POST["password"])
-      if u is not None:
-        if u.is_active:
-          login(request, u)
-        return HttpResponse("NEXT")
-    except Exception as e:
-      print e
-      pass
+    username = request.POST.get("username","")
+    password = request.POST.get("password","")
+    if validate_login(username, password, request):
+      return HttpResponse("NEXT")
     return HttpResponse("ERROR")
   else:
     return render(request, "loginScreen.html")

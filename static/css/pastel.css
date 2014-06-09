@@ -15,7 +15,7 @@ a, a:visited {
  letter-spacing:0px;
 }
 a:hover {
- font-weight:bold;
+ color:#00752F;
 }
 
 .noSelect {
@@ -348,3 +348,10 @@ option, .ui-menu-item a {
  border-bottom:1px solid #c7e9c0;
 }
 
+#userGreeting {
+ position:absolute;
+ top:65px;
+ right:10px;
+ text-align:right;
+ font-size:0.5em;
+}

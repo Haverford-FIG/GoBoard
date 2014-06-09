@@ -56,6 +56,10 @@ function reloadMessages(tagArray, kwargs) {
   
     //After all changes are made, unlock the messageContainer.
     $(messageContainer).data("lockMessages",false);
+
+    //Turn any link-like sequences into links.
+    $(messageContainer).linkify()
+
   });
 
 }
@@ -78,18 +82,10 @@ function displayMessages(messages, prependOrAppend, emptyMessageBox){
 }
 
 function displayMessage(message, prependOrAppend) {
-  //Variable Setup.
-  var text = message.text;
-  var user = message.user;
-  var tagArray = message.tags;
+  //Construct the message.  
+  newMessage = buildMessage(message.text, message.user, message.tags);
 
-  //Construct the message itself.  
-  var newMessage = "<div class=\"message\">";
-  newMessage += "<div class=\"messageText\">"+text+"</div>";
-  newMessage += "<div class=\"userShadow\">"+user+"</div>";
-  newMessage += "<div class=\"tagShadow\">"+buildTagArrayHTML(tagArray)+"</div>";
-  newMessage += "</div>";
-
+  //And display it.
   if (prependOrAppend=="append") {
     $(".messageBox").append(newMessage);
   } else {

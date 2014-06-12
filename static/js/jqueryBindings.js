@@ -43,6 +43,8 @@ $(document).on("click", "#formSubmitButton", function(){
         badElements = "input[name=username]";
       } else if (error=="EMAIL"){
         badElements = "input[name=email]";
+      } else if (error=="GRAD"){
+        badElements = "input[name=grad_year]";
       } else {
         throw "oops... Don't know what to do with ERROR: '"+error+"'.";
       }

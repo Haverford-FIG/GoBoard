@@ -55,6 +55,12 @@ function validateForm(form, url){
         var val = $(this).is(":checked") ? "y" : "n";
         formContent[name]=val;
       });
+
+      //Make sure the grad_range is sensical if specified.
+      var val = formContent["grad_year"];
+      if (val!="" && !isValidGradYear(val)) { 
+        applyErrorClass($(form).find("#form_gradYear"), false);
+      }
       
       //Make sure the repeated new pass is the same.
       if (formContent["newPass"]!=formContent["newPassRepeat"]){
@@ -70,7 +76,7 @@ function validateForm(form, url){
 
     case "/accounts/create/":
       var noEmpty = ["newPass","newPassRepeat", "username", "email"];
-      $(form).find("input").each(function(i){
+      $(form).find("input, select").each(function(i){
         var name = $(this).attr("name");
         var val = $(this).val();
         //Don't allow empty values.
@@ -92,6 +98,12 @@ function validateForm(form, url){
       //Make sure the username is in hash format.
       if (!isValidTag("@"+formContent["username"])){
         applyErrorClass($(form).find("input[name=username]"), false)
+      }
+
+      //Make sure the grad_range is sensical if specified.
+      var val = formContent["grad_year"];
+      if (val!="" && !isValidGradYear(val)) { 
+        applyErrorClass($(form).find("#form_gradYear"), false);
       }
       break;
 
@@ -129,6 +141,18 @@ function validateForm(form, url){
 
   return formContent
 }
+
+
+//# # # #  Specific Input Validators   # # # # # # # # # # # # #
+
+function isValidGradYear(year) {
+  if (isNaN(year)) return false;
+  margin = 40; //The "window" for a valid year.
+  this_year = (new Date()).getFullYear();
+  return (this_year-margin <= year) && (year <= this_year+margin);
+}
+
+
 
 //# # # #  Validation Classes  # # # # # # # # # # # # #
 function applyErrorClass(location, timeout) {

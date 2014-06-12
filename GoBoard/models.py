@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import User
+from datetime import datetime
 
 class Message(models.Model):
   user = models.ForeignKey(User, unique = False)
@@ -14,6 +15,7 @@ class Message(models.Model):
     text = self.text if len(self.text)>20 else "{}...".format(self.text)
     return "\"{}\" -- {}".format(text, self.user.username)
 
+
 	
 class Tag(models.Model):
   tag = models.CharField(max_length=30)
@@ -23,17 +25,21 @@ class Tag(models.Model):
     return self.tag
 
 
+
 class UserInfo(models.Model):
   user = models.OneToOneField(User)
   email_about_weekly_work = models.BooleanField(default=True)
   email_about_weekly_consensus = models.BooleanField(default=True)
   email_about_new_messages = models.BooleanField(default=True)
   email_about_tag_updates = models.BooleanField(default=True)
+  grad_year = models.IntegerField(default=lambda: datetime.now().year, 
+                                  blank=True, null=True)
   theme = models.CharField(max_length=150, default="pastel")
   campus = models.CharField(max_length=150, default="Haverford")
 
   def __unicode__(self):
     return "Info for '{}'".format(self.user.username)
+
 
 admin.site.register(Message)
 admin.site.register(Tag)

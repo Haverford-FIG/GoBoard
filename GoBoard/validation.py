@@ -1,4 +1,17 @@
 from GoBoard.models import User
+from datetime import datetime, timedelta
+
+#Mostly taken from: http://stackoverflow.com/questions/4695609/checking-date-against-date-range-in-python .
+def valid_grad_year(year):
+  try:
+    year = int(year)
+  except:
+    return False
+  margin = 40
+  this_year = datetime.now().year
+  return this_year-margin <= year <= this_year+margin
+
+
 
 def valid_username(username):
   result = True
@@ -8,6 +21,8 @@ def valid_username(username):
     result = False
 
   return result
+
+
 
 def valid_email(email, should_exist=False):
   result = True

@@ -1,6 +1,6 @@
-
+//TODO: COMMENT THIS BAD BOY.
 function reloadMessages(tagArray, kwargs) {
-
+  
   //Variable Setup.
   if (kwargs===undefined) kwargs={page:1}; //Default to no "kwargs".
   var page = kwargs["page"]
@@ -14,10 +14,14 @@ function reloadMessages(tagArray, kwargs) {
   //Clear messages if specified.
   if (kwargs["clearMessages"]) clearMessages(messageContainer);
 
+  //Load private messages if specified.
+  var private = (kwargs["private"]==true);
+
   //Lock the messageContainer from scroll-reloading new messages.
   $(messageContainer).data("lockMessages",true);
 
-  $.get('/get_messages/', {tags: tagArray, page:page}, function(response) {
+  $.get('/get_messages/', {tags: tagArray, page:page, private:private},
+                           function(response) {
     //response = [message1, message2, ... ] or response = {error:"the error", ...}
     if (response["maxPage"]){
       $(messageContainer).data("maxPage",true);
@@ -83,7 +87,9 @@ function displayMessages(messages, prependOrAppend, emptyMessageBox){
 
 function displayMessage(message, prependOrAppend) {
   //Construct the message.  
-  newMessage = buildMessage(message.text, message.user, message.tags);
+  newMessage = buildMessage(message.text, message.user, 
+                            message.tags, message.mentions, 
+                            message.private);
 
   //And display it.
   if (prependOrAppend=="append") {

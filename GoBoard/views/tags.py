@@ -47,3 +47,15 @@ def get_tags(request, query="recent"):
     print e
     return HttpResponse("ERROR")
 
+
+def get_tag_list(message):
+  tagList = []
+  try:
+    #If there are no tags, don't make a list of None objects.
+    if message.tag_set!=None:
+      tagSet = message.tag_set.all()
+      tagList = list(tagSet)
+  except Exception as e:
+    print e
+    print "ERROR GETTING MESSAGE TAGS: {}".format(message)
+  return tagList

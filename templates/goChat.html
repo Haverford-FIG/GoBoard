@@ -2,6 +2,8 @@
   <div class="inputContainer">
     <input type="text" id="tagFilterInput" 
            class="tagAutoComplete" placeholder="#tags #search"/>
+    <div class="noSelect customCheckbox" title="Search private messages?" 
+         name="private" autoReload="true"></div>  
     <div class="noSelect submitButton" id="tagFilterSubmit">Search</div>
   </div>
 
@@ -13,7 +15,8 @@
       <div class="inputContainer">
         <input class="tagAutocomplete" maxlength="300" 
                cols="60" id="newTagsInput"
-               placeholder="#tag #your #message #{{user.username}}">
+               placeholder="#tag #your #message @{{user.username}}">
+        <div class="noSelect customCheckbox" title="Make this a private message?" name="private"></div>  
         <div class="noSelect submitButton" id="newMessageSubmit">Go!</div>  
       </div>
       <div id="otherActiveUserCount">Loading...</div>

@@ -20,6 +20,13 @@ $(document).on("click", ".updateContainerOption", function(e) {
 });
 
 
+$(document).on("click", ".customCheckbox", function(){
+  $(this).toggleClass("active");
+  if ($(this).attr("autoReload")==="true"){
+    $("#tagFilterSubmit").trigger("click");
+  }
+});
+
 //Submit a form when a user clicks the #submitFormButton only if it is valid.
 $(document).on("click", "#formSubmitButton", function(){
   var form = $(this).closest("form");
@@ -110,8 +117,10 @@ $(".messageBox").scroll(function() {
     
 $(document).on("click", "#tagFilterSubmit", function() {
   var tags = getActiveTags();
+  var private = $(this).siblings(".customCheckbox[name=private]")
+                          .hasClass("active");
   setActiveTags(tags); //Show the "clean" tags that are actually being used.
-  reloadMessages(tags, {clearMessages:true, page:1});
+  reloadMessages(tags, {clearMessages:true, page:1, private:private});
 });
 
 $(document).on("click", ".tagLink", function() {
@@ -129,7 +138,8 @@ $(document).on("click", "#newMessageSubmit", function() {
   var message = $("#newMessageInput").val();
   var rawTags = $("#newTagsInput").val();
   var tagsRequired = false; //$("#tagsRequiredInput").val(); //TODO: Add me!
-  var privateMsg = false; //$("#privateMessageInput").val(); //TODO: Add me!
+  var private = $(this).siblings(".customCheckbox[name=private]")
+                          .hasClass("active");
 
   //Validate the message and collect the cleaned tagArray.
   var tagArray;
@@ -146,14 +156,14 @@ $(document).on("click", "#newMessageSubmit", function() {
   		"tags": tagArray,
   		"message": message,
   		"tagCheck": tagsRequired,
-  		"private": privateMsg,
+  		"private": private,
   }
   
   //Send the new message and get the most recent messages.
   $.post('/new_message/', sendObj, function(response){
     applyTempGoodClass("#newMessageInput");
     $("#newMessageInput").val('');
-    reloadMessages(tagArray, {page:1});
+    reloadMessages(tagArray, {page:1, private:private});
   });
 
   return false; //Don't continue or else the form will re-submit.
@@ -171,23 +181,26 @@ function extractLast( term ) {
 }
 
 $.get("/get_tags/", function(tagList) {
-  $( ".tagAutoComplete" ).autocomplete({
-    source: function(request, response) {
-                response($.ui.autocomplete.filter(
-                tagList, extractLast(request.term)));
-            },
-    minLength:0,
-    focus: function(){return false},
-    select: function(event, ui){
-              var terms = split(this.value);
-              terms.pop();
-              terms.push(ui.item.value);
-              terms.push("");
-              var dirty = terms.join(" ");
-              var cleaned = dirty.match(/#[a-zA-Z]+/gm).join(" ");
-              this.value = cleaned;
-              return false;
-            }
+  $.get("/get_usernames/", function(userList) {
+    var validList = userList.concat(tagList);
+    $( ".tagAutoComplete" ).autocomplete({
+      source: function(request, response) {
+                  response($.ui.autocomplete.filter(
+                  validList, extractLast(request.term)));
+              },
+      minLength:0,
+      focus: function(){return false},
+      select: function(event, ui){
+                var terms = split(this.value);
+                terms.pop();
+                terms.push(ui.item.value);
+                terms.push("");
+                var dirty = terms.join(" ");
+                var cleaned = dirty.match(/(#|@)[a-zA-Z]+/gm).join(" ");
+                this.value = cleaned;
+                return false;
+              }
+    });
   });
 });
 

@@ -14,6 +14,7 @@ def store_message(text, tagList, user, tags_required, private):
   message.user = user
   message.text = text
   message.tags_required = tags_required
+  message.private = private
   message.save()
 
   #Store each tag.
@@ -24,28 +25,38 @@ def store_message(text, tagList, user, tags_required, private):
 
     if prefix=="#":
       if tag_exists(tag):
-        add_message_to_tag(tag, message)
+        add_tag_to_message(tag, message)
       else:
         store_tag(tag, message)
     elif prefix=="@":
       if user_exists(tag):
-        pass
-        #TODO: Add public "mentions" and private messages here. 
+        add_user_to_message(tag, message);
     else:
       raise Exception("Tag has inapproriate prefix. Choices are '@' or '#'.")
-      
 
   message.save()
-
   return message
 
-def add_message_to_tag(tag_string, new_message):
+
+def add_user_to_message(username, new_message):
+  try:
+    user = User.objects.filter(username=username).get()
+    user.mentions.add(new_message)
+    user.save()
+  except Exception as e:
+    print "ERROR ADDING MESSAGE TO TAG: {}".format(e)
+
+
+
+def add_tag_to_message(tag_string, new_message):
   try:
     tag = Tag.objects.filter(tag=tag_string).get()
     tag.message.add(new_message)
     tag.save()
   except Exception as e:
     print "ERROR ADDING MESSAGE TO TAG: {}".format(e)
+
+
 
 def store_tag(text, message):
   try:
@@ -55,7 +66,7 @@ def store_tag(text, message):
     tag.save()
 
     #Actually apply the message to the tag.
-    add_message_to_tag(text, message)
+    add_tag_to_message(text, message)
     return tag
   except Exception as e:
     print "ERROR CONSTRUCTING TAG: {}".format(e)

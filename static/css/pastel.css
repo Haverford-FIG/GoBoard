@@ -72,6 +72,18 @@ a #bannerLogo, a #bannerLogo:hover {
  position:relative;
 }
 
+.privateMessage {
+ background-color:#fc9272;
+ background-image:url("/static/images/talk_bubble.png");
+ background-size:20px 20px;
+ background-repeat:no-repeat;
+ background-position:right 15px center;
+}
+
+.privateMessage .messageText {
+ margin-right:45px;
+}
+
 .messageContainerAlert {
  margin: 10 15 10 0;
  padding:10 0 10 0;
@@ -121,7 +133,7 @@ textarea {
 }
 
 input, select {
- width:80%;
+ width:70%;
  height:100%;
  float:left;
  font-size:18px;
@@ -156,8 +168,8 @@ option, .ui-menu-item a {
 } 
 
 .submitButton {
- float:right;
- width:auto;
+ float:left;
+ width:10%;
  padding:15 20 15 20;
  cursor:pointer;
  border-left:1px solid #fff7bc;
@@ -167,6 +179,28 @@ option, .ui-menu-item a {
  background-color:#fff8cd;
  border-color:#fff7bc;
 }
+
+.customCheckbox {
+ position:relative;
+ float:left;
+ width:10%;
+ height:100%;
+ background-color:#B3BAFF;
+ cursor:pointer;
+}
+.customCheckbox.active{
+ background-color:#FFB78A;
+}
+.customCheckbox.active:before{
+ position:relative;
+ content:"\2713";
+ top:10px;
+ width:100%;
+ text-align:center;
+ display:inline-block;
+ font-size:1.5em;
+}
+
 
 .updateContainerOption {
  font-size:0.9em;

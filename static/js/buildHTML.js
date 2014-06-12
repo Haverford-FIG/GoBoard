@@ -18,10 +18,13 @@ function buildUpdateTags(tagArray){
 
 
 //Return the HTML for a list of Tags wrapper in a .tagGroup class.
-function buildTagArrayHTML(tagArray) {
+function buildTagArrayHTML(tagArray, mentionArray) {
   var HTML = "<div class=\"tagGroup\">";
   for (var i=0; i < tagArray.length ;i++){
     HTML += buildTagHTML(tagArray[i]);
+  }
+  for (var i=0; i < mentionArray.length ;i++){
+    HTML += buildMentionHTML(mentionArray[i]);
   }
   HTML += "</div>";
   return HTML;
@@ -30,6 +33,12 @@ function buildTagArrayHTML(tagArray) {
 //Return the HTML for a single .tag DOM element.
 function buildTagHTML(tag){
   return "<span class=\"tag tagLink\">"+tag+"</span>";
+}
+
+
+//Return the HTML for a single .tag DOM element.
+function buildMentionHTML(username){
+  return "<span class=\"mention tagLink\">"+username+"</span>";
 }
 
 
@@ -43,12 +52,15 @@ function buildUserCounter(userCount){
   return HTML;
 }
 
-function buildMessage(text, user, tagArray){
-  var HTML = "<div class=\"message\">";
+function buildMessage(text, user, tagArray, mentionArray, is_private){
+  //Add the .privateMessage class if the message is private.
+  var privateClass = (is_private==true) ? "privateMessage": "";
+
+  var HTML = "<div class=\"message "+privateClass+"\">";
   HTML += "<div class=\"messageText\">"+text+"</div>";
   HTML += "<div class=\"userShadow\">"+user+"</div>";
-  HTML += "<div class=\"tagShadow\">"+buildTagArrayHTML(tagArray)+"</div>";
-  HTML += "</div>";
+  HTML += "<div class=\"tagShadow\">"+buildTagArrayHTML(tagArray, mentionArray)
+  HTML += "</div></div>";
   return HTML;
 }
 

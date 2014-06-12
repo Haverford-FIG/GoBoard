@@ -18,6 +18,8 @@ MAX_UPDATE_CONTAINER_ENTRIES = 15
 CAMPUS_OPTIONS = ["Haverford", "Swarthmore", "Bryn Mawr", "UPenn", "Alumni"]
 THEME_OPTIONS = ["pastel"]
 
+MESSAGES_PER_TRANSACTION = 30
+
 
 #Email Settings
 EMAIL_USE_TLS = True

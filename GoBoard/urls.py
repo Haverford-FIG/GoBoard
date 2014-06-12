@@ -13,7 +13,9 @@ urlpatterns = patterns('',
      url(r'^new_message/?$', 'GoBoard.views_to_abstract.new_message',),
      url(r'^get_messages/?$', 'GoBoard.views_to_abstract.send_messages',),
 
+     #View for getting tag information for autocomplete inputs.
      url(r'^get_tags/?$', 'GoBoard.views.tags.get_tags',),
+     url(r'^get_usernames/?$', 'GoBoard.views.users.get_usernames',),
 
      #Views for transfering basic "#tags" back to the auto-update container.
      url(r'^get_recent_tags/?$', 

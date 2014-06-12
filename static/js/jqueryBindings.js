@@ -79,11 +79,27 @@ $(document).on("blur", ".fullScreenForm input", function() {
 
 
 //If the user presses enter in the #newMessageInput, send the message.
+var tagsAdded = "";
 $(document).on("keydown", "#newMessageInput", function(e) {
   if (e.which==13) {
     $("#newMessageSubmit").trigger("click");
     return false;
   }
+
+  var c = String.fromCharCode(e.which) 
+  var rawInput = $(this).val() + c;
+
+  //Grab everything except a currently-being-written hash.
+  var cleanInput = rawInput.replace(/(#|@)[^ #@]+$/,"");
+  if (cleanInput!=""){
+    var messageTags = cleanTags(cleanInput);
+    var oldTags = getActiveTags();
+    var inputTags = getActiveTags("#newTagsInput");
+    var uniqueTags = removeDuplicateTags(messageTags.concat(oldTags)
+                                                    .concat(inputTags))
+    setActiveTags(uniqueTags, "#newTagsInput");
+  };
+
 });
 
 //TODO: Fix this on the newMessage Submit....

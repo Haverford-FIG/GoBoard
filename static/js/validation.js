@@ -7,11 +7,8 @@ function validateMessage(msg){
 
 
 //# # # #  Tag Validation  # # # # # # # # # # # # #
-//Takes a "dirty" tagString and converts it to a cleaned uniqueTagArray.
-function cleanTags(tagString){
-  //Get the valid characters from the string.
-  var tagArray = tagString.match(/((@|#)[a-zA-Z]+[a-zA-Z1-9]*)+?/g)
-  if (tagArray===null) tagArray=[];
+function removeDuplicateTags(tagArray){
+  if (tagArray.length==0) return [];
 
   var uniqueTagArray = [];
   $.each(tagArray, function(index, entry){
@@ -19,6 +16,16 @@ function cleanTags(tagString){
   });
 
   return uniqueTagArray;
+}
+
+
+//Takes a "dirty" tagString and converts it to a cleaned uniqueTagArray.
+function cleanTags(tagString){
+  //Get the valid characters from the string.
+  var tagArray = tagString.match(/((@|#)[a-zA-Z]+[a-zA-Z1-9]*)+?/g)
+  if (tagArray===null) tagArray=[];
+
+  return removeDuplicateTags(tagArray);
 }
 
 //Returns 'true' if a string is in the proper tag format.

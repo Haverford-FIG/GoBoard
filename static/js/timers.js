@@ -3,7 +3,7 @@
 //Start the #otherActiveUserCount timer.
 function updateUserCounter(){
   $.get("/userCount/", function(response){
-    var newHTML = buildUserCounter(parseInt(response));
+    var newHTML = buildUserCounter(parseInt(response)-1);
     $("#otherActiveUserCount").html(newHTML);
   });
 }

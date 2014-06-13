@@ -42,7 +42,7 @@ def new_message(request):
     #If something goes wrong, send the 500 page.
     return HttpResponse("ERROR")
 
-def get_messages(tagBasedQuery, page=1, private=False, user=None):
+def get_messages(tagBasedQuery, page=1, private=False, user=None, lastID=None):
   #Variable Setup.
   page_size = MESSAGES_PER_TRANSACTION
 
@@ -66,9 +66,17 @@ def get_messages(tagBasedQuery, page=1, private=False, user=None):
   if tagBasedQuery:
     messages = messages.filter(tagBasedQuery)
 
+  if lastID:
+    lastMessage = Messages.objects.get(id=int(lastID))
+    if lastMessage.exists():
+      print "YUP"
+      lastDate = lastMessage.datetime
+      messages = messages.filter(datetime__gt=lastDate) 
+
   #Order the messages.
   messages = messages.order_by("-datetime")
 
+  print messages
   return messages[page_size*(page-1):page_size*page]
 
 
@@ -93,9 +101,14 @@ def send_messages(request):
     u = request.user
     tags = request.GET.getlist("tags[]")
     page = 1 if not request.GET.get("page") else int(request.GET["page"])
+
+    #Load parameters that may not exist in the request.
     private = request.GET.get("private")
     if private: private = private=="true" #Javascript uses lowercase.
-    query = None
+    
+    lastID = request.GET.get("lastID")
+    if not lastID or lastID.lower()=="none": lastID=None
+    
 
     if len(tags)>0:
       #Create a Q (complex query) object for each tag based on the tag's tag field.
@@ -114,8 +127,11 @@ def send_messages(request):
 
       #Create the query itself in the form: Q(content) | Q(content) | Q(content) ...
       query = reduce(operator.or_, qList)
- 
-    messages = get_messages(query, page=page, private=private, user=u)
+    else:
+      query = None
+      
+    messages = get_messages(query, page=page, private=private, 
+                            user=u, lastID=lastID)
 
     if not messages.exists():
       response = {"maxPage":True}
@@ -126,6 +142,7 @@ def send_messages(request):
                    "tags":getTagStrings(get_tag_list(message)), 
                    "mentions":getUsernameStrings(get_mention_list(message)), 
                    "private":message.private,
+                   "pid":message.id,
                    "datetime":str(message.datetime)} for message in messages]
    
   except Exception as e:

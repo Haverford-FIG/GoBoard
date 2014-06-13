@@ -20,8 +20,13 @@ function reloadMessages(tagArray, kwargs) {
   //Lock the messageContainer from scroll-reloading new messages.
   $(messageContainer).data("lockMessages",true);
 
-  $.get('/get_messages/', {tags: tagArray, page:page, private:private},
-                           function(response) {
+  var lastID=$(messageContainer).find(".message").last().data("pid");
+  if (lastID===undefined) lastID="None";
+
+  $.get('/get_messages/', {tags: tagArray, 
+                           page:page, private:private, 
+                           lastID:lastID
+                          }, function(response) {
     //response = [message1, message2, ... ] or response = {error:"the error", ...}
     if (response["maxPage"]){
       $(messageContainer).data("maxPage",true);
@@ -35,7 +40,10 @@ function reloadMessages(tagArray, kwargs) {
       $(messageContainer).prepend(buildMessageBoxAlert(response["error"]));
       return false;
     }
-    
+
+    //TODO:
+    console.log(response);
+
     if (page == 1){
         $(messageContainer).data("page", 1);
         $(messageContainer).data("maxPage", false);
@@ -85,12 +93,14 @@ function displayMessages(messages, prependOrAppend, emptyMessageBox){
   }
 }
 
+
 function displayMessage(message, prependOrAppend) {
   //Construct the message.  
   newMessage = buildMessage(message.text, message.user, 
                             message.tags, message.mentions, 
                             message.private);
 
+  $(newMessage).data("pid", message.pid);
   //And display it.
   if (prependOrAppend=="append") {
     $(".messageBox").append(newMessage);

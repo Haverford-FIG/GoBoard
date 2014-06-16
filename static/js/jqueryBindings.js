@@ -10,7 +10,7 @@ $(document).on("click", ".updateContainerOption", function(e) {
   var item = choiceTuple[1];
 
   if (item=="tags"){
-    setTagBox(adjective); 
+    setTagBox(adjective);
   } else if (item=="messages") {
     throw "message updates not set yet!!!!";
   } else {
@@ -25,6 +25,13 @@ $(document).on("click", ".customCheckbox", function(){
   if ($(this).attr("autoReload")==="true"){
     $("#tagFilterSubmit").trigger("click");
   }
+
+  var shouldBeActive = $(this).hasClass("active");
+  if ($(this).attr("id")=="tagFilterPrivate"){
+    console.log(shouldBeActive);
+    $("#newMessagePrivate").toggleClass("active", shouldBeActive);
+  }
+
 });
 
 //Submit a form when a user clicks the #submitFormButton only if it is valid.
@@ -69,6 +76,7 @@ $(document).on("click", "#formSubmitButton", function(){
   });
 });
 
+
 //Update the .badInput for forms after a user inputs new info.
 $(document).on("blur", ".fullScreenForm input", function() {
   var form = $(this).closest("form");
@@ -86,7 +94,7 @@ $(document).on("keydown", "#newMessageInput", function(e) {
     return false;
   }
 
-  var c = String.fromCharCode(e.which) 
+  var c = String.fromCharCode(e.which)
   var rawInput = $(this).val() + c;
 
   //Grab everything except a currently-being-written hash.
@@ -102,7 +110,7 @@ $(document).on("keydown", "#newMessageInput", function(e) {
 
 });
 
-//TODO: Fix this on the newMessage Submit....
+//TODO: Fix this on the newMessage Submit.... Doesn't work for some reason...
 //Also allow tag-filters to submit by pressing enter.
 $(document).on("keydown", ".tagAutoComplete", function(e) {
   if (e.which==13) {
@@ -119,24 +127,23 @@ $(".messageBox").scroll(function() {
   var containerMaxed = $(this).data("maxPage");
   if (containerMaxed===undefined) containerMaxed=false;
 
-  var page = $(this).data("page");
-  if (page===undefined) page=1;
+  var context = getMessageContext();
+  context["loadMore"]=true;
+  context["noScroll"]=true;
 
-  if (scrollTop==0 && containerNotEmpty && 
+  if (scrollTop==0 && containerNotEmpty &&
       containerMaxed==false && containerNotLocked) {
-    page++;
     var tags = getActiveTags();
-    reloadMessages(tags, {page:page, noScroll:true});
+    reloadMessages(".messageBox", tags, context);
   }
 });
 
-    
+
 $(document).on("click", "#tagFilterSubmit", function() {
   var tags = getActiveTags();
-  var private = $(this).siblings(".customCheckbox[name=private]")
-                          .hasClass("active");
+  var context = getMessageContext();
   setActiveTags(tags); //Show the "clean" tags that are actually being used.
-  reloadMessages(tags, {clearMessages:true, page:1, private:private});
+  reloadMessages(".messageBox", tags, context);
 });
 
 $(document).on("click", ".tagLink", function() {
@@ -166,7 +173,7 @@ $(document).on("click", "#newMessageSubmit", function() {
     applyErrorClass("#newMessageInput");
     return false;
   }
-  
+
   //Construct an object to describe this message for the server.
   var sendObj = {
   		"tags": tagArray,
@@ -174,20 +181,20 @@ $(document).on("click", "#newMessageSubmit", function() {
   		"tagCheck": tagsRequired,
   		"private": private,
   }
-  
+
   //Send the new message and get the most recent messages.
   $.post('/new_message/', sendObj, function(response){
     applyTempGoodClass("#newMessageInput");
     $("#newMessageInput").val('');
-    reloadMessages(tagArray, {page:1, private:private});
+    reloadMessages(".messageBox", tagArray, {private:private});
   });
 
   return false; //Don't continue or else the form will re-submit.
 });
 
 
-//# # # # # # # # # # # # # # # # # # # # # 
-//jQuery Autocomplete for Tag Inputs # # # # 
+//# # # # # # # # # # # # # # # # # # # # #
+//jQuery Autocomplete for Tag Inputs # # # #
 function split( val ) {
   return val.split( /\s+/ );
 }
@@ -220,7 +227,7 @@ $.get("/get_tags/", function(tagList) {
   });
 });
 
-//# # # # # # # # # # # # # # # # # # # # # 
+//# # # # # # # # # # # # # # # # # # # # #
 //jQuery Autocomplete for Options Menu # # #
 $("#optionMenuButton").click(function() {
   var menu = $("#optionMenu");

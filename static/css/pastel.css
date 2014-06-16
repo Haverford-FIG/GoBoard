@@ -31,7 +31,7 @@ a:hover {
 .banner {
  padding:20 0 30 20;
  letter-spacing:2px;
- font-size:24px; 
+ font-size:24px;
  height:5%;
 
  color:white;
@@ -61,7 +61,7 @@ a #bannerLogo, a #bannerLogo:hover {
 .messageBox {
  height:60%;
  padding-left:40px;
- overflow-x:none;
+ overflow-x:hidden;
  overflow-y:scroll;
 }
 
@@ -106,7 +106,7 @@ a #bannerLogo, a #bannerLogo:hover {
  text-align:center;
 
  font-size:18px;
- background-color:#7fcdbb; 
+ background-color:#7fcdbb;
  color:white;
 }
 
@@ -165,7 +165,7 @@ option, .ui-menu-item a {
  background:#7fcdbb;
  outline:none;
  border:none;
-} 
+}
 
 .submitButton {
  float:left;
@@ -317,7 +317,7 @@ option, .ui-menu-item a {
 
 /* # # # # # User Settings Form # # # # # #  */
 .fullScreenForm {
- padding:10 30 0 30; 
+ padding:10 30 0 30;
 }
 
 .formFieldContainer {
@@ -353,7 +353,7 @@ option, .ui-menu-item a {
 
 .fullScreenForm input[type=checkbox]{
  width:5%;
- margin:0 0 0 20; 
+ margin:0 0 0 20;
 }
 
 .button {

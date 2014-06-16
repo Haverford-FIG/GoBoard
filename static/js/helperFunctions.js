@@ -9,10 +9,16 @@ function getURLParams(paramQuery){
   for (var i=0; i < paramList.length; i++){
     var paramTuple = paramList[i].split("=");
     paramObj[paramTuple[0]]=paramTuple[1];
-    
+
   }
 
   if (paramQuery===undefined) return paramObj;
   return paramObj[paramQuery];
 }
 
+
+function getMessageContext(){
+ return {
+   "private": $("#tagFilterPrivate").hasClass("active")
+ }
+}

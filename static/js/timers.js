@@ -1,5 +1,15 @@
 
-// # # # # # # User Updaters # # # # # # # # # # # # 
+// # # # # # # Message Checker # # # # # # # # # # # #
+//Start the #otherActiveUserCount timer.
+function checkMessages(container){
+  var tags = getActiveTags();
+  var context = getMessageContext();
+  context["noScroll"]=true;
+  reloadMessages(".messageBox", tags, context);
+}
+
+
+// # # # # # # User Updaters # # # # # # # # # # # #
 //Start the #otherActiveUserCount timer.
 function updateUserCounter(){
   $.get("/userCount/", function(response){
@@ -9,7 +19,7 @@ function updateUserCounter(){
 }
 
 
-// # # # # # # Tag Updaters # # # # # # # # # # # # 
+// # # # # # # Tag Updaters # # # # # # # # # # # #
 //Load the most recently used tags into the #tagbox.
 function reloadRecentTags(){
   $.get("/get_recent_tags/", function(tags) {
@@ -54,7 +64,7 @@ function setTagBox(choice){
 
   //Give the newActiveChoice the .activeUpdaterChoice class.
   $("."+activeClass).removeClass(activeClass);
-  $(newActiveChoice).addClass(activeClass) 
+  $(newActiveChoice).addClass(activeClass)
 
 }
 

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.db.models import Q
 
-from models import *
+from models import User, Message
 from models_constructors import *
 from GoBoard.sessionCounter import getActiveUsers
 from GoBoard.views.tags import getTagStrings, get_tag_list
@@ -42,9 +42,9 @@ def new_message(request):
     #If something goes wrong, send the 500 page.
     return HttpResponse("ERROR")
 
-def get_messages(tagBasedQuery, page=1, private=False, user=None, lastID=None):
+def get_messages(tagBasedQuery, private=False, user=None, lastID=None, loadMore=True):
   #Variable Setup.
-  page_size = MESSAGES_PER_TRANSACTION
+  batch_size = MESSAGES_PER_TRANSACTION
 
   #Make sure to grab only the private messages to which this user has access.
   if user is not None and user.is_authenticated():
@@ -53,31 +53,32 @@ def get_messages(tagBasedQuery, page=1, private=False, user=None, lastID=None):
                       Q(private=True, user=user))
 
     #If the user doesn't want JUST private messages, give them non-private as well.
-    if not private: 
+    if not private:
       userBasedQuery |= Q(private=False)
   else:
     #Non-members cannot have private messages.
     userBasedQuery = Q(private=False)
 
-  #Actually apply the "private" query.
+  #Apply the "user-based" part of the query.
   messages = Message.objects.filter(userBasedQuery)
-  
+
   #If there is a "tag" query to perform, do that as well.
   if tagBasedQuery:
     messages = messages.filter(tagBasedQuery)
 
   if lastID:
-    lastMessage = Messages.objects.get(id=int(lastID))
-    if lastMessage.exists():
-      print "YUP"
+    lastMessage = Message.objects.get(id=int(lastID))
+    if lastMessage:
       lastDate = lastMessage.datetime
-      messages = messages.filter(datetime__gt=lastDate) 
+      if loadMore:
+        messages = messages.filter(datetime__lt=lastDate)
+      else:
+        messages = messages.filter(datetime__gt=lastDate)
 
   #Order the messages.
   messages = messages.order_by("-datetime")
 
-  print messages
-  return messages[page_size*(page-1):page_size*page]
+  return messages[:batch_size]
 
 
 def get_tag_list(message):
@@ -100,15 +101,17 @@ def send_messages(request):
     #Variable Setup
     u = request.user
     tags = request.GET.getlist("tags[]")
-    page = 1 if not request.GET.get("page") else int(request.GET["page"])
 
     #Load parameters that may not exist in the request.
     private = request.GET.get("private")
     if private: private = private=="true" #Javascript uses lowercase.
-    
+
+    loadMore = request.GET.get("loadMore")
+    if loadMore: loadMore = loadMore=="true" #Javascript uses lowercase.
+
     lastID = request.GET.get("lastID")
     if not lastID or lastID.lower()=="none": lastID=None
-    
+
 
     if len(tags)>0:
       #Create a Q (complex query) object for each tag based on the tag's tag field.
@@ -126,25 +129,25 @@ def send_messages(request):
           qList.append(Q(tag__tag=query_bit))
 
       #Create the query itself in the form: Q(content) | Q(content) | Q(content) ...
-      query = reduce(operator.or_, qList)
+      query = reduce(operator.or_, qList) if qList else []
     else:
       query = None
-      
-    messages = get_messages(query, page=page, private=private, 
-                            user=u, lastID=lastID)
+
+    messages = get_messages(query, private=private, user=u,
+                            lastID=lastID, loadMore=loadMore)
 
     if not messages.exists():
       response = {"maxPage":True}
     else:
       #Construct the JSON response.
-      response = [{"text":message.text, 
-                   "user":message.user.username, 
-                   "tags":getTagStrings(get_tag_list(message)), 
-                   "mentions":getUsernameStrings(get_mention_list(message)), 
+      response = [{"text":message.text,
+                   "user":message.user.username,
+                   "tags":getTagStrings(get_tag_list(message)),
+                   "mentions":getUsernameStrings(get_mention_list(message)),
                    "private":message.private,
                    "pid":message.id,
                    "datetime":str(message.datetime)} for message in messages]
-   
+
   except Exception as e:
     print "send_messages error: {}".format(e)
     #If something goes wrong, send the 500 page.

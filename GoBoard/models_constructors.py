@@ -2,10 +2,11 @@ from models import Message, Tag, User
 import datetime
 
 def tag_exists(tag):
- return Tag.objects.filter(tag=tag).exists()
+  return Tag.objects.filter(tag=tag).exists()
+
 
 def user_exists(username):
- return User.objects.filter(username=username).exists()
+  return User.objects.filter(username=username).exists()
 
 
 def store_message(text, tagList, user, tags_required, private):
@@ -45,7 +46,6 @@ def add_user_to_message(username, new_message):
     user.save()
   except Exception as e:
     print "ERROR ADDING MESSAGE TO TAG: {}".format(e)
-
 
 
 def add_tag_to_message(tag_string, new_message):

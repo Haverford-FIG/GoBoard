@@ -1,75 +1,94 @@
-//TODO: COMMENT THIS BAD BOY.
-function reloadMessages(tagArray, kwargs) {
-  
-  //Variable Setup.
-  if (kwargs===undefined) kwargs={page:1}; //Default to no "kwargs".
-  var page = kwargs["page"]
-  var messageContainer = ".messageBox";
 
+function reloadMessages(messageContainer, tagArray, kwargs) {
+  //If the container is locked, don't do anything.
+  if ($(messageContainer).data("lockMessages")) return false;
+
+  //Load any optional parameters, but default to no options set.
+  if (kwargs===undefined) kwargs = {};
+
+  //Sort the tags so different orders are made uniform.
+  tagArray.sort();
+
+  //Load any available messages from the cache.
+  var tagString = tagArray.join(" ");
+  if (kwargs["private"]==true) tagString += " PRIVATE";
+  var currentMessages = messageCache[tagString];
+  if (currentMessages===undefined) currentMessages = [];
+
+  //Keep track of the current location
   var displayHeight = $(messageContainer).height();
   var oldContainerHeight = $(messageContainer).prop("scrollHeight");
   var currentScrollTop = $(messageContainer).scrollTop();
   var scrollWasAtBottom = (oldContainerHeight-displayHeight)==currentScrollTop
 
-  //Clear messages if specified.
-  if (kwargs["clearMessages"]) clearMessages(messageContainer);
 
-  //Load private messages if specified.
-  var private = (kwargs["private"]==true);
-
-  //Lock the messageContainer from scroll-reloading new messages.
+  //Lock the messageContainer from scroll-reloading new messages until
+  //  the current batch of messages has been loaded and displayed.
   $(messageContainer).data("lockMessages",true);
 
-  var lastID=$(messageContainer).find(".message").last().data("pid");
-  if (lastID===undefined) lastID="None";
+  //Load the "most recent" (or "oldest") message ID for this tag set.
+  var lastID = "None";
+  if (currentMessages.length) {
+    lastID = currentMessages[0]["pid"];
+    if (kwargs["loadMore"]==true) {
+      lastID = currentMessages[currentMessages.length-1]["pid"];
+    }
+  }
 
-  $.get('/get_messages/', {tags: tagArray, 
-                           page:page, private:private, 
-                           lastID:lastID
+  //Load any messages before/after the lastID.
+  //response = [message1, message2, ... ] or response = {error:"the error", ...}
+  $.get('/get_messages/', {tags: tagArray,
+                           private: (kwargs["private"]==true),
+                           loadMore: kwargs["loadMore"]==true,
+                           lastID: lastID,
                           }, function(response) {
-    //response = [message1, message2, ... ] or response = {error:"the error", ...}
+    //Remove any current warnings that might be present.
+    $(".messageContainerAlert").remove();
+
+    //If the maxPage is reached, warn the user.
+    var prependMessage = "";
     if (response["maxPage"]){
-      $(messageContainer).data("maxPage",true);
-      if ($(messageContainer).find(".message").length==0){
-        $(messageContainer).html(buildMessageBoxAlert("No messages found!"));
-      } else {
-        $(messageContainer).prepend(buildMessageBoxAlert("No more messages!"));
+      if (currentMessages.length!=0) {
+        prependMessage = buildMessageBoxAlert("No more messages!");
       }
-      return false;
+    //Also warn if there was some other error.
     } else if (response["error"]){
-      $(messageContainer).prepend(buildMessageBoxAlert(response["error"]));
+      $(messageContainer).append(buildMessageBoxAlert(response["error"]));
       return false;
-    }
-
-    //TODO:
-    console.log(response);
-
-    if (page == 1){
-        $(messageContainer).data("page", 1);
-        $(messageContainer).data("maxPage", false);
-        displayMessages(response, "append", true);
     } else {
-        $(messageContainer).data("page", page); //Update the current page.
-        displayMessages(response, "prepend", false);
+      //Apply the newly-received messages to the message list (in the right order).
+      if (kwargs["loadMore"]==true){
+        currentMessages = currentMessages.concat(response);
+      } else {
+        currentMessages = response.concat(currentMessages);
+      }
+      messageCache[tagString] = currentMessages;
     }
 
-    //Variable Setup.
-    var newContainerHeight = $(messageContainer).prop("scrollHeight");
+    //Apply the new messages if applicable.
+    if (currentMessages.length==0){
+      $(messageContainer).html(buildMessageBoxAlert("No messages found!"));
+    } else {
+      setMessages(currentMessages, messageContainer);
+    }
 
-    //Place the scrollbar back where it was. 
+    //Prepend a warning/message if applicable.
+    $(messageContainer).prepend(prependMessage);
+
+    //Place the scrollbar back where it was.
+    var newContainerHeight = $(messageContainer).prop("scrollHeight");
     var updatedScrollTop = newContainerHeight-oldContainerHeight+currentScrollTop;
     $(messageContainer).scrollTop(updatedScrollTop);
-    
 
     //Scroll the container to see the latest (last) message.
     if (!kwargs["noScroll"] || scrollWasAtBottom){
       scrollBottom(messageContainer);
     }
-  
+
     //After all changes are made, unlock the messageContainer.
     $(messageContainer).data("lockMessages",false);
 
-    //Turn any link-like sequences into links.
+    //Turn any link-like string sequences into links.
     $(messageContainer).linkify()
 
   });
@@ -81,34 +100,25 @@ function scrollBottom(location){
   $(location).animate({scrollTop: bottomOfCell}, "slow");
 }
 
-function displayMessages(messages, prependOrAppend, emptyMessageBox){
+function setMessages(messages, container){
   //If specified, empty the message box before adding new messages.
-  empty = (emptyMessageBox===undefined) ? false : emptyMessageBox ;
-  if (emptyMessageBox) $(".messageBox").empty();
+  $(container).empty();
 
-  //"display" each message.
+  //"display" each message (starting at the last message).
   for (var i=messages.length-1; i>= 0; i--){
     var message = messages[i];
-    displayMessage(message, prependOrAppend);
+    setMessage(message, container);
   }
 }
 
 
-function displayMessage(message, prependOrAppend) {
-  //Construct the message.  
-  newMessage = buildMessage(message.text, message.user, 
-                            message.tags, message.mentions, 
+function setMessage(message, container) {
+  //Construct the message.
+  newMessage = buildMessage(message.text, message.user,
+                            message.tags, message.mentions,
                             message.private);
 
+  //... And display it (storing it's individual ID for future use).
   $(newMessage).data("pid", message.pid);
-  //And display it.
-  if (prependOrAppend=="append") {
-    $(".messageBox").append(newMessage);
-  } else {
-    $(".messageBox").prepend(newMessage);
-  }
-}
-
-function clearMessages(location) {
-  $(location).empty();
+  $(container).append(newMessage);
 }

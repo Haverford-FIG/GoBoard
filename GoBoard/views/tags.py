@@ -25,8 +25,8 @@ def getTrendingTags(limit=MAX_UPDATE_CONTAINER_ENTRIES):
   today = datetime.datetime.now()
   lastMonth = today - datetime.timedelta(days=30)
   tags = Tag.objects.filter(message__datetime__gte=lastMonth)
- 
-  #Get the occurrences of "#text" in those tags. 
+
+  #Get the occurrences of "#text" in those tags.
   tagVals = tags.annotate(c=Count('tag')).order_by('-c')
 
   return tagVals[:limit]
@@ -41,7 +41,7 @@ def get_tags(request, query="recent"):
     else:
       tagList = Tags.objects.all()
 
-    tags = getTagStrings(tagList) 
+    tags = getTagStrings(tagList)
     return HttpResponse(json.dumps(tags), content_type="application/json")
   except Exception as e:
     print e

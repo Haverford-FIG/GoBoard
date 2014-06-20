@@ -22,17 +22,22 @@ def createUser(kwargs):
   #  us to link the UserInfo object below with this User.
   u.save()
 
-  #Make a new UserInfo object for the user.
-  ui = UserInfo()
-  for key in ["grad_year", "campus"]:
-    setattr(ui, key, kwargs[key])
+  #Attempt to make the UserInfo object, but if a fatal error
+  #  occurs, destroy it.
+  try:
+    #Make a new UserInfo object for the user.
+    ui = UserInfo()
+    for key in ["grad_year", "campus"]:
+      setattr(ui, key, kwargs[key])
 
-  #Make a ForeignKey between the User and UserObject and save.
-  ui.user = u
-  ui.save()
+    #Make a ForeignKey between the User and UserObject and save.
+    ui.user = u
+    ui.save()
+    return u
+  except:
+    u.delete()
+    return None
 
-  return u
- 
 
 def create_user(request):
   if request.method=="POST":

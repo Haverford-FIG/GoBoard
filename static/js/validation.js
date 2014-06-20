@@ -65,10 +65,10 @@ function validateForm(form, url){
 
       //Make sure the grad_range is sensical if specified.
       var val = formContent["grad_year"];
-      if (val!="" && !isValidGradYear(val)) { 
+      if (val!="" && !isValidGradYear(val)) {
         applyErrorClass($(form).find("#form_gradYear"), false);
       }
-      
+
       //Make sure the repeated new pass is the same.
       if (formContent["newPass"]!=formContent["newPassRepeat"]){
         applyErrorClass($(form).find("input[name=newPassRepeat]"), false)
@@ -98,7 +98,9 @@ function validateForm(form, url){
 
       //Make sure the email has an "@" and it is appropriately placed.
       var email = formContent["email"];
-      if (email.indexOf("@")<=0 || email.indexOf("@")==email.length-1){
+      var domain = email.split("@")[1];
+      if (email.indexOf("@")<=0 || email.indexOf("@")==email.length-1 ||
+         validDomains.indexOf(domain)<0){
         applyErrorClass($(form).find("input[name=email]"), false)
       }
 
@@ -109,7 +111,7 @@ function validateForm(form, url){
 
       //Make sure the grad_range is sensical if specified.
       var val = formContent["grad_year"];
-      if (val!="" && !isValidGradYear(val)) { 
+      if (val!="" && !isValidGradYear(val)) {
         applyErrorClass($(form).find("#form_gradYear"), false);
       }
       break;
@@ -187,12 +189,12 @@ $(document).ready(function() {
 //# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 $(".tagAutoComplete").keypress(function(e){
-  var c = String.fromCharCode(e.which) 
+  var c = String.fromCharCode(e.which)
 
   //Only allow certain characters.
   var re = new RegExp(/(#|@|[a-zA-Z1-9]|\s)/);
   if (!re.test(c)){
-    return false; 
+    return false;
   }
 
   var input = $(this).val();

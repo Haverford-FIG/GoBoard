@@ -60,17 +60,33 @@ a #bannerLogo, a #bannerLogo:hover {
 
 .messageBox {
  height:60%;
- padding-left:40px;
+ padding-left:5px;
  overflow-x:hidden;
  overflow-y:scroll;
 }
 
-.message {
- margin:25 15 10 0;
+
+
+.message:nth-child(even) {
+ border-radius:5px;
+ margin:5;
  padding:10 0 20 15;
- background-color:#e0f3db;
+ background-color:#99B2B7;
  position:relative;
 }
+
+
+
+.message:nth-child(odd){
+ border-radius:5px;
+ margin:5;
+ padding:10 0 20 15;
+ background-color:#D5DED9;
+ position:relative;
+}
+  
+
+
 
 .privateMessage {
  background-color:#fc9272;
@@ -104,9 +120,8 @@ a #bannerLogo, a #bannerLogo:hover {
  width:100%;
  padding:20 0 20 0;
  text-align:center;
-
  font-size:18px;
- background-color:#7fcdbb;
+ background-color:#99B2B7;
  color:white;
 }
 
@@ -223,7 +238,7 @@ option, .ui-menu-item a {
  text-align:center;
  margin:5 5 5 5;
  font-size:14px;
- background-color:#edf8b1;
+ background-color:D5DED9;
 }
 
 .tagLink:hover{
@@ -237,17 +252,19 @@ option, .ui-menu-item a {
 
 .userShadow {
  position:absolute;
- top:-15px;
- left:-15px;
+ top:-5px;
+ right:10px;
  opacity:0.8;
+ color:#7A6A53;
+ padding:5px 0px;
  font-style:oblique;
 }
 
 .tagShadow {
  position:absolute;
- bottom:-10px;
- right:-8px;
- opacity:0.8;
+ bottom:5px;
+ right:5px;
+  opacity:0.8;
 }
 
 .tag {
@@ -383,8 +400,8 @@ option, .ui-menu-item a {
 }
 
 #userGreeting {
- position:absolute;
- top:65px;
+ position:relative;
+ top:-10px;
  right:10px;
  text-align:right;
  font-size:0.5em;

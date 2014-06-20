@@ -1,8 +1,22 @@
 body {
-margin:0px;
-padding:0px;
-background-color:#C7C7C7;
-min-width:1000px;
+ margin:0 0 40 0;
+ padding:0px;
+ min-width:600px;
+
+ font-family:"Lato";
+ font-size:16px;
+ background-color:lightgrey;
+ border-radius:10px;
+ min-width:1000px;
+}
+
+a, a:visited {
+ text-decoration:none;
+ color:#00441b;
+ letter-spacing:0px;
+}
+a:hover {
+ color:#00752F;
 }
 
 
@@ -23,7 +37,16 @@ height: 100px;
     margin-bottom:30px;
 }
 
- .goBoardBox
+.banner {
+ padding:20 0 30 20;
+ letter-spacing:2px;
+ font-size:24px;
+ height:5%;
+
+ color:white;
+ background-color:#C93030;
+}
+.goBoardBox
  {
 border-color: blue;
 margin: 10px;
@@ -48,6 +71,13 @@ border-width: 3px;
 background-color:#594F4F;
 padding:10px 20px 10px 10px;
 border-radius:15px;
+}
+
+#messageContainer {
+ width:69%;
+ position:relative;
+ float:left;
+ margin-top:30px;
 }
 
 .messageBox
@@ -75,6 +105,18 @@ padding:10px 10px 10px 0px;
 border-radius:15px;
 }
 
+.message {
+ margin:10 15 10 0;
+ padding:10 0 20 15;
+ background-color:#CA6A6A;
+ position:relative;
+ border-radius:15px;
+}
+
+.message:hover {
+background-color:white;
+}
+
 #tagSearchBox{
 width:30%;
 }
@@ -97,6 +139,24 @@ overflow-y:auto;
 {
 padding-left:5px;
 background-color: #A5A5A5;
+}
+
+#recentUpdatesContainer {
+ margin-top:30px;
+ width:30%;
+ position:relative;
+ float:right;
+}
+
+.miniHeader {
+ width:100%;
+ padding:20 0 20 0;
+ text-align:center;
+
+ font-size:18px;
+ border-radius:20px;
+ background-color:#802b2b;
+ color:white;
 }
 .shoutOdd
 {
@@ -123,6 +183,62 @@ form#messageform{
 }
 
 textarea {
+ padding-top:4px;
+ resize:none;
+ resize:none;
+ border-bottom:1px solid #eee;
+}
+
+input, select {
+ width:75%;
+ height:100%;
+ float:left;
+ font-size:18px;
+}
+
+input:focus, select:focus, textarea:focus,
+.fullScreenForm input:focus, .fullSCreenForm select:focus {
+ background-color:#FFFCE5;
+}
+
+.ui-menu {
+ margin:0px;
+ padding:0px;
+ border-radius:0px;
+ outline:none;
+ border:none;
+}
+
+
+option, .ui-menu-item a {
+ background:#edf8b1;
+ outline:none;
+ border:none;
+ font-weight:normal;
+ border-radius:0px;
+}
+
+.ui-widget-content .ui-state-focus { /* TODO: Test in !Chrome */
+ background:#7fcdbb;
+ outline:none;
+ border:none;
+}
+
+.submitButton {
+ float:left;
+ width:10%;
+ padding:15 20 15 20;
+ cursor:pointer;
+ border-left:1px solid #fff7bc;
+ background-color:#C93030;
+ border-radius:20px;
+}
+.submitButton:hover {
+ background-color:#fff8cd;
+ border-color:#fff7bc;
+}
+
+.customCheckbox {
 width:100%;
 padding-right:5px;
 }
@@ -187,6 +303,120 @@ box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
  .kwicks > a {
  position:relative;
  display:inline-block;
+ font-size:1.5em;
+}
+
+
+.updateContainerOption {
+ font-size:0.9em;
+ opacity:0.5;
+ cursor:pointer;
+}
+
+.updateContainerOption:hover {
+ opacity:1;
+}
+
+.activeUpdateContainerChoice {
+ opacity: 0.9;
+ font-size:1.1em;
+ font-weight:bold;
+}
+
+.updateTag {
+ padding: 5 10 5 10;
+ border-radius:10px;
+ text-align:center;
+ margin:5 5 5 5;
+ font-size:14px;
+ background-color:#CA6A6A;
+}
+
+.tagLink:hover{
+ opacity:1;
+}
+
+.tagLink {
+ cursor:pointer;
+ opacity:0.8;
+}
+
+.userShadow {
+ position:absolute;
+ top:0px;
+ right:40px;
+ opacity:0.8;
+ font-style:oblique;
+}
+
+.tagShadow {
+ position:absolute;
+ bottom:0px;
+ right:30px;
+ opacity:0.8;
+}
+
+.tag {
+ margin:0 5 0 5;
+ z-index:10;
+}
+
+#otherActiveUserCount {
+ text-align:center;
+ font-size:0.9em;
+ padding:10 0 0 0;
+ opacity:0.5;
+}
+
+#optionMenuButton {
+ position:absolute;
+ top:0px;
+ right:0px;
+ padding:10 10 12 12;
+ opacity:0.8;
+}
+
+#optionMenuButton:hover {
+ opacity:1;
+ cursor:pointer;
+}
+
+#optionMenu {
+ display:none;
+ position:absolute;
+ z-index:10;
+ top:0px;
+ right:50px;
+
+ padding:10 0 10 0;
+ text-align:center;
+
+ background-color:black;
+ opacity:0.8;
+}
+
+.optionMenuOption, .optionMenuOption a, .optionMenuOption a:hover {
+ padding:4 20 4 20;
+ cursor:pointer;
+ background-color:inherit;
+ color:inherit;
+ font-size:inherit;
+ font-weight:inherit;
+}
+
+.optionMenuOption:hover {
+ background-color:silver;
+}
+
+#copyrightContainer {
+ position:fixed;
+ right:25px;
+ bottom:10px;
+ opacity:0.5;
+ word-spacing:5px;
+}
+
+.genericCenteredContainer {
  white-space:nowrap;
  color:white;
  padding-top:20px;
@@ -207,4 +437,10 @@ box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
 background-color:#1E4B8D;
 }
 
-.kwicks > a:last-child { 
+#userGreeting {
+ position:relative;
+ top:-10px;
+ right:10px;
+ text-align:right;
+ font-size:0.5em;
+}

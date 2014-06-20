@@ -68,11 +68,7 @@ a #bannerLogo, a #bannerLogo:hover {
 .message {
  margin:5;
  padding:10 0 20 15;
-<<<<<<< HEAD
  background-color:#7fcdbb;
-=======
- background-color:blue;
->>>>>>> df0b9436917fd1031f5130966a9713109ec05318
  position:relative;
  border: .5em;
 }
@@ -185,7 +181,7 @@ option, .ui-menu-item a {
  padding:15 20 15 20;
  cursor:pointer;
  border-left:1px solid #fff7bc;
- background-color:#33FFFF;
+ background-color:#7fcdbb;
 }
 .submitButton:hover {
  background-color:green;
@@ -197,7 +193,7 @@ option, .ui-menu-item a {
  float:left;
  width:10%;
  height:100%;
- background-color:grey;
+ background-color:#33ffff;
  cursor:pointer;
 }
 .customCheckbox.active{
@@ -235,7 +231,7 @@ option, .ui-menu-item a {
  text-align:center;
  margin:5 5 5 5;
  font-size:14px;
- background-color:#edf8b1;
+ background-color:#7fcdbb;
 }
 
 .tagLink:hover{

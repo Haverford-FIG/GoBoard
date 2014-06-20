@@ -60,7 +60,7 @@ a #bannerLogo, a #bannerLogo:hover {
 
 .messageBox {
  height:60%;
- padding-left:40px;
+ padding-left:5px;
  overflow-x:hidden;
  overflow-y:scroll;
 }
@@ -68,6 +68,7 @@ a #bannerLogo, a #bannerLogo:hover {
 
 
 .message:nth-child(even) {
+ border-radius:5px;
  margin:5;
  padding:10 0 20 15;
  background-color:#99B2B7;
@@ -77,6 +78,7 @@ a #bannerLogo, a #bannerLogo:hover {
 
 
 .message:nth-child(odd){
+ border-radius:5px;
  margin:5;
  padding:10 0 20 15;
  background-color:#D5DED9;
@@ -118,9 +120,8 @@ a #bannerLogo, a #bannerLogo:hover {
  width:100%;
  padding:20 0 20 0;
  text-align:center;
-
  font-size:18px;
- background-color:#7fcdbb;
+ background-color:#99B2B7;
  color:white;
 }
 
@@ -237,7 +238,7 @@ option, .ui-menu-item a {
  text-align:center;
  margin:5 5 5 5;
  font-size:14px;
- background-color:#edf8b1;
+ background-color:D5DED9;
 }
 
 .tagLink:hover{

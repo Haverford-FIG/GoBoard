@@ -1,5 +1,4 @@
 body {
-<<<<<<< HEAD
  margin:0 0 40 0;
  padding:0px;
  min-width:600px;
@@ -8,6 +7,7 @@ body {
  font-size:16px;
  background-color:lightgrey;
  border-radius:10px;
+ min-width:1000px;
 }
 
 a, a:visited {
@@ -17,12 +17,6 @@ a, a:visited {
 }
 a:hover {
  color:#00752F;
-}
-=======
-margin:0px;
-padding:0px;
-background-color:#C7C7C7;
-min-width:1000px;
 }
 
 
@@ -38,13 +32,11 @@ overflow-x: hidden;
  * html .ui-autocomplete {
 height: 100px;
  }
->>>>>>> df0b9436917fd1031f5130966a9713109ec05318
 
 #navbar{
     margin-bottom:30px;
 }
 
-<<<<<<< HEAD
 .banner {
  padding:20 0 30 20;
  letter-spacing:2px;
@@ -53,14 +45,13 @@ height: 100px;
 
  color:white;
  background-color:#C93030;
-=======
- .goBoardBox
+}
+.goBoardBox
  {
 border-color: blue;
 margin: 10px;
 height: 30%;
 width: 100%;
->>>>>>> df0b9436917fd1031f5130966a9713109ec05318
 }
 
 .fullBox
@@ -82,13 +73,13 @@ padding:10px 20px 10px 10px;
 border-radius:15px;
 }
 
-<<<<<<< HEAD
 #messageContainer {
  width:69%;
  position:relative;
  float:left;
  margin-top:30px;
-=======
+}
+
 .messageBox
 {
 margin:5px;
@@ -97,7 +88,6 @@ height:60%;
 width:100%;
 border-radius:5px;
 overflow-y:auto;
->>>>>>> df0b9436917fd1031f5130966a9713109ec05318
 }
 
 .recentTags
@@ -115,7 +105,6 @@ padding:10px 10px 10px 0px;
 border-radius:15px;
 }
 
-<<<<<<< HEAD
 .message {
  margin:10 15 10 0;
  padding:10 0 20 15;
@@ -126,10 +115,10 @@ border-radius:15px;
 
 .message:hover {
 background-color:white;
-=======
+}
+
 #tagSearchBox{
 width:30%;
->>>>>>> df0b9436917fd1031f5130966a9713109ec05318
 }
 
 label, .fullBox{
@@ -151,7 +140,6 @@ overflow-y:auto;
 padding-left:5px;
 background-color: #A5A5A5;
 }
-<<<<<<< HEAD
 
 #recentUpdatesContainer {
  margin-top:30px;
@@ -169,7 +157,7 @@ background-color: #A5A5A5;
  border-radius:20px;
  background-color:#802b2b;
  color:white;
-=======
+}
 .shoutOdd
 {
 padding-left:5px;
@@ -184,7 +172,6 @@ border-color:black;
 border-bottom:1px solid black;
 font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
 font-size: small;
->>>>>>> df0b9436917fd1031f5130966a9713109ec05318
 }
 
 form#messageform{
@@ -196,7 +183,6 @@ form#messageform{
 }
 
 textarea {
-<<<<<<< HEAD
  padding-top:4px;
  resize:none;
  resize:none;
@@ -253,7 +239,6 @@ option, .ui-menu-item a {
 }
 
 .customCheckbox {
-=======
 width:100%;
 padding-right:5px;
 }
@@ -316,10 +301,8 @@ box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
  margin-bottom:10px;
  }
  .kwicks > a {
->>>>>>> df0b9436917fd1031f5130966a9713109ec05318
  position:relative;
  display:inline-block;
-<<<<<<< HEAD
  font-size:1.5em;
 }
 
@@ -434,12 +417,10 @@ box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
 }
 
 .genericCenteredContainer {
-=======
  white-space:nowrap;
  color:white;
  padding-top:20px;
  padding-bottom:20px;
->>>>>>> df0b9436917fd1031f5130966a9713109ec05318
  text-align:center;
  /* overridden by kwicks but good for when JavaScript is disabled */
  width:20%;
@@ -456,7 +437,6 @@ box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
 background-color:#1E4B8D;
 }
 
-<<<<<<< HEAD
 #userGreeting {
  position:relative;
  top:-10px;
@@ -464,6 +444,3 @@ background-color:#1E4B8D;
  text-align:right;
  font-size:0.5em;
 }
-=======
-.kwicks > a:last-child { 
->>>>>>> df0b9436917fd1031f5130966a9713109ec05318

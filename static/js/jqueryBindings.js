@@ -228,7 +228,8 @@ $.get("/get_tags/", function(tagList) {
                 var cleaned = dirty.match(/(#|@)[a-zA-Z]+/gm).join(" ");
                 this.value = cleaned;
                 return false;
-              }
+              },
+      position:{collision:"flip flip"}
     });
   });
 });
@@ -242,6 +243,15 @@ $("#optionMenuButton").click(function() {
   } else {
     $(menu).show();
   }
+});
+
+
+//# # # # # # # # # # #
+//jQuery Tooltips # # #
+$(document).tooltip({
+  tooltipClass: "tooltip",
+  hide:{duration:200},
+  show:{duration:100}
 });
 
 

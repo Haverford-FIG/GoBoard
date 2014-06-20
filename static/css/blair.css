@@ -4,7 +4,7 @@ body {
  margin:0 0 40 0;
  padding:0px;
  min-width:600px;
-
+ background-color:#D8D8D8;
  font-family:"Lato";
  font-size:16px;
 }
@@ -35,7 +35,7 @@ a:hover {
  height:5%;
 
  color:white;
- background-color:#225ea8;
+ background-color:#9900cc;
 }
 
 a #bannerLogo, a #bannerLogo:hover {
@@ -66,10 +66,17 @@ a #bannerLogo, a #bannerLogo:hover {
 }
 
 .message {
- margin:25 15 10 0;
+ margin:5;
  padding:10 0 20 15;
- background-color:#e0f3db;
+ background-color:#7fcdbb;
  position:relative;
+}
+
+.message:nth-child(odd) {
+ background-color:#B3BAFF;
+}
+.message:nth-child(even) {
+ background-color:#0099ff;
 }
 
 .privateMessage {
@@ -106,7 +113,7 @@ a #bannerLogo, a #bannerLogo:hover {
  text-align:center;
 
  font-size:18px;
- background-color:#7fcdbb;
+ background-color:#0066ff;
  color:white;
 }
 
@@ -173,10 +180,10 @@ option, .ui-menu-item a {
  padding:15 20 15 20;
  cursor:pointer;
  border-left:1px solid #fff7bc;
- background-color:#fff7bc;
+ background-color:#33FFFF;
 }
 .submitButton:hover {
- background-color:#fff8cd;
+ background-color:green;
  border-color:#fff7bc;
 }
 
@@ -185,7 +192,7 @@ option, .ui-menu-item a {
  float:left;
  width:10%;
  height:100%;
- background-color:#B3BAFF;
+ background-color:grey;
  cursor:pointer;
 }
 .customCheckbox.active{
@@ -237,16 +244,17 @@ option, .ui-menu-item a {
 
 .userShadow {
  position:absolute;
- top:-15px;
- left:-15px;
+ top:0px;
+ right:15px;
  opacity:0.8;
  font-style:oblique;
+ color:black;
 }
 
 .tagShadow {
  position:absolute;
- bottom:-10px;
- right:-8px;
+ bottom:0px;
+ right:15px;
  opacity:0.8;
 }
 

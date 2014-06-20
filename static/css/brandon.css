@@ -7,6 +7,8 @@ body {
 
  font-family:"Lato";
  font-size:16px;
+ background-color:lightgrey;
+ border-radius:10px;
 }
 
 a, a:visited {
@@ -35,7 +37,7 @@ a:hover {
  height:5%;
 
  color:white;
- background-color:#225ea8;
+ background-color:#C93030;
 }
 
 a #bannerLogo, a #bannerLogo:hover {
@@ -51,11 +53,11 @@ a #bannerLogo, a #bannerLogo:hover {
  color:white;
 }
 
-
 #messageContainer {
- width:70%;
+ width:69%;
  position:relative;
  float:left;
+ margin-top:30px;
 }
 
 .messageBox {
@@ -66,10 +68,15 @@ a #bannerLogo, a #bannerLogo:hover {
 }
 
 .message {
- margin:25 15 10 0;
+ margin:10 15 10 0;
  padding:10 0 20 15;
- background-color:#e0f3db;
+ background-color:#CA6A6A;
  position:relative;
+ border-radius:15px;
+}
+
+.message:hover {
+background-color:white;
 }
 
 .privateMessage {
@@ -95,6 +102,7 @@ a #bannerLogo, a #bannerLogo:hover {
 }
 
 #recentUpdatesContainer {
+ margin-top:30px;
  width:30%;
  position:relative;
  float:right;
@@ -106,7 +114,8 @@ a #bannerLogo, a #bannerLogo:hover {
  text-align:center;
 
  font-size:18px;
- background-color:#7fcdbb;
+ border-radius:20px;
+ background-color:#802b2b;
  color:white;
 }
 
@@ -133,7 +142,7 @@ textarea {
 }
 
 input, select {
- width:70%;
+ width:75%;
  height:100%;
  float:left;
  font-size:18px;
@@ -173,7 +182,8 @@ option, .ui-menu-item a {
  padding:15 20 15 20;
  cursor:pointer;
  border-left:1px solid #fff7bc;
- background-color:#fff7bc;
+ background-color:#C93030;
+ border-radius:20px;
 }
 .submitButton:hover {
  background-color:#fff8cd;
@@ -220,10 +230,11 @@ option, .ui-menu-item a {
 
 .updateTag {
  padding: 5 10 5 10;
+ border-radius:10px;
  text-align:center;
  margin:5 5 5 5;
  font-size:14px;
- background-color:#edf8b1;
+ background-color:#CA6A6A;
 }
 
 .tagLink:hover{
@@ -237,16 +248,16 @@ option, .ui-menu-item a {
 
 .userShadow {
  position:absolute;
- top:-15px;
- left:-15px;
+ top:0px;
+ right:40px;
  opacity:0.8;
  font-style:oblique;
 }
 
 .tagShadow {
  position:absolute;
- bottom:-10px;
- right:-8px;
+ bottom:0px;
+ right:30px;
  opacity:0.8;
 }
 
@@ -383,8 +394,8 @@ option, .ui-menu-item a {
 }
 
 #userGreeting {
- position:absolute;
- top:65px;
+ position:relative;
+ top:-10px;
  right:10px;
  text-align:right;
  font-size:0.5em;

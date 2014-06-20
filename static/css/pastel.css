@@ -127,7 +127,7 @@ input, textarea, select {
 
 textarea {
  padding-top:4px;
- resize:none;
+ width:100%;
  resize:none;
  border-bottom:1px solid #eee;
 }

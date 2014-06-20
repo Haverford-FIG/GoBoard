@@ -1,391 +1,210 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
-
 body {
- margin:0 0 40 0;
- padding:0px;
- min-width:600px;
-
- font-family:"Lato";
- font-size:16px;
-}
-
-a, a:visited {
- text-decoration:none;
- color:#00441b;
- letter-spacing:0px;
-}
-a:hover {
- color:#00752F;
-}
-
-.noSelect {
- -webkit-touch-callout: none;
- -webkit-user-select: none;
- -khtml-user-select: none;
- -moz-user-select: none;
- -ms-user-select: none;
- user-select: none;
- cursor:default;
-}
-
-.banner {
- padding:20 0 30 20;
- letter-spacing:2px;
- font-size:24px;
- height:5%;
-
- color:white;
- background-color:#225ea8;
-}
-
-a #bannerLogo, a #bannerLogo:hover {
- display:inline-block;
- color:white;
- font-weight:normal;
-}
-
-.bannerMotto, .bannerMotto a {
- font-size:12px;
- letter-spacing:1.5px;
- opacity:0.9;
- color:white;
+margin:0px;
+padding:0px;
+background-color:#C7C7C7;
+min-width:1000px;
 }
 
 
-#messageContainer {
- width:70%;
- position:relative;
- float:left;
+.ui-autocomplete {
+max-height: 100px;
+overflow-y: auto;
+/* prevent horizontal scrollbar */
+overflow-x: hidden;
+ }
+ /* IE 6 doesn't support max-height
+  * we use height instead, but this forces the menu to always be this tall
+  */
+ * html .ui-autocomplete {
+height: 100px;
+ }
+
+#navbar{
+    margin-bottom:30px;
 }
 
-.messageBox {
- height:60%;
- padding-left:40px;
- overflow-x:hidden;
- overflow-y:scroll;
+ .goBoardBox
+ {
+border-color: blue;
+margin: 10px;
+height: 30%;
+width: 100%;
 }
 
-.message {
- margin:25 15 10 0;
- padding:10 0 20 15;
- background-color:#e0f3db;
- position:relative;
+.fullBox
+{
+width:90%;
+margin:auto;
 }
 
-.privateMessage {
- background-color:#fc9272;
- background-image:url("/static/images/talk_bubble.png");
- background-size:20px 20px;
- background-repeat:no-repeat;
- background-position:right 15px center;
+#generalMessageBox
+{
+height: 550px;
+width: 60%;
+float:left;
+border-color: black;
+border-style: solid;
+border-width: 3px;
+background-color:#594F4F;
+padding:10px 20px 10px 10px;
+border-radius:15px;
 }
 
-.privateMessage .messageText {
- margin-right:45px;
+.messageBox
+{
+margin:5px;
+background-color: white;
+height:60%;
+width:100%;
+border-radius:5px;
+overflow-y:auto;
 }
 
-.messageContainerAlert {
- margin: 10 15 10 0;
- padding:10 0 10 0;
- text-align:center;
- font-size:0.8em;
- background-color:#fcbba1;
- border-bottom:1px solid #fc9272;
- opacity:0.7;
+.recentTags
+{
+float: left;
+margin: 5px;
+margin-left:40px;
+height: 550px;
+width: 20%;
+border-color: black;
+border-style: solid;
+border-width: 3px;
+background-color:#594F4F;
+padding:10px 10px 10px 0px;
+border-radius:15px;
 }
 
-#recentUpdatesContainer {
- width:30%;
- position:relative;
- float:right;
+#tagSearchBox{
+width:30%;
 }
 
-.miniHeader {
- width:100%;
- padding:20 0 20 0;
- text-align:center;
-
- font-size:18px;
- background-color:#7fcdbb;
- color:white;
+label, .fullBox{
+text-align:right;
 }
 
-.inputContainer {
- position:relative;
- height:50px;
- text-align:center;
- border-bottom:1px;
+.tagBox
+{
+margin:5px;
+background-color: white;
+height:80%;
+width:100%;
+border-radius:5px;
+overflow-y:auto;
 }
 
-input, textarea, select {
- padding:0 15 0 15;
- border:0px;
- outline:none;
+.shoutEven
+{
+padding-left:5px;
+background-color: #A5A5A5;
+}
+.shoutOdd
+{
+padding-left:5px;
+background-color:#E4E1E8;
+}
 
- color:black;
+.message
+{
+text-align:left;
+padding:5px 5px 5px 10px;
+border-color:black;
+border-bottom:1px solid black;
+font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+font-size: small;
+}
+
+form#messageform{
+    margin-right:5px;
+}
+
+
+.tagBox{
 }
 
 textarea {
- padding-top:4px;
- resize:none;
- resize:none;
- border-bottom:1px solid #eee;
+width:100%;
+padding-right:5px;
 }
 
-input, select {
- width:70%;
- height:100%;
- float:left;
- font-size:18px;
+.banner
+{
+font-size:50px;
+color:white;
+background-color:maroon;
+padding:30px;
+text-align:center;
 }
 
-input:focus, select:focus, textarea:focus,
-.fullScreenForm input:focus, .fullSCreenForm select:focus {
- background-color:#FFFCE5;
+input#tags{
+    width:77%;
+    margin-right:0px;
+    margin-left:0px;
+    padding:2px 0px;
+    border:0px;
+    margin-left:0px;
 }
 
-.ui-menu {
+.submitButton{
+border:2px groove #505050;
+margin-left:0px;
+margin-right:0px;
+padding-left:0px;
+padding-right:0px;
+text-align:center;
+width:20%;
+cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+/*give the background a gradient - see cssdemos.tupence.co.uk/gradients.htm for more info*/
+background-color:maroon; /*required for browsers that don't support gradients*/
+background: -webkit-linear-gradient(top, maroon, #1A1A1A);
+/*style to the text inside the button*/
+font-family:Arial;
+color:#fff;
+font-variant:small-caps;
+border-radius: 0 15px 15px 0;
+/*add a drop shadow to the button*/
+-webkit-box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+-moz-box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+}
+/***NOW STYLE THE BUTTON'S HOVER AND FOCUS STATES***/
+input#submitbutton:hover, input#submitbutton:focus {
+color:#edebda;
+/*reduce the spread of the shadow to give a pushed effect*/
+-webkit-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+-moz-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+}
+
+
+.kwicks {
+ position:relative;
+ height: 60px;
  margin:0px;
  padding:0px;
- border-radius:0px;
- outline:none;
- border:none;
-}
-
-
-option, .ui-menu-item a {
- background:#edf8b1;
- outline:none;
- border:none;
- font-weight:normal;
- border-radius:0px;
-}
-
-.ui-widget-content .ui-state-focus { /* TODO: Test in !Chrome */
- background:#7fcdbb;
- outline:none;
- border:none;
-}
-
-.submitButton {
- float:left;
- width:10%;
- padding:15 20 15 20;
- cursor:pointer;
- border-left:1px solid #fff7bc;
- background-color:#fff7bc;
-}
-.submitButton:hover {
- background-color:#fff8cd;
- border-color:#fff7bc;
-}
-
-.customCheckbox {
+ margin-bottom:10px;
+ }
+ .kwicks > a {
  position:relative;
- float:left;
- width:10%;
- height:100%;
- background-color:#B3BAFF;
- cursor:pointer;
-}
-.customCheckbox.active{
- background-color:#FFB78A;
-}
-.customCheckbox.active:before{
- position:relative;
- content:"\2713";
- top:10px;
- width:100%;
- text-align:center;
  display:inline-block;
- font-size:1.5em;
-}
-
-
-.updateContainerOption {
- font-size:0.9em;
- opacity:0.5;
- cursor:pointer;
-}
-
-.updateContainerOption:hover {
- opacity:1;
-}
-
-.activeUpdateContainerChoice {
- opacity: 0.9;
- font-size:1.1em;
- font-weight:bold;
-}
-
-.updateTag {
- padding: 5 10 5 10;
+ white-space:nowrap;
+ color:white;
+ padding-top:20px;
+ padding-bottom:20px;
  text-align:center;
- margin:5 5 5 5;
- font-size:14px;
- background-color:#edf8b1;
+ /* overridden by kwicks but good for when JavaScript is disabled */
+ width:20%;
+ margin:0px;
+ float: center;
+ border-right:1px solid #134D00;
+ background-color:#3863A3;
+ font-family: arial;
+ font-variant: small-caps;
+ font-size:larger;
+ } 
+
+.kwicks > a:hover { 
+background-color:#1E4B8D;
 }
 
-.tagLink:hover{
- opacity:1;
-}
-
-.tagLink {
- cursor:pointer;
- opacity:0.8;
-}
-
-.userShadow {
- position:absolute;
- top:-15px;
- left:-15px;
- opacity:0.8;
- font-style:oblique;
-}
-
-.tagShadow {
- position:absolute;
- bottom:-10px;
- right:-8px;
- opacity:0.8;
-}
-
-.tag {
- margin:0 5 0 5;
- z-index:10;
-}
-
-#otherActiveUserCount {
- text-align:center;
- font-size:0.9em;
- padding:10 0 0 0;
- opacity:0.5;
-}
-
-#optionMenuButton {
- position:absolute;
- top:0px;
- right:0px;
- padding:10 10 12 12;
- opacity:0.8;
-}
-
-#optionMenuButton:hover {
- opacity:1;
- cursor:pointer;
-}
-
-#optionMenu {
- display:none;
- position:absolute;
- z-index:10;
- top:0px;
- right:50px;
-
- padding:10 0 10 0;
- text-align:center;
-
- background-color:black;
- opacity:0.8;
-}
-
-.optionMenuOption, .optionMenuOption a, .optionMenuOption a:hover {
- padding:4 20 4 20;
- cursor:pointer;
- background-color:inherit;
- color:inherit;
- font-size:inherit;
- font-weight:inherit;
-}
-
-.optionMenuOption:hover {
- background-color:silver;
-}
-
-#copyrightContainer {
- position:fixed;
- right:25px;
- bottom:10px;
- opacity:0.5;
- word-spacing:5px;
-}
-
-.genericCenteredContainer {
- text-align:center;
- margin:0 auto;
-}
-
-/* # # # # # User Settings Form # # # # # #  */
-.fullScreenForm {
- padding:10 30 0 30;
-}
-
-.formFieldContainer {
- height:40px;
- line-height:35px;
-}
-
-.formDescriptor{
- background-color:#FFE5E8;
- padding:5 0 5 0;
- margin: 20 0 0 0;
- width:100%;
-}
-
-.fullScreenForm label {
- background-color:#e0f3db;
- height:100%;
- width:30%;
- display:block;
- float:left;
- vertical-align:middle;
- line-height:inherit;
-}
-
-.fullScreenForm input, .fullScreenForm select {
- float:left;
- width:70%;
- height:100%;
- background-color:#fff8cd;
- border:0px;
- border-bottom:1px solid #fff6ab;
-}
-
-.fullScreenForm input[type=checkbox]{
- width:5%;
- margin:0 0 0 20;
-}
-
-.button {
- background-color:#edf8b1;
- padding:10 0 15 0;
- cursor:pointer;
- font-weight:bold;
-}
-
-.button:hover {
- background-color:#F2FAC7;
-}
-
-.formFieldGroup {
- margin:0 auto;
-}
-
-
-.badInput, input.badInput {
- background-color:#fcbba1;
- border-bottom:1px solid #fc9272;
-}
-
-.goodInput {
- background-color:#e5f5e0;
- border-bottom:1px solid #c7e9c0;
-}
-
-#userGreeting {
- position:absolute;
- top:65px;
- right:10px;
- text-align:right;
- font-size:0.5em;
-}
+.kwicks > a:last-child { 

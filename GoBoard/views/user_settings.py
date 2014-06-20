@@ -20,7 +20,7 @@ def load_settings(request):
 @require_http_methods(["POST"])
 def update_settings(request):
   #Variable Setup.
-  u = request.user 
+  u = request.user
 
   #Shorten the form name a bit for our own sake...
   form = request.POST
@@ -45,11 +45,11 @@ def update_settings(request):
     setattr(u.userinfo, field, form.get(field,"y")=="y")
 
   #Change the user's other information (ie: "user.userinfo.FIELD").
-  otherInfoFields = ["campus", "grad_year"]
+  otherInfoFields = ["campus", "grad_year", "theme"]
   for field in otherInfoFields:
     setattr(u.userinfo, field, form.get(field,""))
 
-  #Change the actual "user" fields (ie: "user.FIELD").  
+  #Change the actual "user" fields (ie: "user.FIELD").
   userFields = ["first_name", "last_name", "email"]
   for field in userFields:
     setattr(u, field, form.get(field,""))

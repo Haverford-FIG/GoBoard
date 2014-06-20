@@ -68,8 +68,9 @@ a #bannerLogo, a #bannerLogo:hover {
 .message {
  margin:25 15 10 0;
  padding:10 0 20 15;
- background-color:#e0f3db;
+ background-color:blue;
  position:relative;
+ border: .5em;
 }
 
 .privateMessage {

@@ -68,8 +68,13 @@ a #bannerLogo, a #bannerLogo:hover {
 .message {
  margin:5;
  padding:10 0 20 15;
+<<<<<<< HEAD
  background-color:#7fcdbb;
+=======
+ background-color:blue;
+>>>>>>> df0b9436917fd1031f5130966a9713109ec05318
  position:relative;
+ border: .5em;
 }
 
 .message:nth-child(odd) {

@@ -91,6 +91,7 @@ var tagsAdded = "";
 $(document).on("keydown", "#newMessageInput", function(e) {
   if (e.which==13) {
     $("#newMessageSubmit").trigger("click");
+    e.preventDefault();
     return false;
   }
 
@@ -110,11 +111,16 @@ $(document).on("keydown", "#newMessageInput", function(e) {
 
 });
 
-//TODO: Fix this on the newMessage Submit.... Doesn't work for some reason...
+
+$(document).on("keydown", "#newTagsInput", function(e) {
+  //e.preventDefault();
+});
+
 //Also allow tag-filters to submit by pressing enter.
-$(document).on("keydown", ".tagAutoComplete", function(e) {
+$(document).on("keydown", ".tagAutocomplete", function(e) {
   if (e.which==13) {
     $(this).siblings(".submitButton").trigger("click");
+    e.preventDefault();
     return false;
   }
 });

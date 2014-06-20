@@ -53,10 +53,12 @@ function buildUserCounter(userCount){
 }
 
 function buildMessage(text, user, tagArray, mentionArray, is_private){
-  //Add the .privateMessage class if the message is private.
+  //Add the .privateMessage class if the message is private and the
+  // .personalMessage class if the user is "mentioned" in it.
   var privateClass = (is_private==true) ? "privateMessage": "";
+  var personalClass = (mentionArray.indexOf("@"+user)>=0) ? "personalMessage ": "" ;
 
-  var HTML = "<div class=\"message "+privateClass+"\">";
+  var HTML = "<div class=\"message "+privateClass+personalClass+"\">";
   HTML += "<div class=\"messageText\">"+text+"</div>";
   HTML += "<div class=\"userShadow\">"+user+"</div>";
   HTML += "<div class=\"tagShadow\">"+buildTagArrayHTML(tagArray, mentionArray)

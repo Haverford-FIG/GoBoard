@@ -16,9 +16,8 @@ import datetime
 import json
 
 def main_page(request):
-	u = request.user
-        style = "pastel" if not u.is_authenticated() else u.userinfo.theme
-	return render(request, "index_{}.html".format(style))
+  u = request.user
+  return render(request, "index.html")
 
 #Store a message in the database.
 @login_required

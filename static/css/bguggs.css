@@ -9,13 +9,18 @@ body {
  font-size:16px;
 }
 
-a, a:visited {
+a {
  text-decoration:none;
- color:#00441b;
+ color:#0F0061;
+  text-decoration:underline;
  letter-spacing:0px;
 }
-a:hover {
- color:#00752F;
+a:visited {
+ color:#61005F;
+}
+
+a:hover{
+ color:26597FF;
 }
 
 .noSelect {
@@ -33,9 +38,8 @@ a:hover {
  letter-spacing:2px;
  font-size:24px;
  height:5%;
-
  color:white;
- background-color:#225ea8;
+ background-color:maroon;
 }
 
 a #bannerLogo, a #bannerLogo:hover {
@@ -69,7 +73,7 @@ a #bannerLogo, a #bannerLogo:hover {
 
 .message:nth-child(even) {
  border-radius:5px;
- margin:5;
+ margin-right:5px;
  padding:10 0 20 15;
  background-color:#99B2B7;
  position:relative;
@@ -79,21 +83,18 @@ a #bannerLogo, a #bannerLogo:hover {
 
 .message:nth-child(odd){
  border-radius:5px;
- margin:5;
+ margin-right:5px;
  padding:10 0 20 15;
  background-color:#D5DED9;
  position:relative;
 }
   
 
-
-
 .privateMessage {
- background-color:#fc9272;
  background-image:url("/static/images/talk_bubble.png");
  background-size:20px 20px;
  background-repeat:no-repeat;
- background-position:right 15px center;
+ background-position:right 15px bottom 5px;
 }
 
 .privateMessage .messageText {
@@ -156,7 +157,7 @@ input, select {
 
 input:focus, select:focus, textarea:focus,
 .fullScreenForm input:focus, .fullSCreenForm select:focus {
- background-color:#FFFCE5;
+ background-color:#F9FFF9;
 }
 
 .ui-menu {
@@ -183,29 +184,31 @@ option, .ui-menu-item a {
 }
 
 .submitButton {
- float:left;
+ position:absolute;
+ right:22px;
  width:10%;
- padding:15 20 15 20;
+ padding:16 5 16 5;
  cursor:pointer;
- border-left:1px solid #fff7bc;
- background-color:#fff7bc;
+ color:white;
+ background-color:gray;
 }
-.submitButton:hover {
- background-color:#fff8cd;
- border-color:#fff7bc;
+.submitButton:active {
+ background-color:maroon;
 }
 
 .customCheckbox {
- position:relative;
- float:left;
- width:10%;
+ position:absolute;
+ right:12%;
+ width:5%;
  height:100%;
- background-color:#B3BAFF;
+ background-color:#D2D6D2;
  cursor:pointer;
 }
+
 .customCheckbox.active{
- background-color:#FFB78A;
+ background-color:#CA7979;
 }
+
 .customCheckbox.active:before{
  position:relative;
  content:"\2713";
@@ -238,7 +241,7 @@ option, .ui-menu-item a {
  text-align:center;
  margin:5 5 5 5;
  font-size:14px;
- background-color:D5DED9;
+ background-color:#D5DED9;
 }
 
 .tagLink:hover{
@@ -255,10 +258,11 @@ option, .ui-menu-item a {
  top:-5px;
  right:10px;
  opacity:0.8;
- color:#7A6A53;
+ color:black;
  padding:5px 0px;
  font-style:oblique;
 }
+
 
 .tagShadow {
  position:absolute;

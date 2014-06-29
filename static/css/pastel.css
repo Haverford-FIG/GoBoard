@@ -126,6 +126,7 @@ input, textarea, select {
  outline:none;
 
  color:black;
+ box-sizing:border-box;
 }
 
 textarea {
@@ -150,15 +151,34 @@ input:focus, select:focus, textarea:focus,
 
 .submitButton {
  float:left;
- width:10%;
+ width:20%;
  padding:15 20 15 20;
  cursor:pointer;
  border-left:1px solid #fff7bc;
  background-color:#fff7bc;
+ box-sizing:border-box;
 }
 .submitButton:hover {
  background-color:#fff8cd;
  border-color:#fff7bc;
+}
+
+.clearTagsButton {
+ position:absolute;
+ left:0px;
+ top:-0.4em;
+ padding:2px 5px;
+ color:red;
+ opacity:0.4;
+}
+
+.clearTagsButton:after {
+ content:"x";
+}
+
+.clearTagsButton:hover {
+ opacity:0.7;
+ cursor:pointer;
 }
 
 .customCheckbox {
@@ -168,6 +188,7 @@ input:focus, select:focus, textarea:focus,
  height:100%;
  background-color:#B3BAFF;
  cursor:pointer;
+ box-sizing:border-box;
 }
 .customCheckbox.active{
  background-color:#FFB78A;

@@ -234,6 +234,13 @@ $.get("/get_tags/", function(tagList) {
   });
 });
 
+
+//Clear tag inputs.
+$(document).on("click", ".clearTagsButton", function() {
+  $(this).closest(".inputContainer").find(".tagAutoComplete").val("");
+});
+
+
 //# # # # # # # # # # # # # # # # # # # # #
 //jQuery Autocomplete for Options Menu # # #
 $("#optionMenuButton").click(function() {

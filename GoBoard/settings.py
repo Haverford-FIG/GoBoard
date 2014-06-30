@@ -20,6 +20,9 @@ THEME_OPTIONS = ["pastel", "bguggs", "blair", "brandon", "nora"]
 
 MESSAGES_PER_TRANSACTION = 30
 
+#The 'name' of a card with that matches a filename "<name>.html"
+DEFAULT_CARDS = ["testCard1", "testCard2", "testCard2","testCard2"]
+
 
 #Email Settings
 EMAIL_USE_TLS = True

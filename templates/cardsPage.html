@@ -1,0 +1,18 @@
+{%include "genericPageStart.html" %}
+   <div id="cardContainer">
+
+   {% for card in cards %}
+     <div class="card">
+       <div class="cardControlBar">
+        <div class="cardSettingsButton"></div>
+       </div>
+       <div class="cardContents">
+         {% with "cards/"|add:card|add:".html" as template %}
+         {% include template %}
+         {% endwith %}
+       </div>
+     </div>
+   {% endfor %}
+
+   </div>
+{% include "genericPageEnd.html" %}

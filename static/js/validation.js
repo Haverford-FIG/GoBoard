@@ -65,7 +65,7 @@ function validateForm(form, url){
 
       //Make sure the grad_range is sensical if specified.
       var val = formContent["grad_year"];
-      if (val=="" && !isValidGradYear(val)) {
+      if (val=="" || !isValidGradYear(val)) {
         applyErrorClass($(form).find("#form_gradYear"), false);
       }
 
@@ -110,8 +110,9 @@ function validateForm(form, url){
       }
 
       //Make sure the grad_range is sensical if specified.
+
       var val = formContent["grad_year"];
-      if (val=="" && !isValidGradYear(val)) {
+      if (val=="" || !isValidGradYear(val)) {
         applyErrorClass($(form).find("#form_gradYear"), false);
       }
       break;

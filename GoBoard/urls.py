@@ -7,8 +7,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
      # Home page:
-     url(r'^$', 'GoBoard.views_to_abstract.main_page',),
-     url(r'^home/?$', 'GoBoard.views_to_abstract.main_page',),
+     url(r'^$', 'GoBoard.views_to_abstract.load_chat',),
+     url(r'^home/?$', 'GoBoard.views_to_abstract.load_chat',),
+     url(r'^chat/?$', 'GoBoard.views_to_abstract.load_chat',),
 
      url(r'^new_message/?$', 'GoBoard.views_to_abstract.new_message',),
      url(r'^get_messages/?$', 'GoBoard.views_to_abstract.send_messages',),
@@ -18,9 +19,9 @@ urlpatterns = patterns('',
      url(r'^get_usernames/?$', 'GoBoard.views.users.get_usernames',),
 
      #Views for transfering basic "#tags" back to the auto-update container.
-     url(r'^get_recent_tags/?$', 
+     url(r'^get_recent_tags/?$',
                   'GoBoard.views.tags.get_tags',{"query":"recent"}),
-     url(r'^get_trending_tags/?$', 
+     url(r'^get_trending_tags/?$',
                   'GoBoard.views.tags.get_tags',{"query":"trending"}),
 
      #Views for user authentication.
@@ -34,6 +35,10 @@ urlpatterns = patterns('',
      #Views for user-specific settings/information.
      url(r'^settings/?$', 'GoBoard.views.user_settings.load_settings',),
      url(r'^update_settings/?$', 'GoBoard.views.user_settings.update_settings',),
+
+     #Views for user cards.
+     url(r'^cards?/?$', 'GoBoard.views.cards.load_cards',),
+
 
      url(r'^userCount/?$', 'GoBoard.sessionCounter.sendActiveUserCount',),
      url(r'^admin/?', include(admin.site.urls)),

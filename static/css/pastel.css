@@ -264,15 +264,21 @@ input:focus, select:focus, textarea:focus,
  opacity:0.5;
 }
 
-#optionMenuButton {
+#optionMenuButton, #goCardLink {
  position:absolute;
- top:0px;
- right:0px;
+ top:0em;
+ right:0em;
  padding:10 10 12 12;
  opacity:0.8;
 }
 
-#optionMenuButton:hover {
+#goCardLink {
+ color:inherit;
+ right:2em;
+ font-weight:bold;
+}
+
+#optionMenuButton:hover, #goCardLink:hover {
  opacity:1;
  cursor:pointer;
 }
@@ -439,5 +445,61 @@ option, .ui-menu-item a {
 
 .ui-helper-hidden-accessible {
  display:none;
+}
+
+/* # # # # #  Cards  # # # # # */
+#cardContainer {
+ text-align:center;
+ margin:0 auto;
+}
+
+.card {
+ position:relative;
+ width:30%;
+ margin:10px 4px;
+ height:300px;
+ display:inline-block;
+ box-sizing:border-box;
+
+ background-color:#fff7bc;
+ border-right:1px solid #FFF18A;
+ overflow:hidden;
+}
+/* To be added in card menu.
+.cardMenu {
+ display:none;
+ position:absolute;
+ z-index:10;
+ top:0px;
+ right:50px;
+
+ padding:10 0 10 0;
+ text-align:center;
+
+ background-color:black;
+ opacity:0.8;
+}
+*/
+.cardControlBar {
+ position:relative;
+ width:100%;
+ height:1em;
+ background-color:#B3BAFF;
+ overflow:hidden;
+}
+
+.cardSettingsButton {
+ position:absolute;
+ right:0px;
+ top:-.35em;
+ height:100%;
+ padding:2px;
+ cursor:pointer;
+}
+.cardSettingsButton:after {
+ content:"\268C";
+}
+.cardSettingsButton:hover {
+ background-color:rgba(0,0,0,0.1);
 }
 

@@ -15,9 +15,8 @@ import operator
 import datetime
 import json
 
-def main_page(request):
-  u = request.user
-  return render(request, "index.html")
+def load_chat(request):
+  return render(request, "chatPage.html")
 
 #Store a message in the database.
 @login_required

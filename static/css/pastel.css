@@ -483,9 +483,14 @@ option, .ui-menu-item a {
 .cardControlBar {
  position:relative;
  width:100%;
- height:1em;
+ height:5%;
  background-color:#B3BAFF;
  overflow:hidden;
+}
+
+.cardContents {
+ position:relative;
+ height:95%;
 }
 
 .cardSettingsButton {
@@ -502,4 +507,99 @@ option, .ui-menu-item a {
 .cardSettingsButton:hover {
  background-color:rgba(0,0,0,0.1);
 }
+
+
+/* # # # #   Cards   # # # # # */
+.cardTitle {
+ font-size:1.2em;
+ box-sizing:border-box;
+ padding:5px 5px;
+ height:10%;
+ font-weight:bold;
+}
+
+/* WHRC_Radio */
+.playerButton {
+ cursor: pointer;
+ position: relative;
+ margin: 5px;
+ display: inline-block;
+ vertical-align: middle;
+ opacity:0.9;
+}
+.playerButton:hover {
+ opacity:1;
+}
+
+#playButton {
+ width: 0px;
+ height: 0px;
+ border-left: 20px solid white;
+ border-top: 10px solid transparent;
+ border-bottom: 10px solid transparent;
+ border-right: none;
+}
+
+#pauseButton {
+ width: 5px;
+ height: 20px;
+ border-left: 4px solid white;
+ border-right: 4px solid white;
+}
+
+#playerController {
+ margin:10px 0px 0px 0px;
+ width:100%;
+ height:18%;
+ padding:8px 0px;
+ box-sizing:border-box;
+
+ color:white;
+ background-color:#7fcdbb;
+}
+
+#headerLiveTrackHolder {
+ font-size:0.75em;
+ box-sizing:border-box;
+ padding:10px 0px;
+ height:35%;
+ background-color:#fc9272;
+}
+.now-playing-bar {
+ list-style-type:none;
+ padding:0px;
+}
+#status-current-show{
+ color:white;
+ font-weight:bold;
+}
+#time-elapsed {
+ display:block;
+ position:absolute;
+ top:0px;
+ width:100%;
+ text-align:right;
+ opacity:0.5;
+}
+
+#onAirToday {
+ background-color:#edf8b1;
+ box-sizing:border-box;
+ padding:10px 0px;
+ height:35%;
+ width:100%;
+}
+#onAirToday table {
+ text-align:center;
+}
+#onAirToday:before {
+ font-weight:bold;
+ content:"Schedule";
+}
+
+#time-remaining, #onAirToday h3 {
+ display:none;
+}
+
+
 

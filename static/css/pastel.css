@@ -154,9 +154,11 @@ input:focus, select:focus, textarea:focus,
  width:20%;
  padding:15 20 15 20;
  cursor:pointer;
- border-left:1px solid #fff7bc;
+ border-left:1px solid #FFF4A3;
+ border-bottom:1px solid #FFF4A3;
  background-color:#fff7bc;
  box-sizing:border-box;
+ text-align:center;
 }
 .submitButton:hover {
  background-color:#fff8cd;
@@ -283,21 +285,27 @@ input:focus, select:focus, textarea:focus,
  cursor:pointer;
 }
 
-#optionMenu {
+
+.menu {
  display:none;
  position:absolute;
  z-index:10;
  top:0px;
- right:50px;
+ right:20px;
+
+ text-align:center;
+ background-color:black;
 
  padding:10 0 10 0;
- text-align:center;
-
- background-color:black;
- opacity:0.8;
+ opacity:0.95;
 }
 
-.optionMenuOption, .optionMenuOption a, .optionMenuOption a:hover {
+#optionMenu {
+ right:50px;
+}
+
+.menuOption,
+.menuOption a {
  padding:4 20 4 20;
  cursor:pointer;
  background-color:inherit;
@@ -305,17 +313,23 @@ input:focus, select:focus, textarea:focus,
  font-size:inherit;
  font-weight:inherit;
 }
-
-.optionMenuOption:hover {
+.menuOption:hover {
  background-color:silver;
+}
+
+.cardMenu .menuOption {
+ font-size:1.2em;
+ color:white;
 }
 
 #copyrightContainer {
  position:fixed;
- right:25px;
- bottom:10px;
+ right:15px;
+ bottom:5px;
+ padding:5px 10px;
  opacity:0.5;
  word-spacing:5px;
+ background-color:rgba(250,250,250,0.8);
 }
 
 .genericCenteredContainer {
@@ -407,6 +421,7 @@ input:focus, select:focus, textarea:focus,
  border-radius:0px;
  outline:none;
  border:none;
+ list-style-type:none;
 }
 
 option, .ui-menu-item a {
@@ -463,42 +478,26 @@ option, .ui-menu-item a {
 
  background-color:#fff7bc;
  border-right:1px solid #FFF18A;
- overflow:hidden;
 }
-/* To be added in card menu.
-.cardMenu {
- display:none;
- position:absolute;
- z-index:10;
- top:0px;
- right:50px;
 
- padding:10 0 10 0;
- text-align:center;
-
- background-color:black;
- opacity:0.8;
-}
-*/
 .cardControlBar {
  position:relative;
  width:100%;
  height:5%;
  background-color:#B3BAFF;
- overflow:hidden;
 }
 
 .cardContents {
  position:relative;
  height:95%;
+ overflow:hidden;
 }
 
 .cardSettingsButton {
  position:absolute;
  right:0px;
- top:-.35em;
+ line-height:10px;
  height:100%;
- padding:2px;
  cursor:pointer;
 }
 .cardSettingsButton:after {
@@ -516,6 +515,12 @@ option, .ui-menu-item a {
  padding:5px 5px;
  height:10%;
  font-weight:bold;
+}
+
+#newCardContainer {
+ padding:10px 0px 10px 10%;
+ background-color:#7fcdbb;
+ margin-top:40px;
 }
 
 /* WHRC_Radio */
@@ -550,24 +555,30 @@ option, .ui-menu-item a {
 #playerController {
  margin:10px 0px 0px 0px;
  width:100%;
- height:18%;
+ height:16%;
  padding:8px 0px;
  box-sizing:border-box;
 
  color:white;
- background-color:#7fcdbb;
+ background-color:#fc9272;
 }
 
 #headerLiveTrackHolder {
  font-size:0.75em;
  box-sizing:border-box;
  padding:10px 0px;
- height:35%;
- background-color:#fc9272;
+ background-color:#7fcdbb;
+}
+#headerLiveTrackHolder:empty:after {
+ content: "Loading!";
+ color:white;
 }
 .now-playing-bar {
  list-style-type:none;
  padding:0px;
+}
+.now-playing-list {
+ font-size:0.75em;
 }
 #status-current-show{
  color:white;
@@ -583,7 +594,6 @@ option, .ui-menu-item a {
 }
 
 #onAirToday {
- background-color:#edf8b1;
  box-sizing:border-box;
  padding:10px 0px;
  height:35%;

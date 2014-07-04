@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from datetime import datetime
 
+from GoBoard import settings
+
 import json
 
 class Message(models.Model):
@@ -40,14 +42,41 @@ class UserInfo(models.Model):
   theme = models.CharField(max_length=150, default="pastel")
   campus = models.CharField(max_length=150, default="Haverford")
 
-  defaultCards = models.TextField(default="[]") #Should be valid JSON.
+  # Start each user with the DEFAULT_CARDS specified in settings.
+  cardList = models.TextField(default=json.dumps(settings.DEFAULT_CARDS))
 
   def __unicode__(self):
     return "Info for '{}'".format(self.user.username)
 
   def getCards(self):
-    return json.loads(self.defaultCards)
+    return json.loads(self.cardList)
 
+  # Attempt to add a cardName to the cardList but fail if the cardName is invalid.
+  def addCard(self, cardName):
+    # Verify that the "cardName" is in fact an available card.
+    if cardName not in settings.AVAILABLE_CARDS:
+      raise Exception("cardName '"+cardName+"' not in settings.AVAILABLE_CARDS")
+
+    cards = self.getCards()
+    cards.append(cardName)
+    self.replaceCards(cards)
+
+  # Attempt to delete the cardName from the cardList but fail if impossible.
+  def deleteCard(self, cardName):
+    cards = self.getCards()
+    cards.remove(cardName)
+    self.replaceCards(cards)
+
+  # Attempt to replace the cardList with a new list of cards, but fail if
+  #   any of the cards is invalid.
+  def replaceCards(self, cards):
+    for card in cards:
+      if card not in settings.AVAILABLE_CARDS:
+        raise Exception("cardName '"+card+"' not in settings.AVAILABLE_CARDS")
+
+    self.cardList = json.dumps(cards)
+
+    self.save()
 
 
 admin.site.register(Message)

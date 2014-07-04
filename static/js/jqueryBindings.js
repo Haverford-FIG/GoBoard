@@ -209,47 +209,112 @@ function extractLast( term ) {
   return split( term ).pop();
 }
 
-$.get("/get_tags/", function(tagList) {
-  $.get("/get_usernames/", function(userList) {
-    var validList = userList.concat(tagList);
-    $( ".tagAutoComplete" ).autocomplete({
-      source: function(request, response) {
-                  response($.ui.autocomplete.filter(
-                  validList, extractLast(request.term)));
-              },
-      minLength:0,
-      focus: function(){return false},
-      select: function(event, ui){
-                var terms = split(this.value);
-                terms.pop();
-                terms.push(ui.item.value);
-                terms.push("");
-                var dirty = terms.join(" ");
-                var cleaned = dirty.match(/(#|@)[a-zA-Z]+/gm).join(" ");
-                this.value = cleaned;
-                return false;
-              },
-      position:{collision:"flip flip"}
+if ($(".tagAutoComplete").length){
+  $.get("/get_tags/", function(tagList) {
+    $.get("/get_usernames/", function(userList) {
+      var validList = userList.concat(tagList);
+      $( ".tagAutoComplete" ).autocomplete({
+        source: function(request, response) {
+                    response($.ui.autocomplete.filter(
+                    validList, extractLast(request.term)));
+                },
+        minLength:0,
+        focus: function(){return false},
+        select: function(event, ui){
+                  var terms = split(this.value);
+                  terms.pop();
+                  terms.push(ui.item.value);
+                  terms.push("");
+                  var dirty = terms.join(" ");
+                  var cleaned = dirty.match(/(#|@)[a-zA-Z]+/gm).join(" ");
+                  this.value = cleaned;
+                  return false;
+                },
+        position:{collision:"flip flip"}
+      });
     });
   });
-});
-
+}
 
 //Clear tag inputs.
 $(document).on("click", ".clearTagsButton", function() {
   $(this).closest(".inputContainer").find(".tagAutoComplete").val("");
 });
 
+//# # # # # # # # # # # # # # # # # # # # #
+//Delete Cards
+$(".deleteCardButton").click(function() {
+  var card = $(this).closest(".card");
+
+  $.post("/deleteCard/", { "cardName":card.attr("name") }, function(response) {
+    if (response=="0") {
+      $(card).hide()
+    } else {
+      alert("Oops... We couldn't delete the card. This is embarrasing...")
+    }
+  });
+
+  //Hide the menu.
+  $(this).closest(".menu").hide()
+});
+
+//Add Cards
+var validCards = [];
+$(".addCardButton").click(function() {
+  //Only submit requests if the cardName is valid.
+  var cardNameInput = $(this).siblings("input[name='newCardName']");
+  var cardName = $(cardNameInput).val();
+
+  //If the cardName is not in the validCards list, mark it as a .badInput.
+  if (cardName===undefined || validCards.indexOf(cardName)<0) {
+    $(cardNameInput).addClass("badInput");
+    return false;
+  } else {
+    $(cardNameInput).removeClass("badInput");
+  }
+
+  $.post("/addCard/", { "cardName":cardName }, function(response) {
+    if (response=="0") {
+      alert("woo!");
+    } else {
+      alert("Oops... We couldn't add the card. This is embarrasing...")
+    }
+  });
+});
+
+//Apply autocomplete to the .cardAutoComplete elements that may exist.
+if ($(".cardAutoComplete").length){
+  $.get("/get_available_cards/", function(cardList) {
+    //Update the validCards list.
+    validCards = cardList;
+    $( ".cardAutoComplete" ).autocomplete({
+      source: validCards,
+      select: function(){ $(this).removeClass("badInput") },
+      position:{my: "center bottom", at: "center top", collision:"flip flip"}
+    });
+  });
+}
+
 
 //# # # # # # # # # # # # # # # # # # # # #
-//jQuery Autocomplete for Options Menu # # #
-$("#optionMenuButton").click(function() {
-  var menu = $("#optionMenu");
+//Toggle .menu elements when the nearby .menuActivator is clicked.
+$(".menuActivator").click(function() {
+  var menu = $(this).next(".menu");
   if ($(menu).is(":visible")) {
     $(menu).hide();
   } else {
     $(menu).show();
   }
+
+  return false;
+});
+
+$(".menu").click(function(event) {
+  event.stopPropagation();
+})
+
+$("body").click(function() {
+  $(".menu").hide();
 });
 
 

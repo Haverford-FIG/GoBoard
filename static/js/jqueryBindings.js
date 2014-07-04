@@ -158,6 +158,12 @@ $(document).on("click", ".tagLink", function() {
   $("#tagFilterSubmit").trigger("click");
 });
 
+
+$(document).on("click", ".activateTagMenu", function() {
+  $(this).append( buildTagMenu() );
+});
+
+
 $(document).on("click", "#newMessageSubmit", function() {
   if ($("#userGreeting").length==0){
     alert("Oops. Yain't logged in.");//TODO: Make me pretttyyyy...

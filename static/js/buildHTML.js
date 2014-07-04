@@ -52,11 +52,54 @@ function buildUserCounter(userCount){
   return HTML;
 }
 
+function buildTagMenu() {
+  var HTML = "";
+  HTML += "<div class='noSelect menu tagMenu'>";
+  HTML +=   "<div class='menuOption'>";
+  HTML +=     "Hello world!";
+  HTML +=   "</div>";
+  HTML += "</div>";
+  return HTML;
+}
+
+
+function markTags(text, tags){
+  var wordList = text.split(" ");
+
+  for (var i=0 ; i < wordList.length ; i++) {
+    var word = wordList[i];
+    var preWordPunc = /^[\.,-\/!$%\^&\*;:{+\n\r\?\\<>\[\]'"}=\-_`~()]*/
+    var postWordPunc = /[\.,-\/!$%\^&\*;:{+\n\r\?\\<>\[\]'"}=\-_`~()]*$/
+
+    //Extract the punctuation from the beginning and ending of the word.
+    var preWord = word.match(preWordPunc).join("");
+    var postWord = word.match(postWordPunc).join("");
+
+    //Remove the punctuation from the word to reveal the "cleaned" word.
+    var clean = word.replace(preWordPunc,"");
+    clean = clean.replace(postWordPunc,"");
+
+    //And only mark tags/mentions that have been used in the text...
+    if (clean[0]=="#" && tags.indexOf(clean)>=0){
+      wordList[i] = preWord+"<span class='inlineTag activateTagMenu'>"+clean+
+                    "</span>"+postWord;
+    } else if (clean[0]=="@" && tags.indexOf(clean)>=0){
+      wordList[i] = preWord+"<span class='inlineMention activateTagMenu'>"+clean+
+                    "</span>"+postWord;
+    }
+  }
+
+  return wordList.join(" ")
+}
+
+
 function buildMessage(text, user, tagArray, mentionArray, is_private){
   //Add the .privateMessage class if the message is private and the
   // .personalMessage class if the user is "mentioned" in it.
   var privateClass = (is_private==true) ? "privateMessage": "";
   var personalClass = (mentionArray.indexOf("@"+user)>=0) ? "personalMessage ": "" ;
+
+  text = markTags(text, tagArray.concat(mentionArray) )
 
   var HTML = "<div class=\"message "+privateClass+personalClass+"\">";
   HTML += "<div class=\"messageText\">"+text+"</div>";

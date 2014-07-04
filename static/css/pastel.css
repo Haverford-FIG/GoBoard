@@ -259,6 +259,20 @@ input:focus, select:focus, textarea:focus,
  z-index:10;
 }
 
+.inlineTag, .inlineMention {
+ opacity:0.8;
+ cursor:pointer;
+}
+.inlineTag:hover, .inlineMention:hover {
+ opacity:1;
+}
+.inlineTag {
+ color:maroon;
+}
+.inlineMention {
+ color:navy;
+}
+
 #otherActiveUserCount {
  text-align:center;
  font-size:0.9em;
@@ -302,6 +316,10 @@ input:focus, select:focus, textarea:focus,
 
 #optionMenu {
  right:50px;
+}
+
+.tagMenu {
+ display:block;
 }
 
 .menuOption,

@@ -15,6 +15,7 @@ def load_cards(request):
 
   return render(request, "cardsPage.html", {
     "cards":cards,
+    "settings":settings,
   })
 
 

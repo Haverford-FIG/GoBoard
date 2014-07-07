@@ -548,6 +548,21 @@ option, .ui-menu-item a {
  margin-top:40px;
 }
 
+.card select {
+ height:2em;
+ width:100%;
+}
+
+.card .submitButton {
+ width:100%;
+}
+
+.fillLineText {
+ padding:2px 0px;
+ font-weight:bold;
+ background-color:#fee;
+}
+
 /* # # # #   Card-specific CSS   # # # # # */
 
 /* WHRC_Radio */

@@ -22,8 +22,15 @@ MESSAGES_PER_TRANSACTION = 30
 
 #The 'name' of a card with that matches a filename "<name>.html"
 DEFAULT_CARDS = ["imgur", "WHRC_Radio"]
-AVAILABLE_CARDS = {"imgur", "WHRC_Radio", "testCard2", "weather"}
+AVAILABLE_CARDS = {"imgur", "WHRC_Radio", "testCard2", "weather", "SEPTA"}
 
+#Card-specific Settings
+SEPTA_LOCATIONS = [
+ {"location": "Haverford", "url":"Haverford"},
+ {"location": "Ardmore", "url":"Ardmore"},
+ {"location": "30th Street", "url":"30th+Street+Station"},
+ {"location": "Bryn Mawr", "url":"Bryn+Mawr"},
+]
 
 
 #Email Settings

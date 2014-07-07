@@ -5,6 +5,7 @@ function checkMessages(container){
   var tags = getActiveTags();
   var context = getMessageContext();
   context["noScroll"]=true;
+  context["messageCheck"]=true;
   reloadMessages(".messageBox", tags, context);
 }
 

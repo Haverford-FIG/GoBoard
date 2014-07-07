@@ -42,6 +42,7 @@ function reloadMessages(messageContainer, tagArray, kwargs) {
                            loadMore: kwargs["loadMore"]==true,
                            lastID: lastID,
                           }, function(response) {
+
     //Remove any current warnings that might be present.
     $(".messageContainerAlert").remove();
 
@@ -51,6 +52,7 @@ function reloadMessages(messageContainer, tagArray, kwargs) {
       if (currentMessages.length!=0) {
         prependMessage = buildMessageBoxAlert("No more messages!");
       }
+
     //Also warn if there was some other error.
     } else if (response["error"]){
       $(messageContainer).append(buildMessageBoxAlert(response["error"]));
@@ -65,20 +67,26 @@ function reloadMessages(messageContainer, tagArray, kwargs) {
       messageCache[tagString] = currentMessages;
     }
 
+    //Marks that no new .message elements should be added.
+    var emptyUpdate = ((response.length===undefined || response.length===0) &&
+           kwargs["messageCheck"]===true)
+
     //Apply the new messages if applicable.
     if (currentMessages.length==0){
       $(messageContainer).html(buildMessageBoxAlert("No messages found!"));
-    } else {
+    } else if (! emptyUpdate) {
       setMessages(currentMessages, messageContainer);
     }
 
     //Prepend a warning/message if applicable.
     $(messageContainer).prepend(prependMessage);
 
+
     //Place the scrollbar back where it was.
     var newContainerHeight = $(messageContainer).prop("scrollHeight");
     var updatedScrollTop = newContainerHeight-oldContainerHeight+currentScrollTop;
     $(messageContainer).scrollTop(updatedScrollTop);
+
 
     //Scroll the container to see the latest (last) message.
     if (!kwargs["noScroll"] || scrollWasAtBottom){
@@ -89,7 +97,9 @@ function reloadMessages(messageContainer, tagArray, kwargs) {
     $(messageContainer).data("lockMessages",false);
 
     //Turn any link-like string sequences into links.
-    $(messageContainer).linkify()
+    if (! emptyUpdate) {
+      $(messageContainer).linkify()
+    }
 
   });
 

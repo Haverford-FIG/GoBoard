@@ -160,7 +160,14 @@ $(document).on("click", ".tagLink", function() {
 
 
 $(document).on("click", ".activateTagMenu", function() {
-  $(this).append( buildTagMenu() );
+  //Remove any other .tagMenu elements that may exist.
+  var tagMenu = $(this).find(".tagMenu");
+  if ($(tagMenu).length==0) {
+    var menu = $(buildTagMenu())
+    $(this).append(menu);
+  } else {
+    $(tagMenu).show();
+  }
 });
 
 
@@ -279,9 +286,15 @@ $(".addCardButton").click(function() {
     $(cardNameInput).removeClass("badInput");
   }
 
+  if ($(".card[name='"+cardName+"']").length){
+    alert("Card already set!");
+    $(cardNameInput).addClass("badInput");
+    return false;
+  }
+
   $.post("/addCard/", { "cardName":cardName }, function(response) {
     if (response=="0") {
-      alert("woo!");
+      location.reload(true);
     } else {
       alert("Oops... We couldn't add the card. This is embarrasing...")
     }
@@ -308,6 +321,7 @@ $(".menuActivator").click(function() {
   var menu = $(this).next(".menu");
   if ($(menu).is(":visible")) {
     $(menu).hide();
+
   } else {
     $(menu).show();
   }

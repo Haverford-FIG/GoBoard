@@ -1,0 +1,48 @@
+<div id="imgurImageContainer">
+
+  <div class="loadingWheel">Imgur-ing...</div>
+  <a id="imgurLink" target="_blank">
+    <img id="imgurImage"/>
+  </a>
+  <div id="imgurStats">
+    <span id="imgurPoints"></span>
+    <span id="imgurViews"></span>
+  </div>
+</div>
+
+<div id="imgurCaption"></div>
+
+<!-- Load the Imgur front page image. -->
+<script>
+
+$.getJSON('http://whateverorigin.org/get?url=' +
+          encodeURIComponent('http://imgur.com/hot/viral') +
+          '&callback=?', function(data){
+  var post = $(data.contents).find(".post").first();
+
+  var imageLink = $(post).find("img").attr("src");
+  var galleryLink = "http://imgur.com"+$(post).find("a").attr("href");
+
+  //Read the response and strip out the information we need.
+  var rawImageCaption = $(post).find("img").attr("title");
+  var imageCaption = rawImageCaption.split("<p>")[0];
+  var imageStats = rawImageCaption.split("<p>")[1];
+  var imagePoints = imageStats.split(":")[0].replace(">points<","");
+  var imageViews = imageStats.split(":")[1].replace("</p>","").replace(" views","");
+
+  //Apply the image and link.
+  $("#imgurImageContainer").children(".loadingWheel").remove();
+  $("#imgurImage").attr("src", imageLink);
+  $("#imgurLink").attr("href", galleryLink);
+
+  //Apply the caption and image stats.
+  $("#imgurCaption").html(imageCaption);
+  $("#imgurPoints").html(imagePoints);
+  $("#imgurViews").html(imageViews);
+
+});
+
+
+</script>
+
+

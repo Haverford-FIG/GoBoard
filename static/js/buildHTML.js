@@ -56,7 +56,7 @@ function buildTagMenu() {
   var HTML = "";
   HTML += "<div class='noSelect menu tagMenu'>";
   HTML +=   "<div class='menuOption'>";
-  HTML +=     "Hello world!";
+  HTML +=     "Follow";
   HTML +=   "</div>";
   HTML += "</div>";
   return HTML;

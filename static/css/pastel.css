@@ -318,8 +318,20 @@ input:focus, select:focus, textarea:focus,
  right:50px;
 }
 
+.activateTagMenu {
+ position:relative;
+ overflow:show;
+}
+
 .tagMenu {
+ position:absolute;
  display:block;
+ left:-1em;
+ top:1.5em;
+ width:100px;
+
+ padding:0px;
+ color:white;
 }
 
 .menuOption,
@@ -493,9 +505,6 @@ option, .ui-menu-item a {
  height:300px;
  display:inline-block;
  box-sizing:border-box;
-
- background-color:#fff7bc;
- border-right:1px solid #FFF18A;
 }
 
 .cardControlBar {
@@ -530,9 +539,9 @@ option, .ui-menu-item a {
 .cardTitle {
  font-size:1.2em;
  box-sizing:border-box;
- padding:5px 5px;
- height:10%;
+ padding:8px 5px;
  font-weight:bold;
+ background-color:#efe;
 }
 
 #newCardContainer {
@@ -571,7 +580,6 @@ option, .ui-menu-item a {
 }
 
 #playerController {
- margin:10px 0px 0px 0px;
  width:100%;
  height:16%;
  padding:8px 0px;
@@ -629,5 +637,44 @@ option, .ui-menu-item a {
  display:none;
 }
 
+/* Imgur */
+#imgurImage {
+ border-radius:2px;
+}
+#imgurImageContainer {
+ position:relative;
+ padding:0.5em 0em;
+ background-color:#2b2b2b;
+}
 
+#imgurCaption {
+ padding:5px 15px;
+ font-size:0.75em;
+ background-color:#edf8b1;
+}
+
+#imgurImageContainer .loadingWheel {
+ color:white;
+}
+
+#imgurPoints, #imgurViews {
+ font-size:0.70em;
+ padding:0px 10px;
+ margin:0px 5px;
+ color:white;
+}
+#imgurPoints:after {
+ content:" points";
+}
+#imgurViews:after {
+ content:" views";
+}
+
+/* Weather */
+#link_get_widget {
+ display:none;
+}
+.aw-widget-current-inner .aw-widget-content.bg-su {
+ border:none !important; /* Override the default border. */
+}
 

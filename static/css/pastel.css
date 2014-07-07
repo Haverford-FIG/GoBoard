@@ -534,8 +534,6 @@ option, .ui-menu-item a {
  background-color:rgba(0,0,0,0.1);
 }
 
-
-/* # # # #   Cards   # # # # # */
 .cardTitle {
  font-size:1.2em;
  box-sizing:border-box;
@@ -549,6 +547,8 @@ option, .ui-menu-item a {
  background-color:#7fcdbb;
  margin-top:40px;
 }
+
+/* # # # #   Card-specific CSS   # # # # # */
 
 /* WHRC_Radio */
 .playerButton {
@@ -624,6 +624,7 @@ option, .ui-menu-item a {
  padding:10px 0px;
  height:35%;
  width:100%;
+ background-color:#B3BAFF;
 }
 #onAirToday table {
  text-align:center;

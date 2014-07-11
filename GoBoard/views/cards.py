@@ -54,6 +54,24 @@ def get_available_cards(request):
 
 
 
+# # # # # # # # # # #   Card-Specific Views   # # # # # # # # # #
+
+import urllib2
+@require_http_methods(["POST"])
+def get_SEPTA_times(request):
+  linkBase = "http://app.septa.org/nta/result.php?"
+  locAPrefix = "loc_a=";
+  locZPrefix = "&loc_z=";
+
+  #Get the SEPTA location URLs that correspond with two locations.
+  locA = settings.SEPTA_LOCATIONS[ request.POST["locA"] ]
+  locZ = settings.SEPTA_LOCATIONS[ request.POST["locZ"] ]
+
+  link = linkBase + locAPrefix + locA + locZPrefix + locZ;
+  url = urllib2.urlopen(linkBase + locAPrefix + locA + locZPrefix + locZ)
+  content = url.read()
+
+  return HttpResponse(content)
 
 
 

@@ -42,6 +42,8 @@ urlpatterns = patterns('',
      url(r'^addCard/?$', 'GoBoard.views.cards.add_card',),
      url(r'^get_available_cards/?$', 'GoBoard.views.cards.get_available_cards',),
 
+     #Views specific to cards.
+     url(r'^get_SEPTA_times/?$', 'GoBoard.views.cards.get_SEPTA_times',),
 
      url(r'^userCount/?$', 'GoBoard.sessionCounter.sendActiveUserCount',),
      url(r'^admin/?', include(admin.site.urls)),

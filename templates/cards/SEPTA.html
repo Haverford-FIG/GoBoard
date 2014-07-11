@@ -1,16 +1,19 @@
 <div class='cardTitle'>SEPTA</div>
 
 <select id="septaLocationA">
- {% for entry in settings.SEPTA_LOCATIONS %}
-   <option val="{{entry.url}}">{{entry.location}}</option>
+ {% for station in settings.SEPTA_LOCATIONS.keys %}
+   <option val="{{station}}">{{station}}</option>
  {% endfor %}
 </select>
+
 <div class='fillLineText'>to</div>
+
 <select id="septaLocationZ">
- {% for entry in settings.SEPTA_LOCATIONS %}
-   <option val="{{entry.url}}">{{entry.location}}</option>
+ {% for station in settings.SEPTA_LOCATIONS.keys %}
+   <option val="{{station}}">{{station}}</option>
  {% endfor %}
 </select>
+
 <div id="septaSubmitButton" class="submitButton noSelect">Search</div>
 
 <div id="septaResultsContainer"></div>
@@ -19,32 +22,30 @@
 <script>
 
 $("#septaSubmitButton").click( function() {
-  var linkBase = "http://app.septa.org/nta/result.php?";
-  var locAPrefix = "loc_a=";
   var locA = $("#septaLocationA").val();
-  var locZPrefix = "&loc_z=";
   var locZ = $("#septaLocationZ").val();
-  var link = linkBase + locAPrefix + locA + locZPrefix + locZ;
+  var resultsContainer = $("#septaResultsContainer");
 
-  //TODO: Change to whateverOrigin so we don't surpass free quota.
-  //var wholeLink = 'http://whateverorigin.org/get?url=' +
-  console.log(link);
-  var wholeLink = 'http://anyorigin.com/dev/get?url=' +
-          encodeURIComponent(link) + '&callback=?'
+  var data = {"locA":locA, "locZ":locZ}
+  $.post("/get_SEPTA_times/", data, function(response){
+    //Empty the current results container.
+    resultsContainer.empty();
 
-  $.getJSON(wholeLink, function(data){
-    var response = $(data.contents)
+    //Grab the results from the container.
     var results = $(response).find("#train_table").find("tr");
-
-    $(results).each( function (i) {
-      var departTime = $(this).find("td").html();
-      alert(departTime);
-      //TODO: Not complete! Needs to extract info from response.
+    $(results).slice(1).each( function (i) {
+      var departTime = $(this).find("td").eq(2).html();
+      var arriveTime = $(this).find("td").eq(3).html();
+      var timeHTML;
+      if (departTime===undefined || arriveTime===undefined){
+        timeHTML = "No times available!"
+      } else {
+        timeHTML = "<div>" + departTime + " --> " + arriveTime + "</div>";
+      }
+      resultsContainer.append(timeHTML);
     });
 
   });
-
-
 
 });
 

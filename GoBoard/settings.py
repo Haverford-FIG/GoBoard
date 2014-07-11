@@ -25,12 +25,12 @@ DEFAULT_CARDS = ["imgur", "WHRC_Radio"]
 AVAILABLE_CARDS = {"imgur", "WHRC_Radio", "testCard2", "weather", "SEPTA"}
 
 #Card-specific Settings
-SEPTA_LOCATIONS = [
- {"location": "Haverford", "url":"Haverford"},
- {"location": "Ardmore", "url":"Ardmore"},
- {"location": "30th Street", "url":"30th+Street+Station"},
- {"location": "Bryn Mawr", "url":"Bryn+Mawr"},
-]
+SEPTA_LOCATIONS = {
+ "Haverford": "Haverford",
+ "Ardmore": "Ardmore",
+ "30th Street": "30th+Street+Station",
+ "Bryn Mawr": "Bryn+Mawr",
+}
 
 
 #Email Settings

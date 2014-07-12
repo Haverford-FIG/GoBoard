@@ -694,3 +694,12 @@ option, .ui-menu-item a {
  border:none !important; /* Override the default border. */
 }
 
+/* SEPTA */
+.SEPTATime {
+ padding:3px 0px;
+ background-color:#edf8b1;
+ font-weight:bold;
+}
+.SEPTALateTime {
+ color:red;
+}

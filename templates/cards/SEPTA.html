@@ -1,4 +1,4 @@
-<div class='cardTitle'>SEPTA</div>
+<div class='cardTitle'>Next SEPTA</div>
 
 <select id="septaLocationA">
  {% for station in settings.SEPTA_LOCATIONS.keys %}
@@ -36,11 +36,16 @@ $("#septaSubmitButton").click( function() {
     $(results).slice(1).each( function (i) {
       var departTime = $(this).find("td").eq(2).html();
       var arriveTime = $(this).find("td").eq(3).html();
+      var lateTime = $(this).find("td").eq(5).html();
+      lateTime = lateTime.replace("mins"," late").replace("On time","");
+
       var timeHTML;
       if (departTime===undefined || arriveTime===undefined){
         timeHTML = "No times available!"
       } else {
-        timeHTML = "<div>" + departTime + " --> " + arriveTime + "</div>";
+        timeHTML = "<div class='SEPTATime'>" + departTime +
+                   " &#8594; " + arriveTime + "<span class='SEPTALateTime'> "+
+                   lateTime + "</span></div>";
       }
       resultsContainer.append(timeHTML);
     });
@@ -48,6 +53,24 @@ $("#septaSubmitButton").click( function() {
   });
 
 });
+
+function disableSelectedInput(value, menu) {
+  //Disable the input that matches the 'value'
+  $(menu).children().removeAttr("disabled");
+  $(menu).children().filter( function() {
+                        return $(this).html()===value;
+                      }).attr("disabled", true);
+
+  //Select the first input that does not have the 'value'.
+  var unselected = $(menu).children("option[val!='"+value+"']")
+  $(menu).val( unselected.first().html() );
+}
+
+$("#septaLocationA").change(function() {
+  disableSelectedInput( $(this).val(), "#septaLocationZ" );
+});
+
+disableSelectedInput( $("#septaLocationA").val(), "#septaLocationZ" );
 
 
 </script>

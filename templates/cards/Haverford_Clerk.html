@@ -1,18 +1,21 @@
-<div class="cardTitle"><a href="http://haverfordclerk.com/">
-  Haverford Clerk
-</a></div>
-http://haverfordclerk.com/feed/
-<div id="clerkResults"></div>
+<div class="cardTitle">
+  <a href="http://haverfordclerk.com/">
+    Haverford Clerk
+  </a>
+</div>
+<div id="clerkResults">Loading...</div>
 
 
 <script>
 
 function buildClerkArticleHTML(title, link, pubDate){
   var HTML = "";
-  HTML += "<div class='clerkArticle'><a href='"+link+"'>";
+  HTML += "<div class='clerkArticle'>";
+  HTML += "<a href='"+link+"'>";
   HTML += title;
+  HTML += "</a>";
   HTML += "<div class='clerkArticleDate'>"+pubDate+"</div>";
-  HTML += "</a></div>";
+  HTML += "</div>";
   return HTML;
 }
 

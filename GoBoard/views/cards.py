@@ -74,5 +74,35 @@ def get_SEPTA_times(request):
   return HttpResponse(content)
 
 
+import requests, bs4, datetime
+def get_clerk_articles(request):
+  maxArticles = 3
+  url = "http://haverfordclerk.com/rss/"
+
+  def getArticle(item):
+    #Put the date in a good format.
+    dateString = item.find("pubDate").text
+    preFormat = "%a, %d %b %Y %H:%M:%S"
+    postFormat = "%B %d, %Y"
+    cleanDateString = "".join(dateString.split(" +")[:-1])
+    dt = datetime.datetime.strptime(cleanDateString, preFormat)
+    formattedDate = dt.strftime(postFormat)
+
+    return {
+             "title":item.find("title").text,
+             "link":item.find("link").text,
+             "pubDate":formattedDate,
+           }
+
+  response = requests.get(url)
+  rawFeed = response.text
+  parsedXML = bs4.BeautifulSoup(rawFeed, features="xml")
+
+  articles = [getArticle(item) for item in parsedXML.find_all("item")]
+  articles = articles[:maxArticles]
+
+  return HttpResponse(json.dumps(articles), content_type="application/json")
+
+
 
 

@@ -24,7 +24,7 @@ MESSAGES_PER_TRANSACTION = 30
 DEFAULT_CARDS = ["imgur", "WHRC_Radio", "links"]
 AVAILABLE_CARDS = {
                     "imgur", "WHRC_Radio", "weather", "SEPTA",
-                    "links", "Haverford_Clerk"
+                    "links", "Haverford_Clerk", "Go_Chat",
                   }
 
 #Card-specific Settings

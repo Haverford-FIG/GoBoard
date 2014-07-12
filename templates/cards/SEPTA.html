@@ -2,7 +2,11 @@
 
 <select id="septaLocationA">
  {% for station in settings.SEPTA_LOCATIONS.keys %}
-   <option val="{{station}}">{{station}}</option>
+  <option val="{{station}}"
+  {% if user.is_authenticated and user.userinfo.campus == station %}
+    selected
+  {% endif %}
+  >{{station}}</option>
  {% endfor %}
 </select>
 
@@ -14,17 +18,21 @@
  {% endfor %}
 </select>
 
-<div id="septaSubmitButton" class="submitButton noSelect">Search</div>
-
 <div id="septaResultsContainer"></div>
 
 
 <script>
 
-$("#septaSubmitButton").click( function() {
+$("#septaLocationA, #septaLocationZ").change( function() {
+
   var locA = $("#septaLocationA").val();
+  //Don't let locA==locZ since there will never exist times.
+  disableSelectedInput( locA, "#septaLocationZ" );
+
   var locZ = $("#septaLocationZ").val();
   var resultsContainer = $("#septaResultsContainer");
+
+  resultsContainer.html("Loading...");
 
   var data = {"locA":locA, "locZ":locZ}
   $.post("/get_SEPTA_times/", data, function(response){
@@ -37,6 +45,7 @@ $("#septaSubmitButton").click( function() {
       var departTime = $(this).find("td").eq(2).html();
       var arriveTime = $(this).find("td").eq(3).html();
       var lateTime = $(this).find("td").eq(5).html();
+      if (lateTime===undefined) lateTime="";
       lateTime = lateTime.replace("mins","").replace("On time","");
       if (lateTime!=="") lateTime = "(+"+lateTime+")";
 
@@ -57,23 +66,23 @@ $("#septaSubmitButton").click( function() {
 });
 
 function disableSelectedInput(value, menu) {
+  var otherVal = $(menu).val();
+
   //Disable the input that matches the 'value'
   $(menu).children().removeAttr("disabled");
   $(menu).children().filter( function() {
                         return $(this).html()===value;
                       }).attr("disabled", true);
 
-  //Select the first input that does not have the 'value'.
-  var unselected = $(menu).children("option[val!='"+value+"']")
-  $(menu).val( unselected.first().html() );
+  // If the current selection of the 'menu' is the previous 'value',
+  //   reselect another option.
+  if (otherVal==value){
+    var unselected = $(menu).children("option[val!='"+value+"']")
+    $(menu).val( unselected.first().html() );
+  }
 }
 
-$("#septaLocationA").change(function() {
-  disableSelectedInput( $(this).val(), "#septaLocationZ" );
-});
-
-disableSelectedInput( $("#septaLocationA").val(), "#septaLocationZ" );
-
+$("#septaLocationA").trigger("change");
 
 </script>
 

@@ -25,16 +25,22 @@ DEFAULT_CARDS = ["imgur", "WHRC_Radio", "links"]
 AVAILABLE_CARDS = {
                     "imgur", "WHRC_Radio", "weather", "SEPTA",
                     "links", "Haverford_Clerk", "Go_Chat",
+                    "Blue_Bus",
                   }
 
 #Card-specific Settings
 SEPTA_LOCATIONS = {
- "Haverford": "Haverford",
- "Ardmore": "Ardmore",
- "30th Street": "30th+Street+Station",
- "Bryn Mawr": "Bryn+Mawr",
+  "Haverford": "Haverford",
+  "Ardmore": "Ardmore",
+  "30th Street": "30th+Street+Station",
+  "Bryn Mawr": "Bryn+Mawr",
+  "Suburban Station": "Suburban+Station",
 }
-
+BLUE_BUS_LOCATIONS = {
+  "Weekday": ["Haverford", "Bryn Mawr"],
+  "Saturday Daytime": ["BMC", "Suburban Square", "HCA", "Stokes", "Suburban Square"],
+  "Weekend": ["Haverford", "Bryn Mawr"],
+}
 
 #Email Settings
 EMAIL_USE_TLS = True

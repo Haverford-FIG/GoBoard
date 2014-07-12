@@ -21,8 +21,11 @@ THEME_OPTIONS = ["pastel", "bguggs", "blair", "brandon", "nora"]
 MESSAGES_PER_TRANSACTION = 30
 
 #The 'name' of a card with that matches a filename "<name>.html"
-DEFAULT_CARDS = ["imgur", "WHRC_Radio"]
-AVAILABLE_CARDS = {"imgur", "WHRC_Radio", "testCard2", "weather", "SEPTA"}
+DEFAULT_CARDS = ["imgur", "WHRC_Radio", "links"]
+AVAILABLE_CARDS = {
+                    "imgur", "WHRC_Radio", "weather", "SEPTA",
+                    "links", "Haverford_Clerk"
+                  }
 
 #Card-specific Settings
 SEPTA_LOCATIONS = {

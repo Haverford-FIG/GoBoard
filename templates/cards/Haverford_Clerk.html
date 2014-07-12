@@ -1,0 +1,31 @@
+<div class="cardTitle"><a href="http://haverfordclerk.com/">
+  Haverford Clerk
+</a></div>
+http://haverfordclerk.com/feed/
+<div id="clerkResults"></div>
+
+
+<script>
+
+function buildClerkArticleHTML(title, link, pubDate){
+  var HTML = "";
+  HTML += "<div class='clerkArticle'><a href='"+link+"'>";
+  HTML += title;
+  HTML += "<div class='clerkArticleDate'>"+pubDate+"</div>";
+  HTML += "</a></div>";
+  return HTML;
+}
+
+$.get("/get_clerk_articles/", function(articles) {
+  var HTML = "";
+  for (var i=0; i<articles.length ; i++){
+    var article = articles[i];
+    HTML += buildClerkArticleHTML(article["title"],
+                                  article["link"],
+                                  article["pubDate"]
+                                 )
+  }
+  $("#clerkResults").html(HTML);
+});
+
+</script>

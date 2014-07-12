@@ -559,6 +559,8 @@ option, .ui-menu-item a {
 
 .fillLineText {
  padding:2px 0px;
+ width:100%;
+ display:block;
  font-weight:bold;
  background-color:#fee;
 }
@@ -666,6 +668,7 @@ option, .ui-menu-item a {
 #imgurCaption {
  padding:5px 15px;
  font-size:0.75em;
+ font-weight:bold;
  background-color:#edf8b1;
 }
 
@@ -703,3 +706,6 @@ option, .ui-menu-item a {
 .SEPTALateTime {
  color:red;
 }
+
+/* Links Card */
+.linkLine

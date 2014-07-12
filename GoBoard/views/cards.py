@@ -75,10 +75,7 @@ def get_SEPTA_times(request):
 
 
 import requests, bs4, datetime
-def get_clerk_articles(request):
-  maxArticles = 3
-  url = "http://haverfordclerk.com/rss/"
-
+def get_rss_articles(request, url="", maxArticles=3):
   def getArticle(item):
     #Put the date in a good format.
     dateString = item.find("pubDate").text

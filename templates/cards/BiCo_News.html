@@ -1,0 +1,34 @@
+<div class="cardTitle">
+  <a href="http://biconews.com/">
+    Bi-Co News
+  </a>
+</div>
+<div id="bicoResults">Loading...</div>
+
+
+<script>
+
+function buildBicoArticleHTML(title, link, pubDate){
+  var HTML = "";
+  HTML += "<div class='bicoArticle'>";
+  HTML += "<a href='"+link+"'>";
+  HTML += title;
+  HTML += "</a>";
+  HTML += "<div class='bicoArticleDate'>"+pubDate+"</div>";
+  HTML += "</div>";
+  return HTML;
+}
+
+$.get("/get_bico_articles/", function(articles) {
+  var HTML = "";
+  for (var i=0; i<articles.length ; i++){
+    var article = articles[i];
+    HTML += buildBicoArticleHTML(article["title"],
+                                  article["link"],
+                                  article["pubDate"]
+                                 )
+  }
+  $("#bicoResults").html(HTML);
+});
+
+</script>

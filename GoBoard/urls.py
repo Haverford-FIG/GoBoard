@@ -44,7 +44,15 @@ urlpatterns = patterns('',
 
      #Views specific to cards.
      url(r'^get_SEPTA_times/?$', 'GoBoard.views.cards.get_SEPTA_times',),
-     url(r'^get_clerk_articles/?$', 'GoBoard.views.cards.get_clerk_articles',),
+     url(r'^get_clerk_articles/?$', 'GoBoard.views.cards.get_rss_articles',
+                  {
+                   "url":"http://haverfordclerk.com/rss/",
+                   "maxArticles":3
+                  }),
+     url(r'^get_bico_articles/?$', 'GoBoard.views.cards.get_rss_articles',
+                  {"url":"http://biconews.com/rss/",
+                   "maxArticles":4,
+                  }),
 
      url(r'^userCount/?$', 'GoBoard.sessionCounter.sendActiveUserCount',),
      url(r'^admin/?', include(admin.site.urls)),

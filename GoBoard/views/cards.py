@@ -101,5 +101,56 @@ def get_rss_articles(request, url="", maxArticles=3):
   return HttpResponse(json.dumps(articles), content_type="application/json")
 
 
+import requests, bs4, datetime, re
+def get_calendar_events(request):
+  try:
+    #Convert the date into an RSS-comparable form.
+    rawDate = request.GET["date"]
+    preFormat = "%m/%d/%Y"
+    postFormat = "%a, %d %b %Y"
+    dt = datetime.datetime.strptime(rawDate, preFormat)
+    date = dt.strftime(postFormat)
+
+    def getEvent(item):
+      #Get the link and the event title.
+      rawTitle = item.find("title").text
+      title = re.findall(r"<a.*?>(.*?)</a>", rawTitle)[0]
+      link = re.findall(r"<a.*?href=\"(.*?)\".*?>.*?</a>", rawTitle)[0]
+
+      #Get the time.
+      rawTime = item.find("pubDate").text
+      preFormat = "%a, %d %b %Y %H:%M:%S EDT"
+      postFormat = "%I:%M%p"
+      dt = datetime.datetime.strptime(rawTime, preFormat)
+      time = dt.strftime(postFormat)
+
+      return {
+               "title":title,
+               "link":link,
+               "time":time,
+             }
+
+
+    #Query the calendar to the events starting on a given day.
+    url = "http://www.haverford.edu/calendar/rss/?date="
+    url += dt.strftime("%Y%m%d")
+    response = requests.get(url)
+    rawFeed = response.text
+    parsedXML = bs4.BeautifulSoup(rawFeed, features="xml")
+
+    items = parsedXML.find_all("item")
+    events = []
+    for item in items:
+      rawQueryDate = item.find("pubDate").text
+      queryDate = rawQueryDate.split(":")[0][:-3]
+      if queryDate==date:
+        events.append(getEvent(item))
+
+  except:
+    events = []
+  return HttpResponse(json.dumps(events), content_type="application/json")
+
+
+
 
 

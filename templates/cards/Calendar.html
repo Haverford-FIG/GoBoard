@@ -1,0 +1,71 @@
+<div class="cardTitle">Calendar</div>
+
+<div>
+<div class="prevDateButton dateButton noSelect">&#8592;</div>
+<input id="calendarDate" class="dateInput" />
+<div class="nextDateButton dateButton noSelect">&#8594;</div>
+</div>
+
+<div id="calendarResults"></div>
+
+<script>
+
+
+function loadCalendarDate(newDate) {
+
+  function buildEventHTML(event) {
+    var name = event.title;
+    var link = event.link;
+    var time = event.time;
+
+    return "<div class='calendarEvent'>" +
+           "<a href='"+link+"'>"+name+"</a>" +
+           "<div class='calendarTime'>"+time+"</div>" +
+           "</div>"
+  }
+
+  $("#calendarResults").html("Loading...");
+
+  $.get("/get_calendar_events/", {"date":newDate}, function(events) {
+
+    //If no events are planned, display a message.
+    var newHTML = "";
+    if (events.length===0) {
+      newHTML = "<div class='emptyMessage'>Nothing planned!</div>";
+    } else {
+      for (var i=0 ; i<events.length ; i++){
+        newHTML += buildEventHTML(events[i]);
+      }
+    }
+    $("#calendarResults").html(newHTML);
+
+  });
+
+}
+
+$("#calendarDate").datepicker({
+  onSelect: function(selectedDate){
+    loadCalendarDate(selectedDate)
+  }
+});
+
+//Set the datepicker to the current date.
+$("#calendarDate").datepicker("setDate", "0");
+loadCalendarDate( $("#calendarDate").val() )
+
+
+//Mostly taken from: http://stackoverflow.com/questions/1757783/how-to-increment-jquery-ui-datepicker-programtically
+$(".prevDateButton").click(function() {
+  var oldDate = $('#calendarDate').datepicker('getDate');
+  oldDate.setDate(oldDate.getDate() - 1);
+  $('#calendarDate').datepicker('setDate', oldDate);
+  loadCalendarDate( $("#calendarDate").val() )
+});
+$(".nextDateButton").click(function() {
+  var oldDate = $('#calendarDate').datepicker('getDate');
+  oldDate.setDate(oldDate.getDate() + 1);
+  $('#calendarDate').datepicker('setDate', oldDate);
+  loadCalendarDate( $("#calendarDate").val() )
+});
+
+</script>

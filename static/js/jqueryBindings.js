@@ -26,15 +26,19 @@ $(document).on("click", ".customCheckbox", function(){
     $("#tagFilterSubmit").trigger("click");
   }
 
-  var shouldBeActive = $(this).hasClass("active");
+  var isActive = $(this).hasClass("active");
   if ($(this).attr("id")=="tagFilterPrivate"){
-    console.log(shouldBeActive);
-    $("#newMessagePrivate").toggleClass("active", shouldBeActive);
+    $("#newMessagePrivate").toggleClass("active", isActive);
   }
 
 });
 
 //Submit a form when a user clicks the #submitFormButton only if it is valid.
+$(document).on("keydown", "#form_password", function(e) {
+  if (e.which==13) {
+    $("#formSubmitButton").trigger("click");
+  }
+});
 $(document).on("click", "#formSubmitButton", function(){
   var form = $(this).closest("form");
   var url = $(form).attr("action");

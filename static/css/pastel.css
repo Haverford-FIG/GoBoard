@@ -486,6 +486,7 @@ option, .ui-menu-item a {
  border-width:0px 4px;
  border-radius:3px;
  background-color:#fee0d2;
+ z-index:100;
 }
 
 .ui-helper-hidden-accessible {
@@ -548,9 +549,14 @@ option, .ui-menu-item a {
  margin-top:40px;
 }
 
-.card select {
+.card select, .card input {
  height:2em;
  width:100%;
+ text-align:center;
+}
+.card input {
+ height:1.5em;
+ background-color:#eeeeff;
 }
 
 .card .submitButton {
@@ -564,6 +570,64 @@ option, .ui-menu-item a {
  font-weight:bold;
  background-color:#fee;
 }
+
+/* Datepicker */
+.ui-datepicker {
+ background-color:white;
+ word-spacing:1em;
+ text-align:center;
+ display:none;
+}
+
+.ui-datepicker-calendar {
+ text-align:center;
+ font-size:1.0em;
+}
+.ui-datepicker-calendar tbody {
+ background-color:#efe;
+}
+.ui-datepicker-calendar td {
+ padding:6px;
+}
+.ui-datepicker-calendar td:hover {
+ cursor:pointer;
+ background-color:#fef;
+}
+.ui-datepicker-header {
+ background-color:#fee;
+}
+.ui-datepicker .ui-state-active {
+ color:red;
+ font-weight:bold;
+}
+.ui-icon {
+ cursor:pointer;
+ margin:0 25px;
+}
+.dateButton {
+ position:absolute;
+ cursor:pointer;
+ opacity:0.5;
+ padding:3px;
+}
+.dateButton:hover {
+ opacity:1;
+}
+.prevDateButton {
+ left:20px;
+}
+.nextDateButton {
+ right:20px;
+}
+
+.emptyMessage {
+ background-color:#fee;
+ color:maroon;
+ padding:15px 0px;
+ width:100%;
+
+}
+
 
 /* # # # #   Card-specific CSS   # # # # # */
 
@@ -709,21 +773,21 @@ option, .ui-menu-item a {
 }
 
 /* Haverford Clerk */
-.clerkArticle, .bicoArticle {
+.clerkArticle, .bicoArticle, .calendarEvent {
  text-align:left;
  font-size:0.75em;
  background-color:#edf8b1;
  border-bottom:4px solid #fee;
  padding:2px 10px;
 }
-.clerkArticle a, .bicoArticle a{
+.clerkArticle a, .bicoArticle a, .calendarEvent a{
  color:black;
  opacity:0.8;
 }
-.clerkArticle a:hover, .bicoArticle a:hover{
+.clerkArticle a:hover, .bicoArticle a:hover, .calendarEvent a:hover{
  opacity:1;
 }
-.clerkArticleDate, .bicoArticleDate {
+.clerkArticleDate, .bicoArticleDate, .calendarTime {
  text-align:right;
  font-size:0.8em;
  opacity:0.5;
@@ -739,6 +803,7 @@ option, .ui-menu-item a {
 }
 #chatCard .tagAutocomplete {
  width:90%;
+ height:inherit;
 }
 #chatCard .message {
  padding: 10 0 10 15;
@@ -760,3 +825,4 @@ option, .ui-menu-item a {
 #chatCard .customCheckbox {
   line-height: 100%;
 }
+

@@ -24,11 +24,11 @@ $.getJSON('http://whateverorigin.org/get?url=' +
   var galleryLink = "http://imgur.com"+$(post).find("a").attr("href");
 
   //Read the response and strip out the information we need.
-  var rawImageCaption = $(post).find("img").attr("title");
-  var imageCaption = rawImageCaption.split("<p>")[0];
-  var imageStats = rawImageCaption.split("<p>")[1];
-  var imagePoints = imageStats.split(":")[0].replace(">points<","");
-  var imageViews = imageStats.split(":")[1].replace("</p>","").replace(" views","");
+  var imageCaption = $(post).find("p").clone()
+                            .children().remove().end().text();
+  var imagePoints = $(post).find("span[class^='points-']").html();
+  var imageViews = $(post).find(".post-info").text()
+                          .replace("image · ","").replace("views","");
 
   //Apply the image and link.
   $("#imgurImageContainer").children(".loadingWheel").remove();

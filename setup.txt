@@ -1,6 +1,6 @@
 #Install the necessary programs.
-sudo apt-get install python-pip mysql-server python-mysqldb
-sudo pip install Django request beautifulsoup4s
+sudo apt-get install python-pip mysql-server python-mysqldb python-requests python-bs4
+sudo pip install Django requests beautifulsoup4
 
 #Set the password for MySQL as "SecurePassword"
 mysql -uroot -pSecurePassword

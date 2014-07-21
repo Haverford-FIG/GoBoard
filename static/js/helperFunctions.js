@@ -22,3 +22,33 @@ function getMessageContext(){
    "private": $("#tagFilterPrivate").hasClass("active")
  }
 }
+
+function applyMarkDown(container) {
+  var settings = [
+    {
+      "class":"messageTextBold",
+      "tags":"\\*\\*"
+    },
+    {
+      "class":"messageTextItalic",
+      "tags":"\\*"
+    },
+    {
+      "class":"messageTextHighlight",
+      "tags":"`"
+    }
+  ]
+
+  var text = $(container).html();
+
+  for (var i=0; i < settings.length; i++) {
+    var tags = settings[i]["tags"];
+    var className = settings[i]["class"];
+
+    var re = new RegExp(tags+"(.*?)"+tags, "g");
+    text = text.replace(re, "<span class="+className+">$1</span>");
+  }
+
+  $(container).html(text);
+}
+

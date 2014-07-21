@@ -28,7 +28,7 @@ $.getJSON('http://whateverorigin.org/get?url=' +
                             .children().remove().end().text();
   var imagePoints = $(post).find("span[class^='points-']").html();
   var imageViews = $(post).find(".post-info").text()
-                          .replace("image · ","").replace("views","");
+                          .replace(/[a-zA-Z]*? · /,"").replace("views","");
 
   //Apply the image and link.
   $("#imgurImageContainer").children(".loadingWheel").remove();

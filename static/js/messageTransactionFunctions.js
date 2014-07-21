@@ -98,6 +98,7 @@ function reloadMessages(messageContainer, tagArray, kwargs) {
 
     //Turn any link-like string sequences into links.
     if (! emptyUpdate) {
+      applyMarkDown(messageContainer);
       $(messageContainer).linkify()
     }
 

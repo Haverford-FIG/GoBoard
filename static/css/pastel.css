@@ -75,6 +75,19 @@ a #bannerLogo, a #bannerLogo:hover {
  position:relative;
 }
 
+.messageTextHighlight {
+ background-color:#fde;
+ color: #534;
+ padding:2px 5px;
+ border-radius:2px;
+}
+.messageTextBold {
+ font-weight:bold;
+}
+.messageTextItalic {
+ font-style:italic;
+}
+
 .privateMessage {
  background-color:#fc9272;
  background-image:url("/static/images/talk_bubble.png");

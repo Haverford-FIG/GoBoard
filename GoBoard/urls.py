@@ -6,10 +6,12 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
-     # Home page:
-     url(r'^$', 'GoBoard.views_to_abstract.load_chat',),
-     url(r'^home/?$', 'GoBoard.views_to_abstract.load_chat',),
-     url(r'^chat/?$', 'GoBoard.views_to_abstract.load_chat',),
+     # Home Page:
+     url(r'^$', 'GoBoard.views.cards.load_cards', name="home"),
+     url(r'^home/?$', 'GoBoard.views.cards.load_cards', name="home"),
+
+     # Chat Page:
+     url(r'^chat/?$', 'GoBoard.views_to_abstract.load_chat', name="chat"),
 
      url(r'^new_message/?$', 'GoBoard.views_to_abstract.new_message',),
      url(r'^get_messages/?$', 'GoBoard.views_to_abstract.send_messages',),
@@ -37,7 +39,7 @@ urlpatterns = patterns('',
      url(r'^update_settings/?$', 'GoBoard.views.user_settings.update_settings',),
 
      #Views for user cards.
-     url(r'^cards?/?$', 'GoBoard.views.cards.load_cards',),
+     url(r'^cards?/?$', 'GoBoard.views.cards.load_cards', name="cards"),
      url(r'^deleteCard/?$', 'GoBoard.views.cards.delete_card',),
      url(r'^addCard/?$', 'GoBoard.views.cards.add_card',),
      url(r'^get_available_cards/?$', 'GoBoard.views.cards.get_available_cards',),

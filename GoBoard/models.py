@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import User
+from django.utils.html import escape
 from datetime import datetime
 
 from GoBoard import settings
@@ -20,6 +21,9 @@ class Message(models.Model):
     text = self.text if len(self.text)>20 else "{}...".format(self.text)
     return "\"{}\" -- {}".format(text, self.user.username)
 
+  def getCleanedText(self):
+    cleanText = escape(self.text)
+    return cleanText
 
 
 class Tag(models.Model):

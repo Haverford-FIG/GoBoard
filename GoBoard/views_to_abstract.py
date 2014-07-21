@@ -138,7 +138,7 @@ def send_messages(request):
       response = {"maxPage":True}
     else:
       #Construct the JSON response.
-      response = [{"text":message.text,
+      response = [{"text":message.getCleanedText(),
                    "user":message.user.username,
                    "tags":getTagStrings(get_tag_list(message)),
                    "mentions":getUsernameStrings(get_mention_list(message)),

@@ -280,21 +280,24 @@ input:focus, select:focus, textarea:focus,
  opacity:0.5;
 }
 
-#optionMenuButton, #goCardLink {
+#menuButtonContainer {
+ overflow:visible;
  position:absolute;
- top:0em;
  right:0em;
- padding:10 10 12 12;
+ top:0em;
+}
+
+.menuButton, .menuButton:visited {
+ position:relative;
+ padding:0.55em 0.55em;
+ margin:0px;
  opacity:0.8;
-}
-
-#goCardLink {
- color:inherit;
- right:2em;
+ color:white;
  font-weight:bold;
+ display:inline-block;
 }
 
-#optionMenuButton:hover, #goCardLink:hover {
+.menuButton:hover {
  opacity:1;
  cursor:pointer;
 }
@@ -316,6 +319,7 @@ input:focus, select:focus, textarea:focus,
 
 #optionMenu {
  right:50px;
+ position:fixed;
 }
 
 .activateTagMenu {

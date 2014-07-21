@@ -1,13 +1,17 @@
 <div class="banner noSelect">
-  <a href="/home/"><div id="bannerLogo">GO! 3.0</div></a>
+  <a href='{% url "home" %}'><div id="bannerLogo">GO! 3.0</div></a>
 
   <div class="bannerMotto">Another fine product from the good folks at
   <a href="http://fig.haverford.edu">FIG</a>.</div>
 
-  <a href="/cards/" id="goCardLink" class="noSelect">&#10063;</a>
+  <div id="menuButtonContainer">
+    <a href='{% url "cards" %}' class="menuButton noSelect">&#10063;</a>
+    <a href='{% url "chat" %}' class="menuButton noSelect">&#9741;</a>
+    <div id="optionMenuButton" id="optionMenuActivator"
+         class="menuButton menuActivator noSelect">&#9776;</div>
+    {% include "optionMenu.html" %}
+  </div>
 
-  <div id="optionMenuButton" class="menuActivator noSelect">&#9776;</div>
-  {% include "optionMenu.html" %}
 
   {% if user.is_authenticated %}
   <div id="userGreeting">

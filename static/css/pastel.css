@@ -719,17 +719,14 @@ option, .ui-menu-item a {
 
 #onAirToday {
  box-sizing:border-box;
- padding:10px 0px;
+ padding:5px 0px;
  height:35%;
  width:100%;
  background-color:#B3BAFF;
+ overflow:hidden;
 }
 #onAirToday table {
  text-align:center;
-}
-#onAirToday:before {
- font-weight:bold;
- content:"Schedule";
 }
 
 #time-remaining, #onAirToday h3 {

@@ -1,10 +1,6 @@
 **Go3 -- Another fine product from the good folks at FIG.**
 
-*Go3 is a social media site designed for Haverford College and the extended Tri-College Consortium.*
-
-It was designed for students, by students, to make information approachable, easy-to-access, and easy-to-post.
-
-With these goals in mind, Go3 can be broken up into a few main parts:
+*Go3 is a social media site designed for Haverford College and the extended Tri-College Consortium.* It was designed for students, by students, to make information approachable, easy-to-access, and easy-to-post. With these goals in mind, Go3 can be broken up into a few main parts:
 
  - GoChat (GoBoard): A chatbox that uses #hashtags and @mentions to make communication easier between students.
    - Users can use any number of Tags in a post and mention any number of Users.

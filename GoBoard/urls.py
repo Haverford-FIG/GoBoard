@@ -39,6 +39,13 @@ urlpatterns = patterns('',
      url(r'^update_settings/?$', 'GoBoard.views.user_settings.update_settings',),
 
      #Views for user cards.
+     url(r'^ads/get/?$', 'GoBoard.views.ads.load_banner',),
+     url(r'^ads/manage/?$', 'GoBoard.views.ads.ad_manager',),
+     url(r'^ads/create/(?P<did>[0-9]*)/?$', 'GoBoard.views.ads.create_ad_form',),
+     url(r'^ads/delete/(?P<did>[0-9]+)/?$', 'GoBoard.views.ads.delete_ad',),
+     url(r'^ads/submit/?$', 'GoBoard.views.ads.submit_ad_form',),
+
+     #Views for user cards.
      url(r'^cards?/?$', 'GoBoard.views.cards.load_cards', name="cards"),
      url(r'^deleteCard/?$', 'GoBoard.views.cards.delete_card',),
      url(r'^addCard/?$', 'GoBoard.views.cards.add_card',),

@@ -436,6 +436,15 @@ input:focus, select:focus, textarea:focus,
  background-color:#F2FAC7;
 }
 
+.center {
+ text-align:center;
+}
+
+.linkButton {
+ padding:10px;
+ background-color:red;
+}
+
 .formFieldGroup {
  margin:0 auto;
 }
@@ -594,6 +603,13 @@ option, .ui-menu-item a {
  word-spacing:1em;
  text-align:center;
  display:none;
+
+ -webkit-touch-callout: none;
+ -webkit-user-select: none;
+ -khtml-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
 }
 
 .ui-datepicker-calendar {
@@ -616,6 +632,11 @@ option, .ui-menu-item a {
 .ui-datepicker .ui-state-active {
  color:red;
  font-weight:bold;
+}
+.ui-datepicker-unselectable {
+ color:silver;
+ background-color:#ded;
+ opacity:0.5;
 }
 .ui-icon {
  cursor:pointer;
@@ -645,8 +666,99 @@ option, .ui-menu-item a {
 
 }
 
+/* # # # #   HaverAd-specific CSS   # # # # */
+.adContainer {
+ position:relative;
+}
 
-/* # # # #   Card-specific CSS   # # # # # */
+.adBanner {
+ padding:10px 30px;
+ min-height:5em;
+ color:white;
+ background-color:#163C6A;
+ background-size:contain;
+}
+
+.adDate {
+ box-sizing:border-box;
+ position:absolute;
+ left:1em;
+ bottom:0px;
+ background-color: rgba(0,0,0,0.5);
+ padding:4px 1em;
+ display:inline-block;
+}
+
+.adText a, .adText a:visited {
+ opacity:0.9;
+ letter-spacing:1px;
+ color:inherit;
+}
+.adText a:hover {
+ opacity:1;
+}
+
+.adText {
+ box-sizing:border-box;
+ padding:1em 1em;
+ background-color: rgba(0,0,0,0.5);
+ letter-spacing:1px;
+ display:inline-block;
+}
+
+.adAuthor {
+ position:absolute;
+ right:0em;
+ top:0em;
+ font-size:0.7em;
+ letter-spacing:1px;
+
+ padding:5px;
+ color:white;
+ background-color: rgba(0,0,0,0.5);
+}
+
+.adSubmitButton, .adSubmitButton:visited {
+ position:absolute;
+ right:1em;
+ bottom:0em;
+ font-size:0.8em;
+
+ opacity:0.7;
+ padding:4px 5px;
+ color:white;
+ background-color: rgba(0,0,0,0.1);
+}
+.adSubmitButton:hover {
+ color:white;
+ opacity:1;
+ cursor:pointer;
+}
+
+
+.adManageBlock {
+ position:relative;
+ padding:0.5em 2em;
+ margin:5px;
+}
+
+.adEditButton, .adDeleteButton {
+ position:absolute;
+ right:2em;
+ top:1em;
+}
+.adDeleteButton {
+ right:5em;
+}
+
+.inactive {
+ opacity:0.5;
+}
+.inactive:hover {
+ opacity:1;
+}
+
+/* # # # #   Card-specific CSS   # # # # */
 
 /* WHRC_Radio */
 .playerButton {

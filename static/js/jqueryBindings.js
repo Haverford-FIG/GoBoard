@@ -50,12 +50,18 @@ $(document).on("click", "#formSubmitButton", function(){
   if ($(form).find(".badInput").length) return false;
 
   $.post(url, formContents, function(response){
-    if (response=="SUCCESS"){
-      window.location.reload();
+    if (response.substr(0,7)=="SUCCESS"){
+      if (response.substr(8)=="HOME") {
+        window.location.href="/home/";
+      } else {
+        window.location.reload();
+      }
     } else if (response.substr(0,5)=="ERROR"){
       var error = response.split(" ")[1];
       var badElements="";
-      if (error===undefined || error=="PASS"){
+      if (error===undefined) {
+        alert("Oops! Something broke... Tell FIG!");
+      } else if (error=="PASS"){
         badElements = "input[name=password],input[name=currentPass]";
       } else if (error=="USERNAME"){
         badElements = "input[name=username]";
@@ -75,7 +81,7 @@ $(document).on("click", "#formSubmitButton", function(){
       window.location.href = next;
     } else {
       //TODO: Make me a pretty error message.
-      alert("OOPS!! We don't know what to do with that result...")
+      alert("OOPS!! We don't know what to do with that server result...")
     }
   });
 });
@@ -340,6 +346,25 @@ $(".menu").click(function(event) {
 $("body").click(function() {
   $(".menu").hide();
 });
+
+
+//# # # # # # # # # # #
+//jQuery DatePicker # #
+$(".dateInput").datepicker({
+  "onSelect": function(newDate) {
+    //Set the value since DatePickers apply changes AFTER the `change` event.
+    this.value = newDate;
+    $(this).trigger("blur");
+  }
+
+});
+$(".dateInput").each(function() {
+  console.log($(this).val());
+  if ($(this).val()===""){
+    $(this).datepicker("setDate", "0");
+  }
+});
+$(".dateInput[noPastDates=true]").datepicker("option", "minDate", 0);
 
 
 //# # # # # # # # # # #

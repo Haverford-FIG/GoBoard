@@ -23,6 +23,7 @@ if ($(".messageBox").length){
 //Load the most recent "general" messages in the main chatbox.
 reloadMessages(".messageBox", []);
 
+loadAds();
 
 //###############################################################
 });

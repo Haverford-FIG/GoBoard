@@ -82,7 +82,35 @@ class UserInfo(models.Model):
 
     self.save()
 
+class Ad(models.Model):
+  text = models.CharField(max_length=300, default="")
+  imageURL = models.TextField(default="")
+  infoURL = models.TextField(default="")
+  startDate = models.DateTimeField()
+  endDate = models.DateTimeField()
+  size = models.TextField(default="banner")
+  style = models.TextField(default="")
+
+  views = models.IntegerField(default=0)
+  author = models.ForeignKey(User, unique = False)
+  enabled = models.BooleanField(default=True)
+
+  def __unicode__(self):
+    isActive = self.isActive()
+    return "'{}' (Active: {}, Enabled: {})".format(self.text, isActive, self.enabled)
+
+  def isActive(self):
+    from datetime import datetime
+    date = datetime.now()
+    dateNoTime = datetime(date.year, date.month, date.day)
+    return self.endDate >= dateNoTime
+
+
+  def incrementViews(self):
+    self.views = self.views+1
+    self.save()
 
 admin.site.register(Message)
 admin.site.register(Tag)
+admin.site.register(Ad)
 admin.site.register(UserInfo)

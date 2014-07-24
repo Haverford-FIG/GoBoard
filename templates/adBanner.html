@@ -1,0 +1,40 @@
+<div class="adContainer">
+{% if ad %}
+  <div class="adBanner" style="background-image:url('{{ad.imageURL}}');">
+    <div class="adText">
+    {% if ad.infoURL %}
+      <a target="_blank" href="{{ad.infoURL}}">{{ ad.text }}</a>
+    {% else %}
+      {{ ad.text }}
+    {% endif %}
+    </div>
+
+    {% if ad.isActive %}
+      <div class="adDate">
+      {% with ad.startDate|date:"d" as startDay %}
+      {% with ad.startDate|date:"N" as startMonth %}
+      {% with ad.endDate|date:"d" as endDay %}
+      {% with ad.endDate|date:"N" as endMonth %}
+
+        {{ startMonth }} {{ startDay }}
+        {% if startMonth != endMonth and startDay != endDay %}
+          - {{ endMonth }} {{ endDay }}
+        {% elif startDay != endDay %}
+          - {{ endDay }}
+        {% endif %}
+
+      {% endwith %}
+      {% endwith %}
+      {% endwith %}
+      {% endwith %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% if user.is_authenticated %}
+    <a href="/ads/create/" class="adSubmitButton">Submit a HaverAd</a>
+  {% endif %}
+
+  <div class="adAuthor">@{{ad.author.username}}</div>
+{% endif%}
+</div>

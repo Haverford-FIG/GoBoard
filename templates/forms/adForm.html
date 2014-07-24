@@ -1,0 +1,44 @@
+<form class="fullScreenForm" action="/ads/submit/" method="post">
+  {% csrf_token %}
+
+  <div class="formDescriptor">Basic Info</div>
+  <div class="formFieldContainer">
+    <label for="form_text">Text</label>
+    <input name="text" id="form_text" type="text" value="{{ad.text}}"/>
+  </div>
+
+  <div class="formFieldContainer">
+    <label for="form_imageURL">Image URL</label>
+    <input name="imageURL" id="form_imageURL" type="text" value="{{ad.imageURL}}"/>
+  </div>
+
+  <div class="formFieldContainer">
+    <label for="form_infoURL">Info URL</label>
+    <input name="infoURL" id="form_infoURL" type="text" value="{{ad.infoURL}}"/>
+  </div>
+
+  <div class="formFieldContainer">
+    <label for="form_startDate">Start Date</label>
+    <input name="startDate" id="form_startDate" class="dateInput"
+           type="text" value="{{ad.startDate|date:"m/d/Y"}}" noPastDates=true />
+  </div>
+
+  <div class="formFieldContainer">
+    <label for="form_endDate">End Date</label>
+    <input name="endDate" id="form_endDate" class="dateInput"
+           type="text" value="{{ad.endDate|date:"m/d/Y"}}" noPastDates=true />
+  </div>
+
+  <div class="formFieldContainer">
+    <label for="form_size">Size</label>
+    <select name="size" id="form_size">
+      <option value="banner">Banner</option>
+      <option value="block">Block</option>
+    </select>
+  </div>
+
+  <input type="hidden" id="form_did" name="did" value="{{ad.id}}"/>
+
+  <div class="button noSelect" id="formSubmitButton">Submit</div>
+
+</form>

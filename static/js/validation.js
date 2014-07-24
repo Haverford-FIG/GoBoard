@@ -81,6 +81,27 @@ function validateForm(form, url){
       }
       break;
 
+    case "/ads/submit/":
+      var noEmpty = ["startDate","endDate", "text"];
+
+      $(form).find("input, select").each(function(i){
+        var name = $(this).attr("name");
+        var val = $(this).val();
+
+        //Don't allow empty values.
+        if (noEmpty.indexOf(name)>=0 && val=="") applyErrorClass($(this), false);
+        formContent[name]=val;
+      });
+
+      $(form).find(".dateInput").each(function(i){
+        var val = $(this).val();
+        //Don't allow empty values.
+        var validDate = /[0-3][0-9]\/[0-3][0-9]\/[0-9]+/g;
+        if (! validDate.test(val)) applyErrorClass($(this), false);
+      });
+
+      break;
+
     case "/accounts/create/":
       var noEmpty = ["newPass","newPassRepeat", "username", "email"];
       $(form).find("input, select").each(function(i){

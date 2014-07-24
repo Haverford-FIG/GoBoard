@@ -1,4 +1,5 @@
 **Go3 -- Another fine product from the good folks at FIG.**
+
 *Go3 is a social media site designed for Haverford College and the extended Tri-College Consortium.*
 
 It was designed for students, by students, to make information approachable, easy-to-access, and easy-to-post.

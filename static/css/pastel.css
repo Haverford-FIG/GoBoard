@@ -178,23 +178,30 @@ input:focus, select:focus, textarea:focus,
  border-color:#fff7bc;
 }
 
-.clearTagsButton {
+.messageDeleteButton, .clearTagsButton {
  position:absolute;
- left:0px;
- top:-0.4em;
  padding:2px 5px;
  color:red;
  opacity:0.4;
 }
+.clearTagsButton {
+ left:0px;
+ top:-0.4em;
+}
+.messageDeleteButton {
+ right:0px;
+ top:-0.4em;
+}
 
-.clearTagsButton:after {
+.messageDeleteButton:after, .clearTagsButton:after {
  content:"x";
 }
 
-.clearTagsButton:hover {
+.messageDeleteButton:hover, .clearTagsButton:hover {
  opacity:0.7;
  cursor:pointer;
 }
+
 
 .customCheckbox {
  position:relative;

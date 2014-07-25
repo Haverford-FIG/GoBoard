@@ -11,7 +11,8 @@ import json
 class Message(models.Model):
   user = models.ForeignKey(User, unique = False)
   text = models.CharField(max_length=300)
-  tags_required = models.BooleanField()
+  tags_required = models.BooleanField(default=False)
+  enabled = models.BooleanField(default=True)
   private = models.BooleanField(default=False)
   mentions = models.ManyToManyField(User, related_name="mentions",
                                    default=None, null=True)
@@ -25,6 +26,15 @@ class Message(models.Model):
     cleanText = escape(self.text)
     return cleanText
 
+  def isRecent(self):
+    # If the Message is more than 3 hours old, don't let it be deleted.
+    from datetime import datetime
+    date = datetime.now()
+    timeDiff = date - self.datetime
+    return (timeDiff.days < 1 and timeDiff.seconds <= 3*3600)
+
+  def deletable(self, user):
+    return self.user==user and self.isRecent()
 
 class Tag(models.Model):
   tag = models.CharField(max_length=30)
@@ -37,10 +47,12 @@ class Tag(models.Model):
 
 class UserInfo(models.Model):
   user = models.OneToOneField(User)
+
   email_about_weekly_work = models.BooleanField(default=True)
   email_about_weekly_consensus = models.BooleanField(default=True)
-  email_about_new_messages = models.BooleanField(default=True)
+  email_about_mentions = models.BooleanField(default=True)
   email_about_tag_updates = models.BooleanField(default=True)
+
   grad_year = models.IntegerField(default=lambda: datetime.now().year,
                                   blank=True, null=True)
   theme = models.CharField(max_length=150, default="pastel")

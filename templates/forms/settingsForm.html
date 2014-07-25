@@ -32,7 +32,7 @@
   </div>
   <div class="formFieldContainer">
     <label for="form_gradYear">Graduation Year</label>
-    <input name="grad_year" id="form_gradYear" type="text" 
+    <input name="grad_year" id="form_gradYear" type="text"
            value="{{user.userinfo.grad_year}}" class="numericOnly"/>
   </div>
 
@@ -48,10 +48,10 @@
 
   <div class="formFieldGroup">
     <div class="formDescriptor">Email Notifications</div>
-    {% include "forms/checkbox.html" with subject="email_about_new_messages" is_checked=user.userinfo.email_about_new_messages label="New Messages" %} 
-    {% include "forms/checkbox.html" with subject="email_about_tag_updates" is_checked=user.userinfo.email_about_tag_updates label="Tag Updates" %} 
-    {% include "forms/checkbox.html" with subject="email_about_weekly_work" is_checked=user.userinfo.email_about_weekly_work label="Weekly Work" %} 
-    {% include "forms/checkbox.html" with subject="email_about_weekly_consensus" is_checked=user.userinfo.email_about_weekly_consensus label="Weekly Consensus" %} 
+    {% include "forms/checkbox.html" with subject="email_about_mentions" is_checked=user.userinfo.email_about_mentions label="Mentioned in Message" %}
+    {% include "forms/checkbox.html" with subject="email_about_tag_updates" is_checked=user.userinfo.email_about_tag_updates label="Tag Updates" %}
+    {% include "forms/checkbox.html" with subject="email_about_weekly_work" is_checked=user.userinfo.email_about_weekly_work label="Weekly Work" %}
+    {% include "forms/checkbox.html" with subject="email_about_weekly_consensus" is_checked=user.userinfo.email_about_weekly_consensus label="Weekly Consensus" %}
   </div>
 
   <div class="formDescriptor">Other</div>

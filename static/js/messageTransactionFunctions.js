@@ -124,12 +124,6 @@ function setMessages(messages, container){
 
 
 function setMessage(message, container) {
-  //Construct the message.
-  newMessage = buildMessage(message.text, message.user,
-                            message.tags, message.mentions,
-                            message.private);
-
-  //... And display it (storing it's individual ID for future use).
-  $(newMessage).data("pid", message.pid);
-  $(container).append(newMessage);
+  //Construct the message and display it.
+  $(container).append( buildMessage(message) );
 }

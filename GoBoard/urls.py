@@ -15,6 +15,7 @@ urlpatterns = patterns('',
 
      url(r'^new_message/?$', 'GoBoard.views_to_abstract.new_message',),
      url(r'^get_messages/?$', 'GoBoard.views_to_abstract.send_messages',),
+     url(r'^messages?/delete/?$', 'GoBoard.views.messages.delete',),
 
      #View for getting tag information for autocomplete inputs.
      url(r'^get_tags/?$', 'GoBoard.views.tags.get_tags',),

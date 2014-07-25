@@ -44,6 +44,11 @@ def add_user_to_message(username, new_message):
     user = User.objects.filter(username=username).get()
     user.mentions.add(new_message)
     user.save()
+
+    #Email the user if they chose to be emailed on mentions.
+    if user.email_about_mentions:
+      text = "You've been mentioned:\n\n\"{}\"".format(new_message.text)
+      email_user(user, "Go! -- Mentioned in Message", text)
   except Exception as e:
     print "ERROR ADDING MESSAGE TO TAG: {}".format(e)
 

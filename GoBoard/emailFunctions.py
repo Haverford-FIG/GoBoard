@@ -8,11 +8,11 @@ be logged -- since emailing should never work if you have the password
 correctly set to "SecurePassword" as you should while developing.
 """
 
-######################  Email Functions  ########################### 
+######################  Email Functions  ###########################
 
 def email_user(user, subject, message):
   try:
-    send_mail("Go: {}".format(subject), message, EMAIL_HOST_USER, 
+    send_mail("Go: {}".format(subject), message, EMAIL_HOST_USER,
               [user.email], fail_silently=False)
   except:
     if not DEBUG:

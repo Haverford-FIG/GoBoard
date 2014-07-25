@@ -93,19 +93,27 @@ function markTags(text, tags){
 }
 
 
-function buildMessage(text, user, tagArray, mentionArray, is_private){
+function buildMessage(msg){
+
   //Add the .privateMessage class if the message is private and the
   // .personalMessage class if the user is "mentioned" in it.
-  var privateClass = (is_private==true) ? "privateMessage": "";
-  var personalClass = (mentionArray.indexOf("@"+user)>=0) ? "personalMessage ": "" ;
+  var privateClass = (msg.is_private==true) ? "privateMessage": "";
+  var personalClass = (msg.mentions.indexOf("@"+msg.user)>=0) ? "personalMessage ": "" ;
 
-  text = markTags(text, tagArray.concat(mentionArray) )
+  text = markTags(msg.text, msg.tags.concat(msg.mentions) )
 
-  var HTML = "<div class=\"message "+privateClass+personalClass+"\">";
-  HTML += "<div class=\"messageText\">"+text+"</div>";
-  HTML += "<div class=\"userShadow\">"+user+"</div>";
-  HTML += "<div class=\"tagShadow\">"+buildTagArrayHTML(tagArray, mentionArray)
-  HTML += "</div></div>";
+  var HTML = "<div data-did=\""+msg.pid+"\"";
+  HTML += " class=\"message "+privateClass+personalClass+"\">";
+  HTML += "<div class=\"messageText\">"+msg.text+"</div>";
+  HTML += "<div class=\"userShadow\">"+msg.user+"</div>";
+  HTML += "<div class=\"tagShadow\">"+buildTagArrayHTML(msg.tags, msg.mentions)
+  HTML += "</div>";
+
+  if (msg.deletable) {
+    HTML += "<div title='Delete this post.' class='messageDeleteButton'></div>";
+  }
+
+  HTML += "</div>";
   return HTML;
 }
 

@@ -264,6 +264,22 @@ $(document).on("click", ".clearTagsButton", function() {
   $(this).closest(".inputContainer").find(".tagAutoComplete").val("");
 });
 
+//Delete Message button.
+$(document).on("click", ".messageDeleteButton", function() {
+  if (confirm("Are you sure? This action can't be undone.")) {
+    $message = $(this).closest(".message");
+    var did = $message.attr("data-did");
+
+    $.post("/message/delete/", {"did":did}, function(response) {
+      if (response=="SUCCESS") {
+        $message.remove();
+      } else {
+        alert("Can't delete that message!");
+      }
+    });
+  }
+});
+
 //# # # # # # # # # # # # # # # # # # # # #
 //Delete Cards
 $(".deleteCardButton").click(function() {

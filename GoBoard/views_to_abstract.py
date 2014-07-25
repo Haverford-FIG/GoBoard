@@ -5,6 +5,7 @@ from django.views.decorators.http import require_http_methods
 from django.db.models import Q
 
 from models import User, Message
+from database_access import getMessages
 from models_constructors import *
 from GoBoard.sessionCounter import getActiveUsers
 from GoBoard.views.tags import getTagStrings, get_tag_list
@@ -58,14 +59,14 @@ def get_messages(tagBasedQuery, private=False, user=None, lastID=None, loadMore=
     userBasedQuery = Q(private=False)
 
   #Apply the "user-based" part of the query.
-  messages = Message.objects.filter(userBasedQuery)
+  messages = getMessages().filter(userBasedQuery)
 
   #If there is a "tag" query to perform, do that as well.
   if tagBasedQuery:
     messages = messages.filter(tagBasedQuery)
 
   if lastID:
-    lastMessage = Message.objects.get(id=int(lastID))
+    lastMessage = getMessages().get(id=int(lastID))
     if lastMessage:
       lastDate = lastMessage.datetime
       if loadMore:
@@ -144,6 +145,7 @@ def send_messages(request):
                    "mentions":getUsernameStrings(get_mention_list(message)),
                    "private":message.private,
                    "pid":message.id,
+                   "deletable":message.deletable(u),
                    "datetime":str(message.datetime)} for message in messages]
 
   except Exception as e:

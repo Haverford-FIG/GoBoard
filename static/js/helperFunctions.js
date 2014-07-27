@@ -23,32 +23,33 @@ function getMessageContext(){
  }
 }
 
-function applyMarkDown(container) {
+function applyMarkDown($message) {
   var settings = [
     {
       "class":"messageTextBold",
-      "tags":"\\*\\*"
+      "marker":"\\*\\*"
     },
     {
       "class":"messageTextItalic",
-      "tags":"\\*"
+      "marker":"\\*"
     },
     {
       "class":"messageTextHighlight",
-      "tags":"`"
+      "marker":"`"
     }
   ]
 
-  var text = $(container).html();
+  var text = $message.html();
 
   for (var i=0; i < settings.length; i++) {
-    var tags = settings[i]["tags"];
+    var marker = settings[i]["marker"];
     var className = settings[i]["class"];
 
-    var re = new RegExp(tags+"(.*?)"+tags, "g");
+    var re = new RegExp(marker+"(.*?)"+marker, "g");
+    console.log(re);
     text = text.replace(re, "<span class="+className+">$1</span>");
   }
 
-  $(container).html(text);
+  $message.html(text);
 }
 

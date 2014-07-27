@@ -32,14 +32,14 @@ def getTrendingTags(limit=MAX_UPDATE_CONTAINER_ENTRIES):
   return tagVals[:limit]
 
 
-def get_tags(request, query="recent"):
+def get_tags(request, query=None):
   try:
     if query=="recent":
       tagList = getRecentTags()
     elif query=="trending":
       tagList = getTrendingTags()
     else:
-      tagList = Tags.objects.all()
+      tagList = Tag.objects.all()
 
     tags = getTagStrings(tagList)
     return HttpResponse(json.dumps(tags), content_type="application/json")

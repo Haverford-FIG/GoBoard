@@ -80,7 +80,13 @@ def form(request, did=0):
 def delete(request, did):
   try:
     from GoBoard.models import Event
-    event = getEnabledEvents(request.user).get(id=did)
+
+    #Allow Event Managers to delete any event.
+    if request.user.groups.filter(name="eventManager").exists():
+      event = getEnabledEvents().get(id=did)
+    else:
+      event = getEnabledEvents(request.user).get(id=did)
+
     event.enabled = False
     event.save()
     return HttpResponse("SUCCESS")
@@ -90,11 +96,32 @@ def delete(request, did):
 @login_required
 def manager(request):
   from GoBoard.models import Event
+
+  managerView =  request.user.groups.filter(name="eventManager").exists()
+
   events = getEnabledEvents(request.user).order_by("-endTime")
+
   return render(request, "eventManager.html", {
-    "events":events
+    "events":events,
+    "managerView":managerView,
   })
 
+
+@login_required
+def send_weekly_consensus(request):
+  from GoBoard.emailFunctions import email_weekly_consensus
+  result = email_weekly_consensus()
+  return HttpResponse(result)
+
+def categorizeEvents(events):
+  categories = events.values_list("category").distinct()
+  categorizedEvents = {category[0]:[] for category in categories}
+
+  #Put each event in its proper category.
+  for event in events:
+    categorizedEvents[event.category].append(event)
+
+  return categorizedEvents
 
 def getEnabledEvents(user=None):
   from GoBoard.models import Event
@@ -107,9 +134,11 @@ def getEnabledEvents(user=None):
 
 def getActiveEvents(user=None):
   from datetime import datetime
-  from GoBoard.models import Event
-
   events = getEnabledEvents(user).filter(endTime__gte = datetime.now())
+  return events
 
+
+def getApprovedEvents(user=None):
+  events = getActiveEvents(user).filter(approved=True)
   return events
 

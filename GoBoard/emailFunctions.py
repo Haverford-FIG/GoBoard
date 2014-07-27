@@ -19,3 +19,23 @@ def email_user(user, subject, message):
       print("email_user failed: {}\n".format(user.id))
 
 
+def email_weekly_consensus():
+  from django.template import Template, Context
+  from GoBoard.models import User
+  from GoBoard.views.events import getApprovedEvents, categorizeEvents
+
+  events = getApprovedEvents().filter(weeklyConsensus=True)
+  with open("templates/emails/weeklyConsensus.html") as f:
+    template = Template(f.read())
+    categorizedEvents = categorizeEvents(events)
+    context = Context({"categorizedEvents":categorizedEvents})
+    message = template.render(context)
+
+  #Email those users that have chosen to receive Weekly Consensus updates.
+  users = User.objects.filter(userinfo__email_about_weekly_consensus=True)
+  for user in users:
+    email_user(user, "Weekly Consensus", message)
+
+  #Allow the message to be collected.
+  return message
+

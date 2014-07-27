@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head></head>
+<body>
+
+<div style="font-family:arial;">
+<div style="padding:10px 0px; text-align:center;font-size:2em;">
+Weekly Consensus {% now "(m/d)" %}
+</div>
+
+{% for category,events in categorizedEvents.items %}
+<div style="font-size: 1.5em; background-color: maroon; color: white; padding: 5px 15px;">{{category}}</div>
+
+  <ul style="list-style-type: none; padding: 0px 0px 15px;">
+  {% for event in events %}
+    <li style="padding: 0px 15px;">
+      <span style="font-weight: bold; font-size: 1.1em; padding: 0px 5px;">
+        {% if event.infoURL %}
+        <a style="text-decoration:none;" href="{{event.infoURL}}">{{ event.title }}</a>
+        {% else %}
+        {{ event.title }}
+        {% endif %}
+      </span>
+      {%if event.weeklyEvent%}<span style="color: #966;">(weekly)</span>{%endif%}
+      <ul style="list-style-type: none; padding: 0px 0px 15px;">
+        <li style="font-size: 0.8em; padding: 0px 15px;">
+        {% if event.startTime == event.endTime %}
+          <span>{{event.startTime|date:"m/d/Y"}}</span>
+          <span style="color: #966;">{{event.startTime|date:"(g:iA D)"}}</span>
+        {% elif event.startTime|date:"m/d/Y" = event.endTime|date:"m/d/Y"  %}
+          <span>{{event.startTime|date:"m/d/Y"}}</span>
+          <span style="color: #966;">{{event.startTime|date:"(g:iA - "}}</span>
+          <span style="color: #966;">{{event.endTime|date:"g:iA D)"}}</span>
+        {% else %}
+          <span>{{event.startTime|date:"m/d/Y"}}</span>
+          <span style="color: #966;">{{event.startTime|date:"(g:iA D)"}}</span>
+          <span style="padding: 0px 10px;">to</span>
+          <span>{{event.endTime|date:"m/d/Y"}}</span>
+          <span style="color: #966;">{{event.endTime|date:"(g:iA D)"}}</span>
+        {% endif %}
+        </li>
+        <li style="padding: 0px 15px;">{{ event.description }}</li>
+      </ul>
+</li>
+  {%   endfor %}
+  </ul>
+
+{% endfor %}
+</div>
+
+</body>
+</html>

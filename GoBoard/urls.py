@@ -44,6 +44,7 @@ urlpatterns = patterns('',
      url(r'^events/form/(?P<did>[0-9]*)/?$', 'GoBoard.views.events.form',),
      url(r'^events/delete/(?P<did>[0-9]+)/?$', 'GoBoard.views.events.delete',),
      url(r'^events/submit/$', 'GoBoard.views.events.submit', name="submitEvent"),
+     url(r'^events/consensus/?$', 'GoBoard.views.events.send_weekly_consensus',),
 
      #Views for ads.
      url(r'^ads/get/?$', 'GoBoard.views.ads.load_banner',),

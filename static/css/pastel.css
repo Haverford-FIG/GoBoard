@@ -678,7 +678,7 @@ option, .ui-menu-item a {
 .eventManageBlock {
  position:relative;
  max-width:600px;
- margin:20px auto;
+ margin:25px auto;
 }
 .eventDeleteButton {
  position:absolute;
@@ -728,6 +728,17 @@ option, .ui-menu-item a {
  text-align:right;
 }
 .eventCategory {
+ font-weight:bold;
+}
+.eventAuthorBlock {
+ position:absolute;
+ bottom:-0.5em;
+ left:10px;
+ font-size:0.7em;
+ text-align:right;
+ opacity:0.5;
+}
+.eventAuthor {
  font-weight:bold;
 }
 

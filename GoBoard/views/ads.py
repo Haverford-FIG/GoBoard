@@ -9,8 +9,9 @@ def load_banner(request):
   if not ad:
     ad = Ad.objects.filter(text="Submit your own HaverAd!").first()
 
-  # Give this `ad` another "view" count.
-  ad.incrementViews()
+  if ad:
+    # Give this `ad` another "view" count.
+    ad.incrementViews()
 
   return render(request, "adBanner.html", {
     "ad":ad,
@@ -21,7 +22,7 @@ from datetime import datetime
 from GoBoard.models import Ad
 @login_required
 @require_http_methods(["POST"])
-def submit_ad_form(request):
+def submit(request):
   try:
     form = request.POST
 
@@ -55,7 +56,7 @@ def submit_ad_form(request):
 
 from GoBoard.models import Ad
 @login_required
-def create_ad_form(request, did=0):
+def form(request, did=0):
   try:
     ad = getEnabledAds(request.user).get(id=did)
   except:
@@ -65,7 +66,7 @@ def create_ad_form(request, did=0):
   })
 
 @login_required
-def delete_ad(request, did):
+def delete(request, did):
   try:
     from GoBoard.models import Ad
     ad = getEnabledAds(request.user).get(id=did)
@@ -76,7 +77,7 @@ def delete_ad(request, did):
     return HttpResponse("ERROR")
 
 @login_required
-def ad_manager(request):
+def manager(request):
   from GoBoard.models import Ad
   ads = getEnabledAds(request.user).order_by("-endDate")
   return render(request, "adManager.html", {

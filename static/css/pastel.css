@@ -157,7 +157,7 @@ input, select {
 }
 
 input:focus, select:focus, textarea:focus,
-.fullScreenForm input:focus, .fullSCreenForm select:focus {
+.fullScreenForm input:focus, .fullScreenForm select:focus {
  background-color:#FFFCE5;
 }
 
@@ -418,13 +418,14 @@ input:focus, select:focus, textarea:focus,
  line-height:inherit;
 }
 
-.fullScreenForm input, .fullScreenForm select {
+.fullScreenForm input, .fullScreenForm select, .fullScreenForm textarea {
  float:left;
  width:70%;
  height:100%;
  background-color:#fff8cd;
  border:0px;
  border-bottom:1px solid #fff6ab;
+ display:inline-block;
 }
 
 .fullScreenForm input[type=checkbox]{
@@ -457,7 +458,7 @@ input:focus, select:focus, textarea:focus,
 }
 
 
-.badInput, input.badInput {
+.badInput, input.badInput, textarea.badInput {
  background-color:#fcbba1;
  border-bottom:1px solid #fc9272;
 }
@@ -673,6 +674,64 @@ option, .ui-menu-item a {
 
 }
 
+/* # # # #   Event-specific CSS   # # # # */
+.eventManageBlock {
+ position:relative;
+ max-width:600px;
+ margin:20px auto;
+}
+.eventDeleteButton {
+ position:absolute;
+ top:0px;
+ right:0px;
+ color:red;
+}
+.eventEditButton {
+ position:absolute;
+ top:0px;
+ right:20px;
+}
+
+.eventSpecificsBlock {
+ background-color:#7fcdbb;
+ padding:5px 15px;
+}
+.eventDateBlock {
+ background-color:#edf8b1;
+ text-align:center;
+ padding:5px 0px;
+}
+.eventDate {
+ font-weight:bold;
+}
+.eventTime {
+ font-size:0.8em;
+ opacity:0.8;
+}
+.eventInfoSpacer {
+ padding:0px 1em;
+}
+.eventInfoBlock {
+ padding:10px;
+ background-color:#efe;
+}
+.eventTitle {
+ font-size:1.2em;
+ font-weight:bold;
+ padding:2px 40px 2px 10px;
+}
+.eventCategoryBlock {
+ position:absolute;
+ bottom:-0.5em;
+ right:10px;
+ font-size:0.7em;
+ text-align:right;
+}
+.eventCategory {
+ font-weight:bold;
+}
+
+
 /* # # # #   HaverAd-specific CSS   # # # # */
 .adContainer {
  position:relative;
@@ -758,8 +817,12 @@ option, .ui-menu-item a {
  right:5em;
 }
 
+.unapproved {
+ border-left:16px solid maroon;
+}
+
 .inactive {
- opacity:0.5;
+ opacity:0.4;
 }
 .inactive:hover {
  opacity:1;

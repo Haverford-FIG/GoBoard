@@ -39,12 +39,18 @@ urlpatterns = patterns('',
      url(r'^settings/?$', 'GoBoard.views.user_settings.load_settings',),
      url(r'^update_settings/?$', 'GoBoard.views.user_settings.update_settings',),
 
-     #Views for user cards.
+     #Views for events.
+     url(r'^events/manage/?$', 'GoBoard.views.events.manager',),
+     url(r'^events/form/(?P<did>[0-9]*)/?$', 'GoBoard.views.events.form',),
+     url(r'^events/delete/(?P<did>[0-9]+)/?$', 'GoBoard.views.events.delete',),
+     url(r'^events/submit/$', 'GoBoard.views.events.submit', name="submitEvent"),
+
+     #Views for ads.
      url(r'^ads/get/?$', 'GoBoard.views.ads.load_banner',),
-     url(r'^ads/manage/?$', 'GoBoard.views.ads.ad_manager',),
-     url(r'^ads/create/(?P<did>[0-9]*)/?$', 'GoBoard.views.ads.create_ad_form',),
-     url(r'^ads/delete/(?P<did>[0-9]+)/?$', 'GoBoard.views.ads.delete_ad',),
-     url(r'^ads/submit/?$', 'GoBoard.views.ads.submit_ad_form',),
+     url(r'^ads/manage/?$', 'GoBoard.views.ads.manager',),
+     url(r'^ads/form/(?P<did>[0-9]*)/?$', 'GoBoard.views.ads.form',),
+     url(r'^ads/delete/(?P<did>[0-9]+)/?$', 'GoBoard.views.ads.delete',),
+     url(r'^ads/submit/$', 'GoBoard.views.ads.submit', name="submitAd"),
 
      #Views for user cards.
      url(r'^cards?/?$', 'GoBoard.views.cards.load_cards', name="cards"),

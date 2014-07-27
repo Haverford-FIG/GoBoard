@@ -81,6 +81,43 @@ function validateForm(form, url){
       }
       break;
 
+    case "/events/submit/":
+      var noEmpty = ["title", "location", "category", "description"];
+
+      $(form).find("input, select, textarea").each(function(i){
+        var name = $(this).attr("name");
+        var val = $(this).val();
+
+        //Don't allow empty values.
+        if (noEmpty.indexOf(name)>=0 && val=="") applyErrorClass($(this), false);
+        formContent[name]=val;
+      });
+
+      $(form).find(".timeInput").each(function(i){
+        var val = $(this).val();
+        //Don't allow empty values.
+        var validDate = /^[1-2]?[0-9]:[0-5][0-9](AM|PM)$/;
+        if (! validDate.test(val)) applyErrorClass($(this), false);
+      });
+
+      $(form).find(".dateInput").each(function(i){
+        var val = $(this).val();
+        //Don't allow empty values.
+        var validDate = /^[0-3][0-9]\/[0-3][0-9]\/[0-9]+$/g;
+        if (! validDate.test(val)) applyErrorClass($(this), false);
+      });
+
+      //Collect any checkbox values.
+      $(form).find("input[type=checkbox]").each(function(i){
+        var name = $(this).attr("name");
+        var val = $(this).is(":checked") ? "y" : "n";
+        formContent[name]=val;
+      });
+
+
+      break;
+
+
     case "/ads/submit/":
       var noEmpty = ["startDate","endDate", "text"];
 

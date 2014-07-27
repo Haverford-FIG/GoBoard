@@ -1,0 +1,43 @@
+{% include "genericPageStart.html" %}
+
+  <div class="miniHeader">Manage Events</div>
+
+  <a href="/events/form/"><div class="button center">Create A New Event</div></a>
+
+  {% for event in events %}
+    <div class="eventManageBlock
+     {% if not event.isActive %}inactive{% endif %}
+     {% if not event.approved %}unapproved{% endif %}
+    ">
+
+      <div class="eventTitle">{{event.title}}</div>
+      <a href="/events/form/{{event.id}}" class="eventEditButton">
+        {%if event.isActive%} Edit {%else%} Copy {%endif%}
+      </a>
+      <a href="/events/delete/{{event.id}}" class="eventDeleteButton">x</a>
+      <div class="eventSpecificsBlock">
+        <div>{%if event.weeklyConsensus%}Weekly Consensus{%endif%}</div>
+        <div>{%if event.weeklyEvent%}Weekly Event{%endif%}</div>
+        <div class="eventCategoryBlock">Category:
+          <span class="eventCategory">{{ event.category }}</span>
+        </div>
+      </div>
+
+      <div class="eventDateBlock">
+        <span class="eventDate">{{event.startTime|date:"m/d/Y"}}</span>
+        <span class="eventTime">{{event.startTime|date:"(g:iA D)"}}</span>
+        <span class="eventInfoSpacer">to</span>
+        <span class="eventDate">{{event.endTime|date:"m/d/Y"}}</span>
+        <span class="eventTime">{{event.endTime|date:"(g:iA D)"}}</span>
+      </div>
+
+      <div class="eventInfoBlock">
+        <span class="eventDescription">{{event.description}}</span>
+      </div>
+    </div>
+  {% endfor %}
+
+
+{% include "genericPageEnd.html" %}
+
+

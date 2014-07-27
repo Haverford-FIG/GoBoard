@@ -2,7 +2,7 @@
 
   <div class="miniHeader">Manage HaverAds</div>
 
-  <a href="/ads/create/"><div class="button center">Create A New Ad</div></a>
+  <a href="/ads/form/"><div class="button center">Create A New Ad</div></a>
 
   {% for ad in ads %}
     <div class="adManageBlock">
@@ -10,7 +10,7 @@
     <div>Active: {%if ad.isActive%} Yes {%else%} No {%endif%}</div>
     <div>Views: {{ad.views}}</div>
 
-    <a href="/ads/create/{{ad.id}}" class="adEditButton">
+    <a href="/ads/form/{{ad.id}}" class="adEditButton">
       {%if ad.isActive%} Edit {%else%} Duplicate {%endif%}
     </a>
 

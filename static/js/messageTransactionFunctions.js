@@ -3,6 +3,9 @@ function reloadMessages(messageContainer, tagArray, kwargs) {
   //If the container is locked, don't do anything.
   if ($(messageContainer).data("lockMessages")) return false;
 
+  //Also don't reload messages if the messageContainer does not exist.
+  if ($(messageContainer).html()===undefined) return false;
+
   //Load any optional parameters, but default to no options set.
   if (kwargs===undefined) kwargs = {};
 

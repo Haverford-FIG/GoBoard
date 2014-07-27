@@ -1,4 +1,4 @@
-<form class="fullScreenForm" action="/ads/submit/" method="post">
+<form class="fullScreenForm" action='{% url "submitAd" %}' method="post">
   {% csrf_token %}
 
   <div class="formDescriptor">Basic Info</div>

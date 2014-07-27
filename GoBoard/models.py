@@ -104,7 +104,7 @@ class Ad(models.Model):
   style = models.TextField(default="")
 
   views = models.IntegerField(default=0)
-  author = models.ForeignKey(User, unique = False)
+  author = models.ForeignKey(User, unique=False)
   enabled = models.BooleanField(default=True)
 
   def __unicode__(self):
@@ -122,7 +122,30 @@ class Ad(models.Model):
     self.views = self.views+1
     self.save()
 
+class Event(models.Model):
+  title = models.CharField(max_length=300, default="")
+  location = models.CharField(max_length=300, default="")
+  description = models.TextField(default="")
+  infoURL = models.TextField(default="")
+
+  startTime = models.DateTimeField()
+  endTime = models.DateTimeField()
+
+  category = models.CharField(max_length=300, default="")
+  weeklyEvent = models.BooleanField(default=False)
+  weeklyConsensus = models.BooleanField(default=False)
+
+  enabled = models.BooleanField(default=True)
+  approved = models.BooleanField(default=False)
+  author = models.ForeignKey(User, unique=False)
+
+  def isActive(self):
+    from datetime import datetime
+    return self.endTime >= datetime.now()
+
+
 admin.site.register(Message)
 admin.site.register(Tag)
 admin.site.register(Ad)
+admin.site.register(Event)
 admin.site.register(UserInfo)

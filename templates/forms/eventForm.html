@@ -1,0 +1,65 @@
+<form class="fullScreenForm" action='{% url "submitEvent" %}' method="post">
+  {% csrf_token %}
+
+  <div class="formDescriptor">Basic Info</div>
+  <div class="formFieldContainer">
+    <label for="form_title">Title</label>
+    <input name="title" id="form_title" type="text" value="{{event.title}}"/>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_location">Location</label>
+    <input name="location" id="form_location"
+           type="text" value="{{event.location}}"/>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_category">Category</label>
+    <input name="category" id="form_category"
+           type="text" value="{{event.category}}"/>
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_description">Description</label>
+    <textarea name="description" id="form_description">{{event.description}}</textarea>
+  </div>
+
+
+  <div class="formDescriptor">Date and Time</div>
+  <div class="formFieldContainer">
+    <label for="form_startTime">Start Time</label>
+    <input name="startTime" id="form_startTime" class="timeInput"
+           type="text" value="{{event.startTime|date:"g:iA"}}" />
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_startDate">Start Date</label>
+    <input name="startDate" id="form_startDate" class="dateInput"
+           type="text" value="{{event.startTime|date:"m/d/Y"}}" noPastDates=true />
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_endTime">End Time</label>
+    <input name="endTime" id="form_endTime" class="timeInput"
+           type="text" value="{{event.endTime|date:"g:iA"}}" />
+  </div>
+  <div class="formFieldContainer">
+    <label for="form_endDate">End Date</label>
+    <input name="endDate" id="form_endDate" class="dateInput"
+           type="text" value="{{event.endTime|date:"m/d/Y"}}" noPastDates=true />
+  </div>
+
+
+  <div class="formDescriptor">More Details</div>
+  <div class="formFieldContainer">
+    <label for="form_infoURL">Info Link</label>
+    <input name="infoURL" id="form_infoURL"
+           type="text" value="{{event.infoURL}}"/>
+  </div>
+    {% include "forms/checkbox.html" with subject="weeklyConsensus" is_checked=event.weeklyConsensus label="Weekly Consensus" %}
+    {% include "forms/checkbox.html" with subject="weeklyEvent" is_checked=event.weeklyEvent label="Weekly Event" %}
+
+    {% if managerView %}
+    <b>{% include "forms/checkbox.html" with subject="approved" is_checked=event.approved label="Approved" %}</b>
+    {% endif %}
+
+  <input type="hidden" id="form_did" name="did" value="{{event.id}}"/>
+
+  <div class="button noSelect" id="formSubmitButton">Submit</div>
+
+</form>

@@ -88,7 +88,7 @@ $(document).on("click", "#formSubmitButton", function(){
 
 
 //Update the .badInput for forms after a user inputs new info.
-$(document).on("blur", ".fullScreenForm input", function() {
+$(document).on("blur", ".fullScreenForm", function() {
   var form = $(this).closest("form");
   var url = $(form).attr("action");
   formContents = validateForm(form, url);
@@ -375,13 +375,54 @@ $(".dateInput").datepicker({
 
 });
 $(".dateInput").each(function() {
-  console.log($(this).val());
   if ($(this).val()===""){
     $(this).datepicker("setDate", "0");
   }
 });
 $(".dateInput[noPastDates=true]").datepicker("option", "minDate", 0);
 
+//# # # # # # # # # # #
+//TimePicker  # # # # #
+$(document).on("change", ".timeInput", function() {
+  var dirtyTime = $(this).val().toUpperCase()
+                         .replace(/[\s.]/g, "");
+
+  //Allow a few keywords to decide on the time.
+  if (dirtyTime==="" || dirtyTime==="midnight") dirtyTime="12:00am";
+  if (dirtyTime==="noon") dirtyTime="12:00pm";
+  if (dirtyTime==="now") {
+    var time = new Date();
+    dirtyTime = time.getHours() + ":" + time.getMinutes();
+  }
+
+  //Give the user options for how they can write the day.
+  var hours;
+  var minutes;
+  if (/^[0-9]+(AM|PM)?$/.test(dirtyTime)){
+    hours = String(dirtyTime.replace(/(AM|PM)/,""));
+    minutes = 0;
+  } else {
+    var colon = dirtyTime.indexOf(":");
+    hours = parseInt(dirtyTime.slice(0, colon).replace(/[a-zA-Z]/g,""));
+    minutes = parseInt(dirtyTime.slice(colon+1).replace(/[a-zA-Z]/g,""));
+  }
+
+  var calculatedPeriod = "PM";
+  if (hours > 12){
+    hours %= 12;
+    if (hours===0) hours = 12;
+  }
+
+  minutes = minutes % 60
+  minutes = (minutes<9) ? "0"+String(minutes) : String(minutes);
+
+  var periodMatch = dirtyTime.match(/(AM|PM)/);
+  var period = (periodMatch!==null) ? periodMatch[0] : calculatedPeriod;
+
+  var cleanTime = String(hours) + ":" + minutes + period;
+  $(this).val(cleanTime);
+})
+$(".timeInput").trigger("change");
 
 //# # # # # # # # # # #
 //jQuery Tooltips # # #

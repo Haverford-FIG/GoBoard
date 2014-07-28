@@ -52,10 +52,10 @@ function buildUserCounter(userCount){
   return HTML;
 }
 
-function buildTagMenu() {
+function buildTagMenu(tag) {
   var HTML = "";
   HTML += "<div class='noSelect menu tagMenu'>";
-  HTML +=   "<div class='menuOption'>";
+  HTML +=   "<div tag='"+tag+"' class='menuOption followTagButton'>";
   HTML +=     "Follow";
   HTML +=   "</div>";
   HTML += "</div>";
@@ -104,7 +104,7 @@ function buildMessage(msg){
 
   var HTML = "<div data-did=\""+msg.pid+"\"";
   HTML += " class=\"message "+privateClass+personalClass+"\">";
-  HTML += "<div class=\"messageText\">"+msg.text+"</div>";
+  HTML += "<div class=\"messageText\">"+text+"</div>";
   HTML += "<div class=\"userShadow\">"+msg.user+"</div>";
   HTML += "<div class=\"tagShadow\">"+buildTagArrayHTML(msg.tags, msg.mentions)
   HTML += "</div>";

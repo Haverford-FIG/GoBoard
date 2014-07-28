@@ -46,7 +46,6 @@ function applyMarkDown($message) {
     var className = settings[i]["class"];
 
     var re = new RegExp(marker+"(.*?)"+marker, "g");
-    console.log(re);
     text = text.replace(re, "<span class="+className+">$1</span>");
   }
 

@@ -19,6 +19,9 @@ urlpatterns = patterns('',
 
      #View for getting tag information for autocomplete inputs.
      url(r'^get_tags/?$', 'GoBoard.views.tags.get_tags',),
+     url(r'^tags/follow/$', 'GoBoard.views.tags.get_followed_tags',),
+     url(r'^tags/follow/new/$', 'GoBoard.views.tags.follow_new',),
+     url(r'^tags/follow/delete/$', 'GoBoard.views.tags.follow_delete',),
      url(r'^get_usernames/?$', 'GoBoard.views.users.get_usernames',),
 
      #Views for transfering basic "#tags" back to the auto-update container.

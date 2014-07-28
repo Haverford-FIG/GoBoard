@@ -173,11 +173,34 @@ $(document).on("click", ".activateTagMenu", function() {
   //Remove any other .tagMenu elements that may exist.
   var tagMenu = $(this).find(".tagMenu");
   if ($(tagMenu).length==0) {
-    var menu = $(buildTagMenu())
+    var tag = $(this).html();
+    var menu = $(buildTagMenu(tag))
     $(this).append(menu);
   } else {
     $(tagMenu).show();
   }
+
+});
+
+
+$(document).on("click", ".followTagButton", function() {
+  var tag = $(this).attr("tag").replace(/#/g,"");
+  $.post("/tags/follow/new/", {"tag":tag}, function(response){
+    $(".tagMenu").hide();
+    alert(response);
+  });
+});
+
+$(document).on("click", ".unfollowTagButton", function() {
+  var $tagBlock = $(this).closest(".tagManageBlock");
+  var tag = $(this).attr("tag").replace(/#/g,"");
+  $.post("/tags/follow/delete/", {"tag":tag}, function(response){
+    if (response==="SUCCESS") {
+      $tagBlock.remove();
+    } else {
+      alert(response);
+    }
+  });
 });
 
 

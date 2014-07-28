@@ -31,10 +31,23 @@ function reloadMessages(messageContainer, tagArray, kwargs) {
 
   //Load the "most recent" (or "oldest") message ID for this tag set.
   var lastID = "None";
-  if (currentMessages.length) {
-    lastID = currentMessages[0]["pid"];
-    if (kwargs["loadMore"]==true) {
+
+  //If a message was deleted, make sure to update the cache.
+  if (kwargs["loadMore"]==true) {
+    while (currentMessages.length) {
       lastID = currentMessages[currentMessages.length-1]["pid"];
+      var message = $(".message[data-did="+lastID+"]");
+      if (message.length) break;
+      currentMessages.pop()
+      lastID = "None";
+    }
+  } else {
+    while (currentMessages.length) {
+      lastID = currentMessages[0]["pid"];
+      var message = $(".message[data-did="+lastID+"]");
+      if (message.length) break;
+      currentMessages.shift()
+      lastID = "None";
     }
   }
 

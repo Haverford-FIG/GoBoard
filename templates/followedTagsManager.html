@@ -1,0 +1,19 @@
+{% include "genericPageStart.html" %}
+
+  <div class="miniHeader">Manage Followed Tags</div>
+
+  {% for tag in tags %}
+    <div class="tagManageBlock">
+      <div class="unfollowTagButton deleteX" tag="{{tag.tag}}">x</div>
+
+      <span class="tagText">#{{ tag.tag }}</span>
+      <span class="tagCount">({{ tag.message.count }} use{% if tag.message.count > 1 %}s{% endif %})</span>
+    </div>
+  {% endfor %}
+
+
+{% include "genericPageEnd.html" %}
+
+
+
+

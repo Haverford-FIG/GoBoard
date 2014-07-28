@@ -36,9 +36,12 @@ class Message(models.Model):
   def deletable(self, user):
     return self.user==user and self.isRecent()
 
+
 class Tag(models.Model):
   tag = models.CharField(max_length=30)
   message = models.ManyToManyField(Message)
+  following = models.ManyToManyField(User, related_name="following",
+                                   default=None, null=True)
 
   def __unicode__(self):
     return self.tag

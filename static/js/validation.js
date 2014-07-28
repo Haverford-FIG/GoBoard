@@ -256,7 +256,10 @@ $(".tagAutoComplete").keypress(function(e){
     return false;
   }
 
-  var input = $(this).val();
+  var input = $(this).val()
+                     .replace(/^\s*#\s+/g,"")
+                     .replace(/\s+#\s+/g," ");
+  $(this).val( input );
   var lastChar = input.slice(-1);
   switch(c){
     case " ":
@@ -271,7 +274,10 @@ $(".tagAutoComplete").keypress(function(e){
     default:
       var validChars = new RegExp(/#|@|[a-zA-Z1-9]/);
       if (lastChar.match(/@|#/) && c.match(/[1-9]/)) return false;
-      if (!validChars.test(lastChar)) return false;
+
+      if (lastChar=="" || lastChar==" ") {
+        $(this).val( input + "#" );
+      } else if (!validChars.test(lastChar)) { return false }
   }
 
 });

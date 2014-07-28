@@ -1,5 +1,9 @@
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
+
 from GoBoard.models import Tag
 from GoBoard.settings import MAX_UPDATE_CONTAINER_ENTRIES
 import datetime
@@ -59,3 +63,43 @@ def get_tag_list(message):
     print e
     print "ERROR GETTING MESSAGE TAGS: {}".format(message)
   return tagList
+
+
+@login_required
+def get_followed_tags(request):
+  #Get the tags that this user has followed.
+  tags = Tag.objects.filter(following__in=[request.user.id])
+  tags = tags.order_by("tag")
+
+  return render(request, "followedTagsManager.html", {
+    "tags": tags
+  })
+
+
+@require_http_methods(["POST"])
+@login_required
+def follow_delete(request):
+  try:
+    tagText = request.POST["tag"]
+    tag = Tag.objects.get(tag=tagText)
+    tag.following.remove(request.user)
+    tag.save()
+    return HttpResponse("SUCCESS")
+  except Exception as e:
+    print e
+    return HttpResponse("ERROR")
+
+
+@require_http_methods(["POST"])
+@login_required
+def follow_new(request):
+  try:
+    tagText = request.POST["tag"]
+    tag = Tag.objects.get(tag=tagText)
+    tag.following.add(request.user)
+    tag.save()
+    return HttpResponse("SUCCESS")
+  except Exception as e:
+    print e
+    return HttpResponse("ERROR")
+

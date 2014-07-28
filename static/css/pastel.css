@@ -674,6 +674,39 @@ option, .ui-menu-item a {
 
 }
 
+.deleteX {
+ position:absolute;
+ opacity:0.5;
+ padding:5px;
+ color:red;
+}
+.deleteX:hover {
+ opacity:1;
+ cursor:pointer;
+}
+
+/* # # # #   Tag Management-specific CSS   # # # # */
+.tagManageBlock {
+ position:relative;
+ padding:10px 35px;
+ width:300px;
+ margin:10px auto;
+ background-color:#edf8b1;
+}
+.unfollowTagButton {
+ right:10px;
+ top:0px;
+}
+
+.tagText {
+ font-size:1.1em;
+ font-weight:bold;
+}
+.tagCount {
+ opacity:0.5;
+}
+
+
 /* # # # #   Event-specific CSS   # # # # */
 .eventManageBlock {
  position:relative;

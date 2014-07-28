@@ -33,21 +33,11 @@ function reloadMessages(messageContainer, tagArray, kwargs) {
   var lastID = "None";
 
   //If a message was deleted, make sure to update the cache.
-  if (kwargs["loadMore"]==true) {
-    while (currentMessages.length) {
+  if (currentMessages.length) {
+    if (kwargs["loadMore"]==true) {
       lastID = currentMessages[currentMessages.length-1]["pid"];
-      var message = $(".message[data-did="+lastID+"]");
-      if (message.length) break;
-      currentMessages.pop()
-      lastID = "None";
-    }
-  } else {
-    while (currentMessages.length) {
+    } else {
       lastID = currentMessages[0]["pid"];
-      var message = $(".message[data-did="+lastID+"]");
-      if (message.length) break;
-      currentMessages.shift()
-      lastID = "None";
     }
   }
 

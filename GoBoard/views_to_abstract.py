@@ -66,7 +66,7 @@ def get_messages(tagBasedQuery, private=False, user=None, lastID=None, loadMore=
     messages = messages.filter(tagBasedQuery)
 
   if lastID:
-    lastMessage = getMessages().get(id=int(lastID))
+    lastMessage = Message.objects.filter(id=int(lastID)).first()
     if lastMessage:
       lastDate = lastMessage.datetime
       if loadMore:

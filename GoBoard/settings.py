@@ -1,3 +1,4 @@
+
 import os
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__name__))
@@ -16,7 +17,7 @@ ALLOWED_HOSTS = ["127.0.0.1","0.0.0.0","165.82.80.243", "go.haverford.edu", "loc
 #The max number of entries to display in an updateContainer.
 MAX_UPDATE_CONTAINER_ENTRIES = 15
 CAMPUS_OPTIONS = ["Haverford", "Swarthmore", "Bryn Mawr", "UPenn", "Alumni"]
-THEME_OPTIONS = ["pastel", "bguggs", "blair", "brandon", "nora"]
+THEME_OPTIONS = ["pastel", "bguggs", "blair", "brandon", "nora", "gabe"]
 
 MESSAGES_PER_TRANSACTION = 30
 

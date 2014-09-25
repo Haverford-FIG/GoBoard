@@ -5,7 +5,7 @@ body {
  padding:0px;
  min-width:600px;
 
- font-family:"Lato";
+ font-family:"Lato", "Arial";
  font-size:16px;
 }
 
@@ -996,6 +996,9 @@ option, .ui-menu-item a {
 /* Weather */
 #link_get_widget {
  display:none;
+}
+.aw-current-weather-inner {
+ z-index:0;
 }
 .aw-widget-current-inner .aw-widget-content.bg-su {
  border:none !important; /* Override the default border. */

@@ -279,7 +279,6 @@ $(".tagAutoComplete").keypress(function(e){
         $(this).val( input + "#" );
       } else if (!validChars.test(lastChar)) { return false }
   }
-
 });
 
 

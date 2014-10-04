@@ -248,11 +248,24 @@ $(document).ready(function() {
 //# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 $(".tagAutoComplete").keypress(function(e){
-  var c = String.fromCharCode(e.which)
+  var c;
+  switch (e.which){
+    case 8:
+      c = "BACKSPACE"
+      break;
+
+    default:
+      c = String.fromCharCode(e.which);
+  }
 
   //Only allow certain characters.
   var re = new RegExp(/(#|@|[a-zA-Z1-9]|\s)/);
-  if (!re.test(c)){
+  if (c == "BACKSPACE") {
+    var old = $(this).val();
+    $(this).val( old.slice(0, old.length-1) );
+    return false;
+
+  } else if (!re.test(c)){
     return false;
   }
 

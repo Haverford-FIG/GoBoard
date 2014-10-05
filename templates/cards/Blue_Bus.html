@@ -20,31 +20,21 @@ transfer from bus to van"
 
 -->
 <div class="cardTitle">Next Blue Bus</div>
-<b>I'm at: </b>
-<table>
-	<td>
-		<tr>
-			<select id="selectOrigin">
-				<option val="Haverford">Haverford</option>
-				<option val="BrynMawr">Bryn Mawr</option>
-				<option val="Swarthmore">Swarthmore</option>
-			</select>
-		</tr>
+<select id="selectOrigin">
+	{% for station in settings.BLUE_BUS_LOCATIONS.keys %}
+		<option val="{{station}}"
+		{% if user.is_authenticated and userinfo.campus == station%}
+			selected
+		{% endif %}
+		>{{station}}</option>
+	{% endfor%}
+</select>
 
-<b>I want to go to: </b>
-
-		<tr>
-			<select id="selectDestination">
-				<option val="BrynMawr">Bryn Mawr</option>
-				<option val="Haverford">Haverford</option>
-				<option val="Swarthmore">Swarthmore</option>
-			</select>
-		</tr>
-	</td>
-	<td>
-		<button type="button">Go!</button>
-	</td>
-</table>
+<select id="selectDestination">
+	{% for station in settings.BLUE_BUS_LOCATIONS.keys %}
+	<option val="{{station}}">{{station}}</option>
+	{% endfor%}
+</select>
 
 <div id="blue_bus_results_container"></div>
 

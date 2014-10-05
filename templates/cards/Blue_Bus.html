@@ -2,6 +2,9 @@
 Blue Bus Card
 Currently maintained by Kevin
 
+All code shamelessly reverse engineered from Casey Falks'
+code found in the "SEPTA.html" file. 
+
 Goals: 
 Milestone 1: Be able to scrape data from the Blue Bus
 	Schedule and offer trip plans for Haverford-Bryn Mawr
@@ -42,3 +45,19 @@ transfer from bus to van"
 		<button type="button">Go!</button>
 	</td>
 </table>
+
+<div id="blue_bus_results_container"></div>
+
+<script>
+$("#selectOrigin, #selectDestination").change(function(){
+	var locA = $("#selectOrigin").val();
+	// Don't let locA==locZ since there will never exist times. 
+	disableSelectedInput(locA, "#selectDestination");
+
+	var locZ = $("#selectDestination").val();
+	var resultsContainer = $("#blue_bus_results_container"); 
+	resultsContainer.html("Loading...");
+});
+
+
+</script>

@@ -319,13 +319,11 @@ $(".deleteCardButton").click(function() {
   $.post("/deleteCard/", { "cardName":card.attr("name") }, function(response) {
     if (response=="0") {
       $(card).hide()
+      location.reload(true);
     } else {
       alert("Oops... We couldn't delete the card. This is embarrasing...")
     }
   });
-
-  //Hide the menu.
-  $(this).closest(".menu").hide()
 });
 
 //Add Cards

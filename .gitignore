@@ -1,2 +1,4 @@
 *.pyc
+*.swp
+*~
 ./GoBoard_db

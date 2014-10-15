@@ -162,6 +162,13 @@ $(document).on("click", "#tagFilterSubmit", function() {
   reloadMessages(".messageBox", tags, context);
 });
 
+// If the "enter" key is clicked, perform a tag-search.
+$(document).on("keydown", "#tagFilterInput", function(e) {
+  if (e.which==13) {
+    $("#tagFilterSubmit").trigger("click");
+  }
+});
+
 $(document).on("click", ".tagLink", function() {
   var tag = cleanTags($(this).html());
   setActiveTags(tag);

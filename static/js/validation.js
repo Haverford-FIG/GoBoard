@@ -251,7 +251,11 @@ $(".tagAutoComplete").keypress(function(e){
   var c;
   switch (e.which){
     case 8:
-      c = "BACKSPACE"
+      c = "BACKSPACE";
+      break;
+
+    case 13:
+      c = "ENTER";
       break;
 
     default:
@@ -264,7 +268,8 @@ $(".tagAutoComplete").keypress(function(e){
     var old = $(this).val();
     $(this).val( old.slice(0, old.length-1) );
     return false;
-
+  } else if (c=="ENTER") {
+    return false;
   } else if (!re.test(c)){
     return false;
   }
@@ -290,7 +295,9 @@ $(".tagAutoComplete").keypress(function(e){
 
       if (lastChar=="" || lastChar==" ") {
         $(this).val( input + "#" );
-      } else if (!validChars.test(lastChar)) { return false }
+      } else if (!validChars.test(lastChar)) {
+        return false;
+      }
   }
 });
 

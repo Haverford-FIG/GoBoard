@@ -17,12 +17,12 @@ def login_view(request):
     password = request.POST.get("password","")
     if validate_login(username, password, request):
       return HttpResponse("NEXT")
-    return HttpResponse("ERROR")
+    return HttpResponse("ERROR PASS")
   else:
     return render(request, "loginScreen.html")
-    
+
 
 def logout_view(request):
-  logout(request)  
+  logout(request)
   return render(request, "successMessages/logout.html")
 

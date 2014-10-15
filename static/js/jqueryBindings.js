@@ -38,7 +38,8 @@ $(document).on("keydown", "#form_password", function(e) {
   if (e.which==13) {
     $("#formSubmitButton").trigger("click");
   }
-});
+})
+;
 $(document).on("click", "#formSubmitButton", function(){
   var form = $(this).closest("form");
   var url = $(form).attr("action");

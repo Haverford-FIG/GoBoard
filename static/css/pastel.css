@@ -3,7 +3,6 @@
 body {
  margin:0 0 40 0;
  padding:0px;
- min-width:600px;
 
  font-family:"Lato", "Arial";
  font-size:16px;
@@ -537,7 +536,7 @@ option, .ui-menu-item a {
 .card {
  position:relative;
  width:30%;
- margin:10px 4px;
+ margin:10px 2px;
  height:300px;
  display:inline-block;
  box-sizing:border-box;
@@ -1070,3 +1069,18 @@ option, .ui-menu-item a {
   line-height: 100%;
 }
 
+
+@media (max-width:600px) {
+ #recentUpdatesContainer {
+  display:none;
+ }
+
+ #messageContainer {
+  width:100%;
+ }
+
+ .card {
+  width:100%;
+  margin:0px 0px;
+ }
+}

@@ -64,6 +64,7 @@ urlpatterns = patterns('',
 
      #Views specific to cards.
      url(r'^get_SEPTA_times/?$', 'GoBoard.views.cards.get_SEPTA_times',),
+     url(r'^get_BlueBus_locations/?$', 'GoBoard.views.cards.get_BlueBus_locations',),
      url(r'^get_calendar_events/?$', 'GoBoard.views.cards.get_calendar_events',),
      url(r'^get_clerk_articles/?$', 'GoBoard.views.cards.get_rss_articles',
                   {
@@ -75,7 +76,9 @@ urlpatterns = patterns('',
                    "maxArticles":4,
                   }),
 
+
      url(r'^userCount/?$', 'GoBoard.sessionCounter.sendActiveUserCount',),
+
      url(r'^admin/?', include(admin.site.urls)),
 )
 

@@ -56,9 +56,10 @@ def get_available_cards(request):
 
 # # # # # # # # # # #   Card-Specific Views   # # # # # # # # # #
 
-import urllib2
+
 @require_http_methods(["POST"])
 def get_SEPTA_times(request):
+  import urllib2
   linkBase = "http://app.septa.org/nta/result.php?"
   locAPrefix = "loc_a=";
   locZPrefix = "&loc_z=";
@@ -74,8 +75,8 @@ def get_SEPTA_times(request):
   return HttpResponse(content)
 
 
-import requests, bs4, datetime
 def get_rss_articles(request, url="", maxArticles=3):
+  import requests, bs4, datetime
   def getArticle(item):
     #Put the date in a good format.
     dateString = item.find("pubDate").text
@@ -101,8 +102,8 @@ def get_rss_articles(request, url="", maxArticles=3):
   return HttpResponse(json.dumps(articles), content_type="application/json")
 
 
-import requests, bs4, datetime, re
 def get_calendar_events(request):
+  import requests, bs4, datetime, re
   try:
     #Convert the date into an RSS-comparable form.
     rawDate = request.GET["date"]
@@ -150,6 +151,23 @@ def get_calendar_events(request):
     events = []
   return HttpResponse(json.dumps(events), content_type="application/json")
 
+
+def get_BlueBus_locations(request):
+  def getDay(timestring=None):
+    import datetime
+    if not timestring: #TODO: Expand to custom timestring
+      time = datetime.datetime.now()
+
+    day = ["Mo","Tu","We","Th","Fr","Sa","Su"][time.weekday()]
+    if day in {"Sa", "Su"}:
+      return "Saturday Daytime" if (day=="Sa" and time.hour<15) else "Weekend"
+    else:
+      return "Weekday"
+
+  from GoBoard.settings import BLUE_BUS_LOCATIONS
+  timestring = request.GET.get("", None)
+  locations = BLUE_BUS_LOCATIONS[getDay(timestring=timestring)]
+  return HttpResponse(json.dumps(locations), content_type="application/json")
 
 
 

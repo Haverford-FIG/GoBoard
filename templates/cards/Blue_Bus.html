@@ -3,51 +3,25 @@ Blue Bus Card
 Currently maintained by Kevin
 
 All code shamelessly reverse engineered from Casey Falks'
-code found in the "SEPTA.html" file. 
+code found in the "SEPTA.html" file.
 
-Goals: 
+Goals:
 Milestone 1: Be able to scrape data from the Blue Bus
 	Schedule and offer trip plans for Haverford-Bryn Mawr
 
 Milestone 2: Be able to scrape data from the TriCo Van
-	Schedule and be able to offer trip plans for the TriCo. 
+	Schedule and be able to offer trip plans for the TriCo.
 
 Milestone 3: Enhanced support for special service flags on
-	the schedule (*) (V) etc. 
+	the schedule (*) (V) etc.
 
 Milestone 4: Enabling "least amount of time including
 transfer from bus to van"
 
 -->
 <div class="cardTitle">Next Blue Bus</div>
-<select id="selectOrigin">
-	{% for station in settings.BLUE_BUS_LOCATIONS.keys %}
-		<option val="{{station}}"
-		{% if user.is_authenticated and userinfo.campus == station%}
-			selected
-		{% endif %}
-		>{{station}}</option>
-	{% endfor%}
-</select>
+<div id="blueBusLocationContainer">
+Busing the Blues...
+</div>
 
-<select id="selectDestination">
-	{% for station in settings.BLUE_BUS_LOCATIONS.keys %}
-	<option val="{{station}}">{{station}}</option>
-	{% endfor%}
-</select>
-
-<div id="blue_bus_results_container"></div>
-
-<script>
-$("#selectOrigin, #selectDestination").change(function(){
-	var locA = $("#selectOrigin").val();
-	// Don't let locA==locZ since there will never exist times. 
-	disableSelectedInput(locA, "#selectDestination");
-
-	var locZ = $("#selectDestination").val();
-	var resultsContainer = $("#blue_bus_results_container"); 
-	resultsContainer.html("Loading...");
-});
-
-
-</script>
+<script src="{{STATIC_URL}}js/cards/bluebus.js"></script>

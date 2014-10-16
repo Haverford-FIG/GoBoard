@@ -97,6 +97,7 @@ def delete(request, did):
 def manager(request):
   from GoBoard.models import Event
 
+  # Note: An event "manager" must be in the "eventManager" group.
   managerView =  request.user.groups.filter(name="eventManager").exists()
 
   events = getEnabledEvents(request.user).order_by("-endTime")
@@ -128,7 +129,8 @@ def getEnabledEvents(user=None):
   events = Event.objects.filter(enabled=True)
 
   if user:
-    events = events.filter(author=user)
+    if not user.groups.filter(name="eventManager").exists():
+      events = events.filter(author=user)
 
   return events
 

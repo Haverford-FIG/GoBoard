@@ -83,6 +83,7 @@ function validateForm(form, url){
 
     case "/events/submit/":
       var noEmpty = ["title", "location", "category", "description"];
+      var externalURL = ["imageURL", "infoURL"]
 
       $(form).find("input, select, textarea").each(function(i){
         var name = $(this).attr("name");
@@ -91,6 +92,14 @@ function validateForm(form, url){
         //Don't allow empty values.
         if (noEmpty.indexOf(name)>=0 && val=="") applyErrorClass($(this), false);
         formContent[name]=val;
+
+        if (externalURL.indexOf(name)>=0) {
+          if (!(val.substring(0,7)=="http://" ||
+                val.substring(0,8)=="https://" ||
+                val=="")) {
+             $(this).val("http://"+$(this).val())
+          }
+        }
       });
 
       $(form).find(".timeInput").each(function(i){

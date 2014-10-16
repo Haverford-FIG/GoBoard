@@ -120,6 +120,7 @@ function validateForm(form, url){
 
     case "/ads/submit/":
       var noEmpty = ["startDate","endDate", "text"];
+      var externalURL = ["imageURL", "infoURL"]
 
       $(form).find("input, select").each(function(i){
         var name = $(this).attr("name");
@@ -128,6 +129,15 @@ function validateForm(form, url){
         //Don't allow empty values.
         if (noEmpty.indexOf(name)>=0 && val=="") applyErrorClass($(this), false);
         formContent[name]=val;
+
+        if (externalURL.indexOf(name)>=0) {
+          if (!(val.substring(0,7)=="http://" ||
+                val.substring(0,8)=="https://" ||
+                val=="")) {
+             $(this).val("http://"+$(this).val())
+          }
+        }
+
       });
 
       $(form).find(".dateInput").each(function(i){

@@ -22,7 +22,7 @@ THEME_OPTIONS = ["pastel", "bguggs", "blair", "brandon", "nora", "gabe"]
 MESSAGES_PER_TRANSACTION = 30
 
 #The 'name' of a card with that matches a filename "<name>.html"
-DEFAULT_CARDS = ["imgur", "WHRC_Radio", "links"]
+DEFAULT_CARDS = ["imgur", "Blue_Bus", "Calendar","WHRC_Radio", "links", "SEPTA"]
 AVAILABLE_CARDS = {
                     "imgur", "WHRC_Radio", "weather", "SEPTA",
                     "links", "Haverford_Clerk", "Go_Chat",

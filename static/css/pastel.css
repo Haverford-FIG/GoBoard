@@ -322,6 +322,17 @@ input:focus, select:focus, textarea:focus,
  color:inherit;
 }
 
+.menuButton img {
+ width:25px;
+ height:25px;
+ display:inline-block;
+ filter: invert(1);
+ -webkit-filter: invert(1);
+ -moz-filter: invert(1);
+ -ms-filter: invert(1);
+ -o-filter: invert(1);
+}
+
 
 .menu {
  display:none;

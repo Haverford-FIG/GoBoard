@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <div class="banner noSelect">
   <a href='{% url "home" %}'><div id="bannerLogo">GO! 3.0</div></a>
 
@@ -5,10 +6,16 @@
   <a href="http://fig.haverford.edu">FIG</a>.</div>
 
   <div id="menuButtonContainer">
-    <a href='{% url "cards" %}' class="menuButton noSelect">&#10063;</a>
-    <a href='{% url "chat" %}' class="menuButton noSelect">&#9741;</a>
+    <a href='{% url "cards" %}' class="menuButton noSelect">
+      <img class="icon" src="{% static "icons/cards.png"%}"/>
+    </a>
+    <a href='{% url "chat" %}' class="menuButton noSelect">
+      <img class="icon" src="{% static "icons/chat.png"%}"/>
+    </a>
     <div id="optionMenuButton" id="optionMenuActivator"
-         class="menuButton menuActivator noSelect">&#9776;</div>
+         class="menuButton menuActivator noSelect">
+      <img class="icon" src="{% static "icons/menu.png"%}"/>
+    </div>
     {% include "optionMenu.html" %}
   </div>
 

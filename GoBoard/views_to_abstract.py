@@ -16,6 +16,9 @@ import operator
 import datetime
 import json
 
+
+@login_required
+@require_http_methods(["GET"])
 def load_chat(request):
   return render(request, "chatPage.html")
 

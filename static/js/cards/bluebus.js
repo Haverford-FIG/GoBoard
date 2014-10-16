@@ -19,10 +19,28 @@ function initializeBlueBus() {
   });
 }
 
+function displayBusTimes(timeArray){
+  $("#blueBusTimesContainer").html("Loading");
+
+  var times = "";
+  for (var i=0; i < timeArray.length; i++){
+    times += "<div class='blueBusTime'>"+timeArray[i]+"</div>";
+  }
+
+  $("#blueBusTimesContainer").html(times);
+}
+
+
 function updateBlueBusTimes() {
   var startLocal = $("#blueBusStart").val()
   disableSelectedInput( startLocal, "#blueBusEnd" );
 
+  var url = "/get_BlueBus_times/";
+  var start = $("#blueBusStart").val();
+  var end = $("#blueBusEnd").val();
+  $.get(url, {"start":start, "end":end}, function(timesJSON){
+    displayBusTimes(timesJSON);
+  })
 }
 
 $(document).on("change", "#blueBusStart", updateBlueBusTimes);

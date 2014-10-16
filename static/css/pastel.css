@@ -1012,7 +1012,7 @@ option, .ui-menu-item a {
 }
 
 /* SEPTA */
-.SEPTATime {
+.SEPTATime, .blueBusTime {
  padding:3px 0px;
  background-color:#edf8b1;
  font-weight:bold;

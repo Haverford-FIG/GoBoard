@@ -152,21 +152,114 @@ def get_calendar_events(request):
   return HttpResponse(json.dumps(events), content_type="application/json")
 
 
-def get_BlueBus_locations(request):
-  def getDay(timestring=None):
-    import datetime
-    if not timestring: #TODO: Expand to custom timestring
-      time = datetime.datetime.now()
+def getTime(timestring):
+  import datetime
+  if not timestring: #TODO: Expand to custom timestring
+    time = datetime.datetime.now()
 
-    day = ["Mo","Tu","We","Th","Fr","Sa","Su"][time.weekday()]
-    if day in {"Sa", "Su"}:
-      return "Saturday Daytime" if (day=="Sa" and time.hour<15) else "Weekend"
+  days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+  day = days[time.weekday()]
+  if day == "Saturday" and time.hour<15:
+    day = "Saturday Daytime"
+
+  return (day, time)
+
+
+def getSchedule(timestring):
+  day, time = getTime(timestring)
+
+  if day=="Saturday Daytime":
+    return "Saturday Daytime"
+  elif "Saturday" in day or "Sunday" in day:
+    return "Weekend"
+  else:
+    return "Weekday"
+
+
+def get_BlueBus_times(request):
+  def militaryTime(time):
+    if time=="":
+      return ""
+    elif time[:2]=="12" and time[-2:]=="AM":
+      colon = time.index(":")
+      return "00:{}".format(time[colon+1:-2])
+    elif time[-2:]=="PM":
+      colon = time.index(":")
+      hour = "12" if time[:2] == "12" else int(time[:colon])+12
+      return "{}:{}".format(hour, time[colon+1:-2])
     else:
-      return "Weekday"
+      colon = time.index(":")
+      hour = int(time[:colon])
+      return "0"+time[:-2] if hour<10 else time[:-2]
 
+  def unmilitaryTime(time):
+    colon = time.index(":")
+    hour = time[:colon]
+    minute = time[colon+1:]
+    if hour>"12":
+      return "{}:{}PM".format(int(hour)-12, minute)
+    elif hour=="12":
+      return "12:{}PM".format(minute)
+    elif hour=="00":
+      return "12:{}AM".format(minute)
+    else:
+      return "{}:{}AM".format(hour, minute)
+
+  def getNextBuses(start, timestring=None, limit=4):
+    def getBlueBusMatrix(day):
+      with open("GoBoard/dataFiles/bluebus.txt","r") as f:
+        read = False
+        lines = []
+        for line in f.readlines():
+          if day in line:
+            read = True
+          elif read:
+            if line=="\n":
+              break
+            else:
+              lines.append(line.replace("\n","").split(" "))
+
+      # Convert the times to military times (for easy comparison).
+      return [lines[0]]+[map(militaryTime, row) for row in lines[1:]]
+
+    day, raw_time = getTime(timestring)
+    time = raw_time.strftime("%H:%M")
+    matrix = getBlueBusMatrix(day)
+
+    headers = matrix.pop(0)
+
+    start = start.replace(" ","_") #TODO: Naive and fails on Saturday Daytime
+    if "Leave_{}".format(start) in headers:
+      col = headers.index("Leave_{}".format(start))
+
+    # Get all the bus times after the first available bus time (since time-sorted).
+    for i, row in enumerate(matrix):
+      if row[col]>time:
+        bus_times = [row[col] for row in matrix[i:]]
+        return bus_times[:limit]
+
+    return []
+
+  try:
+    # Variable Setup
+    start = request.GET["start"]
+    end = request.GET["end"]
+    timestring = request.GET.get("datetime",None)
+
+    times = getNextBuses(start, timestring=timestring)
+
+
+    times = [unmilitaryTime(time) for time in times]
+  except Exception as e:
+    print e
+    times = ["No more today..."]
+  return HttpResponse(json.dumps(times), content_type="application/json")
+
+
+def get_BlueBus_locations(request):
   from GoBoard.settings import BLUE_BUS_LOCATIONS
   timestring = request.GET.get("", None)
-  locations = BLUE_BUS_LOCATIONS[getDay(timestring=timestring)]
+  locations = BLUE_BUS_LOCATIONS[getSchedule(timestring=timestring)]
   return HttpResponse(json.dumps(locations), content_type="application/json")
 
 

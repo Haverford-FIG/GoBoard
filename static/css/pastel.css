@@ -563,7 +563,7 @@ option, .ui-menu-item a {
  cursor:pointer;
 }
 .cardSettingsButton:after {
- content:"\268C";
+ content:"x";
 }
 .cardSettingsButton:hover {
  background-color:rgba(0,0,0,0.1);

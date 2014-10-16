@@ -31,7 +31,8 @@ a:hover {
  padding:20 0 30 20;
  letter-spacing:2px;
  font-size:24px;
- height:5%;
+ height:90px;
+ box-sizing:border-box;
 
  color:white;
  background-color:#225ea8;
@@ -1088,5 +1089,12 @@ option, .ui-menu-item a {
  .card {
   width:100%;
   margin:0px 0px;
+ }
+ .banner {
+  padding:0.5em 0 0 10;
+  height:55px;
+ }
+ .bannerMotto, #userGreeting {
+  display:none;
  }
 }

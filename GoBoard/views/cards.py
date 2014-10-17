@@ -234,7 +234,13 @@ def get_BlueBus_times(request):
     end = end.replace(" ","_")
 
     col_start = headers.index("Leave_{}".format(start))
-    col_end = headers.index("Arrive_{}".format(end))
+
+    if "Arrive_{}".format(end) in headers:
+      col_end = headers.index("Arrive_{}".format(end))
+    elif "Leave_{}".format(end) in headers:
+      col_end = headers.index("Leave_{}".format(end))
+
+    print col_start, col_end #TODO: Find the correct "end" if multiple.
 
     # Get all the bus times after the first available bus time (since time-sorted).
     for i, row in enumerate(matrix):
@@ -255,6 +261,8 @@ def get_BlueBus_times(request):
     start = request.GET["start"]
     end = request.GET["end"]
     timestamp = request.GET.get("timestamp",None)
+    if timestamp:
+      timestamp = float(timestamp)
     times = getNextBuses(start, end, timestamp=timestamp)
 
     times = ["{} --> {}".format(unmilTime(t1), unmilTime(t2)) for t1, t2 in times]
@@ -267,6 +275,9 @@ def get_BlueBus_times(request):
 def get_BlueBus_locations(request):
   from GoBoard.settings import BLUE_BUS_LOCATIONS
   timestamp = request.GET.get("timestamp", None)
+  if timestamp:
+    timestamp = float(timestamp)
+
   locations = BLUE_BUS_LOCATIONS[getSchedule(timestamp=timestamp)]
   return HttpResponse(json.dumps(locations), content_type="application/json")
 

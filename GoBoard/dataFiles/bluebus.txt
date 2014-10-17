@@ -190,7 +190,7 @@ Leave_Bryn_Mawr Arrive_Haverford Leave_Haverford Arrive_Bryn_Mawr
 2:00AM 2:10AM 2:40AM 2:50AM
 
 Saturday Daytime
-Leave_BMC Leave_Suburban_Square Leave_HC_South_Lot Bus_Stop Leave_Stokes Leave_Suburban_Square
+Leave_BMC Leave_Suburban_Square Leave_HC_South_Lot Leave_Stokes Leave_Suburban_Square
 11:15AM 11:25AM 11:35AM 11:40AM 11:50AM
 12:15PM 12:25PM 12:35PM 12:40PM 12:50PM
 1:15PM 1:25PM 1:35PM 1:40PM 1:50PM

@@ -40,7 +40,7 @@ SEPTA_LOCATIONS = {
 
 BLUE_BUS_LOCATIONS = {
   "Weekday": ["Haverford", "Bryn Mawr"],
-  "Saturday Daytime": ["BMC", "Suburban Square", "HCA", "Stokes"],
+  "Saturday Daytime": ["BMC", "Suburban Square", "HC South Lot", "Stokes"],
   "Weekend": ["Haverford", "Bryn Mawr"],
 }
 

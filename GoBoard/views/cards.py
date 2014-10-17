@@ -152,10 +152,12 @@ def get_calendar_events(request):
   return HttpResponse(json.dumps(events), content_type="application/json")
 
 
-def getTime(timestring):
+def getTime(timestamp):
   import datetime
-  if not timestring: #TODO: Expand to custom timestring
+  if not timestamp: #TODO: Expand to custom timestamp
     time = datetime.datetime.now()
+  else:
+    time = datetime.datetime.fromtimestamp(timestamp)
 
   days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
   day = days[time.weekday()]
@@ -165,8 +167,8 @@ def getTime(timestring):
   return (day, time)
 
 
-def getSchedule(timestring):
-  day, time = getTime(timestring)
+def getSchedule(timestamp):
+  day, time = getTime(timestamp)
 
   if day=="Saturday Daytime":
     return "Saturday Daytime"
@@ -205,7 +207,7 @@ def get_BlueBus_times(request):
     else:
       return "{}:{}AM".format(hour, minute)
 
-  def getNextBuses(start, timestring=None, limit=4):
+  def getNextBuses(start, timestamp=None, limit=4):
     def getBlueBusMatrix(day):
       with open("GoBoard/dataFiles/bluebus.txt","r") as f:
         read = False
@@ -222,15 +224,14 @@ def get_BlueBus_times(request):
       # Convert the times to military times (for easy comparison).
       return [lines[0]]+[map(militaryTime, row) for row in lines[1:]]
 
-    day, raw_time = getTime(timestring)
+    day, raw_time = getTime(timestamp)
     time = raw_time.strftime("%H:%M")
     matrix = getBlueBusMatrix(day)
 
     headers = matrix.pop(0)
 
-    start = start.replace(" ","_") #TODO: Naive and fails on Saturday Daytime
-    if "Leave_{}".format(start) in headers:
-      col = headers.index("Leave_{}".format(start))
+    start = start.replace(" ","_")
+    col = headers.index("Leave_{}".format(start))
 
     # Get all the bus times after the first available bus time (since time-sorted).
     for i, row in enumerate(matrix):
@@ -244,9 +245,8 @@ def get_BlueBus_times(request):
     # Variable Setup
     start = request.GET["start"]
     end = request.GET["end"]
-    timestring = request.GET.get("datetime",None)
-
-    times = getNextBuses(start, timestring=timestring)
+    timestamp = request.GET.get("timestamp",None)
+    times = getNextBuses(start, timestamp=timestamp)
 
 
     times = [unmilitaryTime(time) for time in times]
@@ -258,8 +258,8 @@ def get_BlueBus_times(request):
 
 def get_BlueBus_locations(request):
   from GoBoard.settings import BLUE_BUS_LOCATIONS
-  timestring = request.GET.get("", None)
-  locations = BLUE_BUS_LOCATIONS[getSchedule(timestring=timestring)]
+  timestamp = request.GET.get("timestamp", None)
+  locations = BLUE_BUS_LOCATIONS[getSchedule(timestamp=timestamp)]
   return HttpResponse(json.dumps(locations), content_type="application/json")
 
 

@@ -57,7 +57,7 @@ def get_available_cards(request):
 # # # # # # # # # # #   Card-Specific Views   # # # # # # # # # #
 
 
-@require_http_methods(["POST"])
+@require_http_methods(["GET"])
 def get_SEPTA_times(request):
   import urllib2
   linkBase = "http://app.septa.org/nta/result.php?"
@@ -65,8 +65,8 @@ def get_SEPTA_times(request):
   locZPrefix = "&loc_z=";
 
   #Get the SEPTA location URLs that correspond with two locations.
-  locA = settings.SEPTA_LOCATIONS[ request.POST["locA"] ]
-  locZ = settings.SEPTA_LOCATIONS[ request.POST["locZ"] ]
+  locA = settings.SEPTA_LOCATIONS[ request.GET["locA"] ]
+  locZ = settings.SEPTA_LOCATIONS[ request.GET["locZ"] ]
 
   link = linkBase + locAPrefix + locA + locZPrefix + locZ;
   url = urllib2.urlopen(linkBase + locAPrefix + locA + locZPrefix + locZ)
@@ -194,7 +194,7 @@ def get_BlueBus_times(request):
       hour = int(time[:colon])
       return "0"+time[:-2] if hour<10 else time[:-2]
 
-  def unmilitaryTime(time):
+  def unmilTime(time):
     colon = time.index(":")
     hour = time[:colon]
     minute = time[colon+1:]
@@ -207,7 +207,7 @@ def get_BlueBus_times(request):
     else:
       return "{}:{}AM".format(hour, minute)
 
-  def getNextBuses(start, timestamp=None, limit=4):
+  def getNextBuses(start, end, timestamp=None, limit=4):
     def getBlueBusMatrix(day):
       with open("GoBoard/dataFiles/bluebus.txt","r") as f:
         read = False
@@ -231,25 +231,33 @@ def get_BlueBus_times(request):
     headers = matrix.pop(0)
 
     start = start.replace(" ","_")
-    col = headers.index("Leave_{}".format(start))
+    end = end.replace(" ","_")
+
+    col_start = headers.index("Leave_{}".format(start))
+    col_end = headers.index("Arrive_{}".format(end))
 
     # Get all the bus times after the first available bus time (since time-sorted).
     for i, row in enumerate(matrix):
-      if row[col]>time:
-        bus_times = [row[col] for row in matrix[i:]]
-        return bus_times[:limit]
+      if row[col_start]>time:
+        start_times = [row[col_start] for row in matrix[i:]]
 
-    return []
+        if col_end<col_start:
+          end_times = [row[col_end] for row in matrix[i+1:]]
+        else:
+          end_times = [row[col_end] for row in matrix[i:]]
+        break
+
+    size = min(len(start_times), len(end_times), limit)
+    return zip(start_times[:size], end_times[:size])
 
   try:
     # Variable Setup
     start = request.GET["start"]
     end = request.GET["end"]
     timestamp = request.GET.get("timestamp",None)
-    times = getNextBuses(start, timestamp=timestamp)
+    times = getNextBuses(start, end, timestamp=timestamp)
 
-
-    times = [unmilitaryTime(time) for time in times]
+    times = ["{} --> {}".format(unmilTime(t1), unmilTime(t2)) for t1, t2 in times]
   except Exception as e:
     print e
     times = ["No more today..."]

@@ -35,7 +35,7 @@ $("#septaLocationA, #septaLocationZ").change( function() {
   resultsContainer.html("Loading...");
 
   var data = {"locA":locA, "locZ":locZ}
-  $.post("/get_SEPTA_times/", data, function(response){
+  $.get("/get_SEPTA_times/", data, function(response){
     //Empty the current results container.
     resultsContainer.empty();
 

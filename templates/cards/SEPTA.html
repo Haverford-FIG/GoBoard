@@ -61,6 +61,8 @@ $("#septaLocationA, #septaLocationZ").change( function() {
       resultsContainer.append(timeHTML);
     });
 
+  }).fail(function(){
+    resultsContainer.html("Failed to load times!");
   });
 
 });

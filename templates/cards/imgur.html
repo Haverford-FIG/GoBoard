@@ -15,6 +15,13 @@
 <!-- Load the Imgur front page image. -->
 <script>
 
+// Create an error timeout in case Imgur fails to load.
+var timer = window.setTimeout(function(){
+  $("#imgurImageContainer").children(".loadingWheel")
+                           .html("Failed to load Imgur...");
+  $("#imgurStats").hide();
+}, 2000)
+
 $.getJSON('http://whateverorigin.org/get?url=' +
           encodeURIComponent('http://imgur.com/hot/viral') +
           '&callback=?', function(data){
@@ -40,8 +47,9 @@ $.getJSON('http://whateverorigin.org/get?url=' +
   $("#imgurPoints").html(imagePoints);
   $("#imgurViews").html(imageViews);
 
+  // Cancel the error timer.
+  window.clearTimeout(timer);
 });
-
 
 </script>
 

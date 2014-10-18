@@ -23,3 +23,9 @@ muteOnLoad = true;
 <div id="headerLiveTrackHolder" class="airtimeWidget"></div>
 <div id="onAirToday" class="airtimeWidget"></div>
 
+<script>
+ if ((typeof $.jPlayer) === "undefined") {
+   $("#playerContainer").html("Failed to load... :'(");
+   $(".airtimeWidget").hide();
+ }
+</script>

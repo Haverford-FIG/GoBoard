@@ -32,7 +32,7 @@
   </div>
 
   {% if user.is_authenticated %}
-    <a href="/ads/create/" class="adSubmitButton">Submit a HaverAd</a>
+    <a href='{% url "adForm" %}' class="adSubmitButton">Submit a HaverAd</a>
   {% endif %}
 
   <div class="adAuthor">@{{ad.author.username}}</div>

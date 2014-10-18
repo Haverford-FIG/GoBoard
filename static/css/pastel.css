@@ -819,6 +819,7 @@ option, .ui-menu-item a {
  color:white;
  background-color:#163C6A;
  background-size:contain;
+ text-align:center;
 }
 
 .adDate {
@@ -842,7 +843,7 @@ option, .ui-menu-item a {
 
 .adText {
  box-sizing:border-box;
- padding:1em 1em;
+ padding:1em 2.5em;
  background-color: rgba(0,0,0,0.5);
  letter-spacing:1px;
  display:inline-block;
@@ -890,7 +891,7 @@ option, .ui-menu-item a {
  top:1em;
 }
 .adDeleteButton {
- right:5em;
+ right:8em;
 }
 
 .unapproved {
@@ -1127,4 +1128,10 @@ option, .ui-menu-item a {
  .bannerMotto, #userGreeting {
   display:none;
  }
+
+ .adText {
+  box-sizing:border-box;
+  padding:1em 1em;
+ }
 }
+

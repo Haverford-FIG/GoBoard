@@ -52,7 +52,8 @@ urlpatterns = patterns('',
      #Views for ads.
      url(r'^ads/get/?$', 'GoBoard.views.ads.load_banner',),
      url(r'^ads/manage/?$', 'GoBoard.views.ads.manager',),
-     url(r'^ads/form/(?P<did>[0-9]*)/?$', 'GoBoard.views.ads.form',),
+     url(r'^ads/form/$', 'GoBoard.views.ads.form', name="adForm"),
+     url(r'^ads/form/(?P<did>[0-9]*)/?$', 'GoBoard.views.ads.form'),
      url(r'^ads/delete/(?P<did>[0-9]+)/?$', 'GoBoard.views.ads.delete',),
      url(r'^ads/submit/$', 'GoBoard.views.ads.submit', name="submitAd"),
 

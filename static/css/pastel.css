@@ -773,6 +773,13 @@ option, .ui-menu-item a {
  font-size:0.8em;
  opacity:0.8;
 }
+.eventTags {
+ font-size:0.9em;
+ bottom:0px;
+ text-align:center;
+ word-spacing:1em;
+ display:block;
+}
 .eventInfoSpacer {
  padding:0px 1em;
 }

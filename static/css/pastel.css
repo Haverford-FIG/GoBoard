@@ -69,13 +69,13 @@ a #bannerLogo, a #bannerLogo:hover {
 
 .message {
  margin:20px 2.5em 10px 0.5em;
- padding:10 0 20 15;
+ padding:13px 0px 20px 15px;
  background-color:#e0f3db;
  position:relative;
 }
 
 .noTagsMessage {
- padding:8px 0px 8px 15px;
+ padding:12px 0px 10px 15px;
 }
 
 .messageTextHighlight {
@@ -190,7 +190,7 @@ input:focus, select:focus, textarea:focus,
 
 .messageDeleteButton, .clearTagsButton {
  position:absolute;
- padding:2px 5px;
+ padding:4px;
  color:red;
  opacity:0.4;
 }
@@ -200,7 +200,7 @@ input:focus, select:focus, textarea:focus,
 }
 .messageDeleteButton {
  right:0px;
- top:-0.4em;
+ top:-5px;
 }
 
 .messageDeleteButton:after, .clearTagsButton:after {
@@ -288,6 +288,15 @@ input:focus, select:focus, textarea:focus,
  right:0px;
  font-size:0.8em;
  opacity:0.8;
+}
+
+.timeShadow {
+ position:absolute;
+ top:2px;
+ right:1.5em;
+ font-size:0.65em;
+ font-style:oblique;
+ opacity:0.5;
 }
 
 .tag {

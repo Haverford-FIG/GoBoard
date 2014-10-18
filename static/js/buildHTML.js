@@ -93,6 +93,43 @@ function markTags(text, tags){
 }
 
 
+function buildTime(timestring) {
+  function getTime(timestring) {
+    var hour = raw.getHours();
+    var par = "AM";
+    if (hour>=12) {
+      hour -= 12;
+      par = "PM"
+    }
+    if (hour==0) {
+      hour += 12;
+    }
+
+    var time = hour+":"+raw.getMinutes()+par;
+    return time;
+  }
+
+  var now = new Date();
+  var raw = new Date(timestring);
+  var result = "";
+
+  if ((now-raw)>1000*60*60*24) { //Older than a day.
+    var date = raw.getMonth()+"/"+raw.getDate()+"/"+raw.getFullYear();
+    result += date +" at "+ getTime(raw);
+
+  } else if ((now-raw)>1000*60*60) { //Older than an hour.
+    result += "Today at " + getTime(raw);
+  } else if ((now-raw)>1000*60*7) { //Older than 7 minutes.
+    var time = parseInt((now-raw)/(1000*60));
+    result += time + " minutes ago";
+  } else if ((now-raw)>1000*60*3) { //Older than 3 minutes.
+    result += "A few minutes ago";
+  }
+
+  return result;
+}
+
+
 function buildMessage(msg){
   // Prepare the classes for this message.
   var privateClass = (msg.private==true) ? "privateMessage": "";
@@ -104,13 +141,15 @@ function buildMessage(msg){
   var text = markTags(msg.text, msg.tags.concat(msg.mentions) )
   var tags = buildTagArrayHTML(msg.tags, msg.mentions)
 
+  console.log(msg);
+
   var classes = [privateClass, personalClass, myMessageClass, noTagsClass]
   var HTML = "<div data-did=\""+msg.pid+"\"";
   HTML += " class=\"message "+classes.join(" ")+"\">";
   HTML += "<div class=\"messageText\">"+text+"</div>";
   HTML += "<div class=\"userShadow\">"+msg.user+"</div>";
-  HTML += "<div class=\"tagShadow\">"+tags;
-  HTML += "</div>";
+  HTML += "<div class=\"tagShadow\">"+tags+"</div>";
+  HTML += "<div class=\"timeShadow\">"+buildTime(msg.datetime)+"</div>";
 
   if (msg.deletable) {
     HTML += "<div title='Delete this post.' class='messageDeleteButton'></div>";

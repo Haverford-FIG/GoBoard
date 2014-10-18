@@ -63,16 +63,19 @@ a #bannerLogo, a #bannerLogo:hover {
  height:60%;
  width:100%;
  box-sizing:border-box;
- padding-left:40px;
  overflow-x:hidden;
  overflow-y:scroll;
 }
 
 .message {
- margin:25 15 10 0;
+ margin:20px 2.5em 10px 0.5em;
  padding:10 0 20 15;
  background-color:#e0f3db;
  position:relative;
+}
+
+.noTagsMessage {
+ padding:8px 0px 8px 15px;
 }
 
 .messageTextHighlight {
@@ -88,21 +91,28 @@ a #bannerLogo, a #bannerLogo:hover {
  font-style:italic;
 }
 
+.personalMessage .userShadow:after{
+ content:" (to me)"
+}
+
 .privateMessage {
  background-color:#fc9272;
- background-image:url("/static/images/talk_bubble.png");
- background-size:20px 20px;
- background-repeat:no-repeat;
- background-position:right 15px center;
 }
 
 .privateMessage .messageText {
  margin-right:45px;
 }
+.privateMessage .userShadow:after{
+ content:" (private)"
+}
+
+.myMessage{
+ margin:25px 0.5em 10px 2.5em;
+}
 
 .messageContainerAlert {
- margin: 10 15 10 0;
- padding:10 0 10 0;
+ margin: 10px 0px 10px 0px;
+ padding:10px 0px 10px 0px;
  text-align:center;
  font-size:0.8em;
  background-color:#fcbba1;
@@ -261,16 +271,22 @@ input:focus, select:focus, textarea:focus,
 
 .userShadow {
  position:absolute;
- top:-15px;
- left:-15px;
+ top:-1em;
+ left:-0.1em;
+ font-size:0.8em;
  opacity:0.8;
  font-style:oblique;
 }
 
+.userShadow:after{
+ font-weight:bold;
+}
+
 .tagShadow {
  position:absolute;
- bottom:-10px;
- right:-8px;
+ bottom:0px;
+ right:0px;
+ font-size:0.8em;
  opacity:0.8;
 }
 

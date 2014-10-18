@@ -293,6 +293,9 @@ if ($(".tagAutoComplete").length){
 //Clear tag inputs.
 $(document).on("click", ".clearTagsButton", function() {
   $(this).closest(".inputContainer").find(".tagAutoComplete").val("");
+  if ($(this).siblings("#tagFilterSubmit").length){
+    $("#tagFilterSubmit").trigger("click");
+  }
 });
 
 //Delete Message button.

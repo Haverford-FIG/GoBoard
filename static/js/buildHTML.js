@@ -94,19 +94,22 @@ function markTags(text, tags){
 
 
 function buildMessage(msg){
+  // Prepare the classes for this message.
+  var privateClass = (msg.private==true) ? "privateMessage": "";
+  var personalClass = (msg.mentions.indexOf("@"+msg.user)>=0) ? "personalMessage": "";
+  var activeUser = $("#userGreeting").attr("username");
+  var myMessageClass = (msg.user==activeUser) ? "myMessage": "" ;
+  var noTagsClass = (msg.tags.length===0 && msg.mentions.length===0) ? "noTagsMessage": "" ;
 
-  //Add the .privateMessage class if the message is private and the
-  // .personalMessage class if the user is "mentioned" in it.
-  var privateClass = (msg.is_private==true) ? "privateMessage": "";
-  var personalClass = (msg.mentions.indexOf("@"+msg.user)>=0) ? "personalMessage ": "" ;
+  var text = markTags(msg.text, msg.tags.concat(msg.mentions) )
+  var tags = buildTagArrayHTML(msg.tags, msg.mentions)
 
-  text = markTags(msg.text, msg.tags.concat(msg.mentions) )
-
+  var classes = [privateClass, personalClass, myMessageClass, noTagsClass]
   var HTML = "<div data-did=\""+msg.pid+"\"";
-  HTML += " class=\"message "+privateClass+personalClass+"\">";
+  HTML += " class=\"message "+classes.join(" ")+"\">";
   HTML += "<div class=\"messageText\">"+text+"</div>";
   HTML += "<div class=\"userShadow\">"+msg.user+"</div>";
-  HTML += "<div class=\"tagShadow\">"+buildTagArrayHTML(msg.tags, msg.mentions)
+  HTML += "<div class=\"tagShadow\">"+tags;
   HTML += "</div>";
 
   if (msg.deletable) {

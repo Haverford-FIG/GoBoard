@@ -21,7 +21,7 @@
 
 
   {% if user.is_authenticated %}
-  <div id="userGreeting">
+  <div id="userGreeting" username='{{user.username}}'>
   Hi{% if user.first_name != "" %}, {{user.first_name}}{%endif%}!
   </div>
   {% endif %}

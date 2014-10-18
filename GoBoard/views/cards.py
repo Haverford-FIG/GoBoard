@@ -233,26 +233,43 @@ def get_BlueBus_times(request):
     start = start.replace(" ","_")
     end = end.replace(" ","_")
 
+    # Find the appropriate headers/columns for the start and end.
+    start_header = None
+    end_header = None
+    prefixes = ["","Leave_", "Arrive_"]
+    for prefix in prefixes:
+      possible_header = prefix+start
+      if not start_header and possible_header in headers:
+        start_header = possible_header
+
+      possible_header = prefix+end
+      if not end_header and possible_header in headers:
+        end_header = possible_header
+
     col_start = headers.index("Leave_{}".format(start))
 
-    if "Arrive_{}".format(end) in headers:
-      col_end = headers.index("Arrive_{}".format(end))
-    elif "Leave_{}".format(end) in headers:
-      col_end = headers.index("Leave_{}".format(end))
-
-    print col_start, col_end #TODO: Find the correct "end" if multiple.
+    # Grab the closest possible end location.
+    col_end = float("-inf")
+    skipped = 0
+    while headers.count(end_header) and col_end<col_start:
+      possible_end = headers.index(end_header)+skipped
+      if col_end<0 or possible_end>col_end:
+        col_end = possible_end
+      headers = headers[possible_end+1:]
+      skipped += possible_end+1
 
     # Get all the bus times after the first available bus time (since time-sorted).
     for i, row in enumerate(matrix):
       if row[col_start]>time:
         start_times = [row[col_start] for row in matrix[i:]]
 
-        if col_end<col_start:
+        if col_end<col_start: # Start in the next row if necessary.
           end_times = [row[col_end] for row in matrix[i+1:]]
         else:
           end_times = [row[col_end] for row in matrix[i:]]
         break
 
+    # Only return valid rides (ie: where there is a start and end time).
     size = min(len(start_times), len(end_times), limit)
     return zip(start_times[:size], end_times[:size])
 

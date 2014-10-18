@@ -416,13 +416,13 @@ $(".dateInput[noPastDates=true]").datepicker("option", "minDate", 0);
 //# # # # # # # # # # #
 //TimePicker  # # # # #
 $(document).on("change", ".timeInput", function() {
-  var dirtyTime = $(this).val().toUpperCase()
+  var dirtyTime = $(this).val().toLowerCase()
                          .replace(/[\s.]/g, "");
 
   //Allow a few keywords to decide on the time.
   if (dirtyTime==="" || dirtyTime==="midnight") dirtyTime="12:00am";
-  if (dirtyTime==="noon") dirtyTime="12:00pm";
-  if (dirtyTime==="now") {
+  else if (dirtyTime==="noon") dirtyTime="12:00pm";
+  else if (dirtyTime==="now") {
     var time = new Date();
     dirtyTime = time.getHours() + ":" + time.getMinutes();
   }
@@ -430,8 +430,8 @@ $(document).on("change", ".timeInput", function() {
   //Give the user options for how they can write the day.
   var hours;
   var minutes;
-  if (/^[0-9]+(AM|PM)?$/.test(dirtyTime)){
-    hours = String(dirtyTime.replace(/(AM|PM)/,""));
+  if (/^[0-9]+(am|pm)?$/.test(dirtyTime)){
+    hours = String(dirtyTime.replace(/(am|pm)/,""));
     minutes = 0;
   } else {
     var colon = dirtyTime.indexOf(":");
@@ -439,20 +439,20 @@ $(document).on("change", ".timeInput", function() {
     minutes = parseInt(dirtyTime.slice(colon+1).replace(/[a-zA-Z]/g,""));
   }
 
-  var calculatedPeriod = "PM";
+  var calculatedPeriod = "pm";
   if (hours > 12){
-    hours %= 12;
+    hours -= 12;
     if (hours===0) hours = 12;
   }
 
   minutes = minutes % 60
   minutes = (minutes<9) ? "0"+String(minutes) : String(minutes);
 
-  var periodMatch = dirtyTime.match(/(AM|PM)/);
+  var periodMatch = dirtyTime.match(/(am|pm)/);
   var period = (periodMatch!==null) ? periodMatch[0] : calculatedPeriod;
 
   var cleanTime = String(hours) + ":" + minutes + period;
-  $(this).val(cleanTime);
+  $(this).val(cleanTime.toUpperCase());
 })
 $(".timeInput").trigger("change");
 

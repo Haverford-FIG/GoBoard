@@ -8,14 +8,16 @@ from GoBoard.models import Event
 @login_required
 @require_http_methods(["POST"])
 def submit(request):
+  from GoBoard.models_constructors import connect_tag
   try:
     form = request.POST
 
     dateFormat = "%m/%d/%Y%I:%M%p"
     start= datetime.strptime(form["startDate"]+form["startTime"], dateFormat)
     end = datetime.strptime(form["endDate"]+form["endTime"], dateFormat)
+    tag_string = form["tags"]
+    did = form["did"]
 
-    did = request.POST["did"]
     try:
       event = getEnabledEvents(request.user).get(id=did)
 
@@ -49,6 +51,14 @@ def submit(request):
     if request.user.groups.filter(name="eventManager").exists():
       event.approved = form["approved"]=="y"
 
+
+    event.save()
+
+    #Remove any previous ForeignKeys (to allow re-writes).
+    event.tag_set.clear()
+    if tag_string:
+      for tag in tag_string.split(" "):
+        connect_tag(tag, event=event)
 
     event.save()
 

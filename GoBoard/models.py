@@ -37,16 +37,6 @@ class Message(models.Model):
     return self.user==user and self.isRecent()
 
 
-class Tag(models.Model):
-  tag = models.CharField(max_length=30)
-  message = models.ManyToManyField(Message)
-  following = models.ManyToManyField(User, related_name="following",
-                                   default=None, null=True)
-
-  def __unicode__(self):
-    return self.tag
-
-
 
 class UserInfo(models.Model):
   user = models.OneToOneField(User)
@@ -145,6 +135,19 @@ class Event(models.Model):
   def isActive(self):
     from datetime import datetime
     return self.endTime >= datetime.now()
+
+
+class Tag(models.Model):
+  tag = models.CharField(max_length=30)
+  message = models.ManyToManyField(Message)
+  event = models.ManyToManyField(Event)
+  following = models.ManyToManyField(User, related_name="following",
+                                   default=None, null=True)
+
+  def __unicode__(self):
+    return self.tag
+
+
 
 
 admin.site.register(Message)

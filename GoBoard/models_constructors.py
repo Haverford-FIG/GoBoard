@@ -8,6 +8,25 @@ def tag_exists(tag):
 def user_exists(username):
   return User.objects.filter(username=username).exists()
 
+def connect_tag(tag, message=None, event=None):
+  #Remove the prefix.
+  prefix = tag[0]
+  tag = tag[1:]
+
+  if prefix=="#":
+    if not tag_exists(tag):
+      tag = newTag(tag)
+    if message:
+      add_tag_to_message(tag, message)
+    if event:
+      add_tag_to_event(tag, event)
+  elif prefix=="@":
+    if user_exists(tag) and message:
+      add_user_to_message(tag, message);
+  else:
+    error = "Tag '{}' has inapproriate prefix. Choices are '@' or '#'.".format(tag)
+    raise Exception(error)
+
 
 def store_message(text, tagList, user, tags_required, private):
   #Construct the message itself.
@@ -20,20 +39,7 @@ def store_message(text, tagList, user, tags_required, private):
 
   #Store each tag.
   for tag in tagList:
-    #Remove the prefix.
-    prefix = tag[0]
-    tag = tag[1:]
-
-    if prefix=="#":
-      if tag_exists(tag):
-        add_tag_to_message(tag, message)
-      else:
-        store_tag(tag, message)
-    elif prefix=="@":
-      if user_exists(tag):
-        add_user_to_message(tag, message);
-    else:
-      raise Exception("Tag has inapproriate prefix. Choices are '@' or '#'.")
+    connect_tag(tag, message=message)
 
   message.save()
   return message
@@ -53,25 +59,36 @@ def add_user_to_message(username, new_message):
     print "ERROR ADDING MESSAGE TO TAG: {}".format(e)
 
 
-def add_tag_to_message(tag_string, new_message):
+def add_tag_to_message(tag, new_message):
+  from GoBoard.models import Tag
   try:
-    tag = Tag.objects.filter(tag=tag_string).get()
+    if type(tag)!=Tag:
+      tag = Tag.objects.filter(tag=tag).get()
     tag.message.add(new_message)
     tag.save()
+    return tag
   except Exception as e:
     print "ERROR ADDING MESSAGE TO TAG: {}".format(e)
 
+def add_tag_to_event(tag, event):
+  from GoBoard.models import Tag
+  try:
+    if type(tag)!=Tag:
+      tag = Tag.objects.filter(tag=tag).get()
+    tag.event.add(event)
+    tag.save()
+    return tag
+  except Exception as e:
+    print "ERROR ADDING EVENT TO TAG: {}".format(e)
 
 
-def store_tag(text, message):
+
+def newTag(text):
   try:
     #Construct the tag.
     tag = Tag()
     tag.tag = text
     tag.save()
-
-    #Actually apply the message to the tag.
-    add_tag_to_message(text, message)
     return tag
   except Exception as e:
     print "ERROR CONSTRUCTING TAG: {}".format(e)

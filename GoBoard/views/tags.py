@@ -59,6 +59,8 @@ def get_tag_list(message):
     if message.tag_set!=None:
       tagSet = message.tag_set.all()
       tagList = list(tagSet)
+    else:
+      tagList=[]
   except Exception as e:
     print e
     print "ERROR GETTING MESSAGE TAGS: {}".format(message)

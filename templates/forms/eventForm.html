@@ -20,6 +20,13 @@
     <label for="form_description">Description</label>
     <textarea name="description" id="form_description">{{event.description}}</textarea>
   </div>
+  <div class="formFieldContainer">
+    <label for="form_tags">Tags</label>
+    <input name="tags" id="form_tags" class="tagAutocomplete" maxlength="300"
+               cols="60" id="newTagsInput"
+               placeholder="#tag #your #message @{{user.username}}"
+               value='{% for tag in event.tag_set.all %}#{{tag.tag}} {% endfor %}'>
+  </div>
 
 
   <div class="formDescriptor">Date and Time</div>

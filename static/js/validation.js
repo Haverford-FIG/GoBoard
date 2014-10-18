@@ -102,6 +102,9 @@ function validateForm(form, url){
         }
       });
 
+      var tagString = $(form).find("#form_tags").val();
+      $(form).find("#form_tags").val(cleanTags(tagString).join(" "))
+
       $(form).find(".timeInput").each(function(i){
         var val = $(this).val();
         //Don't allow empty values.

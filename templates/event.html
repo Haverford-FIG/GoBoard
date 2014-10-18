@@ -31,4 +31,7 @@
   <div class="eventInfoBlock">
     <span class="eventDescription">{{event.description}}</span>
   </div>
+  <div class="eventTags">
+  {%for tag in event.tag_set.all %}#{{tag.tag}}{% endfor %}
+  </div>
 </div>

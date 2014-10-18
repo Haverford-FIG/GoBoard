@@ -6,7 +6,9 @@
     <div class="tagManageBlock">
       <div class="unfollowTagButton deleteX" tag="{{tag.tag}}">x</div>
 
-      <span class="tagText">#{{ tag.tag }}</span>
+      <a href='/chat/?tags={{tag}}'>
+        <span class="tagText">#{{ tag.tag }}</span>
+      </a>
       <span class="tagCount">({{ tag.message.count }} use{% if tag.message.count > 1 %}s{% endif %})</span>
     </div>
   {% endfor %}

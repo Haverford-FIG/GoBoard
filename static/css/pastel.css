@@ -178,7 +178,7 @@ input:focus, select:focus, textarea:focus,
  padding:15 20 15 20;
  cursor:pointer;
  border-left:1px solid #FFF4A3;
- border-bottom:1px solid #FFF4A3;
+ border-bottom:2px solid #FFF4A3;
  background-color:#fff7bc;
  box-sizing:border-box;
  text-align:center;

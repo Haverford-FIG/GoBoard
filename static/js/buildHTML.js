@@ -141,8 +141,6 @@ function buildMessage(msg){
   var text = markTags(msg.text, msg.tags.concat(msg.mentions) )
   var tags = buildTagArrayHTML(msg.tags, msg.mentions)
 
-  console.log(msg);
-
   var classes = [privateClass, personalClass, myMessageClass, noTagsClass]
   var HTML = "<div data-did=\""+msg.pid+"\"";
   HTML += " class=\"message "+classes.join(" ")+"\">";

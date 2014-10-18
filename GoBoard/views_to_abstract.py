@@ -20,7 +20,12 @@ import json
 @login_required
 @require_http_methods(["GET"])
 def load_chat(request):
-  return render(request, "chatPage.html")
+  # Load any tags that are passed through the GET request.
+  tags = request.GET.get("tags")
+  if tags:
+    tags = " ".join(["#"+tag if tag[0]!="@" else tag for tag in tags.split(",")])
+
+  return render(request, "chatPage.html", {"tags": tags})
 
 #Store a message in the database.
 @login_required

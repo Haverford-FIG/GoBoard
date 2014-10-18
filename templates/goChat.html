@@ -2,7 +2,9 @@
   <div class="inputContainer">
     <div class="clearTagsButton noSelect" title="Clear tags."></div>
     <input type="text" id="tagFilterInput"
-           class="tagAutoComplete" placeholder="#tags #search"/>
+           class="tagAutoComplete" placeholder="#tags #search"
+           {% if tags %} value='{{tags}}' {% endif %}
+           />
     <div class="noSelect customCheckbox" title="Search private messages?"
          name="private" id="tagFilterPrivate" autoReload="true"></div>
     <div class="noSelect submitButton" id="tagFilterSubmit">Search</div>

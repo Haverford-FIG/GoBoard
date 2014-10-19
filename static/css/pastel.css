@@ -1111,6 +1111,17 @@ option, .ui-menu-item a {
 
 
 @media (max-width:600px) {
+ #otherActiveUserCount {
+  display:none;
+ }
+
+ #copyrightContainer{
+  padding:0px;
+  right:2px;
+  bottom:2px;
+  font-size:0.6em;
+ }
+
  #recentUpdatesContainer {
   display:none;
  }
@@ -1140,5 +1151,14 @@ option, .ui-menu-item a {
   box-sizing:border-box;
   padding:1em 1em;
  }
+
+ .inputContainer {
+  height:40px;
+ }
+ .submitButton {
+  padding:10px 15px;
+  border-bottom:1px;
+ }
+
 }
 

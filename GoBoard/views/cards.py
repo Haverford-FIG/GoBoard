@@ -161,8 +161,8 @@ def getTime(timestamp):
 
   days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
   day = days[time.weekday()]
-  if day == "Saturday" and time.hour<15:
-    day = "Saturday Daytime"
+  if day == "Saturday":
+    day = "Saturday Daytime" if time.hour<15 else "Saturday Night"
 
   return (day, time)
 
@@ -246,7 +246,7 @@ def get_BlueBus_times(request):
       if not end_header and possible_header in headers:
         end_header = possible_header
 
-    col_start = headers.index("Leave_{}".format(start))
+    col_start = headers.index(start_header)
 
     # Grab the closest possible end location.
     col_end = float("-inf")
@@ -291,6 +291,7 @@ def get_BlueBus_times(request):
 
 def get_BlueBus_locations(request):
   from GoBoard.settings import BLUE_BUS_LOCATIONS
+
   timestamp = request.GET.get("timestamp", None)
   if timestamp:
     timestamp = float(timestamp)

@@ -14,8 +14,7 @@ function buildLocationTimes(locals) {
 
 function initializeBlueBus() {
   var url = "/get_BlueBus_locations/";
-  var timestamp = "1413637200"; //TODO
-  $.get(url, {"timestamp":timestamp}, function(locationJSON){
+  $.get(url, function(locationJSON){
     buildLocationTimes(locationJSON);
   });
 }
@@ -39,8 +38,7 @@ function updateBlueBusTimes() {
   var url = "/get_BlueBus_times/";
   var start = $("#blueBusStart").val();
   var end = $("#blueBusEnd").val();
-  var timestamp = "1413637200"; //TODO
-  $.get(url, {"start":start, "end":end, "timestamp":timestamp},
+  $.get(url, {"start":start, "end":end},
     function(timesJSON){
       displayBusTimes(timesJSON);
   })

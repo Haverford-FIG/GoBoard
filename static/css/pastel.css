@@ -330,6 +330,7 @@ input:focus, select:focus, textarea:focus,
  position:absolute;
  right:0em;
  top:0em;
+ z-index:1;
 }
 
 .menuButton, .menuButton:visited {
@@ -568,7 +569,7 @@ option, .ui-menu-item a {
 .card {
  position:relative;
  width:30%;
- margin:10px 2px;
+ margin:1em 2px 0em;
  height:300px;
  display:inline-block;
  box-sizing:border-box;
@@ -615,7 +616,6 @@ option, .ui-menu-item a {
 #newCardContainer {
  padding:10px 0px 10px 10%;
  background-color:#7fcdbb;
- margin-top:40px;
 }
 
 .card select, .card input {
@@ -1114,6 +1114,35 @@ option, .ui-menu-item a {
 }
 #chatCard .customCheckbox {
   line-height: 100%;
+}
+
+
+#headerNotice {
+ position:absolute;
+ text-align:center;
+ width:100%;
+ top:0px;
+ left:0px;
+ z-index:0;
+}
+
+#headerTab {
+ display:inline-block;
+ background-color:white;
+ font-size:0.6em;
+ color:orange;
+ padding:5px 1em;
+ border-radius:0px 0px 10px 10px;
+ opacity:0.7;
+}
+
+#headerTab:hover {
+ opacity:1;
+}
+
+#headerTab a {
+ color:inherit;
+ font:inherit;
 }
 
 

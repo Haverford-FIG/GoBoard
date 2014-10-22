@@ -19,6 +19,7 @@
     {% include "optionMenu.html" %}
   </div>
 
+  {% include "notice.html" %}
 
   {% if user.is_authenticated %}
   <div id="userGreeting" username='{{user.username}}'>

@@ -577,9 +577,12 @@ option, .ui-menu-item a {
 .cardControlBar {
  position:relative;
  width:100%;
- height:1.5em;
- background-color:#B3BAFF;
-}
+ position:absolute;
+ top:0px;
+ z-index:100;
+ background-color:transparent;
+ color:red;
+ }
 
 .cardContents {
  position:relative;
@@ -945,7 +948,6 @@ option, .ui-menu-item a {
 
 #playerController {
  width:100%;
- height:16%;
  padding:8px 0px;
  box-sizing:border-box;
 
@@ -986,7 +988,6 @@ option, .ui-menu-item a {
 #onAirToday {
  box-sizing:border-box;
  padding:5px 0px;
- height:35%;
  width:100%;
  background-color:#B3BAFF;
  overflow:hidden;
@@ -1117,6 +1118,11 @@ option, .ui-menu-item a {
 
 
 @media (max-width:600px) {
+
+ body {
+  background-color:#34495e;
+ }
+
  #otherActiveUserCount {
   display:none;
  }
@@ -1138,7 +1144,7 @@ option, .ui-menu-item a {
 
  .card {
   width:100%;
-  max-height:300px;
+  height: initial;
   margin:0px 0px;
   margin-bottom:1em;
  }

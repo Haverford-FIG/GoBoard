@@ -38,6 +38,12 @@ a:hover {
  background-color:#34495e;
 }
 
+.betaTag {
+ color:orange;
+ vertical-align:super;
+ font-size:0.7em;
+}
+
 a #bannerLogo, a #bannerLogo:hover {
  display:inline-block;
  color:white;

@@ -35,7 +35,7 @@ a:hover {
  box-sizing:border-box;
 
  color:white;
- background-color:#225ea8;
+ background-color:#34495e;
 }
 
 a #bannerLogo, a #bannerLogo:hover {
@@ -1056,6 +1056,12 @@ option, .ui-menu-item a {
 }
 
 /* Haverford Clerk */
+.articleContainer {
+ overflow-y: auto;
+ max-height: 200px;
+ width: 100%;
+}
+
 .clerkArticle, .bicoArticle, .calendarEvent {
  text-align:left;
  font-size:0.75em;

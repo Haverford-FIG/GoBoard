@@ -1,5 +1,25 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:400,700);
 
+
+/* Temporary */
+#legacyGoLink {
+ position:fixed;
+ bottom:0px;
+ padding:5px 10px;
+ color:maroon;
+ background-color:rgba(200,0,0,0.3);
+ font-size:0.7em;
+ font-style:oblique;
+}
+@media (max-width:600px) {
+ #legacyGoLink{
+  display:none;
+ }
+}
+
+
+
+
 body {
  margin:0 0 40 0;
  padding:0px;
@@ -987,7 +1007,8 @@ option, .ui-menu-item a {
  position:absolute;
  top:0px;
  width:100%;
- text-align:right;
+ text-align:left;
+ padding:2px;
  opacity:0.5;
 }
 
@@ -1166,6 +1187,10 @@ option, .ui-menu-item a {
  #headerNotice {
   text-align:left;
  }
+ a {
+  color:orange;
+ }
+
 
  #otherActiveUserCount {
   display:none;
@@ -1194,6 +1219,7 @@ option, .ui-menu-item a {
  }
  .cardContents {
   height:initial;
+  background-color:white;
  }
  .banner {
   padding:0.5em 0 0 10;

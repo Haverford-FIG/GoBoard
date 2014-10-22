@@ -21,7 +21,7 @@
 // Create an error timeout in case Imgur fails to load.
 var timer = window.setTimeout(function(){
   $("#imgurImageContainer").children(".loadingWheel")
-                           .html("Failed to load Imgur...");
+                           .html("Taking longer than usual...");
   $("#imgurStats").hide();
 }, 8000)
 

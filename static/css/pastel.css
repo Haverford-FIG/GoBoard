@@ -1158,6 +1158,15 @@ option, .ui-menu-item a {
   background-color:#34495e;
  }
 
+ #headerTab {
+  font-size:0.45em;
+  padding:0px 1em;
+  background-color:transparent;
+ }
+ #headerNotice {
+  text-align:left;
+ }
+
  #otherActiveUserCount {
   display:none;
  }

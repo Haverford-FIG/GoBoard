@@ -460,7 +460,7 @@ $(document).on("click", ".adRefreshButton", function() {
   var container = $(this).closest(".adContainer");
   container.find(".adText").html("Loading...")
   $.get("/ads/get/", function(response) {
-    container.html( response );
+    container.replaceWith( response );
   });
 });
 

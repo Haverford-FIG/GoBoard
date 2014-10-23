@@ -243,7 +243,7 @@ def get_BlueBus_times(request):
         start_header = possible_header
 
       possible_header = prefix+end
-      if not end_header and possible_header in headers:
+      if possible_header in headers and start_header:
         end_header = possible_header
 
     col_start = headers.index(start_header)

@@ -1,30 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:400,700);
 
-
-/* Temporary */
-#legacyGoLink {
- position:fixed;
- bottom:0px;
- left:0px;
- padding:5px 10px;
- color:maroon;
- background-color:rgba(200,0,0,0.3);
- font-size:0.7em;
- font-style:oblique;
-}
-@media (max-width:600px) {
- #legacyGoLink{
-  display:none;
- }
-}
-
-
-
-
 body {
- margin:0 0 40 0;
- padding:0px;
-
  font-family:"Lato", "Arial";
  font-size:16px;
 }
@@ -38,78 +14,30 @@ a:hover {
  color:#00752F;
 }
 
-.noSelect {
- -webkit-touch-callout: none;
- -webkit-user-select: none;
- -khtml-user-select: none;
- -moz-user-select: none;
- -ms-user-select: none;
- user-select: none;
- cursor:default;
-}
 
 .banner {
- padding:20 0 30 20;
- letter-spacing:2px;
- font-size:24px;
- height:90px;
- box-sizing:border-box;
-
  color:white;
  background-color:#34495e;
 }
 
-.betaTag {
- color:orange;
- vertical-align:super;
- font-size:0.7em;
-}
-
 a #bannerLogo, a #bannerLogo:hover {
- display:inline-block;
  color:white;
  font-weight:normal;
 }
 
 .bannerMotto, .bannerMotto a {
- font-size:12px;
- letter-spacing:1.5px;
  opacity:0.9;
  color:white;
 }
 
 
-#messageContainer {
- width:70%;
- position:relative;
- float:left;
-}
-
-.messageBox {
- position:relative;
- height:60%;
- width:100%;
- box-sizing:border-box;
- overflow-x:hidden;
- overflow-y:scroll;
-}
-
 .message {
- margin:20px 2.5em 10px 0.5em;
- padding:13px 0px 20px 15px;
  background-color:#e0f3db;
- position:relative;
-}
-
-.noTagsMessage {
- padding:12px 0px 10px 15px;
 }
 
 .messageTextHighlight {
  background-color:#fde;
  color: #534;
- padding:2px 5px;
- border-radius:2px;
 }
 .messageTextBold {
  font-weight:bold;
@@ -126,39 +54,17 @@ a #bannerLogo, a #bannerLogo:hover {
  background-color:#fc9272;
 }
 
-.privateMessage .messageText {
- margin-right:45px;
-}
 .privateMessage .userShadow:after{
  content:" (private)"
 }
 
-.myMessage{
- margin:25px 0.5em 10px 2.5em;
-}
-
 .messageContainerAlert {
- margin: 10px 0px 10px 0px;
- padding:10px 0px 10px 0px;
- text-align:center;
- font-size:0.8em;
  background-color:#fcbba1;
  border-bottom:1px solid #fc9272;
  opacity:0.7;
 }
 
-#recentUpdatesContainer {
- width:30%;
- position:relative;
- float:right;
-}
-
 .miniHeader {
- width:100%;
- padding:20 0 20 0;
- text-align:center;
-
- font-size:18px;
  background-color:#7fcdbb;
  color:white;
 }
@@ -171,27 +77,14 @@ a #bannerLogo, a #bannerLogo:hover {
 }
 
 input, textarea, select {
- padding:0 15 0 15;
- border:0px;
  outline:none;
-
  color:black;
- box-sizing:border-box;
 }
 
 textarea {
- padding-top:4px;
- width:100%;
- resize:none;
  border-bottom:1px solid #eee;
 }
 
-input, select {
- width:70%;
- height:100%;
- float:left;
- font-size:18px;
-}
 
 input:focus, select:focus, textarea:focus,
 .fullScreenForm input:focus, .fullScreenForm select:focus {
@@ -200,15 +93,9 @@ input:focus, select:focus, textarea:focus,
 
 
 .submitButton {
- float:left;
- width:20%;
- padding:15 20 15 20;
- cursor:pointer;
  border-left:1px solid #FFF4A3;
  border-bottom:2px solid #FFF4A3;
  background-color:#fff7bc;
- box-sizing:border-box;
- text-align:center;
 }
 .submitButton:hover {
  background-color:#fff8cd;
@@ -216,18 +103,8 @@ input:focus, select:focus, textarea:focus,
 }
 
 .messageDeleteButton, .clearTagsButton {
- position:absolute;
- padding:4px;
  color:red;
  opacity:0.4;
-}
-.clearTagsButton {
- left:0px;
- top:-0.4em;
-}
-.messageDeleteButton {
- right:0px;
- top:-5px;
 }
 
 .messageDeleteButton:after, .clearTagsButton:after {
@@ -236,37 +113,19 @@ input:focus, select:focus, textarea:focus,
 
 .messageDeleteButton:hover, .clearTagsButton:hover {
  opacity:0.7;
- cursor:pointer;
 }
 
 
 .customCheckbox {
- position:relative;
- float:left;
- width:10%;
- height:100%;
  background-color:#B3BAFF;
- cursor:pointer;
- box-sizing:border-box;
 }
 .customCheckbox.active{
  background-color:#FFB78A;
 }
-.customCheckbox.active:before{
- position:relative;
- content:"\2713";
- top:10px;
- width:100%;
- text-align:center;
- display:inline-block;
- font-size:1.5em;
-}
 
 
 .updateContainerOption {
- font-size:0.9em;
  opacity:0.5;
- cursor:pointer;
 }
 
 .updateContainerOption:hover {
@@ -275,15 +134,9 @@ input:focus, select:focus, textarea:focus,
 
 .activeUpdateContainerChoice {
  opacity: 0.9;
- font-size:1.1em;
- font-weight:bold;
 }
 
 .updateTag {
- padding: 5 10 5 10;
- text-align:center;
- margin:5 5 5 5;
- font-size:14px;
  background-color:#edf8b1;
 }
 
@@ -292,15 +145,10 @@ input:focus, select:focus, textarea:focus,
 }
 
 .tagLink {
- cursor:pointer;
  opacity:0.8;
 }
 
 .userShadow {
- position:absolute;
- top:-1.2em;
- left:-0.1em;
- font-size:0.8em;
  opacity:0.8;
  font-style:oblique;
 }
@@ -310,30 +158,16 @@ input:focus, select:focus, textarea:focus,
 }
 
 .tagShadow {
- position:absolute;
- bottom:0px;
- right:0px;
- font-size:0.8em;
  opacity:0.8;
 }
 
 .timeShadow {
- position:absolute;
- top:2px;
- right:1.5em;
- font-size:0.65em;
  font-style:oblique;
  opacity:0.5;
 }
 
-.tag {
- margin:0 5 0 5;
- z-index:10;
-}
-
 .inlineTag, .inlineMention {
  opacity:0.8;
- cursor:pointer;
 }
 .inlineTag:hover, .inlineMention:hover {
  opacity:1;
@@ -346,85 +180,34 @@ input:focus, select:focus, textarea:focus,
 }
 
 #otherActiveUserCount {
- text-align:center;
- font-size:0.9em;
- padding:10 0 0 0;
  opacity:0.5;
 }
 
-#menuButtonContainer {
- overflow:visible;
- position:absolute;
- right:0em;
- top:0em;
- z-index:1;
-}
-
 .menuButton, .menuButton:visited {
- position:relative;
- padding:0.55em 0.55em;
- margin:0px;
  opacity:0.8;
  color:white;
- width:30px;
  font-weight:bold;
- display:inline-block;
 }
 
 .menuButton:hover {
  opacity:1;
- cursor:pointer;
  color:inherit;
-}
-
-.menuButton img {
- width:100%;
- display:inline-block;
 }
 
 
 .menu {
- display:none;
- position:absolute;
- z-index:10;
- top:0px;
- right:20px;
-
- text-align:center;
  background-color:black;
-
- padding:10 0 10 0;
  opacity:0.95;
 }
 
-#optionMenu {
- right:50px;
- position:fixed;
-}
-
-.activateTagMenu {
- position:relative;
- overflow:show;
-}
-
 .tagMenu {
- position:absolute;
- display:block;
- left:-1em;
- top:1.5em;
- width:100px;
-
- padding:0px;
  color:white;
 }
 
 .menuOption,
 .menuOption a {
- padding:4 20 4 20;
- cursor:pointer;
  background-color:inherit;
  color:inherit;
- font-size:inherit;
  font-weight:inherit;
 }
 .menuOption:hover {
@@ -432,71 +215,31 @@ input:focus, select:focus, textarea:focus,
 }
 
 .cardMenu .menuOption {
- font-size:1.2em;
  color:white;
 }
 
 #copyrightContainer {
- position:fixed;
- right:15px;
- bottom:5px;
- padding:5px 10px;
  opacity:0.5;
  word-spacing:5px;
  background-color:rgba(250,250,250,0.8);
 }
 
-.genericCenteredContainer {
- text-align:center;
- margin:0 auto;
-}
-
 /* # # # # # User Settings Form # # # # # #  */
-.fullScreenForm {
- padding:10 30 0 30;
-}
-
-.formFieldContainer {
- height:40px;
- line-height:35px;
-}
-
 .formDescriptor{
  background-color:#FFE5E8;
- padding:5 0 5 0;
- margin: 20 0 0 0;
- width:100%;
 }
 
 .fullScreenForm label {
  background-color:#e0f3db;
- height:100%;
- width:30%;
- display:block;
- float:left;
- vertical-align:middle;
- line-height:inherit;
 }
 
 .fullScreenForm input, .fullScreenForm select, .fullScreenForm textarea {
- float:left;
- width:70%;
- height:100%;
  background-color:#fff8cd;
- border:0px;
  border-bottom:1px solid #fff6ab;
- display:inline-block;
-}
-
-.fullScreenForm input[type=checkbox]{
- width:5%;
- margin:0 0 0 20;
 }
 
 .button {
  background-color:#edf8b1;
- padding:10 0 15 0;
- cursor:pointer;
  font-weight:bold;
 }
 
@@ -504,17 +247,8 @@ input:focus, select:focus, textarea:focus,
  background-color:#F2FAC7;
 }
 
-.center {
- text-align:center;
-}
-
 .linkButton {
  padding:10px;
- background-color:red;
-}
-
-.formFieldGroup {
- margin:0 auto;
 }
 
 
@@ -528,104 +262,36 @@ input:focus, select:focus, textarea:focus,
  border-bottom:1px solid #c7e9c0;
 }
 
-#userGreeting {
- position:absolute;
- top:65px;
- right:10px;
- text-align:right;
- font-size:0.5em;
-}
 
 /* # # # # # jQuery # # # # # #  */
-.ui-menu {
- position:fixed;
- display:block;
- margin:0px;
- padding:0px;
- border-radius:0px;
- outline:none;
- border:none;
- list-style-type:none;
- z-index:101;
-}
-
 option, .ui-menu-item a {
  background:#edf8b1;
- outline:none;
- border:none;
  font-weight:normal;
  border-radius:0px;
 
  text-decoration:none;
- display:block;
- padding:1em 2em;
  border-bottom:1px solid #F3FAC7;
  font-weight:bold;
- cursor:pointer;
 }
 
 .ui-widget-content .ui-state-focus {
  background:#7fcdbb;
- outline:none;
- border:none;
  border-bottom:1px solid transparent;
 }
 
 .tooltip {
- display:block;
- position:fixed;
- padding:20px;
- font-size:1.1em;
-
  border:4px solid #fc9272;
  border-width:0px 4px;
  border-radius:3px;
  background-color:#fee0d2;
- z-index:100;
-}
-
-.ui-helper-hidden-accessible {
- display:none;
 }
 
 /* # # # # #  Cards  # # # # # */
-#cardContainer {
- text-align:center;
- margin:0 auto;
-}
-
-.card {
- position:relative;
- width:30%;
- margin:1em 2px 0em;
- height:300px;
- display:inline-block;
- box-sizing:border-box;
-}
-
 .cardControlBar {
- position:relative;
- width:100%;
- position:absolute;
- top:0px;
- z-index:1;
  background-color:transparent;
  color:red;
- }
-
-.cardContents {
- position:relative;
- height:95%;
- overflow:hidden;
 }
 
-.cardSettingsButton {
- position:absolute;
- padding:0px 5px;
- right:0px;
- height:100%;
- cursor:pointer;
-}
 .cardSettingsButton:after {
  content:"x";
 }
@@ -634,67 +300,30 @@ option, .ui-menu-item a {
 }
 
 .cardTitle {
- font-size:1.2em;
- box-sizing:border-box;
- padding:8px 5px;
  font-weight:bold;
  background-color:#efe;
 }
 
 #newCardContainer {
- padding:10px 0px 10px 10%;
  background-color:#7fcdbb;
 }
 
-.card select, .card input {
- height:2em;
- width:100%;
- text-align:center;
-}
 .card input {
- height:1.5em;
  background-color:#eeeeff;
 }
 
-.card .submitButton {
- width:100%;
-}
 
 .fillLineText {
- padding:2px 0px;
- width:100%;
- display:block;
  font-weight:bold;
  background-color:#fee;
 }
 
 /* Datepicker */
-.ui-datepicker {
- background-color:white;
- word-spacing:1em;
- text-align:center;
- display:none;
 
- -webkit-touch-callout: none;
- -webkit-user-select: none;
- -khtml-user-select: none;
- -moz-user-select: none;
- -ms-user-select: none;
- user-select: none;
-}
-
-.ui-datepicker-calendar {
- text-align:center;
- font-size:1.0em;
-}
 .ui-datepicker-calendar tbody {
  background-color:#efe;
 }
-.ui-datepicker-calendar td {
- padding:6px;
-}
 .ui-datepicker-calendar td:hover {
- cursor:pointer;
  background-color:#fef;
 }
 .ui-datepicker-header {
@@ -709,61 +338,28 @@ option, .ui-menu-item a {
  background-color:#ded;
  opacity:0.5;
 }
-.ui-icon {
- cursor:pointer;
- margin:0 25px;
-}
 .dateButton {
- position:absolute;
- cursor:pointer;
  opacity:0.5;
- padding:3px;
 }
 .dateButton:hover {
  opacity:1;
 }
-.prevDateButton {
- left:20px;
-}
-.nextDateButton {
- right:20px;
-}
-
 .emptyMessage {
  background-color:#fee;
  color:maroon;
- padding:15px 0px;
- width:100%;
-
 }
 
 .deleteX {
- position:absolute;
  opacity:0.5;
- padding:5px;
  color:red;
 }
 .deleteX:hover {
  opacity:1;
- cursor:pointer;
 }
 
 /* # # # #   Tag Management-specific CSS   # # # # */
 .tagManageBlock {
- position:relative;
- padding:10px 35px;
- width:300px;
- margin:10px auto;
  background-color:#edf8b1;
-}
-.unfollowTagButton {
- right:10px;
- top:0px;
-}
-
-.tagText {
- font-size:1.1em;
- font-weight:bold;
 }
 .tagCount {
  opacity:0.5;
@@ -771,74 +367,28 @@ option, .ui-menu-item a {
 
 
 /* # # # #   Event-specific CSS   # # # # */
-.eventManageBlock {
- position:relative;
- max-width:600px;
- margin:25px auto;
-}
 .eventDeleteButton {
- position:absolute;
- top:0px;
- right:0px;
  color:red;
 }
-.eventEditButton {
- position:absolute;
- top:0px;
- right:20px;
-}
-
 .eventSpecificsBlock {
  background-color:#7fcdbb;
- padding:5px 15px;
 }
 .eventDateBlock {
  background-color:#edf8b1;
- text-align:center;
- padding:5px 0px;
 }
 .eventDate {
  font-weight:bold;
 }
 .eventTime {
- font-size:0.8em;
  opacity:0.8;
 }
-.eventTags {
- font-size:0.9em;
- bottom:0px;
- text-align:center;
- word-spacing:1em;
- display:block;
-}
-.eventInfoSpacer {
- padding:0px 1em;
-}
 .eventInfoBlock {
- padding:10px;
  background-color:#efe;
 }
 .eventTitle {
- font-size:1.2em;
- font-weight:bold;
- padding:2px 40px 2px 10px;
-}
-.eventCategoryBlock {
- position:absolute;
- bottom:-0.5em;
- right:10px;
- font-size:0.7em;
- text-align:right;
-}
-.eventCategory {
  font-weight:bold;
 }
 .eventAuthorBlock {
- position:absolute;
- bottom:-0.5em;
- left:10px;
- font-size:0.7em;
- text-align:right;
  opacity:0.5;
 }
 .eventAuthor {
@@ -852,38 +402,19 @@ option, .ui-menu-item a {
 }
 
 .adRefreshButton {
- position:absolute;
- top:0px;
- left:0px;
- width:1.75em;
- padding:0.25em;
  opacity:0.6;
 }
 .adRefreshButton:hover {
  opacity:0.9;
- cursor:pointer;
-}
-.adRefreshButton img {
- width:100%;
 }
 
 .adBanner {
- padding:10px 30px;
- min-height:5em;
  color:white;
  background-color:rgba(210,215,211,1);
- background-size:contain;
- text-align:center;
 }
 
 .adDate {
- box-sizing:border-box;
- position:absolute;
- left:1em;
- bottom:0px;
  background-color: rgba(0,0,0,0.5);
- padding:4px 1em;
- display:inline-block;
 }
 
 .adText a, .adText a:visited {
@@ -896,47 +427,24 @@ option, .ui-menu-item a {
 }
 
 .adText {
- box-sizing:border-box;
- padding:1em 2.5em;
  background-color: rgba(0,0,0,0.5);
  letter-spacing:1px;
- display:inline-block;
 }
 
 .adAuthor {
- position:absolute;
- right:0em;
- top:0em;
- font-size:0.7em;
  letter-spacing:1px;
-
- padding:5px;
  color:white;
  background-color: rgba(0,0,0,0.5);
 }
 
 .adSubmitButton, .adSubmitButton:visited {
- position:absolute;
- right:1em;
- bottom:0em;
- font-size:0.8em;
-
  opacity:0.7;
- padding:4px 5px;
  color:white;
  background-color: rgba(0,0,0,0.1);
 }
 .adSubmitButton:hover {
  color:white;
  opacity:1;
- cursor:pointer;
-}
-
-
-.adManageBlock {
- position:relative;
- padding:0.5em 2em;
- margin:5px;
 }
 
 .adEditButton, .adDeleteButton {
@@ -949,7 +457,7 @@ option, .ui-menu-item a {
 }
 
 .unapproved {
- border-left:16px solid maroon;
+ border-color:maroon;
 }
 
 .inactive {
@@ -974,82 +482,27 @@ option, .ui-menu-item a {
  opacity:1;
 }
 
-#playButton {
- width: 0px;
- height: 0px;
- border-left: 20px solid white;
- border-top: 10px solid transparent;
- border-bottom: 10px solid transparent;
- border-right: none;
-}
-
-#pauseButton {
- width: 5px;
- height: 20px;
- border-left: 4px solid white;
- border-right: 4px solid white;
-}
-
 #playerController {
- width:100%;
- padding:8px 0px;
- box-sizing:border-box;
-
  color:white;
  background-color:#fc9272;
 }
 
 #headerLiveTrackHolder {
- padding:2px 3px;
- box-sizing:border-box;
  background-color:#7fcdbb;
 }
 #headerLiveTrackHolder:empty:after {
- content: "Loading!";
  color:white;
-}
-.now-playing-bar {
- list-style-type:none;
- padding:0px;
-}
-.now-playing-list {
- font-size:0.75em;
 }
 #status-current-show{
  color:white;
  font-weight:bold;
 }
 #time-elapsed {
- display:block;
- position:absolute;
- top:0px;
- width:100%;
- text-align:left;
- padding:2px;
  opacity:0.5;
 }
 
 #onAirToday {
- box-sizing:border-box;
- padding:5px 0px;
- width:100%;
  background-color:#B3BAFF;
- overflow:auto;
- height:70px;
-}
-#onAirToday table {
- text-align:center;
-}
-
-#onAirToday .time {
- font-size:0.8em;
- width:70px;
- text-align:left;
- padding-left:4px;
-}
-
-#time-remaining, #onAirToday h3 {
- display:none;
 }
 
 /* Imgur */
@@ -1057,14 +510,10 @@ option, .ui-menu-item a {
  border-radius:2px;
 }
 #imgurImageContainer {
- position:relative;
- padding:0.5em 0em;
  background-color:#2b2b2b;
 }
 
 #imgurCaption {
- padding:5px 15px;
- font-size:0.75em;
  font-weight:bold;
  background-color:#edf8b1;
 }
@@ -1074,32 +523,11 @@ option, .ui-menu-item a {
 }
 
 #imgurPoints, #imgurViews {
- font-size:0.70em;
- padding:0px 10px;
- margin:0px 5px;
  color:white;
-}
-#imgurPoints:after {
- content:" points";
-}
-#imgurViews:after {
- content:" views";
-}
-
-/* Weather */
-#link_get_widget {
- display:none;
-}
-.aw-current-weather-inner {
- z-index:0;
-}
-.aw-widget-current-inner .aw-widget-content.bg-su {
- border:none !important; /* Override the default border. */
 }
 
 /* SEPTA */
 .SEPTATime, .blueBusTime {
- padding:3px 0px;
  background-color:#edf8b1;
  font-weight:bold;
 }
@@ -1109,18 +537,10 @@ option, .ui-menu-item a {
 }
 
 /* Haverford Clerk */
-.articleContainer {
- overflow-y: auto;
- max-height: 200px;
- width: 100%;
-}
 
 .clerkArticle, .bicoArticle, .calendarEvent {
- text-align:left;
- font-size:0.75em;
  background-color:#edf8b1;
  border-bottom:4px solid #fee;
- padding:2px 10px;
 }
 .clerkArticle a, .bicoArticle a, .calendarEvent a{
  color:black;
@@ -1130,61 +550,15 @@ option, .ui-menu-item a {
  opacity:1;
 }
 .clerkArticleDate, .bicoArticleDate, .calendarTime {
- text-align:right;
- font-size:0.8em;
  opacity:0.5;
 }
 
 /* Go_Chat Card */
-#chatCard #messageContainer{
- width:100%;
- font-size:0.8em;
-}
-#chatCard .submitButton{
- display:none;
-}
-#chatCard .tagAutocomplete {
- width:90%;
- height:inherit;
-}
-#chatCard .message {
- padding: 10 0 10 15;
- margin: 15 15 10 0;
- text-align:left;
-}
-#chatCard .inputContainer {
- height:30px;
-}
-#chatCard #newMessageInput {
- height:20%
-}
-#chatCard .otherActiveUserCount {
- display:none;
-}
-#chatCard .messageContainerAlert {
- font-size:1em;
-}
-#chatCard .customCheckbox {
-  line-height: 100%;
-}
 
-
-#headerNotice {
- position:absolute;
- text-align:center;
- width:100%;
- top:0px;
- left:0px;
- z-index:0;
-}
 
 #headerTab {
- display:inline-block;
  background-color:white;
- font-size:0.6em;
  color:orange;
- padding:5px 1em;
- border-radius:0px 0px 10px 10px;
  opacity:0.7;
 }
 
@@ -1200,71 +574,19 @@ option, .ui-menu-item a {
 
 @media (max-width:600px) {
 
- body {
- }
  a {
   color:orange;
  }
 
 
  #headerTab {
-  font-size:0.45em;
-  padding:0px 1em;
   background-color:transparent;
  }
- #headerNotice {
-  text-align:left;
- }
-
-
- #otherActiveUserCount {
-  display:none;
- }
-
- #copyrightContainer{
-  padding:0px;
-  right:2px;
-  bottom:2px;
-  font-size:0.6em;
- }
-
- #recentUpdatesContainer {
-  display:none;
- }
-
- #messageContainer {
-  width:100%;
- }
-
  .card {
-  width:100%;
-  height: initial;
-  margin:0px 0px;
   border-top:1em solid #34495e;
  }
  .cardContents {
-  height:initial;
   background-color:white;
- }
- .banner {
-  padding:0.5em 0 0 10;
-  height:55px;
- }
- .bannerMotto, #userGreeting {
-  display:none;
- }
-
- .adText {
-  box-sizing:border-box;
-  padding:1em 1em;
- }
-
- .inputContainer {
-  height:40px;
- }
- .submitButton {
-  padding:10px 15px;
-  border-bottom:1px;
  }
 
 }

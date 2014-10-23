@@ -763,11 +763,10 @@ option, .ui-menu-item a {
  font-size:0.75em;
 }
 #time-elapsed {
- display:block;
  position:absolute;
+ display:inline-block;
  top:0px;
- width:100%;
- text-align:left;
+ left:0px;
  padding:2px;
 }
 

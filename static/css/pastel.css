@@ -18,6 +18,10 @@ a:hover {
 .banner {
  color:white;
  background-color:#34495e;
+
+-webkit-box-shadow: inset 0px -6px 7px -2px rgba(0,0,0,0.25);
+-moz-box-shadow: inset 0px -6px 7px -2px rgba(0,0,0,0.25);
+box-shadow: inset 0px -6px 7px -2px rgba(0,0,0,0.25);
 }
 
 a #bannerLogo, a #bannerLogo:hover {
@@ -287,6 +291,7 @@ option, .ui-menu-item a {
 }
 
 /* # # # # #  Cards  # # # # # */
+
 .cardControlBar {
  background-color:transparent;
  color:red;
@@ -302,6 +307,10 @@ option, .ui-menu-item a {
 .cardTitle {
  font-weight:bold;
  background-color:#efe;
+
+-webkit-box-shadow: inset 0px 8px 50px -2px rgba(0,0,0,0.15);
+-moz-box-shadow: inset 0px 8px 50px -2px rgba(0,0,0,0.15);
+box-shadow: inset 0px 8px 50px -2px rgba(0,0,0,0.15);
 }
 
 #newCardContainer {
@@ -397,9 +406,6 @@ option, .ui-menu-item a {
 
 
 /* # # # #   HaverAd-specific CSS   # # # # */
-.adContainer {
- position:relative;
-}
 
 .adRefreshButton {
  opacity:0.6;
@@ -410,7 +416,11 @@ option, .ui-menu-item a {
 
 .adBanner {
  color:white;
- background-color:rgba(210,215,211,1);
+ background-color:rgba(210,215,211,0.6);
+
+-webkit-box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
+-moz-box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
+box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
 }
 
 .adDate {
@@ -438,9 +448,9 @@ option, .ui-menu-item a {
 }
 
 .adSubmitButton, .adSubmitButton:visited {
- opacity:0.7;
+ opacity:0.8;
  color:white;
- background-color: rgba(0,0,0,0.1);
+ background-color: rgba(0,0,0,0.2);
 }
 .adSubmitButton:hover {
  color:white;

@@ -22,6 +22,10 @@ def login_view(request):
     return render(request, "loginScreen.html")
 
 
+def login_school(request):
+  return HttpResponse("Not yet implemented... Check back soon!")
+
+
 def logout_view(request):
   logout(request)
   return render(request, "successMessages/logout.html")

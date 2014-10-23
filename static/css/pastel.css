@@ -1000,9 +1000,8 @@ option, .ui-menu-item a {
 }
 
 #headerLiveTrackHolder {
- font-size:0.75em;
+ padding:2px 3px;
  box-sizing:border-box;
- padding:10px 0px;
  background-color:#7fcdbb;
 }
 #headerLiveTrackHolder:empty:after {
@@ -1035,10 +1034,18 @@ option, .ui-menu-item a {
  padding:5px 0px;
  width:100%;
  background-color:#B3BAFF;
- overflow:hidden;
+ overflow:auto;
+ height:70px;
 }
 #onAirToday table {
  text-align:center;
+}
+
+#onAirToday .time {
+ font-size:0.8em;
+ width:70px;
+ text-align:left;
+ padding-left:4px;
 }
 
 #time-remaining, #onAirToday h3 {

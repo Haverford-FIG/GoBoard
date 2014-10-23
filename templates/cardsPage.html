@@ -21,9 +21,11 @@
 
    </div>
 
-   <div id="newCardContainer" class="inputContainer">
-     <input name="newCardName" class="cardAutoComplete" />
-     <div class='noSelect submitButton addCardButton'>Add</div>
-   </div>
+   {% if user.is_authenticated %}
+    <div id="newCardContainer" class="inputContainer">
+      <input name="newCardName" class="cardAutoComplete" />
+      <div class='noSelect submitButton addCardButton'>Add</div>
+    </div>
+  {% endif %}
 
 {% include "genericPageEnd.html" %}

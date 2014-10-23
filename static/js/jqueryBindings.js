@@ -456,6 +456,14 @@ $(document).on("change", ".timeInput", function() {
 })
 $(".timeInput").trigger("change");
 
+$(document).on("click", ".adRefreshButton", function() {
+  var container = $(this).closest(".adContainer");
+  container.find(".adText").html("Loading...")
+  $.get("/ads/get/", function(response) {
+    container.html( response );
+  });
+});
+
 //# # # # # # # # # # #
 //jQuery Tooltips # # #
 $(document).tooltip({

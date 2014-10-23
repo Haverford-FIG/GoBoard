@@ -5,6 +5,7 @@
 #legacyGoLink {
  position:fixed;
  bottom:0px;
+ left:0px;
  padding:5px 10px;
  color:maroon;
  background-color:rgba(200,0,0,0.3);
@@ -297,7 +298,7 @@ input:focus, select:focus, textarea:focus,
 
 .userShadow {
  position:absolute;
- top:-1em;
+ top:-1.2em;
  left:-0.1em;
  font-size:0.8em;
  opacity:0.8;
@@ -849,11 +850,27 @@ option, .ui-menu-item a {
  position:relative;
 }
 
+.adRefreshButton {
+ position:absolute;
+ top:0px;
+ left:0px;
+ width:1.75em;
+ padding:0.25em;
+ opacity:0.6;
+}
+.adRefreshButton:hover {
+ opacity:0.9;
+ cursor:pointer;
+}
+.adRefreshButton img {
+ width:100%;
+}
+
 .adBanner {
  padding:10px 30px;
  min-height:5em;
  color:white;
- background-color:#163C6A;
+ background-color:rgba(210,215,211,1);
  background-size:contain;
  text-align:center;
 }
@@ -1176,8 +1193,11 @@ option, .ui-menu-item a {
 @media (max-width:600px) {
 
  body {
-  background-color:#34495e;
  }
+ a {
+  color:orange;
+ }
+
 
  #headerTab {
   font-size:0.45em;
@@ -1186,9 +1206,6 @@ option, .ui-menu-item a {
  }
  #headerNotice {
   text-align:left;
- }
- a {
-  color:orange;
  }
 
 
@@ -1215,7 +1232,7 @@ option, .ui-menu-item a {
   width:100%;
   height: initial;
   margin:0px 0px;
-  margin-bottom:1em;
+  border-top:1em solid #34495e;
  }
  .cardContents {
   height:initial;

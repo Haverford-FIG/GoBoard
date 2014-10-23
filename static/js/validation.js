@@ -159,6 +159,13 @@ function validateForm(form, url){
         if (! validDate.test(val)) applyErrorClass($(this), false);
       });
 
+      var startDate = $(form).find("#form_startDate");
+      var endDate = $(form).find("#form_endDate");
+      if (startDate.val() > endDate.val()) {
+        applyErrorClass( endDate , false);
+      }
+
+
       break;
 
     case "/accounts/create/":

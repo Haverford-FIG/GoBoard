@@ -7,10 +7,12 @@
   <a href="http://fig.haverford.edu">FIG</a>.</div>
 
   <div id="menuButtonContainer">
-    <a href='{% url "cards" %}' class="menuButton noSelect">
+    <a title="Home"
+      href='{% url "cards" %}' class="menuButton noSelect">
       <img class="icon" src="{% static "icons/cards.png"%}"/>
     </a>
-    <a href='{% url "chat" %}' class="menuButton noSelect">
+    <a title="Chat"
+       href='{% url "chat" %}' class="menuButton noSelect">
       <img class="icon" src="{% static "icons/chat.png"%}"/>
     </a>
     <div id="optionMenuButton" id="optionMenuActivator"

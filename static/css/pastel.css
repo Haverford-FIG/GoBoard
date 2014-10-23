@@ -546,6 +546,7 @@ input:focus, select:focus, textarea:focus,
  outline:none;
  border:none;
  list-style-type:none;
+ z-index:101;
 }
 
 option, .ui-menu-item a {
@@ -607,7 +608,7 @@ option, .ui-menu-item a {
  width:100%;
  position:absolute;
  top:0px;
- z-index:100;
+ z-index:1;
  background-color:transparent;
  color:red;
  }

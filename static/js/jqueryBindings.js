@@ -362,12 +362,22 @@ $(".addCardButton").click(function() {
 //Apply autocomplete to the .cardAutoComplete elements that may exist.
 if ($(".cardAutoComplete").length){
   $.get("/get_available_cards/", function(cardList) {
-    //Update the validCards list.
+    //Update the global `validCards` list.
     validCards = cardList;
+    validCards.sort(function(a, b){
+    if (a.toLowerCase() < b.toLowerCase()) return -1;
+    if (a.toLowerCase() > b.toLowerCase()) return 1;
+    return 0;
+    });
     $( ".cardAutoComplete" ).autocomplete({
       source: validCards,
+      minLength:0,
       select: function(){ $(this).removeClass("badInput") },
       position:{my: "center bottom", at: "center top", collision:"flip flip"}
+    });
+
+    $(".cardAutoComplete").click(function() {
+      $(this).autocomplete("search", "");
     });
   });
 }

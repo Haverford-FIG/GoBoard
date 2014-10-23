@@ -44,6 +44,9 @@ def update_settings(request):
     field = "email_about_{}".format(field)
     setattr(u.userinfo, field, form.get(field,"y")=="y")
 
+  # Set the User's Ad settings.
+  setattr(u.userinfo, "show_ads", form.get("show_ads","y")=="y")
+
   #Change the user's other information (ie: "user.userinfo.FIELD").
   otherInfoFields = ["campus", "grad_year", "theme"]
   for field in otherInfoFields:

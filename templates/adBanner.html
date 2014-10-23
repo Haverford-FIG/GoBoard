@@ -1,5 +1,5 @@
 <div class="adContainer">
-{% if ad %}
+{% if ad and user.userinfo.show_ads %}
   <div class="adRefreshButton"><img src="{{STATIC_URL}}icons/reload.png"/></div>
   <div class="adBanner" style="background-image:url('{{ad.imageURL}}');">
     <div class="adText">

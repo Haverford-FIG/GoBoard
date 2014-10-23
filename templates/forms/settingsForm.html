@@ -66,5 +66,6 @@
       {% endfor %}
     </select>
   </div>
+    {% include "forms/checkbox.html" with subject="show_ads" is_checked=user.userinfo.show_ads label="Show HaverAds" %}
 
 </form>

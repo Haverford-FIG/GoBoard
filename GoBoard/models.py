@@ -49,6 +49,7 @@ class UserInfo(models.Model):
   grad_year = models.IntegerField(default=lambda: datetime.now().year,
                                   blank=True, null=True)
   theme = models.CharField(max_length=150, default="pastel")
+  show_ads = models.BooleanField(default=True)
   campus = models.CharField(max_length=150, default="Haverford")
 
   # Start each user with the DEFAULT_CARDS specified in settings.

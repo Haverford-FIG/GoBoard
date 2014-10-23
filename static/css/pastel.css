@@ -583,7 +583,7 @@ option, .ui-menu-item a {
   background-color:transparent;
  }
  .card {
-  border-top:1em solid #34495e;
+  border-color: #34495e;
  }
  .cardContents {
   background-color:white;

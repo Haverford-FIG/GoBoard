@@ -934,6 +934,10 @@ option, .ui-menu-item a {
   width:100%;
   height: initial;
   margin:0px 0px;
+  border-bottom:1em solid black;
+ }
+ .card:last-child {
+  border-bottom:0px;
  }
  .cardContents {
   height:initial;
@@ -955,7 +959,7 @@ option, .ui-menu-item a {
   height:40px;
  }
  .submitButton {
-  padding:10px 15px;
+  padding:15px 15px;
   border-bottom:1px;
  }
 

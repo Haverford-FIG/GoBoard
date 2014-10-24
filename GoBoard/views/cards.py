@@ -300,5 +300,44 @@ def get_BlueBus_locations(request):
   return HttpResponse(json.dumps(locations), content_type="application/json")
 
 
+def get_DC_grub(request):
+  import urllib2, datetime
+  from xml.etree import ElementTree
 
+  date = datetime.datetime.today()
+  date_formatted = date.strftime("%Y-%m-%d")
+  date_tomorrow = (date + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+
+  options = {
+    "max-results":5,
+    "fields":"entry(content,gd:when(@startTime))",
+    "start-min":date_formatted,
+    "start-max":date_tomorrow,
+    "orderby":"starttime",
+    "sortorder":"descending",
+    "strict":"true",
+    "prettyprint":"true",
+  }
+
+  querystring=""
+  for key,val in options.items():
+    if not querystring: querystring += "?"
+    else: querystring += "&"
+    querystring += "{}={}".format(key, val)
+
+  link_base="http://www.google.com/calendar/feeds/hc.dining%40gmail.com/public/full"
+  request = urllib2.Request(link_base + querystring)
+  tree = ElementTree.parse( urllib2.urlopen(request) )
+  root = tree.getroot()
+
+  times = [elem[1].attrib["startTime"] for elem in root]
+  meals = [elem[0].text.split("\n") for elem in root]
+
+  meal_tuples = sorted(zip(times,meals), key=lambda tup: tup[0])
+
+  grub = meal_tuples[3][1]
+  meal = "Dinner" #TODO: Choose the right meal.
+
+  response = {"meal":meal, "items":grub}
+  return HttpResponse(json.dumps(response), content_type="application/json")
 

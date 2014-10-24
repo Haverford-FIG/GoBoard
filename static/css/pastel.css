@@ -536,6 +536,17 @@ box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
  color:white;
 }
 
+/* DC */
+#DCMeal {
+ background-color:#fc9272;
+ color:white;
+}
+
+.grubItem {
+ background-color:#fee;
+ font-size:0.8em;
+}
+
 /* SEPTA */
 .SEPTATime, .blueBusTime {
  background-color:#edf8b1;

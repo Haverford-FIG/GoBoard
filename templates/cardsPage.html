@@ -8,8 +8,10 @@
    {% for card in cards %}
      <div class="card" name="{{card}}">
        <div class="cardControlBar">
-        <div class="cardSettingsButton menuActivator"></div>
-        {% include "cardMenu.html" %}
+         {% if user.is_authenticated %}
+          <div class="cardSettingsButton menuActivator"></div>
+         {% include "cardMenu.html" %}
+        {% endif %}
        </div>
        <div class="cardContents">
          {% with "cards/"|add:card|add:".html" as template %}

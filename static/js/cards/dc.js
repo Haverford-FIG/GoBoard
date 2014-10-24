@@ -10,6 +10,8 @@ function load_DC_grub(){
   $.get("/get_DC_grub/", function(response) {
     $("#DCMeal").html( response.meal );
     $("#DCGrubResults").html( buildGrubHTML(response.items) );
+  }).fail(function() {
+    $("#DCMeal").html( "Couldn't load any grub for today." );
   });
 }
 

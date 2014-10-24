@@ -335,7 +335,7 @@ def get_DC_grub(request):
 
   meal_tuples = sorted(zip(times,meals), key=lambda tup: tup[0])
 
-  grub = meal_tuples[3][1]
+  grub = meal_tuples[2][1]
   meal = "Dinner" #TODO: Choose the right meal.
 
   response = {"meal":meal, "items":grub}

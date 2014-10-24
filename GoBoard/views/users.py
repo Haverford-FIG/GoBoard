@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from GoBoard.models import User
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 import json
 
 #Returns the "#text" of a QuerySet of Tags.
@@ -7,6 +9,8 @@ def getUsernameStrings(users):
   return ["@{}".format(user.username) for user in users]
 
 #Returns a JSON-formatted list of all usernames with an "@" prefix.
+@login_required
+@require_http_methods(["GET"])
 def get_usernames(request):
   users = User.objects.all()
   usernames = getUsernameStrings(users)

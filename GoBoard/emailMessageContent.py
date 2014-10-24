@@ -6,7 +6,7 @@ def getChangePasswordText(user, password):
 
   text = "Dearest {},\n\n".format(name)
   text += "The password for your Go! account (user '{}') ".format(user.username)
-  text += "was just changed to '{}'.\n\n".format(password)
+  text += "was just changed.\n\n"
   text += "If you did not request this change, please contact "
   text += "us immediately at fig-staff@googlegroups.com or "
   text += "use the nifty form at our site: fig.haverford.edu\n\n"

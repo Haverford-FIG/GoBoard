@@ -27,7 +27,7 @@ AVAILABLE_CARDS = {
                     "imgur", "WHRC_Radio", "weather", "SEPTA",
                     "links", "Haverford_Clerk", "Go_Chat",
                     "Blue_Bus", "BiCo_News", "Calendar",
-                    "DC",
+                    "DC", "HaverStalk",
                   }
 
 #Card-specific Settings

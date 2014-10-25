@@ -66,6 +66,7 @@ urlpatterns = patterns('',
 
      #Views specific to cards.
      url(r'^get_DC_grub/?$', 'GoBoard.views.cards.get_DC_grub',),
+     url(r'^query_haverstalk/?$', 'GoBoard.views.cards.query_haverstalk',),
      url(r'^get_SEPTA_times/?$', 'GoBoard.views.cards.get_SEPTA_times',),
      url(r'^get_BlueBus_times/?$', 'GoBoard.views.cards.get_BlueBus_times',),
      url(r'^get_BlueBus_locations/?$', 'GoBoard.views.cards.get_BlueBus_locations',),

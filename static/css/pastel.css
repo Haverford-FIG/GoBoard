@@ -515,6 +515,11 @@ box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
  background-color:#B3BAFF;
 }
 
+/* HaverStalk */
+#HaverStalkResults {
+ background-color:#fee;
+}
+
 /* Imgur */
 #imgurImage {
  border-radius:2px;

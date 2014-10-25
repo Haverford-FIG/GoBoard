@@ -326,8 +326,8 @@ def get_DC_grub(request):
     querystring += "{}={}".format(key, val)
 
   link_base="http://www.google.com/calendar/feeds/hc.dining%40gmail.com/public/full"
-  request = urllib2.Request(link_base + querystring)
-  tree = ElementTree.parse( urllib2.urlopen(request) )
+  req = urllib2.Request(link_base + querystring)
+  tree = ElementTree.parse( urllib2.urlopen(req) )
   root = tree.getroot()
 
   times = [elem[1].attrib["startTime"] for elem in root]
@@ -340,4 +340,21 @@ def get_DC_grub(request):
 
   response = {"meal":meal, "items":grub}
   return HttpResponse(json.dumps(response), content_type="application/json")
+
+
+@login_required
+@require_http_methods(["GET"])
+def query_haverstalk(request):
+  import urllib2, datetime
+  # EXAMPLE: "http://www.haverford.edu/contacts/directory-pull.php?q=Casey%20Falk"
+  try:
+    link_base = "http://www.haverford.edu/contacts/directory-pull.php?q="
+    querystring = request.GET["query"].replace(" ", "%20")
+    req = urllib2.Request(link_base + querystring)
+    response = urllib2.urlopen(req).read()
+    result = response.replace("<span class=\"off-screen\">Email:</span>","")
+  except:
+    result = "Can't do that, cap."
+
+  return HttpResponse(result)
 

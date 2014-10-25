@@ -1,0 +1,12 @@
+<div class="cardTitle">HaverStalk</div>
+<input id="HaverStalkSearch"
+  {% if user.is_authenticated and user.first_name and user.last_name %}
+    placeholder="Eg: {{user.first_name}} {{user.last_name}}"
+  {% else %}
+    placeholder="Eg: Scott Pilgrim"
+  {% endif %}
+></input>
+
+<div id="HaverStalkResults"></div>
+
+<script src="{{STATIC_URL}}js/cards/haverstalk.js"></script>

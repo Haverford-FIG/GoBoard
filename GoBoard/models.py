@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib import admin
 from django.contrib.auth.models import User
 from django.utils.html import escape
 from datetime import datetime
@@ -148,11 +147,3 @@ class Tag(models.Model):
   def __unicode__(self):
     return self.tag
 
-
-
-
-admin.site.register(Message)
-admin.site.register(Tag)
-admin.site.register(Ad)
-admin.site.register(Event)
-admin.site.register(UserInfo)

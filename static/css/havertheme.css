@@ -334,7 +334,7 @@ box-shadow: inset 0px 8px 50px -2px rgba(0,0,0,0.15);
  background-color:#222;
 }
 
-.card input, select {
+.card input, .card select {
  background-color:#205D70;
  color:white;
 }

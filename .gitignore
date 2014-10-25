@@ -2,3 +2,4 @@
 *.swp
 *~
 GoBoard_db
+GoBoard/settings.py_bak

@@ -37,6 +37,7 @@ SEPTA_LOCATIONS = {
   "30th Street": "30th+Street+Station",
   "Bryn Mawr": "Bryn+Mawr",
   "Suburban Station": "Suburban+Station",
+  "Market East": "Market+East",
 }
 
 BLUE_BUS_LOCATIONS = {

@@ -36,7 +36,7 @@ a #bannerLogo, a #bannerLogo:hover {
 
 
 .message {
- background-color:#92E298;
+ background-color:#c7c7c7;
 }
 
 .messageTextHighlight {
@@ -55,7 +55,7 @@ a #bannerLogo, a #bannerLogo:hover {
 }
 
 .privateMessage {
- background-color:#8AFFEC;
+ background-color:#c53333;
 }
 
 .privateMessage .userShadow:after{
@@ -64,7 +64,7 @@ a #bannerLogo, a #bannerLogo:hover {
 
 .messageContainerAlert {
  background-color:#222;
- border-bottom:1px solid #92E298;
+ border-bottom:1px solid #c7c7c7;
  color:white;
  opacity:0.7;
 }
@@ -93,7 +93,7 @@ textarea {
 
 input:focus, select:focus, textarea:focus,
 .fullScreenForm input:focus, .fullScreenForm select:focus {
- background-color:#FFFCFC;
+ border-color:#205D70;
 }
 
 
@@ -128,12 +128,12 @@ input:focus, select:focus, textarea:focus,
  background-color:#B3BAFF;
 }
 .customCheckbox.active{
- background-color:#8AFFEC;
+ background-color:#c53333;
 }
 
 
 .updateContainerOption {
- opacity:0.5;
+ opacity:0.7;
 }
 
 .updateContainerOption:hover {
@@ -266,7 +266,7 @@ input:focus, select:focus, textarea:focus,
 
 
 .badInput, input.badInput, textarea.badInput {
- background-color:orange;
+ background-color:#8bb830;
 }
 
 .goodInput {
@@ -276,7 +276,7 @@ input:focus, select:focus, textarea:focus,
 
 /* # # # # # jQuery # # # # # #  */
 option, .ui-menu-item a {
- background:#222;
+ background:#2ba6cb;
  font-weight:normal;
  border-radius:0px;
 
@@ -286,26 +286,23 @@ option, .ui-menu-item a {
 }
 
 .ui-widget-content .ui-state-focus {
- background:#7fcdbb;
+ background:#255B6B;
  border-bottom:1px solid transparent;
 }
 
 .tooltip {
- border:4px solid #fc9272;
+ border:4px solid #205D70;
  border-width:0px 4px;
  border-radius:3px;
- background-color:#fee0d2;
+ background-color:#2ba6cb;
+ color:white;
 }
 
 /* # # # # #  Cards  # # # # # */
 
-#cardContainer{
- background-color:#4E4E4E;
-}
-
 .cardControlBar {
  background-color:transparent;
- color:black;
+ color:white;
 }
 
 .cardSettingsButton:after {
@@ -325,19 +322,24 @@ option, .ui-menu-item a {
 box-shadow: inset 0px 8px 50px -2px rgba(0,0,0,0.15);
 }
 
+.cardTitle a {
+ color:white;
+}
+
 #newCardContainer {
  background-color:#222;
 }
 
 .card input, select {
- background-color:#c2c2c2;
+ background-color:#205D70;
+ color:white;
 }
 
 
 .fillLineText {
  font-weight:bold;
- background-color:#7c7c7c;
- color:black;
+ background-color:#222;
+ color:white;
 }
 
 
@@ -525,6 +527,7 @@ box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
  font-weight:bold;
 }
 #time-elapsed {
+ color:white;
  opacity:0.5;
 }
 
@@ -542,7 +545,7 @@ box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
  border-radius:2px;
 }
 #imgurImageContainer {
- background-color:#2b2b2b;
+ background-color:white;
 }
 
 #imgurCaption {
@@ -552,11 +555,11 @@ box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
 }
 
 #imgurImageContainer .loadingWheel {
- color:white;
+ color:gray;
 }
 
 #imgurPoints, #imgurViews {
- color:white;
+ color:black;
 }
 
 /* DC */
@@ -581,21 +584,36 @@ box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
  opacity:0.8;
 }
 
-/* Haverford Clerk */
+/* Haverford Clerk, News, Calendar */
 
 .clerkArticle, .bicoArticle, .calendarEvent {
- background-color:#7c7c7c;
- border-bottom:4px solid #4E4E4E;
+ background-color:white;
+ border-bottom:1px dotted #daa;
 }
-.clerkArticle a, .bicoArticle a, .calendarEvent a{;
+
+
+/*
+.clerkArticle, .bicoArticle, .calendarEvent:nth-of-type(even){
+ background-color:white;
  color:black;
+}
+
+.clerkArticle, .bicoArticle, .calendarEvent:nth-of-type(odd){
+ background-color:maroon;
+ color:white;
+}
+*/
+
+
+.clerkArticle a, .bicoArticle a, .calendarEvent a{;
+ color:#2ba6cb;
  opacity:1;
 }
 .clerkArticle a:hover, .bicoArticle a:hover, .calendarEvent a:hover{
  opacity:.8;
 }
 .clerkArticleDate, .bicoArticleDate, .calendarTime {
- color:white;
+ color:n;acl;
 }
 
 /* Go_Chat Card */
@@ -616,6 +634,9 @@ box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
  font:inherit;
 }
 
+.cardContents {
+ border-bottom:0px dotted #daa;
+}
 
 @media (max-width:600px) {
 
@@ -633,7 +654,7 @@ box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
 
  .cardContents {
   background-color:white;
- }
+  }
 
 }
 

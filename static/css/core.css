@@ -766,7 +766,7 @@ option, .ui-menu-item a {
 }
 .now-playing-bar {
  list-style-type:none;
- padding:0px;
+ padding:0px 0px 0px 5px;
 }
 .now-playing-list {
  font-size:0.75em;

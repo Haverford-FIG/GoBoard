@@ -22,7 +22,7 @@ function removeDuplicateTags(tagArray){
 //Takes a "dirty" tagString and converts it to a cleaned uniqueTagArray.
 function cleanTags(tagString){
   //Get the valid characters from the string.
-  var tagArray = tagString.match(/((@|#)[a-zA-Z]+[a-zA-Z1-9]*)+?/g)
+  var tagArray = tagString.match(/((@|#)[a-zA-Z]+[a-zA-Z0-9]*)+?/g)
   if (tagArray===null) tagArray=[];
 
   return removeDuplicateTags(tagArray);
@@ -30,7 +30,7 @@ function cleanTags(tagString){
 
 //Returns 'true' if a string is in the proper tag format.
 function isValidTag(str){
-  var re = RegExp("^(@|#)[a-zA-Z]+[a-aA-Z1-9]*$");
+  var re = RegExp("^(@|#)[a-zA-Z]+[a-aA-Z0-9]*$");
   return re.test(str);
 }
 
@@ -292,7 +292,7 @@ $(".tagAutoComplete").keypress(function(e){
   }
 
   //Only allow certain characters.
-  var re = new RegExp(/(#|@|[a-zA-Z1-9]|\s)/);
+  var re = new RegExp(/(#|@|[a-zA-Z0-9]|\s)/);
   if (c == "BACKSPACE") {
     var old = $(this).val();
     $(this).val( old.slice(0, old.length-1) );
@@ -310,7 +310,7 @@ $(".tagAutoComplete").keypress(function(e){
   var lastChar = input.slice(-1);
   switch(c){
     case " ":
-      var alphaNum = new RegExp(/[a-zA-Z1-9]/);
+      var alphaNum = new RegExp(/[a-zA-Z0-9]/);
       if (!alphaNum.test(lastChar)) return false;
       break;
     case "@":
@@ -319,8 +319,8 @@ $(".tagAutoComplete").keypress(function(e){
       if (!alphaSpace.test(lastChar) || "#"==lastChar || "@"==lastChar) return false;
       break;
     default:
-      var validChars = new RegExp(/#|@|[a-zA-Z1-9]/);
-      if (lastChar.match(/@|#/) && c.match(/[1-9]/)) return false;
+      var validChars = new RegExp(/#|@|[a-zA-Z0-9]/);
+      if (lastChar.match(/@|#/) && c.match(/[0-9]/)) return false;
 
       if (lastChar=="" || lastChar==" ") {
         $(this).val( input + "#" );

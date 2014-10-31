@@ -71,7 +71,9 @@ def get_messages(tagBasedQuery, private=False, user=None, lastID=None, loadMore=
 
   #If there is a "tag" query to perform, do that as well.
   if tagBasedQuery:
-    messages = messages.filter(tagBasedQuery)
+    for q in tagBasedQuery:
+      messages = messages.filter(q)
+
 
   if lastID:
     lastMessage = Message.objects.filter(id=int(lastID)).first()
@@ -110,19 +112,26 @@ def send_messages(request):
       #Create a Q (complex query) object for each tag based on the tag's tag field.
       #The format below is: Q(object__field=value)
       qList = []
-      for query_bit in tags:
-        if query_bit[0]=="@":
-          name = query_bit[1:]
+      for tag in tags:
+        if tag[0]=="@":
+          name = tag[1:]
           userTest = User.objects.filter(username=name)
           if userTest.exists():
             otherUser = userTest.first()
             qList.append(Q(user__username=name)|Q(mentions__in=[otherUser.id]))
         else:
-          if query_bit[0]=="#": query_bit = query_bit[1:]
-          qList.append(Q(tag__tag=query_bit))
+          if tag[0]=="#":
+            if Tag.objects.filter(tag=tag[1:]).exists():
+              qList.append(Q(tag__tag=tag[1:]))
+            else:
+              response = {"error":"Tag '{}' does not exist!".format(tag)}
+              jsonified = json.dumps(response)
+              return HttpResponse(jsonified, content_type="application/json")
 
       #Create the query itself in the form: Q(content) | Q(content) | Q(content) ...
-      query = reduce(operator.or_, qList) if qList else []
+      #query = reduce(operator.and_, qList) if qList else []
+      query = qList
+
     else:
       query = None
 

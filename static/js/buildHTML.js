@@ -149,6 +149,12 @@ function buildMessage(msg){
   HTML += "<div class=\"tagShadow\">"+tags+"</div>";
   HTML += "<div class=\"timeShadow\">"+buildTime(msg.datetime)+"</div>";
 
+  if (msg.tags.length>0) {
+    HTML += "<div class=\"messageReplyButton\" title='Reply'>";
+    HTML += "<img class=\"messageButton\" src=\"static/icons/reply.png\"/>";
+    HTML += "</div>";
+  }
+
   if (msg.deletable) {
     HTML += "<div title='Delete this post.' class='messageDeleteButton'></div>";
   }

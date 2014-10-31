@@ -87,6 +87,22 @@ a #bannerLogo, a #bannerLogo:hover {
  position:relative;
 }
 
+.messageReplyButton {
+ position:absolute;
+ bottom:-0.3em;
+ right:0.2em;;
+ opacity:0.3;
+ padding:5px;
+ cursor:pointer;
+ max-width:1em;
+}
+.messageReplyButton:hover{
+ opacity:0.8;
+}
+.messageReplyButton img {
+ max-width:100%;
+}
+
 .noTagsMessage {
  padding:12px 0px 10px 15px;
 }
@@ -234,7 +250,7 @@ input, select {
 .tagShadow {
  position:absolute;
  bottom:0px;
- right:0px;
+ right:2.25em;
  font-size:0.8em;
 }
 

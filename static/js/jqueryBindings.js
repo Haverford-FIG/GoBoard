@@ -156,6 +156,21 @@ $(".messageBox").scroll(function() {
 });
 
 
+$(document).on("click", ".messageReplyButton", function() {
+  var tags = []
+  $(this).siblings(".tagShadow").find(".tag, .mention").each(function() {
+    tags.push( $(this).html() );
+  });
+  var context = $(this).closest(".message").hasClass("privateMessage");
+
+  setActiveTags(tags);
+  if (context != getMessageContext()["private"]) {
+    $("#tagFilterPrivate").trigger("click");
+  }
+
+  reloadMessages(".messageBox", tags, context);
+});
+
 $(document).on("click", "#tagFilterSubmit", function() {
   var tags = getActiveTags();
   var context = getMessageContext();
@@ -293,6 +308,11 @@ if ($(".tagAutoComplete").length){
 //Clear tag inputs.
 $(document).on("click", ".clearTagsButton", function() {
   $(this).closest(".inputContainer").find(".tagAutoComplete").val("");
+
+  $(this).siblings(".customCheckbox.active").each(function() {
+    $(this).trigger("click");
+  });
+
   if ($(this).siblings("#tagFilterSubmit").length){
     $("#tagFilterSubmit").trigger("click");
   }

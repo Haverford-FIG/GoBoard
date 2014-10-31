@@ -1,9 +1,11 @@
 <div class='cardTitle'>Next SEPTA</div>
 
 <select id="septaLocationA">
- {% for station in settings.SEPTA_LOCATIONS.keys %}
+ {% for station in settings.SEPTA_LOCATIONS_SORTED %}
   <option val="{{station}}"
   {% if user.is_authenticated and user.userinfo.campus == station %}
+    selected
+  {% elif not user.is_authenticated and settings.SEPTA_DEFAULT_START == station %}
     selected
   {% endif %}
   >{{station}}</option>
@@ -13,8 +15,12 @@
 <div class='fillLineText'>to</div>
 
 <select id="septaLocationZ">
- {% for station in settings.SEPTA_LOCATIONS.keys %}
-   <option val="{{station}}">{{station}}</option>
+ {% for station in settings.SEPTA_LOCATIONS_SORTED %}
+  <option val="{{station}}"
+  {% if settings.SEPTA_DEFAULT_END == station %}
+    selected
+  {% endif %}
+  >{{station}}</option>
  {% endfor %}
 </select>
 

@@ -37,8 +37,11 @@ SEPTA_LOCATIONS = {
   "30th Street": "30th+Street+Station",
   "Bryn Mawr": "Bryn+Mawr",
   "Suburban Station": "Suburban+Station",
-  "Market East": "Market+East",
+  "Jefferson": "Market+East",
 }
+SEPTA_LOCATIONS_SORTED = sorted(SEPTA_LOCATIONS.keys())
+SEPTA_DEFAULT_START = "Haverford"
+SEPTA_DEFAULT_END = "30th Street"
 
 BLUE_BUS_LOCATIONS = {
   "Weekday": ["Haverford", "Bryn Mawr"],

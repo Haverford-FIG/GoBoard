@@ -469,10 +469,11 @@ option, .ui-menu-item a {
 .card {
  position:relative;
  width:30%;
- margin:1em 2px 0em;
+ margin:1em 10px 0em;
  height:300px;
  display:inline-block;
  box-sizing:border-box;
+ box-shadow: 1px 1px 1px 1px #E6E6E6;
 }
 
 .cardControlBar {

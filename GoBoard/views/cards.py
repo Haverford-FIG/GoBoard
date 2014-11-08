@@ -103,6 +103,26 @@ def get_rss_articles(request, url="", maxArticles=3):
 
 
 def get_calendar_events(request):
+  def getEvent(item):
+    #Get the link and the event title.
+    rawTitle = item.find("title").text
+    title = re.findall(r"<a.*?>(.*?)</a>", rawTitle)[0]
+    link = re.findall(r"<a.*?href=\"(.*?)\".*?>.*?</a>", rawTitle)[0]
+
+    #Get the time.
+    rawTime = item.find("pubDate").text.replace(" EDT","").replace(" EST","")
+    preFormat = "%a, %d %b %Y %H:%M:%S"
+    postFormat = "%I:%M%p"
+    dt = datetime.datetime.strptime(rawTime, preFormat)
+    time = dt.strftime(postFormat)
+
+    return {
+              "title":title,
+              "link":link,
+              "time":time,
+            }
+
+
   import requests, bs4, datetime, re
   try:
     #Convert the date into an RSS-comparable form.
@@ -111,26 +131,6 @@ def get_calendar_events(request):
     postFormat = "%a, %d %b %Y"
     dt = datetime.datetime.strptime(rawDate, preFormat)
     date = dt.strftime(postFormat)
-
-    def getEvent(item):
-      #Get the link and the event title.
-      rawTitle = item.find("title").text
-      title = re.findall(r"<a.*?>(.*?)</a>", rawTitle)[0]
-      link = re.findall(r"<a.*?href=\"(.*?)\".*?>.*?</a>", rawTitle)[0]
-
-      #Get the time.
-      rawTime = item.find("pubDate").text.replace(" EDT","").replace(" EST","")
-      preFormat = "%a, %d %b %Y %H:%M:%S"
-      postFormat = "%I:%M%p"
-      dt = datetime.datetime.strptime(rawTime, preFormat)
-      time = dt.strftime(postFormat)
-
-      return {
-               "title":title,
-               "link":link,
-               "time":time,
-             }
-
 
     #Query the calendar to the events starting on a given day.
     url = "http://www.haverford.edu/calendar/rss/?date="
@@ -153,7 +153,7 @@ def get_calendar_events(request):
   return HttpResponse(json.dumps(events), content_type="application/json")
 
 
-def getTime(timestamp):
+def getTime(timestamp=None):
   import datetime
   if not timestamp: #TODO: Expand to custom timestamp
     time = datetime.datetime.now()
@@ -169,7 +169,7 @@ def getTime(timestamp):
 
 
 def getSchedule(timestamp):
-  day, time = getTime(timestamp)
+  day, time = getTime(timestamp=timestamp)
 
   if day=="Saturday Daytime":
     return "Saturday Daytime"
@@ -225,7 +225,7 @@ def get_BlueBus_times(request):
       # Convert the times to military times (for easy comparison).
       return [lines[0]]+[map(militaryTime, row) for row in lines[1:]]
 
-    day, raw_time = getTime(timestamp)
+    day, raw_time = getTime(timestamp=timestamp)
     time = raw_time.strftime("%H:%M")
     matrix = getBlueBusMatrix(day)
 
@@ -326,21 +326,40 @@ def get_DC_grub(request):
     else: querystring += "&"
     querystring += "{}={}".format(key, val)
 
-  link_base="http://www.google.com/calendar/feeds/hc.dining%40gmail.com/public/full"
+  link_base="https://www.google.com/calendar/feeds/hc.dining%40gmail.com/private-621da4de847adcf8249bb6781bc24383/basic"
   req = urllib2.Request(link_base + querystring)
   tree = ElementTree.parse( urllib2.urlopen(req) )
   root = tree.getroot()
 
-  times = [elem[1].attrib["startTime"] for elem in root]
-  meals = [elem[0].text.split("\n") for elem in root]
+  # Grab the relevant text from the ElementTree
+  raw_meals = [elem[0].text for elem in root]
+  raw_meals = [text.replace("Event Status: confirmed","") for text in raw_meals]
+  raw_meals = [text.replace("Event Description: ","") for text in raw_meals]
+  raw_meals = [text.replace("Recurring Event","") for text in raw_meals]
+  raw_meals = [text.replace("<br />","\n") for text in raw_meals]
+  raw_meals = [text.replace("EST","") for text in raw_meals]
+  raw_meals = [text.replace("EDT","") for text in raw_meals]
+  raw_meals = [text.replace(u"\xa0","") for text in raw_meals]
 
-  meal_tuples = sorted(zip(times,meals), key=lambda tup: tup[0])
 
-  grub = meal_tuples[2][1]
-  meal = "Dinner" #TODO: Choose the right meal.
+  # Clean up the gross formatting.
+  cleaned_meals = {}
+  key = ""
+  for line in "\n".join(raw_meals).split("\n"):
+    if "When:" in line:
+      key = line.replace("When: ","")
+      cleaned_meals[key] = []
+    elif "First start:" in line:
+      break
+    elif line:
+      cleaned_meals[key].append(line)
 
-  response = {"meal":meal, "items":grub}
-  return HttpResponse(json.dumps(response), content_type="application/json")
+
+  # Remove the meals that aren't today.
+  day, dt = getTime()
+  meals = {key:val for key,val in cleaned_meals.items() if key[:3] in day}
+
+  return HttpResponse(json.dumps(meals), content_type="application/json")
 
 
 @login_required

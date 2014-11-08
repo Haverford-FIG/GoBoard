@@ -107,7 +107,7 @@ input:focus, select:focus, textarea:focus,
  background-color:#1e728c;
  border-left:1px solid #005353;
  border-bottom:2px solid #005353;
- 
+
 }
 
 .messageDeleteButton, .clearTagsButton {
@@ -568,7 +568,7 @@ box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
 }
 
 /* DC */
-#DCMeal {
+.grubMeal {
  background-color:#222;
  color:white;
 }

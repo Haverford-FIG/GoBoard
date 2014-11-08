@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 //Start the #tagbox by loading the most recent tags if it exists.
 if ($("#tagbox").length){
-  setTagBox("recent");
+  setTagBox("trending");
 }
 
 //Start the userCount updater if there is an #OtherActiveUserCount container.

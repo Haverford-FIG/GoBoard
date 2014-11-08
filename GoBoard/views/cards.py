@@ -119,8 +119,8 @@ def get_calendar_events(request):
       link = re.findall(r"<a.*?href=\"(.*?)\".*?>.*?</a>", rawTitle)[0]
 
       #Get the time.
-      rawTime = item.find("pubDate").text
-      preFormat = "%a, %d %b %Y %H:%M:%S EDT"
+      rawTime = item.find("pubDate").text.replace(" EDT","").replace(" EST","")
+      preFormat = "%a, %d %b %Y %H:%M:%S"
       postFormat = "%I:%M%p"
       dt = datetime.datetime.strptime(rawTime, preFormat)
       time = dt.strftime(postFormat)
@@ -147,7 +147,8 @@ def get_calendar_events(request):
       if queryDate==date:
         events.append(getEvent(item))
 
-  except:
+  except Exception as e:
+    print e
     events = []
   return HttpResponse(json.dumps(events), content_type="application/json")
 

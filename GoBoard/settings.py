@@ -17,7 +17,8 @@ ALLOWED_HOSTS = ["127.0.0.1","0.0.0.0","165.82.80.243", "go.haverford.edu", "loc
 #The max number of entries to display in an updateContainer.
 MAX_UPDATE_CONTAINER_ENTRIES = 15
 CAMPUS_OPTIONS = ["Haverford", "Swarthmore", "Bryn Mawr", "UPenn", "Alumni"]
-THEME_OPTIONS = ["pastel"]
+THEME_OPTIONS = ["pastel", "havertheme"]
+DEFAULT_THEME = "havertheme"
 
 MESSAGES_PER_TRANSACTION = 30
 

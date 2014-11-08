@@ -30,7 +30,7 @@
 {% if user.is_authenticated %}
   href="{{STATIC_URL}}css/{{user.userinfo.theme}}.css"
   {% else %}
-  href="{{STATIC_URL}}css/pastel.css"
+  href="{{STATIC_URL}}css/{{settings.DEFAULT_THEME}}.css"
   {% endif %}
 />
 

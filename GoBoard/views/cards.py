@@ -357,7 +357,12 @@ def get_DC_grub(request):
 
   # Remove the meals that aren't today.
   day, dt = getTime()
-  meals = {key:val for key,val in cleaned_meals.items() if key[:3] in day}
+  date_format = "%a %b %d, %Y"
+  date = dt.strftime(date_format).replace(" 0"," ")
+
+  # Do some final formatting...
+  meals = {key.replace(date,""):sorted(val) for key,val in cleaned_meals.items() if key[:3] in day}
+
 
   return HttpResponse(json.dumps(meals), content_type="application/json")
 

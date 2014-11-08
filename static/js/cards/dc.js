@@ -1,9 +1,12 @@
 function buildGrubHTML(grubArray) {
   var HTML = "";
+  var vegan = "<img class='veganIcon' src='static/icons/vegan.png' title='Vegan'/>";
   for (var i=0; i<grubArray.length; i++) {
-    HTML += "<div class='grubItem'>"+grubArray[i]+"</div>"
+    var food = grubArray[i];
+    food = food.replace(/ +V *$/,vegan);
+    HTML += "<div class='grubItem'>"+food+"</div>"
   }
-  return HTML;
+  return HTML+"<br />";
 }
 
 function load_DC_grub(){

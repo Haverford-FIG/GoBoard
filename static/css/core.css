@@ -874,7 +874,13 @@ option, .ui-menu-item a {
 }
 
 .grubItem {
- padding:1px;
+ padding:3px 1em;
+ text-align:left;
+}
+
+.veganIcon {
+ max-height:1em;
+ padding-left:0.2em;
 }
 
 /* Weather */

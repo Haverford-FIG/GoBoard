@@ -22,7 +22,7 @@ THEME_OPTIONS = ["pastel"]
 MESSAGES_PER_TRANSACTION = 30
 
 #The 'name' of a card with that matches a filename "<name>.html"
-DEFAULT_CARDS = ["imgur", "Blue_Bus", "Calendar","WHRC_Radio", "links", "SEPTA"]
+DEFAULT_CARDS = ["DC", "Blue_Bus", "Calendar","WHRC_Radio", "links", "SEPTA"]
 AVAILABLE_CARDS = {
                     "imgur", "WHRC_Radio", "weather", "SEPTA",
                     "links", "Haverford_Clerk", "Go_Chat",

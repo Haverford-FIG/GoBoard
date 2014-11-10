@@ -15,7 +15,6 @@ def load_cards(request):
 
   return render(request, "cardsPage.html", {
     "cards":cards,
-    "settings":settings,
   })
 
 
@@ -302,6 +301,13 @@ def get_BlueBus_locations(request):
 
 
 def get_DC_grub(request):
+  def getDayFromDate(date_string):
+    import datetime, time
+    date_format = "%Y-%m-%d %H:%M:%S "
+    dt = datetime.datetime.strptime(date_string, date_format)
+    timestamp = time.mktime(dt.timetuple())
+    return getTime(timestamp=timestamp)
+
   import urllib2, datetime
   from xml.etree import ElementTree
 
@@ -341,7 +347,6 @@ def get_DC_grub(request):
   raw_meals = [text.replace("EDT","") for text in raw_meals]
   raw_meals = [text.replace(u"\xa0","") for text in raw_meals]
 
-
   # Clean up the gross formatting.
   cleaned_meals = {}
   key = ""
@@ -349,11 +354,11 @@ def get_DC_grub(request):
     if "When:" in line:
       key = line.replace("When: ","")
       cleaned_meals[key] = []
-    elif "First start:" in line:
-      break
-    elif line:
+    elif "First start" in line:
+      key = line.replace("First start: ","")
+      cleaned_meals[key] = []
+    elif line and "Duration" not in line:
       cleaned_meals[key].append(line)
-
 
   # Remove the meals that aren't today.
   day, dt = getTime()
@@ -361,8 +366,29 @@ def get_DC_grub(request):
   date = dt.strftime(date_format).replace(" 0"," ")
 
   # Do some final formatting...
-  meals = {key.replace(date,""):sorted(val) for key,val in cleaned_meals.items() if key[:3] in day}
+  meals = {key.replace(date,""):val for key,val in cleaned_meals.items() if key[:3] in day}
 
+  # The calendar feed is sporadic and Frankenstein-y; some special cases are needed
+  # to make sure the food for each day is successfully grabbed.
+  if not meals:
+    reparsed_meals = {}
+    for date, food in cleaned_meals.items():
+      try:
+        other_day, dt = getDayFromDate(date)
+        print dt
+        if day == other_day:
+          if dt.hour>=16:
+            meal = "Dinner"
+          elif dt.hour>=10:
+            meal = "Brunch"
+          else:
+            meal = "Breakfast"
+          reparsed_meals[meal] = food
+      except:
+        pass
+    meals = reparsed_meals
+
+  meals = {key:sorted(val) for key,val in meals.items()}
 
   return HttpResponse(json.dumps(meals), content_type="application/json")
 

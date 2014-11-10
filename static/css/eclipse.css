@@ -1,0 +1,620 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
+body {
+ font-family: "Lato", "Arial";
+ font-size:16px;
+ background-color:rgb(30,30,30);
+}
+
+a, a:visited {
+ text-decoration:none;
+ color:yellow;
+ letter-spacing:0px;
+}
+a:hover {
+ color:#00752F;
+}
+
+
+.banner {
+ color:white;
+ background-color: rgb(34, 49, 63);
+
+-webkit-box-shadow: inset 0px -6px 7px -2px rgba(0,0,0,0.25);
+-moz-box-shadow: inset 0px -6px 7px -2px rgba(0,0,0,0.25);
+box-shadow: inset 0px -6px 7px -2px rgba(0,0,0,0.25);
+}
+
+a #bannerLogo, a #bannerLogo:hover {
+ color:white;
+ font-weight:normal;
+}
+
+.bannerMotto, .bannerMotto a {
+ opacity:0.9;
+ color:white;
+}
+
+
+.message {
+ background-color:#e0f3db;
+}
+
+.messageTextHighlight {
+ background-color:#fde;
+ color: #534;
+}
+.messageTextBold {
+ font-weight:bold;
+}
+.messageTextItalic {
+ font-style:italic;
+}
+
+.personalMessage .userShadow:after{
+ content:" (to me)"
+}
+
+.privateMessage {
+ background-color:#fc9272;
+}
+
+.privateMessage .userShadow:after{
+ content:" (private)"
+}
+
+.messageContainerAlert {
+ background-color:#fcbba1;
+ border-bottom:1px solid #fc9272;
+ opacity:0.7;
+}
+
+.miniHeader {
+ background-color:#7fcdbb;
+ color:white;
+}
+
+.inputContainer {
+ position:relative;
+ height:50px;
+ text-align:center;
+ border-bottom:1px;
+}
+
+input, textarea, select {
+ outline:none;
+ color:black;
+}
+
+textarea {
+ border-bottom:1px solid #eee;
+}
+
+
+input:focus, select:focus, textarea:focus,
+.fullScreenForm input:focus, .fullScreenForm select:focus {
+ background-color:#FFFCE5;
+}
+
+
+.submitButton {
+ border-left:1px solid #FFF4A3;
+ border-bottom:2px solid #FFF4A3;
+ background-color:#fff7bc;
+}
+.submitButton:hover {
+ background-color:#fff8cd;
+ border-color:#fff7bc;
+}
+
+.messageDeleteButton, .clearTagsButton {
+ color:red;
+ opacity:0.4;
+}
+
+.messageDeleteButton:after, .clearTagsButton:after {
+ content:"x";
+}
+
+.messageDeleteButton:hover, .clearTagsButton:hover {
+ opacity:0.7;
+}
+
+
+.customCheckbox {
+ background-color:#B3BAFF;
+}
+.customCheckbox.active{
+ background-color:#FFB78A;
+}
+
+
+.updateContainerOption {
+ opacity:0.5;
+}
+
+.updateContainerOption:hover {
+ opacity:1;
+}
+
+.activeUpdateContainerChoice {
+ opacity: 0.9;
+}
+
+.updateTag {
+ background-color:#edf8b1;
+}
+
+.tagLink:hover{
+ opacity:1;
+}
+
+.tagLink {
+ opacity:0.8;
+}
+
+.userShadow {
+ opacity:0.8;
+ font-style:oblique;
+}
+
+.userShadow:after{
+ font-weight:bold;
+}
+
+.tagShadow {
+ opacity:0.8;
+}
+
+.timeShadow {
+ font-style:oblique;
+ opacity:0.5;
+}
+
+.inlineTag, .inlineMention {
+ opacity:0.8;
+}
+.inlineTag:hover, .inlineMention:hover {
+ opacity:1;
+}
+.inlineTag {
+ color:maroon;
+}
+.inlineMention {
+ color:navy;
+}
+
+#otherActiveUserCount {
+ opacity:0.5;
+}
+
+.menuButton, .menuButton:visited {
+ opacity:0.8;
+ color:white;
+ font-weight:bold;
+}
+
+.menuButton:hover {
+ opacity:1;
+ color:inherit;
+}
+
+
+.menu {
+ background-color:black;
+ opacity:0.95;
+}
+
+.tagMenu {
+ color:white;
+}
+
+.menuOption,
+.menuOption a {
+ background-color:inherit;
+ color:inherit;
+ font-weight:inherit;
+}
+.menuOption:hover {
+ background-color:silver;
+}
+
+.cardMenu .menuOption {
+ color:white;
+}
+
+#copyrightContainer {
+ opacity:0.5;
+ word-spacing:5px;
+ background-color:rgba(250,250,250,0.8);
+}
+
+/* # # # # # User Settings Form # # # # # #  */
+.formDescriptor{
+ background-color:#FFE5E8;
+}
+
+.fullScreenForm label {
+ background-color:#e0f3db;
+}
+
+.fullScreenForm input, .fullScreenForm select, .fullScreenForm textarea {
+ background-color:#fff8cd;
+ border-bottom:1px solid #fff6ab;
+}
+
+.button {
+ background-color:#edf8b1;
+ font-weight:bold;
+}
+
+.button:hover {
+ background-color:#F2FAC7;
+}
+
+.linkButton {
+ padding:10px;
+}
+
+
+.badInput, input.badInput, textarea.badInput {
+ background-color:#fcbba1;
+ border-bottom:1px solid #fc9272;
+}
+
+.goodInput {
+ background-color:#e5f5e0;
+ border-bottom:1px solid #c7e9c0;
+}
+
+
+/* # # # # # jQuery # # # # # #  */
+option, .ui-menu-item a {
+ background:#edf8b1;
+ font-weight:normal;
+ border-radius:0px;
+
+ text-decoration:none;
+ border-bottom:1px solid #F3FAC7;
+ font-weight:bold;
+}
+
+.ui-widget-content .ui-state-focus {
+ background:#7fcdbb;
+ border-bottom:1px solid transparent;
+}
+
+.tooltip {
+ border-width:0px 4px;
+ border-radius:3px;
+ background-color:silver;
+}
+
+/* # # # # #  Cards  # # # # # */
+
+.cardControlBar {
+ background-color:transparent;
+ color:red;
+}
+
+.cardSettingsButton:after {
+ content:"x";
+}
+.cardSettingsButton:hover {
+ background-color:rgba(0,0,0,0.1);
+}
+
+.cardTitle {
+ font-weight:bold;
+ color: white;
+ background-color: rgb(34, 49, 63);
+
+-webkit-box-shadow: inset 0px 8px 50px -2px rgba(0,0,0,0.15);
+-moz-box-shadow: inset 0px 8px 50px -2px rgba(0,0,0,0.15);
+box-shadow: inset 0px 8px 50px -2px rgba(0,0,0,0.15);
+}
+
+#newCardContainer {
+ background-color:#7fcdbb;
+}
+
+.card input {
+ background-color:#eeeeff;
+}
+
+
+.fillLineText {
+ font-weight:bold;
+ background-color:#fbfcd1;
+}
+
+/* Datepicker */
+
+.ui-datepicker-calendar tbody {
+ background-color:#efe;
+}
+.ui-datepicker-calendar td:hover {
+ background-color:#fef;
+}
+.ui-datepicker-header {
+ background-color:#fee;
+}
+.ui-datepicker .ui-state-active {
+ color:red;
+ font-weight:bold;
+}
+.ui-datepicker-unselectable {
+ color:silver;
+ background-color:#ded;
+ opacity:0.5;
+}
+.dateButton {
+ opacity:0.5;
+}
+.dateButton:hover {
+ opacity:1;
+}
+.emptyMessage {
+ background-color:#fee;
+ color:maroon;
+}
+
+.deleteX {
+ opacity:0.5;
+ color:red;
+}
+.deleteX:hover {
+ opacity:1;
+}
+
+/* # # # #   Tag Management-specific CSS   # # # # */
+.tagManageBlock {
+ background-color:#edf8b1;
+}
+.tagCount {
+ opacity:0.5;
+}
+
+
+/* # # # #   Event-specific CSS   # # # # */
+.eventDeleteButton {
+ color:red;
+}
+.eventSpecificsBlock {
+ background-color:#7fcdbb;
+}
+.eventDateBlock {
+ background-color:#edf8b1;
+}
+.eventDate {
+ font-weight:bold;
+}
+.eventTime {
+ opacity:0.8;
+}
+.eventInfoBlock {
+ background-color:#efe;
+}
+.eventTitle {
+ font-weight:bold;
+}
+.eventAuthorBlock {
+ opacity:0.5;
+}
+.eventAuthor {
+ font-weight:bold;
+}
+
+
+/* # # # #   HaverAd-specific CSS   # # # # */
+
+.adRefreshButton {
+ opacity:0.6;
+}
+.adRefreshButton:hover {
+ opacity:0.9;
+}
+
+.adBanner {
+ color:white;
+ background-color:rgba(210,215,211,0.6);
+
+-webkit-box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
+-moz-box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
+box-shadow: inset 0px 8px 89px -10px rgba(0,0,0,0.15);
+}
+
+.adDate {
+ background-color: rgba(0,0,0,0.5);
+}
+
+.adText a, .adText a:visited {
+ opacity:0.9;
+ letter-spacing:1px;
+ color:inherit;
+}
+.adText a:hover {
+ opacity:1;
+}
+
+.adText {
+ background-color: rgba(0,0,0,0.5);
+ letter-spacing:1px;
+}
+
+.adAuthor {
+ letter-spacing:1px;
+ color:white;
+ background-color: rgba(0,0,0,0.5);
+}
+
+.adSubmitButton, .adSubmitButton:visited {
+ opacity:0.8;
+ color:white;
+ background-color: rgba(0,0,0,0.2);
+}
+.adSubmitButton:hover {
+ color:white;
+ opacity:1;
+}
+
+.adEditButton, .adDeleteButton {
+ position:absolute;
+ right:2em;
+ top:1em;
+}
+.adDeleteButton {
+ right:8em;
+}
+
+.unapproved {
+ border-color:maroon;
+}
+
+.inactive {
+ opacity:0.4;
+}
+.inactive:hover {
+ opacity:1;
+}
+
+/* # # # #   Card-specific CSS   # # # # */
+
+/* WHRC_Radio */
+.playerButton {
+ cursor: pointer;
+ position: relative;
+ margin: 5px;
+ display: inline-block;
+ vertical-align: middle;
+ opacity:0.9;
+}
+.playerButton:hover {
+ opacity:1;
+}
+
+#playerController {
+ color:white;
+}
+
+#headerLiveTrackHolder {
+ background-color:#003c30;
+ color:white;
+}
+#headerLiveTrackHolder:empty:after {
+ color:white;
+}
+#status-current-show{
+ color:white;
+ font-weight:bold;
+}
+#time-elapsed {
+ opacity:0.5;
+}
+
+#onAirToday {
+ background-color:#B3BAFF;
+}
+
+/* HaverStalk */
+#HaverStalkResults {
+ background-color:#fee;
+}
+
+/* Imgur */
+#imgurImage {
+ border-radius:2px;
+}
+#imgurImageContainer {
+ background-color:#2b2b2b;
+}
+
+#imgurCaption {
+ font-weight:bold;
+ background-color:#edf8b1;
+}
+
+#imgurImageContainer .loadingWheel {
+ color:white;
+}
+
+#imgurPoints, #imgurViews {
+ color:white;
+}
+
+/* DC */
+.grubMeal {
+ background-color:#fc9272;
+ color:white;
+}
+
+.grubItem {
+ background-color:#fee;
+ font-size:0.8em;
+}
+
+/* SEPTA */
+.SEPTATime, .blueBusTime {
+ background-color:#edf8b1;
+ font-weight:bold;
+}
+.SEPTALateTime {
+ color:red;
+ opacity:0.8;
+}
+
+/* Haverford Clerk */
+
+.clerkArticle, .bicoArticle, .calendarEvent {
+ background-color:#edf8b1;
+ border-bottom:4px solid #fee;
+}
+.clerkArticle a, .bicoArticle a, .calendarEvent a{
+ color:black;
+ opacity:0.8;
+}
+.clerkArticle a:hover, .bicoArticle a:hover, .calendarEvent a:hover{
+ opacity:1;
+}
+.clerkArticleDate, .bicoArticleDate, .calendarTime {
+ opacity:0.5;
+}
+
+/* Go_Chat Card */
+
+
+#headerTab {
+ background-color:white;
+ color:orange;
+ opacity:0.7;
+}
+
+#headerTab:hover {
+ opacity:1;
+}
+
+#headerTab a {
+ color:inherit;
+ font:inherit;
+}
+
+
+@media (max-width:600px) {
+
+ a {
+  color:orange;
+ }
+
+
+ #headerTab {
+  background-color:transparent;
+ }
+ .card {
+  border-color: #34495e;
+ }
+ .cardContents {
+  background-color:white;
+ }
+
+}
+

@@ -167,6 +167,12 @@ TEMPLATE_DIRS = (
 	os.path.join(PROJECT_ROOT, 'templates/'),
 )
 
+
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+TEMPLATE_CONTEXT_PROCESSORS += (
+    "GoBoard.context_processors.settings_processor",
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

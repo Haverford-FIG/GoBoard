@@ -31,8 +31,6 @@
 }
 
 
-
-
 body {
  margin:0 0 40 0;
  padding:0px;
@@ -471,6 +469,8 @@ option, .ui-menu-item a {
  width:30%;
  margin:1em 10px 0em;
  height:300px;
+ top:0px;
+ vertical-align:top;
  display:inline-block;
  box-sizing:border-box;
 }

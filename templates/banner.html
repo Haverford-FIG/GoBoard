@@ -15,9 +15,13 @@
        href='{% url "chat" %}' class="menuButton noSelect">
       <img class="icon" src="{% static "icons/chat.png"%}"/>
     </a>
+    <a title="Boards"
+       href='http://go.haverford.edu/board' class="menuButton noSelect">
+      <img class="icon" src="{% static "icons/menu.png"%}"/>
+    </a>
     <div id="optionMenuButton" id="optionMenuActivator"
          class="menuButton menuActivator noSelect">
-      <img class="icon" src="{% static "icons/menu.png"%}"/>
+    ...
     </div>
     {% include "optionMenu.html" %}
   </div>

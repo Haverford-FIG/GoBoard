@@ -380,7 +380,7 @@ def get_DC_grub(request):
           if dt.hour>=16:
             meal = "Dinner"
           elif dt.hour>=10:
-            meal = "Brunch"
+            meal = "Lunch"
           else:
             meal = "Breakfast"
           reparsed_meals[meal] = food
